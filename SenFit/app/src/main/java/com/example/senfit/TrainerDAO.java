@@ -16,8 +16,10 @@ import java.util.List;
 @Dao
 public interface TrainerDAO {
 
+
     @Query("Select * from trainers where trainerId=:id")
-    public Trainer getTrainer(int id);
+    public Trainer getTrainer(int id);//IMPORTANT: Methods that retrieve data from database should
+    // never be run from main thread
 
     @Query("Select * from trainers")
     public List<Trainer> getAllTrainers();//TODO: update return data to Flowable or LiveData if possible

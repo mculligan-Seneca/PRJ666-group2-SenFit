@@ -19,7 +19,8 @@ public interface MemberDAO {
     public void insertMember(Member member);
 
     @Query("Select * from members where member_id=:id")
-    public Member getMember(int id);
+    public Member getMember(int id);//IMPORTANT: Methods that retrieve data from database should
+    // never be run from main thread
 
 
    //TODO: ADD methods for retrieving associated data
