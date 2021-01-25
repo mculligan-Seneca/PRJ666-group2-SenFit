@@ -3,6 +3,7 @@ PRJ666 Sen-Fit
 init date: January 24th 2021
 Author Mitchell Culligan
 Version 1.0
+Member class
  */
 package com.example.senfit;
 import androidx.room.ColumnInfo;
@@ -33,7 +34,10 @@ public class Member {
 
     @ColumnInfo(name="password")
     private String password;//will be hashed
+    //must contain at least 1 number, 1 upper case letter and be 8 chars long
 
+
+    //TODO: add constructor
     public int getMember_id() {
         return member_id;
     }
@@ -77,7 +81,7 @@ public class Member {
     public void setPassword(String password) {
         this.password = password;
     }
-    //must contain at least 1 number, 1 upper case letter and be 8 chars long
+
 
 
 
