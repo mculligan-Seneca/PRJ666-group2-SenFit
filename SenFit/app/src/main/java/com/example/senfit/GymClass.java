@@ -32,6 +32,8 @@ public class GymClass {
     @ColumnInfo(name="trainerId")
     private int trainerId;//TODO: ADD foreign key or embeeded
 
+    @ColumnInfo(name="fitnessClassId")
+    private int fitnessClassId;//TODO:ADD foreign key or embedded
     @ColumnInfo(name="gymLocationId")
     private int gymLocationId;//TODO: ADD foreign key or embedded
 

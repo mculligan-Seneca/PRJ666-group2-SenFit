@@ -31,6 +31,9 @@ public class OnlineClass {
     @ColumnInfo(name="end_time")
     private Timestamp endTime;
 
+    @ColumnInfo(name="fitnessClassId")
+    private int fitnessClassId;//TODO:ADD foreign key or embedded
+
     @ColumnInfo(name="trainerId")
     public int trainerId;//TODO:ADD foreign key associations
 
