@@ -21,4 +21,28 @@ public class TrainingExercise {
 
     @ColumnInfo(name="exerciseId")
     private int exerciseId;//TODO: add foreign key dependency
+
+    public int getTrainingExerciseID() {
+        return trainingExerciseID;
+    }
+
+    public void setTrainingExerciseID(int trainingExerciseID) {
+        this.trainingExerciseID = trainingExerciseID;
+    }
+
+    public int getRepNumber() {
+        return repNumber;
+    }
+
+    public void setRepNumber(int repNumber) {
+        this.repNumber = repNumber;
+    }
+
+    public int getExerciseId() {
+        return exerciseId;
+    }
+
+    public void setExerciseId(int exerciseId) {
+        this.exerciseId = exerciseId;
+    }
 }

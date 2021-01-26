@@ -7,6 +7,7 @@
     tools:context=".SignUpActivity">
 
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,4 +135,7 @@
         app:layout_constraintGuide_percent="0.71" />
 
 
+=======
+    
+>>>>>>> main
 </androidx.constraintlayout.widget.ConstraintLayout>

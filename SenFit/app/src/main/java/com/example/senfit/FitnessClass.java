@@ -20,4 +20,20 @@ public class FitnessClass {
 
     @ColumnInfo(name="fitness_class_name")
     private String fitnessClassName;
+
+    public int getFitnessClassId() {
+        return fitnessClassId;
+    }
+
+    public void setFitnessClassId(int fitnessClassId) {
+        this.fitnessClassId = fitnessClassId;
+    }
+
+    public String getFitnessClassName() {
+        return fitnessClassName;
+    }
+
+    public void setFitnessClassName(String fitnessClassName) {
+        this.fitnessClassName = fitnessClassName;
+    }
 }

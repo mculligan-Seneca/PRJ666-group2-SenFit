@@ -24,4 +24,36 @@ public class FitnessPortfolio {
 
     @ColumnInfo(name="member_id")
     private int memberId; //TODO: add foreignKEY or embeded
+
+    public int getFitnessPortfolioId() {
+        return fitnessPortfolioId;
+    }
+
+    public void setFitnessPortfolioId(int fitnessPortfolioId) {
+        this.fitnessPortfolioId = fitnessPortfolioId;
+    }
+
+    public int getSessDuration() {
+        return sessDuration;
+    }
+
+    public void setSessDuration(int sessDuration) {
+        this.sessDuration = sessDuration;
+    }
+
+    public String getMemberGoals() {
+        return memberGoals;
+    }
+
+    public void setMemberGoals(String memberGoals) {
+        this.memberGoals = memberGoals;
+    }
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
 }

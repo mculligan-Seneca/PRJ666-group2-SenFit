@@ -33,4 +33,43 @@ public class TrainingSession {
     private int trainingPlanId;//TODO:add association or emmbedded
 
 
+    public int getTrainingSessionId() {
+        return trainingSessionId;
+    }
+
+    public void setTrainingSessionId(int trainingSessionId) {
+        this.trainingSessionId = trainingSessionId;
+    }
+
+    public Date getTrainingDate() {
+        return trainingDate;
+    }
+
+    public void setTrainingDate(Date trainingDate) {
+        this.trainingDate = trainingDate;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getTrainingPlanId() {
+        return trainingPlanId;
+    }
+
+    public void setTrainingPlanId(int trainingPlanId) {
+        this.trainingPlanId = trainingPlanId;
+    }
 }

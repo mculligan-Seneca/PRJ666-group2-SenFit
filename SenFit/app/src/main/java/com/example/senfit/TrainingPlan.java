@@ -30,4 +30,44 @@ public class TrainingPlan {
 
     @ColumnInfo(name="trainerId")
     private int trainerId; //TODO: add foreignKey
+
+    public int getTrainingPlanId() {
+        return trainingPlanId;
+    }
+
+    public void setTrainingPlanId(int trainingPlanId) {
+        this.trainingPlanId = trainingPlanId;
+    }
+
+    public String getPlanName() {
+        return planName;
+    }
+
+    public void setPlanName(String planName) {
+        this.planName = planName;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public int getFitnessPortfolioId() {
+        return fitnessPortfolioId;
+    }
+
+    public void setFitnessPortfolioId(int fitnessPortfolioId) {
+        this.fitnessPortfolioId = fitnessPortfolioId;
+    }
+
+    public int getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(int trainerId) {
+        this.trainerId = trainerId;
+    }
 }

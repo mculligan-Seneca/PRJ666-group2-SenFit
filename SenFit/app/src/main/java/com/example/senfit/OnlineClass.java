@@ -31,8 +31,51 @@ public class OnlineClass {
     @ColumnInfo(name="end_time")
     private Timestamp endTime;
 
-    @ColumnInfo(name="trainerId")
-    public int trainerId;//TODO:ADD foreign key associations
+    @ColumnInfo(name="fitnessClassId")
+    private int fitnessClassId;//TODO:ADD foreign key or embedded
 
-        //TODO: add bridge tables
+    @ColumnInfo(name="trainerId")
+    private int trainerId;//TODO:ADD foreign key associations
+
+    public int getOnlineClassId() {
+        return onlineClassId;
+    }
+
+    public void setOnlineClassId(int onlineClassId) {
+        this.onlineClassId = onlineClassId;
+    }
+
+    public Date getClassDate() {
+        return classDate;
+    }
+
+    public void setClassDate(Date classDate) {
+        this.classDate = classDate;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getFitnessClassId() {
+        return fitnessClassId;
+    }
+
+    public void setFitnessClassId(int fitnessClassId) {
+        this.fitnessClassId = fitnessClassId;
+    }
+
+    //TODO: add bridge tables
 }
