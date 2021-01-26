@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SenFit</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>
