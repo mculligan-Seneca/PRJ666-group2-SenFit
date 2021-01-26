@@ -36,7 +36,8 @@ public class Member {
     private String password;//will be hashed
     //must contain at least 1 number, 1 upper case letter and be 8 chars long
 
-
+    @ColumnInfo(name="salt",typeAffinity = ColumnInfo.BLOB)
+    private byte[] salt;// used as a salt for hashing password
     //TODO: add constructor
     public int getMember_id() {
         return member_id;
@@ -83,13 +84,11 @@ public class Member {
     }
 
 
+    public byte[] getSalt() {
+        return salt;
+    }
 
-
-
-
-
-
-
-
-
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
 }
