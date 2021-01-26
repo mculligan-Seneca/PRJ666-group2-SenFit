@@ -37,4 +37,59 @@ public class GymClass {
     @ColumnInfo(name="gymLocationId")
     private int gymLocationId;//TODO: ADD foreign key or embedded
 
+    public int getGymClassId() {
+        return gymClassId;
+    }
+
+    public void setGymClassId(int gymClassId) {
+        this.gymClassId = gymClassId;
+    }
+
+    public Date getClassDate() {
+        return classDate;
+    }
+
+    public void setClassDate(Date classDate) {
+        this.classDate = classDate;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(int trainerId) {
+        this.trainerId = trainerId;
+    }
+
+    public int getFitnessClassId() {
+        return fitnessClassId;
+    }
+
+    public void setFitnessClassId(int fitnessClassId) {
+        this.fitnessClassId = fitnessClassId;
+    }
+
+    public int getGymLocationId() {
+        return gymLocationId;
+    }
+
+    public void setGymLocationId(int gymLocationId) {
+        this.gymLocationId = gymLocationId;
+    }
 }

@@ -31,4 +31,36 @@ public class CovidLog {
 
     @ColumnInfo(name="member_id")
     private int member_id;
+
+    public int getCovidLogID() {
+        return covidLogID;
+    }
+
+    public void setCovidLogID(int covidLogID) {
+        this.covidLogID = covidLogID;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public Date getDate_logged() {
+        return date_logged;
+    }
+
+    public void setDate_logged(Date date_logged) {
+        this.date_logged = date_logged;
+    }
+
+    public int getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
+    }
 }
