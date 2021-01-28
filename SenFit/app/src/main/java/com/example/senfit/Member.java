@@ -39,6 +39,18 @@ public class Member {
     @ColumnInfo(name="salt",typeAffinity = ColumnInfo.BLOB)
     private byte[] salt;// used as a salt for hashing password
     //TODO: add constructor
+
+
+    public Member(){
+        this.firstName=null;
+        this.lastName=null;
+        this.dateOfBirth=null;
+        this.gender='N';
+        this.email=null;
+        this.password=null;
+        this.salt=null;
+
+    }
     public int getMember_id() {
         return member_id;
     }
