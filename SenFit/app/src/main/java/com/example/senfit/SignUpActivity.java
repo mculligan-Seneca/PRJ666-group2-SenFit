@@ -10,6 +10,7 @@ which allows the activity to recieve data from the AddBirthDate fragment.
 package com.example.senfit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+//TODO: Add client side validation
 public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("DD-MM-YYYY");
@@ -44,6 +46,18 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         this.rePassword = findViewById(R.id.re_password);
         this.birthDate = findViewById(R.id.birthDate);
         this.setBirthDate = findViewById(R.id.addBirthDate);
+        this.setBirthDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddBirthDateFragment fragment =  AddBirthDateFragment.newInstance(member.getDateOfBirth());
+                //dialog fragment instance created off previous date of birth
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                fragment.show(transaction,"Add birth date");
+
+            }
+        });
+
 
     }
 
@@ -60,6 +74,24 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
 
     }
 
+
+    public void submitClick(View v){
+        //TODO: Add validation before submit
+        String first = this.firstName.getText().toString();
+        String last = this.lastName.getText().toString();
+        String postal= this.postalCode.getText().toString();
+        String e_mail = this.email.getText().toString();
+        String pWord = this.password.getText().toString();
+        String rpWord = this.rePassword.getText().toString();
+        //attributes like date and gender are already set although must be validated
+        //After validation
+        this.member.setFirstName(first);
+        this.member.setLastName(last);
+        this.member.setPostalCode(postal);
+        this.member.setEmail(e_mail);
+        this.member.setPassword(pWord);
+
+    }
     @Override
     public void saveBirthDate(Bundle args) {
         int year = args.getInt(AddBirthDateFragment.YEAR_ARG);

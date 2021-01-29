@@ -23,6 +23,8 @@ public class Member {
     @ColumnInfo(name="last_name")
     private String lastName;
 
+    @ColumnInfo(name="postal_code")
+    private String postalCode;
     @ColumnInfo(name="birth_date")
     private Date dateOfBirth;// date uses java.sql.Date format
 
@@ -45,6 +47,7 @@ public class Member {
         this.firstName=null;
         this.lastName=null;
         this.dateOfBirth=null;
+        this.postalCode=null;
         this.gender='N';
         this.email=null;
         this.password=null;
@@ -102,5 +105,21 @@ public class Member {
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }

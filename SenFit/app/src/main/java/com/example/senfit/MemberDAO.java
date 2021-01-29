@@ -12,6 +12,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.List;
+
 @Dao
 public interface MemberDAO {
 
@@ -22,7 +24,10 @@ public interface MemberDAO {
     public Member getMember(int id);//IMPORTANT: Methods that retrieve data from database should
     // never be run from main thread
 
-
+    @Query("Select * from members where email=:email")
+    public List<Member> getMembersFromEmail(String email);
+    //This method retrieves all members that have the email of the parameter
+    //used for user validation
 
 
    //TODO: ADD methods for retrieving associated data
