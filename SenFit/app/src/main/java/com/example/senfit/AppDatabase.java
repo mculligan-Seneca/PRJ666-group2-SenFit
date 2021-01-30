@@ -14,7 +14,7 @@ import androidx.room.RoomDatabase;
 
 @Database(entities={Member.class,Trainer.class,CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class,GymClass.class,GymLocation.class,
-        OnlineClass.class,TrainingExercise.class,TrainingPlan.class,TrainingSession.class},version=1)
+        OnlineClass.class,TrainingExercise.class,TrainingPlan.class,TrainingSession.class},version=1, exportSchema = false)
 
 //TODO: Add Entity classes to database annotation
 public abstract class AppDatabase extends RoomDatabase {

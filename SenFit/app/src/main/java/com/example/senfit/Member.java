@@ -26,10 +26,14 @@ public class Member {
     @ColumnInfo(name="postal_code")
     private String postalCode;
     @ColumnInfo(name="birth_date")
-    private Date dateOfBirth;// date uses java.sql.Date format
+    private String dateOfBirth;// date uses java.sql.Date format
 
     @ColumnInfo(name="gender")
     private char gender;//gender can either be repersented in F or M
+
+    public String getEmail() {
+        return email;
+    }
 
     @ColumnInfo(name="email")
     private String email;
@@ -70,11 +74,11 @@ public class Member {
         this.firstName = firstName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

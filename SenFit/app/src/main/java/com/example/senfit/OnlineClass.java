@@ -23,16 +23,24 @@ public class OnlineClass {
     private int onlineClassId;
 
     @ColumnInfo(name="class_date")
-    private Date classDate;
+    private String classDate;
 
     @ColumnInfo(name="start_time")
-    private Timestamp startTime;
+    private String startTime;
 
     @ColumnInfo(name="end_time")
-    private Timestamp endTime;
+    private String endTime;
 
     @ColumnInfo(name="fitnessClassId")
     private int fitnessClassId;//TODO:ADD foreign key or embedded
+
+    public int getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(int trainerId) {
+        this.trainerId = trainerId;
+    }
 
     @ColumnInfo(name="trainerId")
     private int trainerId;//TODO:ADD foreign key associations
@@ -45,27 +53,27 @@ public class OnlineClass {
         this.onlineClassId = onlineClassId;
     }
 
-    public Date getClassDate() {
+    public String getClassDate() {
         return classDate;
     }
 
-    public void setClassDate(Date classDate) {
+    public void setClassDate(String classDate) {
         this.classDate = classDate;
     }
 
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

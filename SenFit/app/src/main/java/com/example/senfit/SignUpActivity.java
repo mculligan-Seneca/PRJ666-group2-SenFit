@@ -49,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         this.setBirthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddBirthDateFragment fragment =  AddBirthDateFragment.newInstance(member.getDateOfBirth());
+                AddBirthDateFragment fragment =  AddBirthDateFragment.newInstance(Date.valueOf(member.getDateOfBirth()));
                 //dialog fragment instance created off previous date of birth
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -99,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         int day = args.getInt(AddBirthDateFragment.DAY_ARG);
         Date bDate = new Date(year,month,day);
         birthDate.setText(DATE_FORMAT.format(this.member.getDateOfBirth()));
-        this.member.setDateOfBirth(bDate);
+        this.member.setDateOfBirth(DATE_FORMAT.format(bDate));
 
     }
 }

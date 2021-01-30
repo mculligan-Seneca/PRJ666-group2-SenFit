@@ -14,11 +14,13 @@ import androidx.room.PrimaryKey;
 
 import java.sql.Date;
 
-@Entity(tableName="CovidLogs",
-        foreignKeys = @ForeignKey(entity=Member.class,
-                                  parentColumns="covidLogID",
-                                  childColumns = "member_id"
-        ))
+@Entity(tableName="CovidLogs"
+//        ,
+//        foreignKeys = @ForeignKey(entity=Member.class,
+//                                  parentColumns="covidLogID",
+//                                  childColumns = "member_id"
+//        )
+        )
 public class CovidLog {
     @PrimaryKey(autoGenerate = true)
     private  int covidLogID;
@@ -27,7 +29,7 @@ public class CovidLog {
     private boolean status;
 
     @ColumnInfo(name="date_logged")
-    private Date date_logged;
+    private String date_logged;
 
     @ColumnInfo(name="member_id")
     private int member_id;
@@ -48,11 +50,11 @@ public class CovidLog {
         this.status = status;
     }
 
-    public Date getDate_logged() {
+    public String getDate_logged() {
         return date_logged;
     }
 
-    public void setDate_logged(Date date_logged) {
+    public void setDate_logged(String date_logged) {
         this.date_logged = date_logged;
     }
 

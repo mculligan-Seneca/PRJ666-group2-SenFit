@@ -23,7 +23,7 @@ public class TrainingPlan {
     private String planName;
 
     @ColumnInfo(name="start_date")
-    private Date startDate;
+    private String startDate;
 
     @ColumnInfo(name="fitnessPortfolioId")
     private int fitnessPortfolioId;//TODO: add foreignKey
@@ -47,11 +47,11 @@ public class TrainingPlan {
         this.planName = planName;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 

@@ -21,13 +21,13 @@ public class TrainingSession {
     private int trainingSessionId;
 
     @ColumnInfo(name="training_date")
-    private Date trainingDate;
+    private String trainingDate;
 
     @ColumnInfo(name="start_time")
-    private Timestamp startTime; //well have to see if date is really needed
+    private String startTime; //well have to see if date is really needed
 
     @ColumnInfo(name="end_time")
-    private Timestamp endTime;
+    private String endTime;
 
     @ColumnInfo(name="trainingPlanId")
     private int trainingPlanId;//TODO:add association or emmbedded
@@ -41,27 +41,27 @@ public class TrainingSession {
         this.trainingSessionId = trainingSessionId;
     }
 
-    public Date getTrainingDate() {
+    public String getTrainingDate() {
         return trainingDate;
     }
 
-    public void setTrainingDate(Date trainingDate) {
+    public void setTrainingDate(String trainingDate) {
         this.trainingDate = trainingDate;
     }
 
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
