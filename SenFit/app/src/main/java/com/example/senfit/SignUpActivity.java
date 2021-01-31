@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +34,7 @@ import java.util.Queue;
 
 //TODO: Add client side validation
 public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver {
-
+    private static final int REQUEST_PROCCESS=1;//request code for sign up process activity
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("DD-MM-YYYY");
 
     private EditText firstName, lastName,
@@ -150,11 +151,18 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         String rpWord = this.rePassword.getText().toString();
         //attributes like date and gender are already set although must be validated
         //After validation
-        this.memberViewModel.getMember().setFirstName(first);
-        this.memberViewModel.getMember().setLastName(last);
-        this.memberViewModel.getMember().setPostalCode(postal);
-        this.memberViewModel.getMember().setEmail(e_mail);
-        this.memberViewModel.getMember().setPassword(pWord);
+        ErrorDialog errorDialog = this.validate();
+        if(errorDialog.hasErrors()){
+            errorDialog.buildErrorDialog(this);
+        }else {
+            this.memberViewModel.getMember().setFirstName(first);
+            this.memberViewModel.getMember().setLastName(last);
+            this.memberViewModel.getMember().setPostalCode(postal);
+            this.memberViewModel.getMember().setEmail(e_mail);
+            this.memberViewModel.getMember().setPassword(pWord);
+            Intent intent = new Intent(this,SignUpProcessActivity.class);
+            startActivityForResult(intent,REQUEST_PROCCESS);
+        }
 
     }
     @Override
