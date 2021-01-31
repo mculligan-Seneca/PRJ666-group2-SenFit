@@ -10,6 +10,8 @@ which allows the activity to recieve data from the AddBirthDate fragment.
 package com.example.senfit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -30,12 +32,13 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
 
     private TextView birthDate;
     private Button setBirthDate;
-    private Member member;
+    private MemberSignUpViewModel memberViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        this.member = new Member();
+        this.memberViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication())
+                .create(MemberSignUpViewModel.class);//using view model to store data
         this.firstName = findViewById(R.id.first_name_id);
         this.lastName = findViewById(R.id.last_name_id);
         this.postalCode = findViewById(R.id.postal_code);
@@ -51,10 +54,10 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
 
         switch(v.getId()){
             case R.id.male_genderID:
-                this.member.setGender('M');
+                this.memberViewModel.getMember().setGender('M');
                 break;
             case R.id.female_genderID:
-                this.member.setGender('F');
+                this.memberViewModel.getMember().setGender('F');
                 break;
         }
 
@@ -66,8 +69,14 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         int month = args.getInt(AddBirthDateFragment.MONTH_ARG);
         int day = args.getInt(AddBirthDateFragment.DAY_ARG);
         Date bDate = new Date(year,month,day);
-        birthDate.setText(DATE_FORMAT.format(this.member.getDateOfBirth()));
-        this.member.setDateOfBirth(bDate);
+        birthDate.setText(DATE_FORMAT.format(bDate));
+        this.memberViewModel.getMember().setDateOfBirth(bDate);
 
     }
+
+    private boolean validate(){
+
+    }
+
+
 }

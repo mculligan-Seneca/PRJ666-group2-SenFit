@@ -8,18 +8,26 @@ This viewmodel class is meant to store the member data for the sign up use case
  */
 package com.example.senfit;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class MemberSignUpViewModel extends ViewModel {
 
-    private Member member;
+    private Member memberData;
 
     public MemberSignUpViewModel(){
-        this.member = new Member();
+         this.memberData = new Member();
     }
 
     public Member getMember(){
-        return this.member;
+        return this.memberData;
     }
 
+
+
+
+
+
+
+    //TODO: Add functionality to sbmit member
 }
