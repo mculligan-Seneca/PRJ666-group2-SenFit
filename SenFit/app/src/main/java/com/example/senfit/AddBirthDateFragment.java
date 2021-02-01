@@ -96,6 +96,12 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
 
 
     }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        this.dateSaver=null;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

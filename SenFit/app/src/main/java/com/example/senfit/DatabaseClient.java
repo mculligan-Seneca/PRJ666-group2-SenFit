@@ -38,4 +38,6 @@ public class DatabaseClient {
         //instaniates database client if null
         return dbClient;
     }
+
+
 }

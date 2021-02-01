@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -34,7 +36,8 @@ import java.util.List;
 import java.util.Queue;
 
 //TODO: Add client side validation
-public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver {
+public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver,
+        SignUpProcessFragment.SignUpRequest {
     private static final int REQUEST_PROCCESS=1;//request code for sign up process activity
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("DD-MM-YYYY");
 
@@ -44,6 +47,20 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
     private TextView birthDate;
     private Button setBirthDate;
     private MemberSignUpViewModel memberViewModel;
+
+    @Override
+    public void resolve() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        Toast.makeText(this,"Member successfully created",Toast.LENGTH_LONG);
+        startActivity(intent);
+        finish();//activity clean up
+    }
+
+    @Override
+    public void reject(String errMsg) {
+        new ErrorDialog().buildErrorDialog(SignUpActivity.this,errMsg);
+    }
+
 
     //this inside class will display any errors found during validation of sign up
     private class ErrorDialog{//TODO: ADD User story
@@ -112,6 +129,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         this.rePassword = findViewById(R.id.re_password);
         this.birthDate = findViewById(R.id.birthDate);
         this.setBirthDate = findViewById(R.id.addBirthDate);
+
         this.setBirthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +179,9 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             this.memberViewModel.getMember().setPostalCode(postal);
             this.memberViewModel.getMember().setEmail(e_mail);
             this.memberViewModel.getMember().setPassword(pWord);
+
+
+
 
         }
 

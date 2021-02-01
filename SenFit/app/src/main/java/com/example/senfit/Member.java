@@ -89,7 +89,7 @@ public class Member {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    public String getEmail(){return this.email;}
     public String getPassword() {
         return password;
     }

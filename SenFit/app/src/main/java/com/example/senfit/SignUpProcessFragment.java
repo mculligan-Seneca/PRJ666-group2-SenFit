@@ -1,59 +1,92 @@
+
 package com.example.senfit;
 
+/*
+PRJ666 Sen-Fit
+init date: January 27th 2021
+Author Mitchell Culligan
+Version 1.0
+SignUp Process Fragment
+
+This fragment is displayed while a new member account is being processed in the background.
+Class interacts with database client insert member into database.
+
+
+ */
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SignUpProcessFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+
+
 public class SignUpProcessFragment extends DialogFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    public interface SignUpRequest{
+        public void resolve();
+        public void reject(String errMsg);
+    }
+
+    private SignUpRequest request;
+
 
     public SignUpProcessFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SignUpProcessFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SignUpProcessFragment newInstance(String param1, String param2) {
-        SignUpProcessFragment fragment = new SignUpProcessFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof SignUpRequest){
+            this.request= (SignUpRequest)context;
+        }
     }
 
+    //ensures all references of activity are dropped
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        this.request=null;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        Activity activity = getActivity();
+        MemberSignUpViewModel memberViewModel = new ViewModelProvider.AndroidViewModelFactory(
+                activity.getApplication())
+                .create(MemberSignUpViewModel.class);//using view model to store data
+        Member member = memberViewModel.getMember();
+
+        DatabaseClient dbClient = DatabaseClient.getInstance(getActivity().getApplicationContext());
+        DatabaseClient.dbExecutors.execute(()->{
+            List<Member> memberList = dbClient//maybe replace with worker class
+                    .getAppDatabase()
+                    .getMemberDao()
+                    .getMembersFromEmail(member.getEmail());
+            if(memberList.isEmpty()){
+            //TODO: HASH PASSWORD
+                dbClient.getAppDatabase()
+                        .getMemberDao()
+                        .insertMember(member);
+                activity.runOnUiThread(()->request.resolve());
+            }
+            else{
+                activity.runOnUiThread(()->request.reject("Email already found in database"));
+            }
+        });
     }
 
     @Override
