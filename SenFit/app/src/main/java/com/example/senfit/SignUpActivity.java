@@ -180,8 +180,10 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             this.memberViewModel.getMember().setEmail(e_mail);
             this.memberViewModel.getMember().setPassword(pWord);
 
+            SignUpProcessFragment fragment = new SignUpProcessFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-
+            fragment.show(transaction,"Add birth date");
 
         }
 

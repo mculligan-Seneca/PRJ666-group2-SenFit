@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 
@@ -76,15 +78,37 @@ public class SignUpProcessFragment extends DialogFragment {
                     .getAppDatabase()
                     .getMemberDao()
                     .getMembersFromEmail(member.getEmail());
-            if(memberList.isEmpty()){
-            //TODO: HASH PASSWORD
-                dbClient.getAppDatabase()
-                        .getMemberDao()
-                        .insertMember(member);
-                activity.runOnUiThread(()->request.resolve());
+            if(memberList.isEmpty()) {
+                //TODO: HASH PASSWORD
+                try {
+                    PasswordHasher ph = new PasswordHasher();
+                    String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
+                    member.setPassword(hash);
+                    member.setSalt(ph.getSalt());//store salt in database
+                    dbClient.getAppDatabase()
+                            .getMemberDao()
+                            .insertMember(member);
+                    activity.runOnUiThread(() -> {
+                        request.resolve();
+                        dismiss();
+                    });
+                } catch (GeneralSecurityException e) {
+                    activity.runOnUiThread(() -> {
+                        request.reject("Security Error ");//does not store password
+                        dismiss();
+                    });
+                } catch (UnsupportedEncodingException e) {
+                    activity.runOnUiThread(() -> {
+                        request.reject("unsupported encoder type");
+                        dismiss();
+                    });
+                }
             }
-            else{
-                activity.runOnUiThread(()->request.reject("Email already found in database"));
+            else {
+                activity.runOnUiThread(() -> {
+                    request.reject("Email already found in database");
+                    dismiss();//end fragment after ever request is resolved or rejected
+                });
             }
         });
     }
