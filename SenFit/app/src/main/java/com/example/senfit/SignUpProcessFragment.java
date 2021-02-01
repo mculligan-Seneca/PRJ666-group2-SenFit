@@ -74,42 +74,45 @@ public class SignUpProcessFragment extends DialogFragment {
 
         DatabaseClient dbClient = DatabaseClient.getInstance(getActivity().getApplicationContext());
         DatabaseClient.dbExecutors.execute(()->{
-            List<Member> memberList = dbClient//maybe replace with worker class
-                    .getAppDatabase()
-                    .getMemberDao()
-                    .getMembersFromEmail(member.getEmail());
-            if(memberList.isEmpty()) {
+
                 //TODO: HASH PASSWORD
                 try {
                     PasswordHasher ph = new PasswordHasher();
                     String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
                     member.setPassword(hash);
                     member.setSalt(ph.getSalt());//store salt in database
-                    dbClient.getAppDatabase()
+                   Long rowNum= dbClient.getAppDatabase()
                             .getMemberDao()
                             .insertMember(member);
-                    activity.runOnUiThread(() -> {
-                        request.resolve();
-                        dismiss();
-                    });
+
+                   if(rowNum!=null) {
+                       activity.runOnUiThread(() -> {
+                           dismiss();
+                           request.resolve();
+                       });
+                   }
+                   else {
+                       activity.runOnUiThread(() -> {
+                           dismiss();//end fragment after ever request is resolved or rejected
+                           request.reject("Email already found in database");
+
+                       });
+                   }
                 } catch (GeneralSecurityException e) {
                     activity.runOnUiThread(() -> {
-                        request.reject("Security Error ");//does not store password
                         dismiss();
+                        request.reject("Security Error ");//does not store password
                     });
                 } catch (UnsupportedEncodingException e) {
                     activity.runOnUiThread(() -> {
-                        request.reject("unsupported encoder type");
                         dismiss();
+                        request.reject("unsupported encoder type");
                     });
                 }
-            }
-            else {
-                activity.runOnUiThread(() -> {
-                    request.reject("Email already found in database");
-                    dismiss();//end fragment after ever request is resolved or rejected
-                });
-            }
+
+
+
+
         });
     }
 

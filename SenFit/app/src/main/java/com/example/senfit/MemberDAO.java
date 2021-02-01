@@ -11,6 +11,7 @@ package com.example.senfit;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.List;
 @Dao
 public interface MemberDAO {
 
-    @Insert
-    public void insertMember(Member member);
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    public Long insertMember(Member member);//returns new rownumber
 
     @Query("Select * from members where member_id=:id")
     public Member getMember(int id);//IMPORTANT: Methods that retrieve data from database should

@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
 import java.sql.Date;
 
 //Member entity repersents all the data to be used for a member account
-@Entity(tableName="members")
+@Entity(tableName="members",indices = {@Index(value = "email",unique = true)})
 public class Member {
     @PrimaryKey(autoGenerate = true)
     private int member_id;//primary key for member class will auto generate a val
@@ -33,6 +33,7 @@ public class Member {
     private char gender;//gender can either be repersented in F or M
 
     @ColumnInfo(name="email")
+
     private String email;
 
     @ColumnInfo(name="password")
