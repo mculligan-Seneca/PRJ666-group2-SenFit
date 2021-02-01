@@ -30,6 +30,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Queue;
 
 //TODO: Add client side validation
@@ -160,8 +161,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             this.memberViewModel.getMember().setPostalCode(postal);
             this.memberViewModel.getMember().setEmail(e_mail);
             this.memberViewModel.getMember().setPassword(pWord);
-            Intent intent = new Intent(this,SignUpProcessActivity.class);
-            startActivityForResult(intent,REQUEST_PROCCESS);
+
         }
 
     }
