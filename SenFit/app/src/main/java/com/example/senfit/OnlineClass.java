@@ -14,7 +14,6 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity(tableName="onlineClasses")
 public class OnlineClass {
@@ -26,10 +25,10 @@ public class OnlineClass {
     private Date classDate;
 
     @ColumnInfo(name="start_time")
-    private Timestamp startTime;
+    private Long startTime;// refactor as long so timestamp can keep functionality
 
     @ColumnInfo(name="end_time")
-    private Timestamp endTime;
+    private Long endTime;//Timestamp repersented as long
 
     @ColumnInfo(name="fitnessClassId")
     private int fitnessClassId;//TODO:ADD foreign key or embedded
@@ -53,19 +52,19 @@ public class OnlineClass {
         this.classDate = classDate;
     }
 
-    public Timestamp getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 
@@ -75,6 +74,14 @@ public class OnlineClass {
 
     public void setFitnessClassId(int fitnessClassId) {
         this.fitnessClassId = fitnessClassId;
+    }
+
+    public int getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(int trainerId) {
+        this.trainerId = trainerId;
     }
 
     //TODO: add bridge tables

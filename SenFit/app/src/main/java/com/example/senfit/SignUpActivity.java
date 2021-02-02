@@ -51,14 +51,15 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
     @Override
     public void resolve() {
         Intent intent = new Intent(this, LoginActivity.class);
-        Toast.makeText(this,"Member successfully created",Toast.LENGTH_LONG);
+
+        Toast.makeText(this,"Member successfully created",Toast.LENGTH_LONG).show();
         startActivity(intent);
         finish();//activity clean up
     }
 
     @Override
     public void reject(String errMsg) {
-        new ErrorDialog().buildErrorDialog(SignUpActivity.this,errMsg);
+        new ErrorDialog().buildErrorDialog(SignUpActivity.this,errMsg).show();
     }
 
 
@@ -172,7 +173,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         //After validation
         ErrorDialog errorDialog = this.validate();
         if(errorDialog.hasErrors()){
-            errorDialog.buildErrorDialog(this);
+            errorDialog.buildErrorDialog(this).show();
         }else {
             this.memberViewModel.getMember().setFirstName(first);
             this.memberViewModel.getMember().setLastName(last);

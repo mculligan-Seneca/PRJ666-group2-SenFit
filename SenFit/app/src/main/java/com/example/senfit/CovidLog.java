@@ -16,9 +16,10 @@ import java.sql.Date;
 
 @Entity(tableName="CovidLogs",
         foreignKeys = @ForeignKey(entity=Member.class,
-                                  parentColumns="covidLogID",
-                                  childColumns = "member_id"
+                                  parentColumns="member_id",
+                                  childColumns = "member_covidId"
         ))
+//@Entity TODO: Find way to potentially remove full table scans
 public class CovidLog {
     @PrimaryKey(autoGenerate = true)
     private  int covidLogID;
@@ -29,8 +30,8 @@ public class CovidLog {
     @ColumnInfo(name="date_logged")
     private Date date_logged;
 
-    @ColumnInfo(name="member_id")
-    private int member_id;
+    @ColumnInfo(name="member_covidId")
+    private int memberCovidId;//foregin  key to member table
 
     public int getCovidLogID() {
         return covidLogID;
@@ -56,11 +57,12 @@ public class CovidLog {
         this.date_logged = date_logged;
     }
 
-    public int getMember_id() {
-        return member_id;
+
+    public int getMemberCovidId() {
+        return memberCovidId;
     }
 
-    public void setMember_id(int member_id) {
-        this.member_id = member_id;
+    public void setMemberCovidId(int memberCovidId) {
+        this.memberCovidId = memberCovidId;
     }
 }
