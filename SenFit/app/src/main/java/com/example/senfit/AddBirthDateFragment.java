@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 
@@ -110,6 +111,7 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
         this.datePicker= v.findViewById(R.id.date_picker);
         this.setBirthDate=v.findViewById(R.id.set_Birth_Date);
         // TODO:set the original date for date picker
+        this.datePicker.setMinDate(Timestamp.valueOf("1970-01-01 00:00:00").getTime());
         this.datePicker.init(this.year, this.month, this.day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int chosenYear, int monthOfYear, int dayOfMonth) {
