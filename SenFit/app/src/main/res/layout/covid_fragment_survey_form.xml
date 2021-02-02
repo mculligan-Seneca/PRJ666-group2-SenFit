@@ -9,21 +9,6 @@
     android:gravity="center_horizontal"
     tools:context=".CovidSurveyFormFragment">
 
-    <CheckBox
-        android:id="@+id/cough_symptomId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:text="@string/cough_symptom"
-
-        />
-    <CheckBox
-        android:id="@+id/migraine_symptom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:text="@string/migraine_question"/>
-
 
 
 <RadioGroup
