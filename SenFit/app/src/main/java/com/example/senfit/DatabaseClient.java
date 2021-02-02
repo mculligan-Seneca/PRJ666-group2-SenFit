@@ -17,6 +17,8 @@ import androidx.room.Room;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import io.reactivex.Observer;
+
 public class DatabaseClient {
     private AppDatabase appDatabase;
     private static DatabaseClient dbClient=null;
@@ -39,5 +41,8 @@ public class DatabaseClient {
         return dbClient;
     }
 
+    public void insertMember(Member member, Observer observer){//rxjava observable
+
+    }
 
 }

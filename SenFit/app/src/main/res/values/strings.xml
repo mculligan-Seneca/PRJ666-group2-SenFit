@@ -23,4 +23,6 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="cough_symptom">Do you have a cough?</string>
+    <string name="migraine_question">Do you have a migraine?</string>
 </resources>

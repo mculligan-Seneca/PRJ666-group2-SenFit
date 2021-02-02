@@ -75,9 +75,9 @@ public class SignUpProcessFragment extends DialogFragment {
         DatabaseClient dbClient = DatabaseClient.getInstance(getActivity().getApplicationContext());
         DatabaseClient.dbExecutors.execute(()->{
 
-                //TODO: HASH PASSWORD
+
                 try {
-                    PasswordHasher ph = new PasswordHasher();
+                    PasswordHasher ph = new PasswordHasher();//hashes password
                     String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
                     member.setPassword(hash);
                     member.setSalt(ph.getSalt());//store salt in database

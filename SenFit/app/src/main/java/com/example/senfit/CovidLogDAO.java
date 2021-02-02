@@ -8,10 +8,22 @@ This interface is the data access object for the covid logs class. All database 
  */
 package com.example.senfit;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+
+import java.util.List;
 
 @Dao
 public  interface CovidLogDAO {
+
+    @Insert
+    public void insertCovidLog(CovidLog log);
+
+    @Query("Select * from CovidLogs where member_id=:memberId")
+    public LiveData<List<CovidLog>> getLogsForMember(int memberId);
+
 
 
 }
