@@ -80,11 +80,11 @@ public class SignUpProcessFragment extends DialogFragment {
                     .getMembersFromEmail(member.getEmail());
             if(memberList.isEmpty()) {
                 //TODO: HASH PASSWORD
-                try {
-                    PasswordHasher ph = new PasswordHasher();
-                    String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
-                    member.setPassword(hash);
-                    member.setSalt(ph.getSalt());//store salt in database
+               // try {
+                 //   PasswordHasher ph = new PasswordHasher();
+                   // String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
+                    member.setPassword(member.getPassword());
+                    member.setSalt(member.getPassword().getBytes());//store salt in database
                     dbClient.getAppDatabase()
                             .getMemberDao()
                             .insertMember(member);
@@ -92,7 +92,7 @@ public class SignUpProcessFragment extends DialogFragment {
                         request.resolve();
                         dismiss();
                     });
-                } catch (GeneralSecurityException e) {
+               /* } catch (GeneralSecurityException e) {
                     activity.runOnUiThread(() -> {
                         request.reject("Security Error ");//does not store password
                         dismiss();
@@ -102,7 +102,7 @@ public class SignUpProcessFragment extends DialogFragment {
                         request.reject("unsupported encoder type");
                         dismiss();
                     });
-                }
+                }*/
             }
             else {
                 activity.runOnUiThread(() -> {
