@@ -39,7 +39,7 @@ import java.util.Queue;
 public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver
          {
     private static final int REQUEST_PROCCESS=1;//request code for sign up process activity
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("DD-MM-YYYY");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-YYYY");
 
     private EditText firstName, lastName,
             postalCode,email,password,rePassword;
@@ -205,16 +205,18 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         }
 
     }
+
     @Override
     public void saveBirthDate(Bundle args) {
         int year = args.getInt(AddBirthDateFragment.YEAR_ARG);
         int month = args.getInt(AddBirthDateFragment.MONTH_ARG);
         int day = args.getInt(AddBirthDateFragment.DAY_ARG);
-        Date bDate = new Date(year,month,day);
+        Date bDate = new Date(year-1900,month,day);
         birthDate.setText(DATE_FORMAT.format(bDate));
         this.member.setDateOfBirth(bDate);
 
     }
+
 
     private ErrorDialog validate(){
         ErrorDialog errDialog = new ErrorDialog();

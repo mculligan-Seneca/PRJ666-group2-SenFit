@@ -23,6 +23,8 @@ import android.widget.DatePicker;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 
@@ -63,9 +65,9 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
         AddBirthDateFragment fragment = new AddBirthDateFragment();
         if(prevDate!=null) {
             Bundle args = new Bundle();
-            args.putInt(YEAR_ARG, prevDate.getYear());
+            args.putInt(YEAR_ARG, prevDate.getYear()+1900);
             args.putInt(MONTH_ARG, prevDate.getMonth());
-            args.putInt(DAY_ARG,prevDate.getDay());
+            args.putInt(DAY_ARG,prevDate.getDate());
             fragment.setArguments(args);
         }
 
@@ -81,9 +83,10 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
             this.day = getArguments().getInt(DAY_ARG);
         }
         else{
-            this.year = Calendar.YEAR;
-            this.month = Calendar.MONTH;
-            this.day = Calendar.DAY_OF_MONTH;
+            Calendar cal= Calendar.getInstance();
+            this.year = cal.get(Calendar.YEAR);
+            this.month = cal.get(Calendar.MONTH);
+            this.day = cal.get(Calendar.DAY_OF_MONTH);
         }
         //retrieves previous date set by user or instantiates date to today
     }
@@ -112,6 +115,7 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
         this.setBirthDate=v.findViewById(R.id.set_Birth_Date);
         // TODO:set the original date for date picker
         this.datePicker.setMinDate(Timestamp.valueOf("1970-01-01 00:00:00").getTime());
+
         this.datePicker.init(this.year, this.month, this.day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int chosenYear, int monthOfYear, int dayOfMonth) {
