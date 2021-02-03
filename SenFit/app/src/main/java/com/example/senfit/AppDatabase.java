@@ -18,7 +18,8 @@ import androidx.room.TypeConverters;
 
 @Database(entities={Member.class,Trainer.class,CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class,GymClass.class,GymLocation.class,
-        OnlineClass.class,TrainingExercise.class,TrainingPlan.class,TrainingSession.class},version=1)//See what export schema is used for
+        OnlineClass.class,TrainingExercise.class,TrainingPlan.class,TrainingSession.class},version=1,
+exportSchema=false)//See what export schema is used for
 @TypeConverters({Converter.class})
 //TODO: Add Entity classes to database annotation
 public abstract class AppDatabase extends RoomDatabase {

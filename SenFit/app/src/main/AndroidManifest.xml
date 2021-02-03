@@ -21,10 +21,7 @@
         -->
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> signUpPage
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
