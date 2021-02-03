@@ -1,4 +1,4 @@
-/**
+/*
  PRJ666 Sen-Fit
  init date: January 26th 2021
  Author Mitchell Culligan
@@ -13,7 +13,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import java.sql.Date;
+
 import java.util.Calendar;
 
 
@@ -37,8 +38,7 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
     private int year;
     private int month;
     private int day;
-    private DatePicker datePicker;
-    private Button setBirthDate;
+
     public interface  BirthDateSaver{//callback interface used to interact with signup page
         public void saveBirthDate(Bundle args);
     }
@@ -62,9 +62,9 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
         AddBirthDateFragment fragment = new AddBirthDateFragment();
         if(prevDate!=null) {
             Bundle args = new Bundle();
-            args.putInt(YEAR_ARG, prevDate.getYear());
+            args.putInt(YEAR_ARG, prevDate.getYear()+1900);
             args.putInt(MONTH_ARG, prevDate.getMonth());
-            args.putInt(DAY_ARG,prevDate.getDay());
+            args.putInt(DAY_ARG,prevDate.getDate());
             fragment.setArguments(args);
         }
 
@@ -80,9 +80,10 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
             this.day = getArguments().getInt(DAY_ARG);
         }
         else{
-            this.year = Calendar.YEAR;
-            this.month = Calendar.MONTH;
-            this.day = Calendar.DAY_OF_MONTH;
+            Calendar cal= Calendar.getInstance();
+            this.year = cal.get(Calendar.YEAR)-10;
+            this.month = cal.get(Calendar.MONTH);
+            this.day = cal.get(Calendar.DAY_OF_MONTH);
         }
         //retrieves previous date set by user or instantiates date to today
     }
@@ -107,18 +108,18 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_add_birth_date, container, false);
-        this.datePicker= v.findViewById(R.id.date_picker);
-        this.setBirthDate=v.findViewById(R.id.set_Birth_Date);
+
+        DatePicker datePicker = v.findViewById(R.id.date_picker);
+        Button setBirthDate = v.findViewById(R.id.set_Birth_Date);
         // TODO:set the original date for date picker
-        this.datePicker.init(this.year, this.month, this.day, new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker view, int chosenYear, int monthOfYear, int dayOfMonth) {
-                year = chosenYear;
-                month=monthOfYear;
-                day=dayOfMonth;
-            }
+        datePicker.setMinDate(0);//1970 Jan1st
+        datePicker.setMaxDate(new java.util.Date().getTime());
+        datePicker.init(this.year, this.month, this.day, (view, chosenYear, monthOfYear, dayOfMonth) -> {
+            year = chosenYear;
+            month=monthOfYear;
+            day=dayOfMonth;
         });
-        this.setBirthDate.setOnClickListener(this);
+        setBirthDate.setOnClickListener(this);
         return v;
     }
 

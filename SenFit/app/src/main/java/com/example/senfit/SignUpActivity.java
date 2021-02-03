@@ -36,31 +36,19 @@ import java.util.List;
 import java.util.Queue;
 
 //TODO: Add client side validation
-public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver,
-        SignUpProcessFragment.SignUpRequest {
+public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver
+         {
     private static final int REQUEST_PROCCESS=1;//request code for sign up process activity
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("DD-MM-YYYY");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-YYYY");
 
     private EditText firstName, lastName,
             postalCode,email,password,rePassword;
 
     private TextView birthDate;
-    private Button setBirthDate;
-    private MemberSignUpViewModel memberViewModel;
+    private Button setBirthDate, submit;
+    private Member member;
 
-    @Override
-    public void resolve() {
-        Intent intent = new Intent(this, LoginActivity.class);
 
-        Toast.makeText(this,"Member successfully created",Toast.LENGTH_LONG).show();
-        startActivity(intent);
-        finish();//activity clean up
-    }
-
-    @Override
-    public void reject(String errMsg) {
-        new ErrorDialog().buildErrorDialog(SignUpActivity.this,errMsg).show();
-    }
 
 
     //this inside class will display any errors found during validation of sign up
@@ -85,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         public void pushError(CharSequence error){
             errorList.add(error);
         }
-        public AlertDialog buildErrorDialog(Context context){
+        public AlertDialog buildErrorDialog(Context context){//build dialog from error items
             AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(ERR_TITLE);
 
             if(hasErrors()){
@@ -120,8 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        this.memberViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication())
-                .create(MemberSignUpViewModel.class);//using view model to store data
+        this.member = new Member();
         this.firstName = findViewById(R.id.first_name_id);
         this.lastName = findViewById(R.id.last_name_id);
         this.postalCode = findViewById(R.id.postal_code);
@@ -130,11 +117,11 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         this.rePassword = findViewById(R.id.re_password);
         this.birthDate = findViewById(R.id.birthDate);
         this.setBirthDate = findViewById(R.id.addBirthDate);
-
+        this.submit = findViewById(R.id.submit_button);
         this.setBirthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddBirthDateFragment fragment =  AddBirthDateFragment.newInstance(memberViewModel.getMember()
+                AddBirthDateFragment fragment =  AddBirthDateFragment.newInstance(member
                         .getDateOfBirth());
                 //dialog fragment instance created off previous date of birth
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -151,10 +138,10 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
 
         switch(v.getId()){
             case R.id.male_genderID:
-                this.memberViewModel.getMember().setGender('M');
+                this.member.setGender('M');
                 break;
             case R.id.female_genderID:
-                this.memberViewModel.getMember().setGender('F');
+                this.member.setGender('F');
                 break;
         }
 
@@ -175,30 +162,61 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         if(errorDialog.hasErrors()){
             errorDialog.buildErrorDialog(this).show();
         }else {
-            this.memberViewModel.getMember().setFirstName(first);
-            this.memberViewModel.getMember().setLastName(last);
-            this.memberViewModel.getMember().setPostalCode(postal);
-            this.memberViewModel.getMember().setEmail(e_mail);
-            this.memberViewModel.getMember().setPassword(pWord);
+            this.member.setFirstName(first);
+            this.member.setLastName(last);
+            this.member.setPostalCode(postal);
+            this.member.setEmail(e_mail);
+            this.member.setPassword(pWord);
 
-            SignUpProcessFragment fragment = new SignUpProcessFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            submit.setEnabled(false);
+            DatabaseClient dbClient = DatabaseClient.getInstance(getApplicationContext());
+            DatabaseClient.dbExecutors.execute(()-> {
+                List<Member> memberList = dbClient//maybe replace with worker class
+                        .getAppDatabase()
+                        .getMemberDao()
+                        .getMembersFromEmail(member.getEmail());
+                if (memberList.isEmpty()) {
+                    //TODO: HASH PASSWORD
+                    // try {
+                    //   PasswordHasher ph = new PasswordHasher();
+                    // String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
+                    member.setPassword(member.getPassword());
+                    member.setSalt(member.getPassword().getBytes());//store salt in database
+                    dbClient.getAppDatabase()
+                            .getMemberDao()
+                            .insertMember(member);
+                    runOnUiThread(() -> {
 
-            fragment.show(transaction,"Add birth date");
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
 
+                        Toast.makeText(SignUpActivity.this,"Member successfully created",Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+                        finish();//activity clean up
+
+                    });
+
+                } else {
+                    runOnUiThread(() -> {
+                        new ErrorDialog().buildErrorDialog(SignUpActivity.this,"Email already found in database");
+                        submit.setEnabled(true);
+                    });
+                }
+            });
         }
 
     }
+
     @Override
     public void saveBirthDate(Bundle args) {
         int year = args.getInt(AddBirthDateFragment.YEAR_ARG);
         int month = args.getInt(AddBirthDateFragment.MONTH_ARG);
         int day = args.getInt(AddBirthDateFragment.DAY_ARG);
-        Date bDate = new Date(year,month,day);
+        Date bDate = new Date(year-1900,month,day);
         birthDate.setText(DATE_FORMAT.format(bDate));
-        this.memberViewModel.getMember().setDateOfBirth(bDate);
+        this.member.setDateOfBirth(bDate);
 
     }
+
 
     private ErrorDialog validate(){
         ErrorDialog errDialog = new ErrorDialog();
@@ -215,15 +233,15 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             errDialog.pushError("last name field must have value");
         }
 
-        if(this.memberViewModel.getMember().getDateOfBirth()==null){
+        if(this.member.getDateOfBirth()==null){
             errDialog.pushError("Date field must be valid");
         }
 
-        if(this.memberViewModel.getMember().getGender()=='N'){
+        if(this.member.getGender()=='N'){
             errDialog.pushError("Gender field must have value");
         }
-
-        if(postal==null || postal.isEmpty() || !postal.matches("[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d")){
+        //!postal.matches("[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d")
+        if(postal==null || postal.isEmpty()  ){//TODO:add back postal
             errDialog.pushError("Postal code field must have value and be formatted correctly");
         }
         if(e_mail==null || e_mail.isEmpty()) {//TODO: ADD EMAIL REGEX
