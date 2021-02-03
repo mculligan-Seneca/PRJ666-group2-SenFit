@@ -1,4 +1,4 @@
-/**
+/*
  PRJ666 Sen-Fit
  init date: January 26th 2021
  Author Mitchell Culligan
@@ -13,7 +13,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.Calendar;
 
 
@@ -40,8 +38,7 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
     private int year;
     private int month;
     private int day;
-    private DatePicker datePicker;
-    private Button setBirthDate;
+
     public interface  BirthDateSaver{//callback interface used to interact with signup page
         public void saveBirthDate(Bundle args);
     }
@@ -84,7 +81,7 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
         }
         else{
             Calendar cal= Calendar.getInstance();
-            this.year = cal.get(Calendar.YEAR);
+            this.year = cal.get(Calendar.YEAR)-10;
             this.month = cal.get(Calendar.MONTH);
             this.day = cal.get(Calendar.DAY_OF_MONTH);
         }
@@ -111,20 +108,18 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_add_birth_date, container, false);
-        this.datePicker= v.findViewById(R.id.date_picker);
-        this.setBirthDate=v.findViewById(R.id.set_Birth_Date);
-        // TODO:set the original date for date picker
-        this.datePicker.setMinDate(Timestamp.valueOf("1970-01-01 00:00:00").getTime());
 
-        this.datePicker.init(this.year, this.month, this.day, new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker view, int chosenYear, int monthOfYear, int dayOfMonth) {
-                year = chosenYear;
-                month=monthOfYear;
-                day=dayOfMonth;
-            }
+        DatePicker datePicker = v.findViewById(R.id.date_picker);
+        Button setBirthDate = v.findViewById(R.id.set_Birth_Date);
+        // TODO:set the original date for date picker
+        datePicker.setMinDate(0);//1970 Jan1st
+        datePicker.setMaxDate(new java.util.Date().getTime());
+        datePicker.init(this.year, this.month, this.day, (view, chosenYear, monthOfYear, dayOfMonth) -> {
+            year = chosenYear;
+            month=monthOfYear;
+            day=dayOfMonth;
         });
-        this.setBirthDate.setOnClickListener(this);
+        setBirthDate.setOnClickListener(this);
         return v;
     }
 
