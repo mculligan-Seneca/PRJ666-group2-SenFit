@@ -6,7 +6,7 @@ Version 1.0
 FitnessClass Class
  */
 
-package com.example.senfit;
+package com.example.senfit.DataContext.Entities;
 
 
 import androidx.room.ColumnInfo;

@@ -6,13 +6,13 @@ Version 1.0
 MemberDAO class
 This interface repersents the data access object of the member class
  */
-package com.example.senfit;
+package com.example.senfit.DataContext.DAO;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.senfit.Entities.Member;
+import com.example.senfit.DataContext.Entities.Member;
 
 import java.util.List;
 

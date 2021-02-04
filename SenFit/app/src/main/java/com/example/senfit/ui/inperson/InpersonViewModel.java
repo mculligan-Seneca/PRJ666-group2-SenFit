@@ -12,10 +12,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.senfit.DatabaseClient;
-import com.example.senfit.FitnessClass;
-import com.example.senfit.GymClass;
-import com.example.senfit.Trainer;
+import com.example.senfit.DataContext.DatabaseClient;
+import com.example.senfit.DataContext.Entities.FitnessClass;
+import com.example.senfit.DataContext.Entities.GymClass;
+import com.example.senfit.DataContext.Entities.Trainer;
 
 import java.util.ArrayList;
 import java.util.Date;

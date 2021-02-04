@@ -6,7 +6,7 @@ Author Mitchell Culligan
 Version 1.0
 GymLocation class
  */
-package com.example.senfit;
+package com.example.senfit.DataContext.Entities;
 
 
 import androidx.room.ColumnInfo;

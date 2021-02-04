@@ -8,8 +8,8 @@ package com.example.senfit.login;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.senfit.DatabaseClient;
-import com.example.senfit.Entities.Member;
+import com.example.senfit.DataContext.DatabaseClient;
+import com.example.senfit.DataContext.Entities.Member;
 
 import java.util.List;
 

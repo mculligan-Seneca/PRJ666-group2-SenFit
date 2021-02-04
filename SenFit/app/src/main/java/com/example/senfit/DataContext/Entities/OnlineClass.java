@@ -6,7 +6,7 @@ Version 1.0
 OnlineClass class
 This class repersents the data to be stored for an online class entity.
  */
-package com.example.senfit;
+package com.example.senfit.DataContext.Entities;
 
 
 import androidx.room.ColumnInfo;

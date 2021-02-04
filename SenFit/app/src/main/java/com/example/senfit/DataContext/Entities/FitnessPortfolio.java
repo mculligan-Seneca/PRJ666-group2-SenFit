@@ -5,10 +5,9 @@ Author Mitchell Culligan
 Version 1.0
 Fitness Portfolio Class
  */
-package com.example.senfit;
+package com.example.senfit.DataContext.Entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName="fitnessPortfolio")
