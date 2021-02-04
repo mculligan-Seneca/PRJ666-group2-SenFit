@@ -241,7 +241,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             errDialog.pushError("Gender field must have value");
         }
         //!postal.matches("[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d")
-        if(postal==null || postal.isEmpty()  ){//TODO:add back postal
+        if(postal==null || postal.isEmpty() || !postal.matches("[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d") ){//TODO:add back postal
             errDialog.pushError("Postal code field must have value and be formatted correctly");
         }
         if(e_mail==null || e_mail.isEmpty()) {//TODO: ADD EMAIL REGEX
