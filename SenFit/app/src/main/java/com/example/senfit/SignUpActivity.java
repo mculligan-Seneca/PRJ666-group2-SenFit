@@ -26,7 +26,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.senfit.Entities.Member;
+import com.example.senfit.DataContext.DatabaseClient;
+import com.example.senfit.DataContext.Entities.Member;
 import com.example.senfit.login.LoginActivity;
 
 import java.sql.Date;

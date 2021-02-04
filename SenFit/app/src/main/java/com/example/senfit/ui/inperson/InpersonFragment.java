@@ -6,7 +6,6 @@
 
   package com.example.senfit.ui.inperson;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.senfit.DatabaseClient;
-import com.example.senfit.FitnessClass;
-import com.example.senfit.GymClass;
 import com.example.senfit.R;
-import com.example.senfit.Trainer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
+  /**
  * A placeholder fragment containing a simple view.
  */
 public class InpersonFragment extends Fragment {

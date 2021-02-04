@@ -5,14 +5,12 @@ Author Mitchell Culligan
 Version 1.0
 CovidLog class
  */
-package com.example.senfit;
+package com.example.senfit.DataContext.Entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import com.example.senfit.Entities.Member;
 
 import java.sql.Date;
 

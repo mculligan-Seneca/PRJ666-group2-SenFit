@@ -6,7 +6,7 @@ Version 1.0
  Converter class
 This class is  to assist in converting complex data types from java into storable types for database
  */
-package com.example.senfit;
+package com.example.senfit.DataContext;
 
 import androidx.room.TypeConverter;
 

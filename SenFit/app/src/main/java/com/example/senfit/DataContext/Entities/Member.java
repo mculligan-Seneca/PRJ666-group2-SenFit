@@ -5,10 +5,9 @@ Author Mitchell Culligan
 Version 1.0
 Member class
  */
-package com.example.senfit.Entities;
+package com.example.senfit.DataContext.Entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import java.sql.Date;
 

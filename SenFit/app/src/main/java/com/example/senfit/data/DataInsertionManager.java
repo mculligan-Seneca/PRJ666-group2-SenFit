@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
-import com.example.senfit.DatabaseClient;
-import com.example.senfit.FitnessClass;
-import com.example.senfit.GymClass;
-import com.example.senfit.Trainer;
+import com.example.senfit.DataContext.DatabaseClient;
+import com.example.senfit.DataContext.Entities.FitnessClass;
+import com.example.senfit.DataContext.Entities.GymClass;
+import com.example.senfit.DataContext.Entities.Trainer;
 
 import java.sql.Date;
 import java.text.DateFormat;
