@@ -1,3 +1,8 @@
+/*
+ * author: Portia siddiqua(107741175)
+ *
+ * */
+
 package com.example.senfit.login;
 
 import android.content.Context;
@@ -36,7 +41,7 @@ public class LoginHelper {
                         .getAppDatabase().getMemberDao().getMembersFromEmail(email);
 
                 if (memberList == null || memberList.isEmpty()) {
-                    comparisonCallback.isValid(true);
+                    comparisonCallback.isValid(false);
                     return null;
                 }
 

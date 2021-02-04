@@ -9,6 +9,7 @@ This interface repersents the data access object of the trainer class
 package com.example.senfit;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
@@ -16,9 +17,11 @@ import java.util.List;
 @Dao
 public interface TrainerDAO {
 
+    @Insert
+    long insertTrainer(Trainer member);
 
     @Query("Select * from trainers where trainerId=:id")
-    public Trainer getTrainer(int id);//IMPORTANT: Methods that retrieve data from database should
+    public Trainer getTrainer(long id);//IMPORTANT: Methods that retrieve data from database should
     // never be run from main thread
 
     @Query("Select * from trainers")
