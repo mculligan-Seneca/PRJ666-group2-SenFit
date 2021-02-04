@@ -27,5 +27,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TrainerDAO getTrainerDao();
 
+    public abstract GymClassDao getGymClassDao();
+
+    public abstract FitnessClassDao FitnessGymClassDao();
+
     //TODO: Add any new DAO's to appdatabase
 }

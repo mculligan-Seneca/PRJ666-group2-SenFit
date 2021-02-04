@@ -1,3 +1,9 @@
+/*
+ * author: Portia siddiqua(107741175)
+ *
+ * */
+
+
 package com.example.senfit.login;
 
 import android.content.Intent;
@@ -10,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senfit.R;
 import com.example.senfit.SignUpActivity;
+import com.example.senfit.data.DataInsertionManager;
+import com.example.senfit.ui.inperson.SenFitActivity;
 
 
 /**
@@ -29,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        DataInsertionManager.insertDummyData(this);
     }
 
     /*
@@ -49,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         if (vaild) {
                             Toast.makeText(LoginActivity.this, "Loging success", Toast.LENGTH_LONG).show();
+                            showSenfitActivity();
                         } else {
                             Toast.makeText(LoginActivity.this, "Invalid credentials.", Toast.LENGTH_LONG).show();
                         }
@@ -64,6 +74,12 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void onSignupClick(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showSenfitActivity() {
+        Intent intent = new Intent(this, SenFitActivity.class);
         startActivity(intent);
         finish();
     }
