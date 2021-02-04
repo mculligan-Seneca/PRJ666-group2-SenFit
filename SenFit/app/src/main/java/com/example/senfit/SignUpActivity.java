@@ -197,7 +197,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             errors+="Email field must have value\n";
         }
 
-        if(pWord==null || pWord.isEmpty()){//TODO: add email regex
+        if(pWord==null || pWord.isEmpty()){//TODO: add pWord regex
             errors+="Password field must have value\n";
         }else if(rpWord==null || rpWord.isEmpty()){
             errors+="Password must be reentered\n";
