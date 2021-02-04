@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.senfit.DatabaseClient;
-import com.example.senfit.Member;
+import com.example.senfit.Entities.Member;
 
 import java.util.List;
 

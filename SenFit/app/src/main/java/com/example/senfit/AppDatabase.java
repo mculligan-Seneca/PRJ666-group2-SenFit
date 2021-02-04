@@ -16,6 +16,9 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.senfit.Entities.Exercise;
+import com.example.senfit.Entities.Member;
+
 @Database(entities={Member.class,Trainer.class,CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class,GymClass.class,GymLocation.class,
         OnlineClass.class,TrainingExercise.class,TrainingPlan.class,TrainingSession.class},version=1,

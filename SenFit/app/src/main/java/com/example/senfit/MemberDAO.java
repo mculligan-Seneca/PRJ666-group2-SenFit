@@ -8,10 +8,11 @@ This interface repersents the data access object of the member class
  */
 package com.example.senfit;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.senfit.Entities.Member;
 
 import java.util.List;
 

@@ -8,9 +8,7 @@ import android.os.AsyncTask;
 import com.example.senfit.DatabaseClient;
 import com.example.senfit.FitnessClass;
 import com.example.senfit.GymClass;
-import com.example.senfit.Member;
 import com.example.senfit.Trainer;
-import com.example.senfit.ui.inperson.SenFitActivity;
 
 import java.sql.Date;
 import java.text.DateFormat;

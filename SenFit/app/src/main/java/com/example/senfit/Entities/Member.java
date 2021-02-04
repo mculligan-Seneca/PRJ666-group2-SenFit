@@ -5,7 +5,7 @@ Author Mitchell Culligan
 Version 1.0
 Member class
  */
-package com.example.senfit;
+package com.example.senfit.Entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
