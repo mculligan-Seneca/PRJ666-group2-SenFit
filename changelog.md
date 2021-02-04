@@ -8,3 +8,5 @@ Complete sign up page and store member in database.(Mitchell)
 
 Complete login page, fetch signup info from database and compare credentials on 2021/02/02.(Portia)
 
+Complete in-person class list page, add dummy data in database,fetch and show on 2021/02/03.(Portia)
+
