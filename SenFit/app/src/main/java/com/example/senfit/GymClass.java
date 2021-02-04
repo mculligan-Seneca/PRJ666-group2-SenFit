@@ -29,10 +29,10 @@ public class GymClass {
     private Long endTime;
 
     @ColumnInfo(name="trainerId")
-    private int trainerId;//TODO: ADD foreign key or embeeded
+    private long trainerId;//TODO: ADD foreign key or embeeded
 
     @ColumnInfo(name="fitnessClassId")
-    private int fitnessClassId;//TODO:ADD foreign key or embedded
+    private long fitnessClassId;//TODO:ADD foreign key or embedded
     @ColumnInfo(name="gymLocationId")
     private int gymLocationId;//TODO: ADD foreign key or embedded
 
@@ -68,19 +68,19 @@ public class GymClass {
         this.endTime = endTime;
     }
 
-    public int getTrainerId() {
+    public long getTrainerId() {
         return trainerId;
     }
 
-    public void setTrainerId(int trainerId) {
+    public void setTrainerId(long trainerId) {
         this.trainerId = trainerId;
     }
 
-    public int getFitnessClassId() {
+    public long getFitnessClassId() {
         return fitnessClassId;
     }
 
-    public void setFitnessClassId(int fitnessClassId) {
+    public void setFitnessClassId(long fitnessClassId) {
         this.fitnessClassId = fitnessClassId;
     }
 

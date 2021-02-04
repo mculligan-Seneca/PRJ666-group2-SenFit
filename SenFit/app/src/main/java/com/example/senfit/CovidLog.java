@@ -12,10 +12,12 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.example.senfit.Entities.Member;
+
 import java.sql.Date;
 
 @Entity(tableName="CovidLogs",
-        foreignKeys = @ForeignKey(entity=Member.class,
+        foreignKeys = @ForeignKey(entity= Member.class,
                                   parentColumns="member_id",
                                   childColumns = "member_covidId"
         ))

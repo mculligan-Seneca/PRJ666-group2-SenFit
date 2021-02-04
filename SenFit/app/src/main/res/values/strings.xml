@@ -23,4 +23,10 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_inperson">Inperson Class</string>
+    <string name="tab_online">Online Class</string>
+    <string name="tab_home">Home</string>
 </resources>
