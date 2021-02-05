@@ -35,11 +35,18 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 
+
 //TODO: Add client side validation
 public class SignUpActivity extends AppCompatActivity implements AddBirthDateFragment.BirthDateSaver
          {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-YYYY");
+    private static final String POSTAL_FORMAT="[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d";//Regex for postal format
+    private static final String EMAIL_FORMAT="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\\\.[a-zA-Z0-9-]+)*$";
+    //Regex for email format- allows multiple dots in domain and local but rejects two contigious dots
+    private static final String PASSWORD_FORMAT="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]){8,}";
+    //Regex for password- must conatin at least 8 character - must contain 1 upper case - 1 lower case -
+    //       1 number
     private static final String ERR_TITLE ="Error Dialog";
     private EditText firstName, lastName,
             postalCode,email,password,rePassword;
@@ -192,20 +199,17 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             errors += "Gender field must have value\n";
         }
 
-        //!postal.matches("[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d")
-        if (postal == null || postal.isEmpty() || !postal.matches("[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d")) {//TODO:add back postal
-            errors+="Postal code field must have value and be formatted correctly\n";
-        }
-            //
-            if (postal == null || postal.isEmpty() || !postal.matches("[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d")) {//TODO:add back postal
+
+
+            if (postal == null || postal.isEmpty() || !postal.matches(POSTAL_FORMAT)) {//TODO:add back postal
                 errors += "Postal code field must be formatted correctly\n";
 
             }
-            if (e_mail == null || e_mail.isEmpty()) {//TODO: ADD EMAIL REGEX
+            if (e_mail == null || e_mail.isEmpty()|| !e_mail.matches(EMAIL_FORMAT)) {//TODO: ADD EMAIL REGEX
                 errors += "Email field must have value\n";
             }
 
-            if (pWord == null || pWord.isEmpty()) {//TODO: add pWord regex
+            if (pWord == null || pWord.isEmpty() || !pWord.matches(PASSWORD_FORMAT)) {//TODO: add pWord regex
                 errors += "Password field must have value\n";
             } else if (rpWord == null || rpWord.isEmpty()) {
                 errors += "Password must be reentered\n";
