@@ -42,9 +42,9 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-YYYY");
     private static final String POSTAL_FORMAT="[A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d";//Regex for postal format
-    private static final String EMAIL_FORMAT="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\\\.[a-zA-Z0-9-]+)*$";
+    private static final String EMAIL_FORMAT="[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*";
     //Regex for email format- allows multiple dots in domain and local but rejects two contigious dots
-    private static final String PASSWORD_FORMAT="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]){8,}";
+    private static final String PASSWORD_FORMAT="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9]{8,}$";
     //Regex for password- must conatin at least 8 character - must contain 1 upper case - 1 lower case -
     //       1 number
     private static final String ERR_TITLE ="Error Dialog";
@@ -210,7 +210,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             }
 
             if (pWord == null || pWord.isEmpty() || !pWord.matches(PASSWORD_FORMAT)) {//TODO: add pWord regex
-                errors += "Password field must have value\n";
+                errors += "Password field must have\n - 1 number\n- 1 upper case\n- 1 lower case\n - must have 8 or more characters\n";
             } else if (rpWord == null || rpWord.isEmpty()) {
                 errors += "Password must be reentered\n";
             } else if (!pWord.equals(rpWord)) {
