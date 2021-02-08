@@ -10,3 +10,5 @@ Complete login page, fetch signup info from database and compare credentials on 
 
 Complete in-person class list page, add dummy data in database,fetch and show on 2021/02/03.(Portia)
 
+Complete password and email validation to sign up page on 2021/2/8.(Mitchell)
+
