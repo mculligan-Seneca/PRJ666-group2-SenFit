@@ -7,7 +7,7 @@
  This fragment class extends the dialog fragment class and will provide the user with a seperate dialog window to
  select their birthdate. This fragment will be used in the sign up process
  */
-package com.example.senfit;
+package signup;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+
+import com.example.senfit.R;
 
 import java.sql.Date;
 

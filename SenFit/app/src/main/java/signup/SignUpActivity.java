@@ -7,7 +7,7 @@ SignUp Activity
 This activity allows the user to sign up for a new member account. The activity implements the date saver interface
 which allows the activity to recieve data from the AddBirthDate fragment.
  */
-package com.example.senfit;
+package signup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.senfit.DataContext.DatabaseClient;
 import com.example.senfit.DataContext.Entities.Member;
+import com.example.senfit.R;
 import com.example.senfit.login.LoginActivity;
 
 import java.sql.Date;
