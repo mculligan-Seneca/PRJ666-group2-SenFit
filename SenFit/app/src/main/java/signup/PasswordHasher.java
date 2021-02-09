@@ -8,7 +8,7 @@ This class generates a salt and hashes passwords for member class.
  This class can also be used to compare hashed passwords
  */
 
-package com.example.senfit;
+package signup;
 
 
 

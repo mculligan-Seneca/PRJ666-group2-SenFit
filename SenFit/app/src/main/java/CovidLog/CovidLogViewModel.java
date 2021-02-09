@@ -6,7 +6,7 @@ Version 1.0
 CovidLog ViewModel
 This viewmodel class stores data for the current covid Log
  */
-package com.example.senfit;
+package CovidLog;
 
 import androidx.lifecycle.ViewModel;
 
