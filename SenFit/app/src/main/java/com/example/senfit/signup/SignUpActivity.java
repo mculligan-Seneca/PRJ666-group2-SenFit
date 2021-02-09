@@ -136,7 +136,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
                     // try {
                     //   PasswordHasher ph = new PasswordHasher();
                     // String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
-                    member.setPassword(member.getPassword());
+                    member.setPassword(member.getPassword().toLowerCase());
                     member.setSalt(member.getPassword().getBytes());//store salt in database
                     dbClient.getAppDatabase()
                             .getMemberDao()
