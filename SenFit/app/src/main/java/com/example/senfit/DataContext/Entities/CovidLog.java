@@ -3,7 +3,7 @@ PRJ666 Sen-Fit
 init date: January 24th 2021
 Author Mitchell Culligan
 Version 1.0
-CovidLog class
+com.example.senfit.CovidLog class
  */
 package com.example.senfit.DataContext.Entities;
 

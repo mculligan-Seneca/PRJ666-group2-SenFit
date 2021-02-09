@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senfit.R;
-import signup.SignUpActivity;
+import com.example.senfit.signup.SignUpActivity;
 import com.example.senfit.data.DataInsertionManager;
 import com.example.senfit.ui.inperson.SenFitActivity;
 
@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /*
     Is called whern click singup button
-    Shows the signup activity
+    Shows the com.example.senfit.signup activity
      */
     public void onSignupClick(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);

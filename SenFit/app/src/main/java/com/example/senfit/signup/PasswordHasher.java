@@ -8,16 +8,13 @@ This class generates a salt and hashes passwords for member class.
  This class can also be used to compare hashed passwords
  */
 
-package signup;
+package com.example.senfit.signup;
 
 
 
 import android.util.Log;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 import javax.crypto.SecretKeyFactory;

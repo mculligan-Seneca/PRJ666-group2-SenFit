@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:paddingTop="25dp"
     android:gravity="center_horizontal"
-    tools:context="CovidLog.CovidSurveyFormFragment">
+    tools:context="com.example.senfit.CovidLog.CovidSurveyFormFragment">
 
 
 

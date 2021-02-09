@@ -7,7 +7,7 @@
  This fragment class extends the dialog fragment class and will provide the user with a seperate dialog window to
  select their birthdate. This fragment will be used in the sign up process
  */
-package signup;
+package com.example.senfit.signup;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -41,7 +41,7 @@ public class AddBirthDateFragment extends DialogFragment implements View.OnClick
     private int month;
     private int day;
 
-    public interface  BirthDateSaver{//callback interface used to interact with signup page
+    public interface  BirthDateSaver{//callback interface used to interact with com.example.senfit.signup page
         public void saveBirthDate(Bundle args);
     }
 

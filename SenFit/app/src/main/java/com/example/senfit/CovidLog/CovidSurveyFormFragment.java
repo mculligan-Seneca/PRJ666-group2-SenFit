@@ -1,4 +1,4 @@
-package CovidLog;
+package com.example.senfit.CovidLog;
 
 import android.os.Bundle;
 
