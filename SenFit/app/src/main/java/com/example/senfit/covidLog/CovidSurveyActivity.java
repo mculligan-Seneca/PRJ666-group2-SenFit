@@ -100,7 +100,7 @@ public class CovidSurveyActivity extends AppCompatActivity {
 
     public void submit(View v){ //triggied by onclick action
 
-            this.logViewModel.insertLog();//inserts the log into the database and submits to backend
+        boolean status=this.logViewModel.insertLog();//inserts the log into the database and submits to backend
 
     }
 }

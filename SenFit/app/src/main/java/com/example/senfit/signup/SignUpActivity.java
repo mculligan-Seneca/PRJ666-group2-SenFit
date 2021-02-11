@@ -26,6 +26,7 @@ import com.example.senfit.DataContext.DatabaseClient;
 import com.example.senfit.DataContext.Entities.Member;
 import com.example.senfit.R;
 import com.example.senfit.login.LoginActivity;
+import com.example.senfit.uiHelpers.DialogBoxHelper;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -112,7 +113,9 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         //After validation
         String errMsg = getErrorMessage();
         if(!errMsg.equals("")){
-            createDialog(this,ERR_TITLE,"The following fields have errors:\n"+errMsg).show();
+            DialogBoxHelper.createPositiveDialog(this,ERR_TITLE,
+                    "The following fields have errors:\n"+errMsg,null)
+                    .show();
         }else {
             this.member.setFirstName(first);
             this.member.setLastName(last);
@@ -150,8 +153,8 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
                 } else {
                     runOnUiThread(() -> {
 
-                                createDialog(SignUpActivity.this,ERR_TITLE,
-                                        "Email already found in database")
+                                DialogBoxHelper.createPositiveDialog(SignUpActivity.this,ERR_TITLE,
+                                        "Email already found in database",null)
                                 .show();
                         submit.setEnabled(true);
                     });
@@ -217,15 +220,6 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             return errors;
         }
 
-        private static AlertDialog createDialog (Context context, CharSequence title, CharSequence
-        message){
-            AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(title);
-            builder.setMessage(message)
-                    .setCancelable(true)
-                    .setPositiveButton("Ok", null);
-
-            return builder.create();
-        }
 
 
 }
