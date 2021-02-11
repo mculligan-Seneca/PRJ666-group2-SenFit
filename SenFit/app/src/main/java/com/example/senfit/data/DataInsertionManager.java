@@ -1,9 +1,10 @@
 package com.example.senfit.data;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senfit.DataContext.DatabaseClient;
 import com.example.senfit.DataContext.Entities.FitnessClass;
@@ -141,7 +142,7 @@ public class DataInsertionManager {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                trainerId[0] = DatabaseClient.getInstance(context).getAppDatabase().getTrainerDao().insertTrainer(trainer);
+                trainerId[0] = DatabaseClient.initDB(context).getAppDatabase().getTrainerDao().insertTrainer(trainer);
                 return null;
             }
 
@@ -166,7 +167,7 @@ public class DataInsertionManager {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                classId[0] = DatabaseClient.getInstance(context).getAppDatabase().FitnessGymClassDao().insertFitnessClass(fitnessClass);
+                classId[0] = DatabaseClient.initDB(context).getAppDatabase().FitnessGymClassDao().insertFitnessClass(fitnessClass);
                 return null;
             }
 
@@ -195,7 +196,7 @@ public class DataInsertionManager {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                DatabaseClient.getInstance(context).getAppDatabase().getGymClassDao().insertGymClass(gymClass);
+                DatabaseClient.initDB(context).getAppDatabase().getGymClassDao().insertGymClass(gymClass);
                 return null;
             }
 
@@ -207,14 +208,14 @@ public class DataInsertionManager {
     }
 
     private static void setDummyDataInserted(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("senfit_pref", Activity.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("senfit_pref", AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("dummy_data_flag", 1);
         editor.commit();
     }
 
     private static boolean getDummyDataInserted(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("senfit_pref", Activity.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("senfit_pref", AppCompatActivity.MODE_PRIVATE);
         int myIntValue = sp.getInt("dummy_data_flag", 0);
         return myIntValue > 0;
     }

@@ -24,8 +24,7 @@
     -->
     <string name="hello_world">Hello Square World!</string>
 
-    <string name="cough_symptom">Do you have a cough?</string>
-    <string name="migraine_question">Do you have a migraine?</string>
+
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -33,5 +32,15 @@
     <string name="tab_inperson">Inperson Class</string>
     <string name="tab_online">Online Class</string>
     <string name="tab_home">Home</string>
+    <string name="un_confirm">un-confirm</string>
+    <string name="confirm_statement">I Confirm these results</string>
+    <string name="covid_survey">Covid Survey</string>
+
+    <string-array name="covid_questions">
+        <item>Do you have a cough?</item>
+        <item>Have you experienced migraines?</item>
+        <item>Have you spent more than 15 minutes with someone who has Covid-19?</item>
+
+    </string-array>
 
 </resources>

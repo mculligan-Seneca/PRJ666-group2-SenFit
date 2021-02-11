@@ -34,12 +34,15 @@ public class DatabaseClient {
         return appDatabase;
     }
 
-    public static DatabaseClient getInstance(Context context){
+    public static DatabaseClient getInstance(){
+        return dbClient;
+    }
+
+
+    public static DatabaseClient initDB(Context context){
         if(dbClient==null)
             dbClient = new DatabaseClient(context);
         //instaniates database client if null
         return dbClient;
     }
-
-
 }

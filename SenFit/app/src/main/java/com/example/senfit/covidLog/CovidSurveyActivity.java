@@ -1,0 +1,106 @@
+/*
+PRJ666 Sen-Fit
+init date: Febuary 1st 2021
+Author Mitchell Culligan
+Version 1.0
+Covid survey activity
+This activity is provided when the user attempts to access an activity that deals with
+gym facilities. The user must fill out the form provided which will be stored in database.
+This activity returns a result and and must be supplied a member id via an intent.
+ */
+package com.example.senfit.covidLog;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableBoolean;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.example.senfit.DataContext.Entities.CovidLog;
+import com.example.senfit.R;
+import com.example.senfit.databinding.ActivityCovidSurveyBinding;
+
+public class CovidSurveyActivity extends AppCompatActivity {
+    public static final String MEMBER_ID_TAG="member_id_tag"; //tag to retrieve member id from intent
+    public static final String CANCELED_RESULT ="error_result";//intent tag in the case the result is cancelled
+    public static final String MEMBER_NOTFOUND="No such member exists";
+
+    private CovidLogViewModel logViewModel;
+    private  ActivityCovidSurveyBinding binding;
+    private RecyclerView recyclerView;
+    private SurveyAdapter adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.binding = DataBindingUtil.setContentView(this,R.layout.activity_covid_survey);
+        //setContentView(R.layout.activity_covid_survey);
+        this.logViewModel=null;
+        Intent intent = getIntent();
+
+        int memberId = intent.getIntExtra(MEMBER_ID_TAG,-1);//retrieves member id
+
+        if(memberId!=-1){
+         this.logViewModel = new ViewModelProvider(this).get(CovidLogViewModel.class);
+         this.recyclerView = findViewById(R.id.covid_questions);
+         this.logViewModel.setMemberIdData(memberId);
+         this.logViewModel.getRecentMemberLogs().observe(this,(logs)->{
+             if(!logs.isEmpty()){//retrieves only logs within valid time period.
+                 CovidLog cLog = logs.get(0);//retrieves most recent log
+                 if(!cLog.getStatus()){
+                    if(DateHelper.compareToDate(cLog.getDate_logged())) {//checks if log was made today
+                            setResult(Activity.RESULT_OK);//log was already deemed ok for today
+                        //process can continue
+                    }
+                    else
+                    {
+                            createUI();//otherwise continue continue to fill covid log
+                    }
+
+                 }else{
+                    //provides member with message to stay at home
+                     // sets result to cancelled
+
+                 }
+
+             }
+             else{
+                 createUI();
+             }
+         });
+        }else{
+            Intent result = new Intent ();
+            result.putExtra(CANCELED_RESULT,MEMBER_NOTFOUND);
+            setResult(Activity.RESULT_CANCELED,result);
+            finish();
+        }
+
+    }
+
+    public void createUI(){
+        String[] questions=null;
+        if(this.logViewModel.getSurveyQuestions().isEmpty()) {
+            questions = getResources().getStringArray(R.array.covid_questions);//retrieves the survey questions
+            this.logViewModel.setQuestionList(questions);//stores the questions in view model
+        }
+        this.adapter = new SurveyAdapter(this,this.logViewModel.getSurveyQuestions());
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        this.recyclerView.setAdapter(this.adapter);
+        ObservableBoolean isConfirmed = new ObservableBoolean();
+        this.binding.setIsConfirmed(isConfirmed);
+
+    }
+
+
+    public void submit(View v){ //triggied by onclick action
+
+            this.logViewModel.insertLog();//inserts the log into the database and submits to backend
+
+    }
+}

@@ -15,6 +15,7 @@ import androidx.room.Query;
 
 import com.example.senfit.DataContext.Entities.CovidLog;
 
+import java.sql.Date;
 import java.util.List;
 
 @Dao
@@ -23,8 +24,9 @@ public  interface CovidLogDAO {
     @Insert
     public void insertCovidLog(CovidLog log);
 
-    @Query("Select * from CovidLogs where member_id=:memberId")
-    public LiveData<List<CovidLog>> getLogsForMember(int memberId);
+    @Query("Select * from CovidLogs where member_id=:memberId and date_logged >:date order by date_logged desc")
+    public LiveData<List<CovidLog>> getLogsForMember(int memberId, Date date);
+    //retrieves logs within a certain time frame
 
 
 

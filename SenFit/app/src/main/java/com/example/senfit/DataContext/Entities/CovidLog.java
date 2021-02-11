@@ -25,7 +25,7 @@ public class CovidLog {
     private  int covidLogID;
 
     @ColumnInfo(name="covid_status")
-    private boolean status;
+    private boolean status; //true if then have covid symptoms false if they do not
 
     @ColumnInfo(name="date_logged")
     private Date date_logged;
@@ -33,6 +33,12 @@ public class CovidLog {
     @ColumnInfo(name="member_id")
     private int member_id;//foregin  key to member table
 
+
+    public CovidLog(boolean status, Date date_logged,int memberId){//covidLogId set by database
+        this.status=status;
+        this.date_logged=date_logged;
+        this.member_id=memberId;
+    }
     public CovidLog(){
         this.status=false;
         this.date_logged=null;
@@ -46,12 +52,15 @@ public class CovidLog {
         this.covidLogID = covidLogID;
     }
 
-    public boolean isStatus() {
+    /*public boolean isStatus() {
         return status;
-    }
+    }*/
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+    public boolean getStatus(){
+        return this.status;
     }
 
     public Date getDate_logged() {

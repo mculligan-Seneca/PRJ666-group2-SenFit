@@ -37,7 +37,7 @@ public class LoginHelper {
         new AsyncTask<Object, Object, Object>() {
             @Override
             protected Object doInBackground(Object[] objects) {
-                List<Member> memberList = DatabaseClient.getInstance(context)
+                List<Member> memberList = DatabaseClient.initDB(context)
                         .getAppDatabase().getMemberDao().getMembersFromEmail(email);
 
                 if (memberList == null || memberList.isEmpty()) {

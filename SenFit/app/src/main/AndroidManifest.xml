@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SenFit">
 
         <activity
-            android:name=".CovidLog.CovidSurveyActivity"
+            android:name=".covidLog.CovidSurveyActivity"
             android:label="@string/title_activity_covid_survey">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

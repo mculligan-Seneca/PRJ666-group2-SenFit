@@ -1,41 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CovidLog.CovidSurveyActivity">
+<layout>
+
+    <data>
+        <import type="androidx.databinding.ObservableBoolean"/>
+        <variable
+            name="isConfirmed"
+            type="ObservableBoolean" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".covidLog.CovidSurveyActivity">
 
 
-    <TextView
-        android:id="@+id/survey_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Covid Survey"
-        android:textSize="45sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/title_guideline"/>
+        <TextView
+            android:id="@+id/survey_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/covid_survey"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/title_guideline"/>
 
 
-    <Button
-        android:id="@+id/survey_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submit"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exposed_group" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/covid_questions"
+            android:layout_width="401dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/radio_group_valid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/survey_title" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/title_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/confirm_statement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_statement"
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/survey_submit"
+            app:layout_constraintEnd_toStartOf="@id/radio_group_valid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/covid_questions"
+            app:layout_constraintVertical_chainStyle="packed"
+            />
+        <RadioGroup
+            android:orientation="horizontal"
+            android:id="@+id/radio_group_valid"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/survey_submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/confirm_statement"
+            app:layout_constraintTop_toBottomOf="@id/covid_questions" >
+
+            <RadioButton
+                android:id="@+id/valid_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm"
+                android:checked="@{isConfirmed}"
+                android:textStyle="bold"/>
+            <RadioButton
+                android:id="@+id/invalid_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/un_confirm"
+                android:checked="@{!isConfirmed}"
+                android:textStyle="bold"/>
+
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/survey_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:textSize="15sp"
+            android:enabled="@{isConfirmed}"
+            android:onClick="submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radio_group_valid" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/title_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.10"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -40,7 +40,7 @@ public class InpersonViewModel extends ViewModel {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                List<GymClass> gymClasses = DatabaseClient.getInstance(context)
+                List<GymClass> gymClasses = DatabaseClient.initDB(context)
                         .getAppDatabase()
                         .getGymClassDao()
                         .getGymClasses();
@@ -50,7 +50,7 @@ public class InpersonViewModel extends ViewModel {
                 for(GymClass gymClass: gymClasses) {
                     InpersonClassData data = new InpersonClassData();
                     FitnessClass fClass = DatabaseClient
-                            .getInstance(context)
+                            .getInstance()
                             .getAppDatabase()
                             .FitnessGymClassDao()
                             .getClassName(gymClass.getFitnessClassId());
@@ -64,7 +64,7 @@ public class InpersonViewModel extends ViewModel {
                             + endDate.getHours() + ":" + endDate.getMinutes());
 
                     Trainer trainer = DatabaseClient
-                            .getInstance(context)
+                            .getInstance()
                             .getAppDatabase()
                             .getTrainerDao()
                             .getTrainer(gymClass.getTrainerId());

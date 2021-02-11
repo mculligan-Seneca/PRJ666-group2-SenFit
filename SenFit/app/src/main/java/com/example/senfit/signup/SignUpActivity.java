@@ -9,22 +9,18 @@ which allows the activity to recieve data from the AddBirthDate fragment.
  */
 package com.example.senfit.signup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.fragment.app.FragmentTransaction;
-
-
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.senfit.DataContext.DatabaseClient;
 import com.example.senfit.DataContext.Entities.Member;
@@ -125,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             this.member.setPassword(pWord);
 
             submit.setEnabled(false);
-            DatabaseClient dbClient = DatabaseClient.getInstance(getApplicationContext());
+            DatabaseClient dbClient = DatabaseClient.initDB(getApplicationContext());
             DatabaseClient.dbExecutors.execute(()-> {
                 List<Member> memberList = dbClient//maybe replace with worker class
                         .getAppDatabase()
