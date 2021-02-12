@@ -22,6 +22,7 @@
     <string name="member_not_found">No such member exists</string>
     <string name="covid_status_positive_mssg">Please stay home and do not attend our gym facilities.</string>
     <string name="covid_form_dialog">Covid-19 Health and safety response</string>
+    <string name="default_err_msg">Something went wrong</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

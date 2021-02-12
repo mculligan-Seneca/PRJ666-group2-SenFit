@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class LoginHelper {
 
+    public static int MEMBER_ID=0;//just for debug
     public LoginHelper() {}
 
     /*
@@ -44,7 +45,7 @@ public class LoginHelper {
                     comparisonCallback.isValid(false);
                     return null;
                 }
-
+                MEMBER_ID=memberList.get(0).getMember_id();
                 String emailFromDb = memberList.get(0).getEmail();
                 String passWordFromDb = memberList.get(0).getPassword();
                 comparisonCallback.isValid(email.equalsIgnoreCase(emailFromDb)

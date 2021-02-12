@@ -5,38 +5,44 @@
 
 package com.example.senfit.ui.inperson;
 
-import android.content.Context;
-import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.senfit.dataContext.DatabaseClient;
-import com.example.senfit.dataContext.entities.FitnessClass;
 import com.example.senfit.dataContext.entities.GymClass;
-import com.example.senfit.dataContext.entities.Trainer;
+import com.example.senfit.dataContext.entities.InPersonClass;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class InpersonViewModel extends ViewModel {
-    private MutableLiveData<List<InpersonClassData>> inpersonClasses;
+    //private MutableLiveData<List<InpersonClassData>> inpersonClasses;
+    private LiveData<List<InPersonClass>> gymClassLiveData;//retrieves all in person classes
 
-    public LiveData<List<InpersonClassData>> getInpersonClasses(Context context) {
+    public InpersonViewModel(){
+        this.gymClassLiveData = DatabaseClient
+                .getInstance()
+                .getAppDatabase()
+                .getGymClassDao()
+                .getInPersonClasses();//live data of gym classes
+
+    }
+
+    public LiveData<List<InPersonClass>> getGymClassLiveData(){
+        return this.gymClassLiveData;
+    }
+  /*  public LiveData<List<InpersonClassData>> getInpersonClasses(Context context) {
         if (inpersonClasses == null) {
             inpersonClasses = new MutableLiveData<List<InpersonClassData>>();
-            loadInpersonClass(context);
+            //loadInpersonClass(context);
         }
         return inpersonClasses;
     }
-
+*/
 
     /*
     Fetching inperson class related data from the DB
      */
-    private void loadInpersonClass(Context context) {
+  /*  private void loadInpersonClass(Context context) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -77,5 +83,5 @@ public class InpersonViewModel extends ViewModel {
                 return null;
             }
         }.execute();
-    }
+    } */
 }

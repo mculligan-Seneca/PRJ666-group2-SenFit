@@ -91,8 +91,8 @@ public class InpersonFragment extends Fragment {
         InpersonViewModel model = new ViewModelProvider(this).get(InpersonViewModel.class);
 
         // Observing live data and updating adapter data
-        model.getInpersonClasses(getContext()).observe(this, inpersonClassData -> {
-            mAdapter = new InpersonAdapter(inpersonClassData);
+        model.getGymClassLiveData().observe(this, inpersonClassData -> {
+            mAdapter = new InpersonAdapter(inpersonClassData,listener);//passes data and listener to adapter
 
             mRecyclerView.setAdapter(mAdapter);
 

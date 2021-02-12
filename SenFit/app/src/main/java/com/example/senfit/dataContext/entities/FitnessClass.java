@@ -21,6 +21,19 @@ public class FitnessClass {
     @ColumnInfo(name="fitness_class_name")
     private String fitnessClassName;
 
+    @ColumnInfo(name = "class_description")
+    private String description;
+
+    public FitnessClass(int id, String name, String desc){
+        this.fitnessClassId=id;
+        this.fitnessClassName=name;
+        this.description=desc;
+    }
+    public FitnessClass(){
+        this.fitnessClassId=0;
+        this.fitnessClassName="";
+        this.description="";
+    }
     public int getFitnessClassId() {
         return fitnessClassId;
     }
@@ -35,5 +48,13 @@ public class FitnessClass {
 
     public void setFitnessClassName(String fitnessClassName) {
         this.fitnessClassName = fitnessClassName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

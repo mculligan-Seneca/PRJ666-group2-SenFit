@@ -3,19 +3,29 @@ PRJ666 Sen-Fit
 init date: January 24th 2021
 Author Mitchell Culligan
 Version 1.0
-GymClass Class
-
+BookedClass Class
+This entity class repersents the data of a gym class booked at a specific time, at a specific location, with a
+specific trainer
  */
 package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 
-@Entity(tableName = "gymClass")
+@Entity(tableName = "gymClass",foreignKeys = {@ForeignKey(entity=FitnessClass.class,
+                                                                parentColumns = "fitnessClassId",
+                                                                    childColumns ="fitnessClassId" ),
+                                                @ForeignKey(entity=Trainer.class,
+                                                        parentColumns = "trainerId",
+                                                        childColumns = "trainerId"),
+                                                @ForeignKey(entity = GymLocation.class,
+                                                        parentColumns = "gymLocationId",
+                                                        childColumns = "gymLocationId")})
 public class GymClass {
     @PrimaryKey(autoGenerate = true)
     private int gymClassId;//TODO:add constructor and getter/setter
