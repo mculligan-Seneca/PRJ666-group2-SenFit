@@ -6,13 +6,13 @@ Version 1.0
 TrainerDAO class
 This interface repersents the data access object of the trainer class
  */
-package com.example.senfit.DataContext.DAO;
+package com.example.senfit.dataContext.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.senfit.DataContext.Entities.Trainer;
+import com.example.senfit.dataContext.entities.Trainer;
 
 import java.util.List;
 

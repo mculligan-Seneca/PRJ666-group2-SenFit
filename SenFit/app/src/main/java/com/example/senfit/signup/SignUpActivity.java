@@ -9,7 +9,6 @@ which allows the activity to recieve data from the AddBirthDate fragment.
  */
 package com.example.senfit.signup;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,12 +17,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.senfit.DataContext.DatabaseClient;
-import com.example.senfit.DataContext.Entities.Member;
+import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.Member;
 import com.example.senfit.R;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.uiHelpers.DialogBoxHelper;

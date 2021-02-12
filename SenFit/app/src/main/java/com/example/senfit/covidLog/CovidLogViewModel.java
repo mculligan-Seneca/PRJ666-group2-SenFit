@@ -13,8 +13,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.example.senfit.DataContext.DatabaseClient;
-import com.example.senfit.DataContext.Entities.CovidLog;
+import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.CovidLog;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,29 +10,29 @@ can be accessed via DAO's
 Changed: Added converter class to handle dates being stored
  */
 
-package com.example.senfit.DataContext;
+package com.example.senfit.dataContext;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.example.senfit.DataContext.DAO.CovidLogDAO;
-import com.example.senfit.DataContext.DAO.FitnessClassDao;
-import com.example.senfit.DataContext.DAO.GymClassDao;
-import com.example.senfit.DataContext.DAO.MemberDAO;
-import com.example.senfit.DataContext.DAO.TrainerDAO;
-import com.example.senfit.DataContext.Entities.CovidLog;
-import com.example.senfit.DataContext.Entities.Exercise;
-import com.example.senfit.DataContext.Entities.FitnessClass;
-import com.example.senfit.DataContext.Entities.FitnessPortfolio;
-import com.example.senfit.DataContext.Entities.GymClass;
-import com.example.senfit.DataContext.Entities.GymLocation;
-import com.example.senfit.DataContext.Entities.Member;
-import com.example.senfit.DataContext.Entities.OnlineClass;
-import com.example.senfit.DataContext.Entities.Trainer;
-import com.example.senfit.DataContext.Entities.TrainingExercise;
-import com.example.senfit.DataContext.Entities.TrainingPlan;
-import com.example.senfit.DataContext.Entities.TrainingSession;
+import com.example.senfit.dataContext.dao.CovidLogDAO;
+import com.example.senfit.dataContext.dao.FitnessClassDao;
+import com.example.senfit.dataContext.dao.GymClassDao;
+import com.example.senfit.dataContext.dao.MemberDAO;
+import com.example.senfit.dataContext.dao.TrainerDAO;
+import com.example.senfit.dataContext.entities.CovidLog;
+import com.example.senfit.dataContext.entities.Exercise;
+import com.example.senfit.dataContext.entities.FitnessClass;
+import com.example.senfit.dataContext.entities.FitnessPortfolio;
+import com.example.senfit.dataContext.entities.GymClass;
+import com.example.senfit.dataContext.entities.GymLocation;
+import com.example.senfit.dataContext.entities.Member;
+import com.example.senfit.dataContext.entities.OnlineClass;
+import com.example.senfit.dataContext.entities.Trainer;
+import com.example.senfit.dataContext.entities.TrainingExercise;
+import com.example.senfit.dataContext.entities.TrainingPlan;
+import com.example.senfit.dataContext.entities.TrainingSession;
 
 @Database(entities={Member.class, Trainer.class, CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class, GymClass.class, GymLocation.class,

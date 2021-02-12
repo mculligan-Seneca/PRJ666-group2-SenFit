@@ -6,13 +6,14 @@ Version 1.0
 GymClass Class
 
  */
-package com.example.senfit.DataContext.Entities;
+package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity(tableName = "gymClass")
 public class GymClass {
@@ -23,10 +24,10 @@ public class GymClass {
     private Date classDate;
 
     @ColumnInfo(name="start_time")
-    private Long startTime;
+    private Timestamp startTime;
 
     @ColumnInfo(name="end_time")
-    private Long endTime;
+    private Timestamp endTime;
 
     @ColumnInfo(name="trainerId")
     private long trainerId;//TODO: ADD foreign key or embeeded
@@ -52,19 +53,19 @@ public class GymClass {
         this.classDate = classDate;
     }
 
-    public Long getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Long startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
-    public Long getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Long endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 

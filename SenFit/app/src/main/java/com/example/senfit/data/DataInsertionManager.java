@@ -6,10 +6,10 @@ import android.os.AsyncTask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.senfit.DataContext.DatabaseClient;
-import com.example.senfit.DataContext.Entities.FitnessClass;
-import com.example.senfit.DataContext.Entities.GymClass;
-import com.example.senfit.DataContext.Entities.Trainer;
+import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.FitnessClass;
+import com.example.senfit.dataContext.entities.GymClass;
+import com.example.senfit.dataContext.entities.Trainer;
 
 import java.sql.Date;
 import java.text.DateFormat;

@@ -5,7 +5,7 @@ Author Mitchell Culligan
 Version 1.0
 TrainingExcercise class
  */
-package com.example.senfit.DataContext.Entities;
+package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

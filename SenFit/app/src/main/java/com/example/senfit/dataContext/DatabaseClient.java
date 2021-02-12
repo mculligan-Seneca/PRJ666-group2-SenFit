@@ -7,7 +7,7 @@ DatabaseClient class
 This Database client class is a client that instantiates the database
 and allows activities of the app to interact with the database.
  */
-package com.example.senfit.DataContext;
+package com.example.senfit.dataContext;
 
 
 import android.content.Context;
@@ -16,8 +16,6 @@ import androidx.room.Room;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import io.reactivex.Observer;
 
 public class DatabaseClient {
     private AppDatabase appDatabase;

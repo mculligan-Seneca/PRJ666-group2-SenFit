@@ -36,7 +36,7 @@ public class InpersonFragment extends Fragment {
 
 
     public interface SelectClassListener {
-        public void selectClassItem();
+        public void selectClassItem(int inPersonClassId);
     }
     //communicate with ui
 

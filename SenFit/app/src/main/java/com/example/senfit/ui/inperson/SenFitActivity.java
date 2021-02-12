@@ -27,7 +27,7 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
     }
 
     @Override
-    public void selectClassItem() {
+    public void selectClassItem(int inPersonClassId) {
 
     }
 }

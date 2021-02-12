@@ -6,14 +6,14 @@ Version 1.0
 Covid Log DAO
 This interface is the data access object for the covid logs class. All database operations will be defined here.
  */
-package com.example.senfit.DataContext.DAO;
+package com.example.senfit.dataContext.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.senfit.DataContext.Entities.CovidLog;
+import com.example.senfit.dataContext.entities.CovidLog;
 
 import java.sql.Date;
 import java.util.List;

@@ -1,13 +1,13 @@
 /*author: Portia siddiqua(107741175)*/
 
-package com.example.senfit.DataContext.DAO;
+package com.example.senfit.dataContext.dao;
 
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.senfit.DataContext.Entities.FitnessClass;
+import com.example.senfit.dataContext.entities.FitnessClass;
 
 @Dao
 public interface FitnessClassDao {

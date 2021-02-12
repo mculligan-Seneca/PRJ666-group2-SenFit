@@ -23,10 +23,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.senfit.DataContext.Entities.CovidLog;
+import com.example.senfit.dataContext.entities.CovidLog;
 import com.example.senfit.R;
 import com.example.senfit.databinding.ActivityCovidSurveyBinding;
-import com.example.senfit.uiHelpers.DialogBoxHelper;
 
 public class CovidSurveyActivity extends AppCompatActivity {
     public static final String MEMBER_ID_TAG="member_id_tag"; //tag to retrieve member id from intent
