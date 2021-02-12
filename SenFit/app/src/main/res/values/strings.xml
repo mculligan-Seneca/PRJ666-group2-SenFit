@@ -18,6 +18,10 @@
     <string name="submit">Submit</string>
     <string name="wait_message">Creating account. Please wait</string>
     <string name="title_activity_covid_survey">CovidSurveyActivity</string>
+    <string name="log_success_mssg">Log successfully stored.</string>
+    <string name="member_not_found">No such member exists</string>
+    <string name="covid_status_positive_mssg">Please stay home and do not attend our gym facilities.</string>
+    <string name="covid_form_dialog">Covid-19 Health and safety response</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

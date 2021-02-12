@@ -23,7 +23,18 @@ public class DialogBoxHelper {
                 .setCancelable(true)
                 .setPositiveButton("Ok", listener);
 
+
         return builder.create();
     }
 
+    public static AlertDialog createPositiveDialog(Context context, int titleId, int
+            messageId, DialogInterface.OnClickListener listener){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(titleId);
+        builder.setMessage(messageId)
+                .setCancelable(true)
+                .setPositiveButton("Ok", listener);
+
+
+        return builder.create();
+    }
 }
