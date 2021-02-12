@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SenFitActivity extends AppCompatActivity {
+public class SenFitActivity extends AppCompatActivity implements InpersonFragment.SelectClassListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,5 +24,10 @@ public class SenFitActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void selectClassItem() {
+
     }
 }

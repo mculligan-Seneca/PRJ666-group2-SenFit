@@ -6,6 +6,7 @@
 
   package com.example.senfit.ui.inperson;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,13 @@ public class InpersonFragment extends Fragment {
     protected String[] mDataset;
 
 
+    public interface SelectClassListener {
+        public void selectClassItem();
+    }
+    //communicate with ui
+
+    private SelectClassListener  listener;
+
     public static InpersonFragment newInstance(int index) {
         InpersonFragment fragment = new InpersonFragment();
         Bundle bundle = new Bundle();
@@ -43,8 +51,24 @@ public class InpersonFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof SelectClassListener){//attaches callbackinterface
+            this.listener=(SelectClassListener)context;
+        }
+
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        this.listener=null;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
         int index = 1;
         if (getArguments() != null) {
@@ -79,4 +103,6 @@ public class InpersonFragment extends Fragment {
 
         return root;
     }
+
+
 }
