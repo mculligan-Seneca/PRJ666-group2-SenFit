@@ -11,6 +11,7 @@ package com.example.senfit.covidLog;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.SurveyHold
     @Override
     public SurveyAdapter.SurveyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflator = LayoutInflater.from(this.context);
-        CovidSymptomItemBinding binding = DataBindingUtil.inflate(inflator, R.layout.covid_symptom_item,parent,false);
+        View v = inflator.inflate( R.layout.covid_symptom_item,parent,false);
+        CovidSymptomItemBinding binding = DataBindingUtil.bind(v);//inflate first then bnd to avoid chip inflation
             //inflate layout then get binding for data
         return new SurveyHolder(binding) ;
     }

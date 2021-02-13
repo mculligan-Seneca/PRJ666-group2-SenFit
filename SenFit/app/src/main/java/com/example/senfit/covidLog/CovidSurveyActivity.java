@@ -41,6 +41,7 @@ public class CovidSurveyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_covid_survey);
         this.binding = DataBindingUtil.setContentView(this,R.layout.activity_covid_survey);
         //setContentView(R.layout.activity_covid_survey);
         this.logViewModel=null;
@@ -50,7 +51,7 @@ public class CovidSurveyActivity extends AppCompatActivity {
 
         if(memberId!=-1){
          this.logViewModel = new ViewModelProvider(this).get(CovidLogViewModel.class);
-         this.recyclerView = findViewById(R.id.covid_questions);
+         this.recyclerView = this.binding.covidQuestions;
          this.logViewModel.setMemberIdData(memberId);
          this.logViewModel.getRecentMemberLogs().observe(this,(logs)->{
              if(!logs.isEmpty()){//retrieves only logs within valid time period.
