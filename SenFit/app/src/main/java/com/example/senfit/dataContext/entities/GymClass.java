@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-@Entity(tableName = "gymClass",foreignKeys = {@ForeignKey(entity=FitnessClass.class,
+@Entity(tableName = "gymClass"/*,foreignKeys = {@ForeignKey(entity=FitnessClass.class,
                                                                 parentColumns = "fitnessClassId",
                                                                     childColumns ="fitnessClassId" ),
                                                 @ForeignKey(entity=Trainer.class,
@@ -25,7 +25,7 @@ import java.sql.Timestamp;
                                                         childColumns = "trainerId"),
                                                 @ForeignKey(entity = GymLocation.class,
                                                         parentColumns = "gymLocationId",
-                                                        childColumns = "gymLocationId")})
+                                                        childColumns = "gymLocationId")}*/)
 public class GymClass {
     @PrimaryKey(autoGenerate = true)
     private int gymClassId;//TODO:add constructor and getter/setter

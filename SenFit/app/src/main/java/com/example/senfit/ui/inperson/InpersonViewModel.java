@@ -5,48 +5,46 @@
 
 package com.example.senfit.ui.inperson;
 
+import android.os.AsyncTask;
+
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.FitnessClass;
 import com.example.senfit.dataContext.entities.GymClass;
 import com.example.senfit.dataContext.entities.InPersonClass;
+import com.example.senfit.dataContext.entities.Trainer;
 
+import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 public class InpersonViewModel extends ViewModel {
-    //private MutableLiveData<List<InpersonClassData>> inpersonClasses;
-    private LiveData<List<InPersonClass>> gymClassLiveData;//retrieves all in person classes
+    private MutableLiveData<List<InpersonClassData>> inpersonClasses;
 
-    public InpersonViewModel(){
-        this.gymClassLiveData = DatabaseClient
-                .getInstance()
-                .getAppDatabase()
-                .getGymClassDao()
-                .getInPersonClasses();//live data of gym classes
 
-    }
 
-    public LiveData<List<InPersonClass>> getGymClassLiveData(){
-        return this.gymClassLiveData;
-    }
-  /*  public LiveData<List<InpersonClassData>> getInpersonClasses(Context context) {
+
+
+    public LiveData<List<InpersonClassData>> getInpersonClasses() {
         if (inpersonClasses == null) {
             inpersonClasses = new MutableLiveData<List<InpersonClassData>>();
-            //loadInpersonClass(context);
+            loadInpersonClass();
         }
         return inpersonClasses;
     }
-*/
+
 
     /*
     Fetching inperson class related data from the DB
      */
-  /*  private void loadInpersonClass(Context context) {
+   private void loadInpersonClass() {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                List<GymClass> gymClasses = DatabaseClient.initDB(context)
+                List<GymClass> gymClasses = DatabaseClient.getInstance()
                         .getAppDatabase()
                         .getGymClassDao()
                         .getGymClasses();
@@ -55,19 +53,20 @@ public class InpersonViewModel extends ViewModel {
 
                 for(GymClass gymClass: gymClasses) {
                     InpersonClassData data = new InpersonClassData();
+                    data.setGymClassId(gymClass.getGymClassId());
                     FitnessClass fClass = DatabaseClient
                             .getInstance()
                             .getAppDatabase()
-                            .FitnessGymClassDao()
-                            .getClassName(gymClass.getFitnessClassId());
+                            .getFitnessClassDao()
+                            .getFitnessClass(gymClass.getFitnessClassId());
                     data.setClasName(fClass.getFitnessClassName());
                     data.setDate(gymClass.getClassDate().toString());
 
-                    Date startDate = new Date(gymClass.getStartTime());
-                    Date endDate = new Date(gymClass.getEndTime());
+                    Date startDate = new Date(gymClass.getStartTime().getTime());
+                    Date endDate = new Date(gymClass.getEndTime().getTime());
 
-                    data.setTime(startDate.getHours() + ":" + startDate.getMinutes() + "-"
-                            + endDate.getHours() + ":" + endDate.getMinutes());
+                    data.setTime(startDate.toString()/*startDate.getHours() + ":" + startDate.getMinutes() + "-"
+                            + endDate.getHours() + ":" + endDate.getMinutes()*/);
 
                     Trainer trainer = DatabaseClient
                             .getInstance()
@@ -83,5 +82,5 @@ public class InpersonViewModel extends ViewModel {
                 return null;
             }
         }.execute();
-    } */
+    }
 }

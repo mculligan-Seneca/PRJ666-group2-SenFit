@@ -60,11 +60,14 @@ public class CovidLogViewModel extends ViewModel {
 
     public boolean insertLog(){ //returns the status of the log
         //creates a log object and inserts it into the database
-        boolean status;
-        if (this.questionList.contains(false)) status = true;
-        else status = false;//checks if member claimed to have symptoms
+        boolean status=false;
+        for(int i=0; i<this.questionList.size()&& !status;i++){
+            if(!this.questionList.get(i).getResult())
+                status=true;
+        }
+        boolean finalStatus = status;
         DatabaseClient.dbExecutors.execute(()->{
-            CovidLog covidLog = new CovidLog(status,DateHelper.getCurrentDate(),memberIdData.getValue());
+            CovidLog covidLog = new CovidLog(finalStatus,DateHelper.getCurrentDate(),memberIdData.getValue());
             dbClient.getAppDatabase()
                     .getCovidLogDAO()
                     .insertCovidLog(covidLog);
@@ -75,4 +78,6 @@ public class CovidLogViewModel extends ViewModel {
 
 
     }
+
+
 }

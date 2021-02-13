@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.senfit.dataContext.entities.InPersonClass;
 import com.example.senfit.dataContext.entities.GymClass;
@@ -18,9 +19,7 @@ public interface GymClassDAO {
     @Insert
     void insertGymClass(GymClass gymClass);
 
-    @Query("select  g.gymClassId as gymClassId, g.class_date as date, g.start_time as startTime,g.end_time as endTime," +
-            "c.fitness_class_name as className, t.first_name || ' ' || t.last_name as trainerName "+
-            " from gymClass g INNER JOIN fitnessClass c on g.fitnessClassId=c.fitnessClassId " +
-            "INNER JOIN Trainers t on g.trainerId=t.trainerId")
-    public LiveData<List<InPersonClass>> getInPersonClasses();
+    @Transaction
+    @Query("Select * from gymClass")
+    public List<GymClass> getGymClasses();
 }

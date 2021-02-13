@@ -26,7 +26,7 @@ import java.util.List;
 public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
 
-    private List<InPersonClass> mDataSet;
+    private List<InpersonClassData> mDataSet;
 
     private InpersonFragment.SelectClassListener listener;
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -86,7 +86,7 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
     }
 
 
-    public InpersonAdapter(List<InPersonClass> dataSet, InpersonFragment.SelectClassListener listener) {
+    public InpersonAdapter(List<InpersonClassData> dataSet, InpersonFragment.SelectClassListener listener) {
         this.listener=listener;
         mDataSet = dataSet;
     }
@@ -105,14 +105,12 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         Log.d(TAG, "Element " + position + " set.");
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getClassNameTextView().setText(mDataSet.get(position).getClassName());
-        viewHolder.getClassDateTextView().setText(
-                DateTimeFormatHelper.formatDate(mDataSet.get(position).getDate()));
-        viewHolder.getClassTimeTextView().setText(
-                DateTimeFormatHelper.formatTime(mDataSet.get(position).getStartTime()));
-        viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).getTrainerName());
+        viewHolder.getClassNameTextView().setText(mDataSet.get(position).getClasName());
+        viewHolder.getClassDateTextView().setText(mDataSet.get(position).getDate());
+        viewHolder.getClassTimeTextView().setText(mDataSet.get(position).getTime());
+        viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).getInstructorName());
         viewHolder.getClassEnrollButton().setOnClickListener((v)->{
-            InPersonClass gymClass = mDataSet.get(position);
+            InpersonClassData gymClass = mDataSet.get(position);
             //gets the current gym class being selected
             if(listener!=null)//checks listener is not null
                 listener.selectClassItem(gymClass.getGymClassId());//notifies the main ui of selected class

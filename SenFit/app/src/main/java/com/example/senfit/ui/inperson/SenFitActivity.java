@@ -22,7 +22,7 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
 
     private static final int SURVEY_ACTIVITY=2;
     private int memberId;
-    private int inPersonClassId=0;
+    private int inPersonClassId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,7 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         this.memberId= LoginHelper.MEMBER_ID;
+        this.inPersonClassId=0;
     }
 
     @Override
@@ -49,8 +50,9 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         if(requestCode==SURVEY_ACTIVITY){
             if(resultCode==RESULT_OK){
                 //TODO: switch activity to inperson enrollment
-                DialogBoxHelper.createPositiveDialog(this,"Status updated successfully",
-                        "Title",null).show();
+                DialogBoxHelper.createPositiveDialog(this,"Title",
+                        "Status updated successfully",null).show();
+                //finish();
             } else if(resultCode==RESULT_CANCELED){
                 int messId = data.getIntExtra(CovidSurveyActivity.CANCELED_RESULT,R.string.default_err_msg);
                 DialogBoxHelper.createPositiveDialog(this,messId,R.string.covid_form_dialog,null)

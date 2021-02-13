@@ -9,6 +9,8 @@ import androidx.room.Query;
 
 import com.example.senfit.dataContext.entities.FitnessClass;
 
+import java.util.List;
+
 @Dao
 public interface FitnessClassDao {
 
@@ -16,6 +18,9 @@ public interface FitnessClassDao {
     long insertFitnessClass(FitnessClass member);
 
     @Query("Select * from FitnessClass where fitnessClassId=:id")
-    public FitnessClass getClassName(long id);
+    public FitnessClass getFitnessClass(long id);
+
+    @Query("Select * from fitnessClass")
+    public List<FitnessClass> getAllClasses();
 
 }

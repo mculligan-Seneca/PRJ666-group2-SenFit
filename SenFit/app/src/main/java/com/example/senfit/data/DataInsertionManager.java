@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DataInsertionManager {
@@ -128,7 +129,12 @@ public class DataInsertionManager {
             populateDummyData();
             for (int i = 0 ; i < 4; i++) {
                 insertTrainer(context, i);
+
             }
+
+
+
+
             setDummyDataInserted(context);
         }
     }
@@ -169,7 +175,7 @@ public class DataInsertionManager {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                classId[0] = DatabaseClient.initDB(context).getAppDatabase().FitnessGymClassDao().insertFitnessClass(fitnessClass);
+                classId[0] = DatabaseClient.initDB(context).getAppDatabase().getFitnessClassDao().insertFitnessClass(fitnessClass);
                 return null;
             }
 

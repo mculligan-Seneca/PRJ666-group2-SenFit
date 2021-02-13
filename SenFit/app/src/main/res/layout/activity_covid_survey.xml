@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <import type="androidx.databinding.ObservableBoolean"/>
-        <variable
-            name="isConfirmed"
-            type="ObservableBoolean" />
-    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".covidLog.CovidSurveyActivity">
@@ -31,8 +25,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/covid_questions"
-            android:layout_width="401dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:nestedScrollingEnabled="false"
             app:layout_constraintBottom_toTopOf="@+id/radio_group_valid"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,21 +59,24 @@
             app:layout_constraintBottom_toTopOf="@+id/survey_submit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/confirm_statement"
-            app:layout_constraintTop_toBottomOf="@id/covid_questions" >
+            app:layout_constraintTop_toBottomOf="@id/covid_questions"
+           >
 
             <RadioButton
                 android:id="@+id/valid_log"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/confirm"
-                android:checked="@{isConfirmed}"
+                android:onClick="radioSwitch"
                 android:textStyle="bold"/>
             <RadioButton
                 android:id="@+id/invalid_log"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/un_confirm"
-                android:checked="@{!isConfirmed}"
+                android:checked="true"
+                android:onClick="radioSwitch"
+
                 android:textStyle="bold"/>
 
         </RadioGroup>
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:text="@string/submit"
             android:textSize="15sp"
-            android:enabled="@{isConfirmed}"
+
             android:onClick="submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -102,4 +102,3 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.10"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

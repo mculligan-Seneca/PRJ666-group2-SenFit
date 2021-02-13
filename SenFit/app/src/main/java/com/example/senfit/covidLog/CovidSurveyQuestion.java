@@ -15,7 +15,7 @@ import androidx.databinding.Bindable;
 import com.example.senfit.BR;
 
 
-public class CovidSurveyQuestion extends BaseObservable {
+public class CovidSurveyQuestion {
 
     private final String question;
     private boolean result;
@@ -26,19 +26,18 @@ public class CovidSurveyQuestion extends BaseObservable {
         this.result = result;
     }
 
-    @Bindable
+
     public boolean getResult(){
        return this.result;
     }
 
-    @Bindable
     public String getQuestion(){
         return this.question;
     }
 
     public void setResult(boolean result){
         this.result=result;
-        super.notifyPropertyChanged(BR.result);
+
 
     }
 

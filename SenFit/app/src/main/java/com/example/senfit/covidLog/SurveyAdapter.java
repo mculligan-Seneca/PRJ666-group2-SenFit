@@ -13,13 +13,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.senfit.R;
-import com.example.senfit.databinding.CovidSymptomItemBinding;
+
 
 import java.util.List;
 
@@ -35,16 +37,19 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.SurveyHold
     @Override
     public SurveyAdapter.SurveyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflator = LayoutInflater.from(this.context);
-        View v = inflator.inflate( R.layout.covid_symptom_item,parent,false);
-        CovidSymptomItemBinding binding = DataBindingUtil.bind(v);//inflate first then bnd to avoid chip inflation
+        View v = inflator.inflate(R.layout.covid_symptom_item,parent,false);
+
+
             //inflate layout then get binding for data
-        return new SurveyHolder(binding) ;
+        return new SurveyHolder(v) ;
     }
 
     @Override
     public void onBindViewHolder(@NonNull SurveyHolder holder, int position) {
             CovidSurveyQuestion question = questionList.get(position);
-            holder.bind(question);
+            holder.getQuestion().setText(question.getQuestion());
+
+
     }
 
 
@@ -56,15 +61,26 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.SurveyHold
 
     public class SurveyHolder extends RecyclerView.ViewHolder{
 
-        private CovidSymptomItemBinding binding;// binder for data binding
-        public SurveyHolder(CovidSymptomItemBinding binding) {
-            super(binding.getRoot());
-            this.binding= binding;
+        private TextView question;
+        private CheckBox checkBox;
+
+        public SurveyHolder(View v) {
+            super(v);
+            question = v.findViewById(R.id.question_id);
+            checkBox=v.findViewById(R.id.checkbox_id);
+            checkBox.setOnClickListener((view)->{
+                CovidSurveyQuestion q= questionList.get(getAdapterPosition());
+                q.setResult(!q.getResult());
+            });
         }
 
-        public void bind(CovidSurveyQuestion question){
-            this.binding.setCovidQuestion(question);//actually binds the question to the view
-            this.binding.executePendingBindings();//updates the views to the bindings
+
+        public CheckBox getCheckBox() {
+            return checkBox;
+        }
+
+        public TextView getQuestion() {
+            return question;
         }
     }
 }

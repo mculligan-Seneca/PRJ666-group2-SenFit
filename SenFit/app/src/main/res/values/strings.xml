@@ -42,9 +42,9 @@
     <string name="covid_survey">Covid Survey</string>
 
     <string-array name="covid_questions">
-        <item>Do you have a cough?</item>
-        <item>Have you experienced migraines?</item>
-        <item>Have you spent more than 15 minutes with someone who has Covid-19?</item>
+        <item>I do not have a cough</item>
+        <item>I have not been experencing headaches</item>
+        <item>I have not been exposed</item>
 
     </string-array>
 

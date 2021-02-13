@@ -24,7 +24,9 @@ public class DatabaseClient {
     public static final ExecutorService dbExecutors = Executors.newFixedThreadPool(4);
     //NOTE: Optionally use livedata and observables to run concurrent actions
     private DatabaseClient(Context context){
-            this.appDatabase= Room.databaseBuilder(context, AppDatabase.class,"Sen-FitDB").build();
+            this.appDatabase= Room.databaseBuilder(context, AppDatabase.class,"Sen-FitDB")
+                    //.fallbackToDestructiveMigration()
+                    .build();
 
     }
 

@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
  *
  *  * */
 public class InpersonClassData {
+    private int gymClassId;
     private String clasName;
     private String date;
     private String time;
@@ -51,5 +52,13 @@ public class InpersonClassData {
 
     public void setImage(Bitmap image) {
         this.image = image;
+    }
+
+    public int getGymClassId() {
+        return gymClassId;
+    }
+
+    public void setGymClassId(int gymClassId) {
+        this.gymClassId = gymClassId;
     }
 }

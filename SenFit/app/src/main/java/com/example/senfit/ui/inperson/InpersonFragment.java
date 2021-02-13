@@ -50,7 +50,7 @@ public class InpersonFragment extends Fragment {
         return fragment;
     }
 
-    @Override
+   @Override
     public void onAttach(Context context){
         super.onAttach(context);
         if(context instanceof SelectClassListener){//attaches callbackinterface
@@ -59,7 +59,7 @@ public class InpersonFragment extends Fragment {
 
     }
 
-    @Override
+   @Override
     public void onDetach(){
         super.onDetach();
         this.listener=null;
@@ -75,6 +75,7 @@ public class InpersonFragment extends Fragment {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
         }
         pageViewModel.setIndex(index);
+
     }
 
     @Override
@@ -91,7 +92,7 @@ public class InpersonFragment extends Fragment {
         InpersonViewModel model = new ViewModelProvider(this).get(InpersonViewModel.class);
 
         // Observing live data and updating adapter data
-        model.getGymClassLiveData().observe(this, inpersonClassData -> {
+        model.getInpersonClasses().observe(this, inpersonClassData -> {
             mAdapter = new InpersonAdapter(inpersonClassData,listener);//passes data and listener to adapter
 
             mRecyclerView.setAdapter(mAdapter);

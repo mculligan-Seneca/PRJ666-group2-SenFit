@@ -9,70 +9,33 @@ com.example.senfit.booked in person class
 package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Relation;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 
 public class InPersonClass {
-    @ColumnInfo(name="gymClassId")
-    private int gymClassId;
-    @ColumnInfo(name="date")
-    private Date date;
-    @ColumnInfo(name="startTime")
-    private Timestamp startTime;
-    @ColumnInfo(name="endTime")
-    private Timestamp endTime;
-    @ColumnInfo(name="className")
-    private  String className;
-    @ColumnInfo(name="trainerName")
-    private String trainerName;
 
+    @Embedded
+    private GymClass gymClass;
 
-    public int getGymClassId() {
-        return gymClassId;
+    @Relation(parentColumn = "fitnessClassId",entityColumn = "fitnessClassId")
+    private FitnessClass fitnessClass;
+
+    public FitnessClass getFitnessClass() {
+        return fitnessClass;
     }
 
-    public void setGymClassId(int gymClass) {
-        this.gymClassId = gymClass;
+    public void setFitnessClass(FitnessClass fitnessClass) {
+        this.fitnessClass = fitnessClass;
     }
 
-    public Date getDate() {
-        return date;
+    public GymClass getGymClass() {
+        return gymClass;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Timestamp getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
-    }
-
-    public Timestamp getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getTrainerName() {
-        return trainerName;
-    }
-
-    public void setTrainerName(String trainerName) {
-        this.trainerName = trainerName;
+    public void setGymClass(GymClass gymClass) {
+        this.gymClass = gymClass;
     }
 }

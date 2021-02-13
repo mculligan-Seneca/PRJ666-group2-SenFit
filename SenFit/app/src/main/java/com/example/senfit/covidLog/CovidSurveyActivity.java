@@ -21,11 +21,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.senfit.dataContext.entities.CovidLog;
 import com.example.senfit.R;
-import com.example.senfit.databinding.ActivityCovidSurveyBinding;
+
 
 public class CovidSurveyActivity extends AppCompatActivity {
     public static final String MEMBER_ID_TAG="member_id_tag"; //tag to retrieve member id from intent
@@ -34,15 +35,16 @@ public class CovidSurveyActivity extends AppCompatActivity {
     private static final String DIALOG_TITLE="Covid Positive message";
 
     private CovidLogViewModel logViewModel;
-    private  ActivityCovidSurveyBinding binding;
+   // private  ActivityCovidSurveyBinding binding;
     private RecyclerView recyclerView;
     private SurveyAdapter adapter;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_covid_survey);
-        this.binding = DataBindingUtil.setContentView(this,R.layout.activity_covid_survey);
+        setContentView(R.layout.activity_covid_survey);
+      //  this.binding = DataBindingUtil.setContentView(this,R.layout.activity_covid_survey);
         //setContentView(R.layout.activity_covid_survey);
         this.logViewModel=null;
         Intent intent = getIntent();
@@ -50,8 +52,12 @@ public class CovidSurveyActivity extends AppCompatActivity {
         int memberId = intent.getIntExtra(MEMBER_ID_TAG,-1);//retrieves member id
 
         if(memberId!=-1){
+            this.recyclerView = findViewById(R.id.covid_questions);
+            this.submit = findViewById(R.id.survey_submit);
+            this.submit.setEnabled(false);
          this.logViewModel = new ViewModelProvider(this).get(CovidLogViewModel.class);
-         this.recyclerView = this.binding.covidQuestions;
+
+
          this.logViewModel.setMemberIdData(memberId);
          this.logViewModel.getRecentMemberLogs().observe(this,(logs)->{
              if(!logs.isEmpty()){//retrieves only logs within valid time period.
@@ -98,11 +104,14 @@ public class CovidSurveyActivity extends AppCompatActivity {
         this.adapter = new SurveyAdapter(this,this.logViewModel.getSurveyQuestions());
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerView.setAdapter(this.adapter);
-        ObservableBoolean isConfirmed = new ObservableBoolean();
-        this.binding.setIsConfirmed(isConfirmed);
+
 
     }
 
+    public void radioSwitch(View v){
+       boolean status = this.submit.isEnabled();
+       this.submit.setEnabled(!status);
+    }
 
     public void submit(View v){ //triggied by onclick action
 
@@ -118,6 +127,8 @@ public class CovidSurveyActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     public void setCanceledResult(int resId){
         Intent result = new Intent ();
