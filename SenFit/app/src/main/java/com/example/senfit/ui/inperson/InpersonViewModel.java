@@ -19,6 +19,8 @@ import com.example.senfit.dataContext.entities.Trainer;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class InpersonViewModel extends ViewModel {
@@ -63,10 +65,15 @@ public class InpersonViewModel extends ViewModel {
                     data.setDate(gymClass.getClassDate().toString());
 
                     Date startDate = new Date(gymClass.getStartTime().getTime());
-                    Date endDate = new Date(gymClass.getEndTime().getTime());
+                    Calendar startCalendar = GregorianCalendar.getInstance();
+                    startCalendar.setTime(startDate);
 
-                    data.setTime(startDate.toString()/*startDate.getHours() + ":" + startDate.getMinutes() + "-"
-                            + endDate.getHours() + ":" + endDate.getMinutes()*/);
+                    Date endDate = new Date(gymClass.getEndTime().getTime());
+                    Calendar endCalendar = GregorianCalendar.getInstance();
+                    endCalendar.setTime(endDate);
+
+                    data.setTime(startCalendar.get(Calendar.HOUR_OF_DAY) + ":" + startCalendar.get(Calendar.MINUTE) + "-"
+                            +endCalendar.get(Calendar.HOUR_OF_DAY) + ":" + endCalendar.get(Calendar.MINUTE));
 
                     Trainer trainer = DatabaseClient
                             .getInstance()
