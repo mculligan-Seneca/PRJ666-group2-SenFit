@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.senfit.R;
 import com.example.senfit.signup.SignUpActivity;
 import com.example.senfit.data.DataInsertionManager;
-import com.example.senfit.ui.inperson.SenFitActivity;
+import com.example.senfit.SenFitActivity;
 
 
 /**

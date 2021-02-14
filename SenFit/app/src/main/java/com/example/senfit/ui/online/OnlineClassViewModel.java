@@ -1,9 +1,4 @@
-/*
- * author: Portia siddiqua(107741175)
- *
- * */
-
-package com.example.senfit.ui.inperson;
+package com.example.senfit.ui.online;
 
 import android.os.AsyncTask;
 
@@ -13,59 +8,56 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.FitnessClass;
-import com.example.senfit.dataContext.entities.GymClass;
-import com.example.senfit.dataContext.entities.InPersonClass;
+import com.example.senfit.dataContext.entities.OnlineClass;
 import com.example.senfit.dataContext.entities.Trainer;
+import com.example.senfit.ui.inperson.InpersonClassData;
 
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class InpersonViewModel extends ViewModel {
-    private MutableLiveData<List<InpersonClassData>> inpersonClasses;
+public class OnlineClassViewModel extends ViewModel {
 
-    public LiveData<List<InpersonClassData>> getInpersonClasses() {
-        if (inpersonClasses == null) {
-            inpersonClasses = new MutableLiveData<List<InpersonClassData>>();
-            loadInpersonClass();
+    private MutableLiveData<List<InpersonClassData>> mOnlineClasses;
+
+    public LiveData<List<InpersonClassData>> getOnlineClasses() {
+        if (mOnlineClasses == null) {
+            mOnlineClasses = new MutableLiveData<List<InpersonClassData>>();
+            loadOnlineClass();
         }
-        return inpersonClasses;
+        return mOnlineClasses;
     }
 
-
-    /*
-    Fetching inperson class related data from the DB
-     */
-   private void loadInpersonClass() {
+    private void loadOnlineClass() {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                List<GymClass> gymClasses = DatabaseClient.getInstance()
+                List<OnlineClass> onlineClasses = DatabaseClient.getInstance()
                         .getAppDatabase()
-                        .getGymClassDao()
-                        .getGymClasses();
+                        .getOnlineClassDao()
+                        .getOnlineClasses();
 
                 List<InpersonClassData> dataSet = new ArrayList<>();
 
-                for(GymClass gymClass: gymClasses) {
+                for(OnlineClass onlineClass: onlineClasses) {
                     InpersonClassData data = new InpersonClassData();
-                    data.setGymClassId(gymClass.getGymClassId());
+                    data.setGymClassId(onlineClass.getOnlineClassId());
                     FitnessClass fClass = DatabaseClient
                             .getInstance()
                             .getAppDatabase()
                             .getFitnessClassDao()
-                            .getFitnessClass(gymClass.getFitnessClassId());
+                            .getFitnessClass(onlineClass.getFitnessClassId());
                     data.setClasName(fClass.getFitnessClassName());
-                    data.setDate(gymClass.getClassDate().toString());
-                    data.setEnrolled(gymClass.getEnrolled());
+                    data.setDate(onlineClass.getClassDate().toString());
+                    data.setEnrolled(false);
 
-                    Date startDate = new Date(gymClass.getStartTime().getTime());
+                    Date startDate = new Date(onlineClass.getStartTime().getTime());
                     Calendar startCalendar = GregorianCalendar.getInstance();
                     startCalendar.setTime(startDate);
 
-                    Date endDate = new Date(gymClass.getEndTime().getTime());
+                    Date endDate = new Date(onlineClass.getEndTime().getTime());
                     Calendar endCalendar = GregorianCalendar.getInstance();
                     endCalendar.setTime(endDate);
 
@@ -76,15 +68,18 @@ public class InpersonViewModel extends ViewModel {
                             .getInstance()
                             .getAppDatabase()
                             .getTrainerDao()
-                            .getTrainer(gymClass.getTrainerId());
+                            .getTrainer(onlineClass.getTrainerId());
                     data.setInstructorName(trainer.getFirstName() + " " + trainer.getLastName());
                     dataSet.add(data);
                 }
 
-                inpersonClasses.postValue(dataSet);
+                mOnlineClasses.postValue(dataSet);
+
 
                 return null;
             }
         }.execute();
     }
+
+
 }

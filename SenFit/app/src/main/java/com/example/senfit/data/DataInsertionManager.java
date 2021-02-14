@@ -9,16 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.FitnessClass;
 import com.example.senfit.dataContext.entities.GymClass;
+import com.example.senfit.dataContext.entities.OnlineClass;
 import com.example.senfit.dataContext.entities.Trainer;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DataInsertionManager {
@@ -29,6 +28,7 @@ public class DataInsertionManager {
         List<FitnessClass> fitnessClasses = new ArrayList<>();
         List<Trainer> trainerList = new ArrayList<>();
         List<GymClass> gymClassList = new ArrayList<>();
+        List<OnlineClass> onlineClassList = new ArrayList<>();
     }
 
     private static void populateDummyData() {
@@ -113,6 +113,40 @@ public class DataInsertionManager {
         data.gymClassList.add(gymClass3);
         data.gymClassList.add(gymClass4);
 
+
+        OnlineClass onlineClass1 = new OnlineClass();
+        //onlineClass1.setGymLocationId(1234);
+        onlineClass1.setClassDate(Date.valueOf("2021-04-12"));
+        onlineClass1.setStartTime(Timestamp.valueOf("2021-04-12 09:30:0"));
+        onlineClass1.setEndTime(Timestamp.valueOf("2021-04-12 10:30:0"));
+        //onlineClass1.setEnrolled(false);
+
+        OnlineClass onlineClass2 = new OnlineClass();
+        //onlineClass2.setGymLocationId(1234);
+        onlineClass2.setClassDate(Date.valueOf("2021-04-13"));
+        onlineClass2.setStartTime(Timestamp.valueOf("2021-04-13 11:30:0"));
+        onlineClass2.setEndTime(Timestamp.valueOf("2021-04-13 12:30:0"));
+        //onlineClass2.setEnrolled(false);
+
+        OnlineClass onlineClass3 = new OnlineClass();
+        //onlineClass3.setGymLocationId(1234);
+        onlineClass3.setClassDate(Date.valueOf("2021-04-14"));
+        onlineClass3.setStartTime(Timestamp.valueOf("2021-04-14 10:30:0"));
+        onlineClass3.setEndTime(Timestamp.valueOf("2021-02-14 11:30:0"));
+        //onlineClass3.setEnrolled(false);
+
+        OnlineClass onlineClass4 = new OnlineClass();
+        //onlineClass4.setGymLocationId(1234);
+        onlineClass4.setClassDate(Date.valueOf("2021-04-15"));
+        onlineClass4.setStartTime(Timestamp.valueOf("2021-02-15 08:30:0"));
+        onlineClass4.setEndTime(Timestamp.valueOf("2021-02-15 09:30:0"));
+        //onlineClass4.setEnrolled(false);
+
+        data.onlineClassList.add(onlineClass1);
+        data.onlineClassList.add(onlineClass2);
+        data.onlineClassList.add(onlineClass3);
+        data.onlineClassList.add(onlineClass4);
+
     }
 
     private static Long getTime(String dateStr) {
@@ -194,21 +228,29 @@ public class DataInsertionManager {
      static void insertInpersonDummyData(Context context, long traineId, long fitnessClassId, int pass) {
         GymClass gymClass = new GymClass();
         gymClass.setClassDate(data.gymClassList.get(pass).getClassDate());
-
-
-         gymClass.setStartTime(data.gymClassList.get(pass).getStartTime());
-
-
-         gymClass.setEndTime(data.gymClassList.get(pass).getEndTime());
-
+        gymClass.setStartTime(data.gymClassList.get(pass).getStartTime());
+        gymClass.setEndTime(data.gymClassList.get(pass).getEndTime());
         gymClass.setFitnessClassId(fitnessClassId);
         gymClass.setGymLocationId(data.gymClassList.get(pass).getGymLocationId());
         gymClass.setTrainerId(traineId);
+
+
+         OnlineClass onlineClass = new OnlineClass();
+         onlineClass.setClassDate(data.onlineClassList.get(pass).getClassDate());
+         onlineClass.setStartTime(data.onlineClassList.get(pass).getStartTime());
+         onlineClass.setEndTime(data.onlineClassList.get(pass).getEndTime());
+         onlineClass.setFitnessClassId(fitnessClassId);
+         //onlineClass.setGymLocationId(data.gymClassList.get(pass).getGymLocationId());
+         onlineClass.setTrainerId(traineId);
+
+
 
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 DatabaseClient.initDB(context).getAppDatabase().getGymClassDao().insertGymClass(gymClass);
+                DatabaseClient.initDB(context).getAppDatabase().getOnlineClassDao().insertOnlineClass(onlineClass);
+
                 return null;
             }
 

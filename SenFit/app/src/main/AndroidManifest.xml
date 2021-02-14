@@ -41,7 +41,7 @@
         <activity android:name="com.example.senfit.signup.SignUpActivity" />
 
         <activity
-            android:name=".ui.inperson.SenFitActivity"
+            android:name=".SenFitActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.SenFit.NoActionBar" />
     </application>

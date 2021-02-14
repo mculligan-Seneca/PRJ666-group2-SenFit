@@ -14,6 +14,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity(tableName="onlineClasses")
 public class OnlineClass {
@@ -25,16 +26,16 @@ public class OnlineClass {
     private Date classDate;
 
     @ColumnInfo(name="start_time")
-    private Long startTime;// refactor as long so timestamp can keep functionality
+    private Timestamp startTime;// refactor as long so timestamp can keep functionality
 
     @ColumnInfo(name="end_time")
-    private Long endTime;//Timestamp repersented as long
+    private Timestamp endTime;//Timestamp repersented as long
 
     @ColumnInfo(name="fitnessClassId")
-    private int fitnessClassId;//TODO:ADD foreign key or embedded
+    private long fitnessClassId;//TODO:ADD foreign key or embedded
 
     @ColumnInfo(name="trainerId")
-    private int trainerId;//TODO:ADD foreign key associations
+    private long trainerId;//TODO:ADD foreign key associations
 
     public int getOnlineClassId() {
         return onlineClassId;
@@ -52,35 +53,35 @@ public class OnlineClass {
         this.classDate = classDate;
     }
 
-    public Long getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Long startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
-    public Long getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Long endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 
-    public int getFitnessClassId() {
+    public long getFitnessClassId() {
         return fitnessClassId;
     }
 
-    public void setFitnessClassId(int fitnessClassId) {
+    public void setFitnessClassId(long fitnessClassId) {
         this.fitnessClassId = fitnessClassId;
     }
 
-    public int getTrainerId() {
+    public long getTrainerId() {
         return trainerId;
     }
 
-    public void setTrainerId(int trainerId) {
+    public void setTrainerId(long trainerId) {
         this.trainerId = trainerId;
     }
 

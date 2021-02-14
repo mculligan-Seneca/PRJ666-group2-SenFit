@@ -6,7 +6,6 @@
 
   package com.example.senfit.ui.inperson;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -24,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.senfit.PageViewModel;
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.dataContext.DatabaseClient;
@@ -48,7 +48,6 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
     protected RecyclerView mRecyclerView;
     protected InpersonAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset;
     private int mInPersonClassId;
     InpersonViewModel model;
 

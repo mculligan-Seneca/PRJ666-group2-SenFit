@@ -3,18 +3,10 @@
  *
  * */
 
-package com.example.senfit.ui.inperson;
+package com.example.senfit;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.example.senfit.R;
-import com.example.senfit.covidLog.CovidSurveyActivity;
-import com.example.senfit.dataContext.DatabaseClient;
-import com.example.senfit.login.LoginHelper;
-import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;
