@@ -12,3 +12,5 @@ Complete in-person class list page, add dummy data in database,fetch and show on
 
 Complete password and email validation to sign up page on 2021/2/8.(Mitchell)
 
+Complete Covid survey functionality on 2021/2/12.(Mitchell)
+
