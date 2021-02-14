@@ -28,6 +28,7 @@ import java.sql.Timestamp;
                                                         childColumns = "gymLocationId")}*/)
 public class GymClass {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="gymClassId")
     private int gymClassId;//TODO:add constructor and getter/setter
 
     @ColumnInfo(name="class_date")
@@ -43,9 +44,21 @@ public class GymClass {
     private long trainerId;//TODO: ADD foreign key or embeeded
 
     @ColumnInfo(name="fitnessClassId")
-    private long fitnessClassId;//TODO:ADD foreign key or embedded
+    private long fitnessClassId;//TODO:ADD foreign key or
+
     @ColumnInfo(name="gymLocationId")
     private int gymLocationId;//TODO: ADD foreign key or embedded
+
+    @ColumnInfo(name="enrolled")
+    private boolean enrolled;
+
+    public boolean getEnrolled() {
+        return enrolled;
+    }
+
+    public void setEnrolled(boolean enrolled) {
+        this.enrolled = enrolled;
+    }
 
     public int getGymClassId() {
         return gymClassId;

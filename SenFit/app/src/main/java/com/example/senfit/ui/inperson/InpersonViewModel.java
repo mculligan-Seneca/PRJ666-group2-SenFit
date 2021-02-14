@@ -63,6 +63,7 @@ public class InpersonViewModel extends ViewModel {
                             .getFitnessClass(gymClass.getFitnessClassId());
                     data.setClasName(fClass.getFitnessClassName());
                     data.setDate(gymClass.getClassDate().toString());
+                    data.setEnrolled(gymClass.getEnrolled());
 
                     Date startDate = new Date(gymClass.getStartTime().getTime());
                     Calendar startCalendar = GregorianCalendar.getInstance();

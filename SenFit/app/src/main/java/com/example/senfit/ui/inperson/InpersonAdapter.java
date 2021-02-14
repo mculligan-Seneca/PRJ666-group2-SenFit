@@ -28,7 +28,12 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
 
     private List<InpersonClassData> mDataSet;
 
-    private InpersonFragment.SelectClassListener listener;
+    private SelectClassListener listener;
+
+    public interface SelectClassListener {
+        public void selectClassItem(int position, int inPersonClassId);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView mClassImageView;
         private final TextView mClassNameTextView;
@@ -37,6 +42,7 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         private final TextView mClassInstrctorTextView;
         private final Button mClassEnrollButton;
         private final View mInpersonRowView;
+        private final TextView mEnrolledTextView;
 
         public ViewHolder(View v) {
             super(v);
@@ -54,6 +60,7 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
             mClassTimeTextView = (TextView) v.findViewById(R.id.inperson_row_class_time);
             mClassInstrctorTextView = (TextView) v.findViewById(R.id.inperson_row_class_instructor_name);
             mClassEnrollButton = (Button) v.findViewById(R.id.inperson_row_class_enroll);
+            mEnrolledTextView = (TextView) v.findViewById(R.id.inperson_row_class_enrolled_txt);
         }
 
         public ImageView getClassImageView() {
@@ -80,15 +87,25 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
             return mClassEnrollButton;
         }
 
+        public TextView getClassEnroledTextView() {
+            return mEnrolledTextView;
+        }
+
         public View getInpersonRowView() {
             return mInpersonRowView;
         }
     }
 
 
-    public InpersonAdapter(List<InpersonClassData> dataSet, InpersonFragment.SelectClassListener listener) {
+    public InpersonAdapter(List<InpersonClassData> dataSet, SelectClassListener listener) {
         this.listener=listener;
         mDataSet = dataSet;
+    }
+
+    public void updateDataSet(List<InpersonClassData> dataSet) {
+        dataSet.clear();
+        mDataSet.addAll(dataSet);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -109,11 +126,20 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         viewHolder.getClassDateTextView().setText(mDataSet.get(position).getDate());
         viewHolder.getClassTimeTextView().setText(mDataSet.get(position).getTime());
         viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).getInstructorName());
+
+        if (mDataSet.get(position).getEnrolled()) {
+            viewHolder.getClassEnroledTextView().setVisibility(View.VISIBLE);
+            viewHolder.getClassEnrollButton().setVisibility(View.INVISIBLE);
+        } else {
+            viewHolder.getClassEnrollButton().setVisibility(View.VISIBLE);
+            viewHolder.getClassEnroledTextView().setVisibility(View.INVISIBLE);
+        }
+
         viewHolder.getClassEnrollButton().setOnClickListener((v)->{
             InpersonClassData gymClass = mDataSet.get(position);
             //gets the current gym class being selected
-            if(listener!=null)//checks listener is not null
-                listener.selectClassItem(gymClass.getGymClassId());//notifies the main ui of selected class
+            if (listener!=null)//checks listener is not null
+                listener.selectClassItem(position, gymClass.getGymClassId());//notifies the main ui of selected class
         });
     }
 

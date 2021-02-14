@@ -85,24 +85,28 @@ public class DataInsertionManager {
         gymClass1.setClassDate(Date.valueOf("2021-02-12"));
         gymClass1.setStartTime(Timestamp.valueOf("2021-02-12 09:30:0"));
         gymClass1.setEndTime(Timestamp.valueOf("2021-02-12 10:30:0"));
+        gymClass1.setEnrolled(false);
 
         GymClass gymClass2 = new GymClass();
         gymClass2.setGymLocationId(1234);
         gymClass2.setClassDate(Date.valueOf("2021-02-13"));
         gymClass2.setStartTime(Timestamp.valueOf("2021-02-13 11:30:0"));
         gymClass2.setEndTime(Timestamp.valueOf("2021-02-13 12:30:0"));
+        gymClass2.setEnrolled(false);
 
         GymClass gymClass3 = new GymClass();
         gymClass3.setGymLocationId(1234);
         gymClass3.setClassDate(Date.valueOf("2021-02-14"));
         gymClass3.setStartTime(Timestamp.valueOf("2021-02-14 10:30:0"));
         gymClass3.setEndTime(Timestamp.valueOf("2021-02-14 11:30:0"));
+        gymClass3.setEnrolled(false);
 
         GymClass gymClass4 = new GymClass();
         gymClass4.setGymLocationId(1234);
         gymClass4.setClassDate(Date.valueOf("2021-02-15"));
         gymClass4.setStartTime(Timestamp.valueOf("2021-02-15 08:30:0"));
         gymClass4.setEndTime(Timestamp.valueOf("2021-02-15 09:30:0"));
+        gymClass4.setEnrolled(false);
 
         data.gymClassList.add(gymClass1);
         data.gymClassList.add(gymClass2);

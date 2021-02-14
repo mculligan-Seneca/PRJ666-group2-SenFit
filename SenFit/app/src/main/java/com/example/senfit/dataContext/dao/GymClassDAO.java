@@ -22,4 +22,7 @@ public interface GymClassDAO {
     @Transaction
     @Query("Select * from gymClass")
     public List<GymClass> getGymClasses();
+
+    @Query("UPDATE gymClass SET enrolled=:enrolled where gymClassId=:id")
+    void updateEnrollStatus(int id, boolean enrolled);
 }
