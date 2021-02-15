@@ -17,9 +17,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.senfit.R;
-import com.example.senfit.dataContext.entities.GymClass;
-import com.example.senfit.dataContext.entities.InPersonClass;
-import com.example.senfit.uiHelpers.DateTimeFormatHelper;
 
 import java.util.List;
 
@@ -112,7 +109,7 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.text_row_item, viewGroup, false);
+                .inflate(R.layout.inperson_row_item, viewGroup, false);
 
         return new ViewHolder(v);
     }

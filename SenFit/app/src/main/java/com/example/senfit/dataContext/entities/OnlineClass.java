@@ -26,16 +26,28 @@ public class OnlineClass {
     private Date classDate;
 
     @ColumnInfo(name="start_time")
-    private Timestamp startTime;// refactor as long so timestamp can keep functionality
+    private Timestamp startTime;
 
     @ColumnInfo(name="end_time")
-    private Timestamp endTime;//Timestamp repersented as long
+    private Timestamp endTime;
 
     @ColumnInfo(name="fitnessClassId")
     private long fitnessClassId;//TODO:ADD foreign key or embedded
 
     @ColumnInfo(name="trainerId")
     private long trainerId;//TODO:ADD foreign key associations
+
+
+    @ColumnInfo(name="enrolled")
+    private boolean enrolled;
+
+    public boolean isEnrolled() {
+        return enrolled;
+    }
+
+    public void setEnrolled(boolean enrolled) {
+        this.enrolled = enrolled;
+    }
 
     public int getOnlineClassId() {
         return onlineClassId;

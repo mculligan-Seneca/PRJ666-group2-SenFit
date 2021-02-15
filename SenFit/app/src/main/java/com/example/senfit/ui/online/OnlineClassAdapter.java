@@ -105,7 +105,7 @@ public class OnlineClassAdapter extends RecyclerView.Adapter<OnlineClassAdapter.
     @Override
     public OnlineClassAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.text_row_item, parent, false);
+                .inflate(R.layout.online_row_item, parent, false);
 
         return new ViewHolder(v);
 

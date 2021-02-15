@@ -115,32 +115,28 @@ public class DataInsertionManager {
 
 
         OnlineClass onlineClass1 = new OnlineClass();
-        //onlineClass1.setGymLocationId(1234);
         onlineClass1.setClassDate(Date.valueOf("2021-04-12"));
         onlineClass1.setStartTime(Timestamp.valueOf("2021-04-12 09:30:0"));
         onlineClass1.setEndTime(Timestamp.valueOf("2021-04-12 10:30:0"));
-        //onlineClass1.setEnrolled(false);
+        onlineClass1.setEnrolled(false);
 
         OnlineClass onlineClass2 = new OnlineClass();
-        //onlineClass2.setGymLocationId(1234);
         onlineClass2.setClassDate(Date.valueOf("2021-04-13"));
         onlineClass2.setStartTime(Timestamp.valueOf("2021-04-13 11:30:0"));
         onlineClass2.setEndTime(Timestamp.valueOf("2021-04-13 12:30:0"));
-        //onlineClass2.setEnrolled(false);
+        onlineClass2.setEnrolled(false);
 
         OnlineClass onlineClass3 = new OnlineClass();
-        //onlineClass3.setGymLocationId(1234);
         onlineClass3.setClassDate(Date.valueOf("2021-04-14"));
         onlineClass3.setStartTime(Timestamp.valueOf("2021-04-14 10:30:0"));
         onlineClass3.setEndTime(Timestamp.valueOf("2021-02-14 11:30:0"));
-        //onlineClass3.setEnrolled(false);
+        onlineClass3.setEnrolled(false);
 
         OnlineClass onlineClass4 = new OnlineClass();
-        //onlineClass4.setGymLocationId(1234);
         onlineClass4.setClassDate(Date.valueOf("2021-04-15"));
         onlineClass4.setStartTime(Timestamp.valueOf("2021-02-15 08:30:0"));
         onlineClass4.setEndTime(Timestamp.valueOf("2021-02-15 09:30:0"));
-        //onlineClass4.setEnrolled(false);
+        onlineClass4.setEnrolled(false);
 
         data.onlineClassList.add(onlineClass1);
         data.onlineClassList.add(onlineClass2);

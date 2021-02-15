@@ -22,6 +22,6 @@ public interface OnlineClassDAO {
     @Query("Select * from onlineClasses")
     public List<OnlineClass> getOnlineClasses();
 
-//    @Query("UPDATE onlineClass SET enrolled=:enrolled where gymClassId=:id")
-//    void updateEnrollStatus(int id, boolean enrolled);
+    @Query("UPDATE onlineClasses SET enrolled=:enrolled where onlineClassId=:id")
+    void updateEnrollStatus(int id, boolean enrolled);
 }
