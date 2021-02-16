@@ -61,7 +61,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
           mInPersonClassId = inPersonClassId;
           mCurrentPosition = pos;
           Intent intent = new Intent(getContext(), CovidSurveyActivity.class);
-          intent.putExtra(CovidSurveyActivity.MEMBER_ID_TAG,this.memberId);//TODO: Find way to store member id
+          //intent.putExtra(CovidSurveyActivity.MEMBER_ID_TAG,this.memberId);
           startActivityForResult(intent, SURVEY_ACTIVITY);
       }
 
@@ -85,7 +85,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
             index = getArguments().getInt(ARG_SECTION_NUMBER);
         }
         pageViewModel.setIndex(index);
-        this.memberId= LoginHelper.MEMBER_ID;
+        this.memberId= LoginHelper.getMemberId(getContext());
     }
 
     @Override

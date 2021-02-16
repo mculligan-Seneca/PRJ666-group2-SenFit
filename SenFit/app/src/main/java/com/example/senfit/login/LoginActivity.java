@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     Interface to get email password comparison result
      */
     public interface ComparisonCallback {
-        void isValid(boolean vaild);
+        void isValid(boolean vaildUser, boolean isValidPass);
     }
 
     @Override
@@ -50,17 +50,29 @@ public class LoginActivity extends AppCompatActivity {
         String userName = userNameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
+        if (userName.isEmpty()|| password.isEmpty()) {
+            Toast.makeText(LoginActivity.this, "Insert valid username and password.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
         LoginHelper.compareEmailPass(this, userName, password, new ComparisonCallback() {
             @Override
-            public void isValid(boolean vaild) {
+            public void isValid(boolean vaildUser, boolean validPass) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (vaild) {
+                        if (vaildUser && validPass) {
                             Toast.makeText(LoginActivity.this, "Loging success", Toast.LENGTH_LONG).show();
                             showSenfitActivity();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Invalid credentials.", Toast.LENGTH_LONG).show();
+                            if (!vaildUser && validPass) {
+                                Toast.makeText(LoginActivity.this, "Invalid username.", Toast.LENGTH_LONG).show();
+                            } else if(vaildUser && !validPass) {
+                                Toast.makeText(LoginActivity.this, "Invalid password.", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Invalid credentials.", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });
