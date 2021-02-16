@@ -38,7 +38,9 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         Toolbar tool = findViewById(R.id.title_toolBar);
+        tool.setTitle(R.string.app_name);
         this.drawer = findViewById(R.id.drawer_view_senfit);
+        setSupportActionBar(tool);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawer,tool,
                 R.string.nav_drawer_open,R.string.nav_drawer_close);//to manage functionality of drawer
         this.drawer.addDrawerListener(toggle);
