@@ -40,7 +40,10 @@
     <string name="un_confirm">un-confirm</string>
     <string name="confirm_statement">I Confirm these results</string>
     <string name="covid_survey">Covid Survey</string>
-
+    <string name="fitness_portfolio">Fitness Portfolio</string>
+    <string name="classes">Classes</string>
+    <string name="nav_drawer_open">Open Navigation Drawer</string>
+    <string name="nav_drawer_close">Close Navigation Drawer</string>
     <string-array name="covid_questions">
         <item>I do not have a cough</item>
         <item>I have not been experencing headaches</item>

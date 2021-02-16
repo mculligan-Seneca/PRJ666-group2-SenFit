@@ -15,12 +15,17 @@ import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SenFitActivity extends AppCompatActivity implements InpersonFragment.SelectClassListener {
 
     private static final int SURVEY_ACTIVITY=2;
+    private DrawerLayout drawer;
     private int memberId;
     private int inPersonClassId;
     @Override
@@ -32,10 +37,24 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        Toolbar tool = findViewById(R.id.title_toolBar);
+        this.drawer = findViewById(R.id.drawer_view_senfit);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawer,tool,
+                R.string.nav_drawer_open,R.string.nav_drawer_close);//to manage functionality of drawer
+        this.drawer.addDrawerListener(toggle);
+        toggle.syncState();//manages rotating the hamburger icon
         this.memberId= LoginHelper.MEMBER_ID;
         this.inPersonClassId=0;
     }
 
+    @Override
+    public void onBackPressed(){// when the back button is pressed we do not want to leave activity immeadiatley
+        if(this.drawer.isDrawerOpen(GravityCompat.START)){//check if drawer is open
+            this.drawer.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+    }
     @Override
     public void selectClassItem(int inPersonClassId) {
             Intent intent = new Intent(this, CovidSurveyActivity.class);
