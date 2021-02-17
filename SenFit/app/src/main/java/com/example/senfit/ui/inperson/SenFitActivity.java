@@ -13,6 +13,7 @@ import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -40,6 +41,11 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         Toolbar tool = findViewById(R.id.title_toolBar);
         tool.setTitle(R.string.app_name);
         this.drawer = findViewById(R.id.drawer_view_senfit);
+        NavigationView navView = findViewById(R.id.navigation_viewId);
+        navView.setNavigationItemSelectedListener((item)->{
+
+            return true;
+        });
         setSupportActionBar(tool);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawer,tool,
                 R.string.nav_drawer_open,R.string.nav_drawer_close);//to manage functionality of drawer
