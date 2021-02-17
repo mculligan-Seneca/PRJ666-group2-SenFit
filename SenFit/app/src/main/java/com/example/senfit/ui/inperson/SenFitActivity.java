@@ -5,7 +5,6 @@
 
 package com.example.senfit.ui.inperson;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,51 +13,73 @@ import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SenFitActivity extends AppCompatActivity implements InpersonFragment.SelectClassListener {
 
     private static final int SURVEY_ACTIVITY=2;
-    private DrawerLayout drawer;
+    private static final String DEFAULT_FRAG="HOME_FRAGMENT";
+    private DrawerLayout drawerLayout;
+    private FragmentManager fm;
     private int memberId;
     private int inPersonClassId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senfit);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        Toolbar tool = findViewById(R.id.title_toolBar);
-        tool.setTitle(R.string.app_name);
+        this.fm = getSupportFragmentManager();
+        this.drawerLayout = findViewById(R.id.drawer_view_senfit);
+/*
+        if(savedInstanceState==null){
+            fm.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.frame_layout_senfit,HomeFragment.newInstance(),DEFAULT_FRAG)//sets fragment to home fragment by default
+                    .commit();
+        }
         this.drawer = findViewById(R.id.drawer_view_senfit);
         NavigationView navView = findViewById(R.id.navigation_viewId);
         navView.setNavigationItemSelectedListener((item)->{
 
             return true;
         });
-        setSupportActionBar(tool);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawer,tool,
+
+        Toolbar toolbar = findViewById(R.id.title_toolBar);
+        toolbar.setTitle(R.string.app_name);
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawer,toolbar,
                 R.string.nav_drawer_open,R.string.nav_drawer_close);//to manage functionality of drawer
         this.drawer.addDrawerListener(toggle);
         toggle.syncState();//manages rotating the hamburger icon
+        */
+
+        NavController navController = Navigation.findNavController(this,R.id.fragment_container_view_tag);;
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
+                .setOpenableLayout(drawerLayout)
+                .build();
+
+       //Toolbar toolbar = findViewById(R.id.title_toolBar);
+        NavigationView navView = findViewById(R.id.navigation_viewId);
+//        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
+        NavigationUI.setupWithNavController(navView,navController);
+
         this.memberId= LoginHelper.MEMBER_ID;
         this.inPersonClassId=0;
     }
 
     @Override
     public void onBackPressed(){// when the back button is pressed we do not want to leave activity immeadiatley
-        if(this.drawer.isDrawerOpen(GravityCompat.START)){//check if drawer is open
-            this.drawer.closeDrawer(GravityCompat.START);
+        if(this.drawerLayout.isDrawerOpen(GravityCompat.START)){//check if drawer is open
+            this.drawerLayout.closeDrawer(GravityCompat.START);
         }else{
             super.onBackPressed();
         }

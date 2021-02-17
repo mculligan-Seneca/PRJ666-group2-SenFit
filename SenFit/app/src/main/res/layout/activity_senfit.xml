@@ -7,46 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.inperson.SenFitActivity"
     android:fitsSystemWindows="true"
-
     tools:openDrawer="start"
     >
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
+    <!--
+    <Toolbar
+        android:id="@+id/title_toolBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.SenFit.AppBarOverlay">
+        android:gravity="center"
+        android:minHeight="?actionBarSize"
+        android:padding="@dimen/appbar_padding"
+        android:title="@string/app_name"
+        android:elevation="5dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />-->
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/title_toolBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
+    <fragment
+        android:id="@+id/fragment_container_view_tag"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"/>
 
-            android:elevation="5dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            app:tabTextColor="@color/White"
-            app:tabSelectedTextColor="@color/Green"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

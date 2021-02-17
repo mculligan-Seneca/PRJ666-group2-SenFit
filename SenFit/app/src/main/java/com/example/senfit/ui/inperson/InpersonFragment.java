@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -92,7 +93,8 @@ public class InpersonFragment extends Fragment {
         InpersonViewModel model = new ViewModelProvider(this).get(InpersonViewModel.class);
 
         // Observing live data and updating adapter data
-        model.getInpersonClasses().observe(this, inpersonClassData -> {
+        //tieing the lifcycle to the view instead of actual fragment
+        model.getInpersonClasses().observe(getViewLifecycleOwner(), inpersonClassData -> {
             mAdapter = new InpersonAdapter(inpersonClassData,listener);//passes data and listener to adapter
 
             mRecyclerView.setAdapter(mAdapter);
@@ -106,4 +108,4 @@ public class InpersonFragment extends Fragment {
     }
 
 
-}
+  }
