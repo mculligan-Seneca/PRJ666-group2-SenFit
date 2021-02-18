@@ -8,9 +8,14 @@ Fitness Portfolio Class
 package com.example.senfit.dataContext.entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName="fitnessPortfolio")
+import java.sql.Date;
+
+@Entity(tableName="fitnessPortfolio",foreignKeys = @ForeignKey(entity = Member.class,
+        parentColumns = "member_id",
+        childColumns = "member_id"))
 public class FitnessPortfolio {
     @PrimaryKey(autoGenerate=true)
     private int fitnessPortfolioId;
@@ -18,11 +23,19 @@ public class FitnessPortfolio {
     @ColumnInfo(name="session_duration")
     private int sessDuration;//the duration of a session in minutes
 
-    @ColumnInfo(name="member_goals")
-    private String memberGoals;
+    @ColumnInfo(name="height")
+    private float height;//height in ft
+
+    @ColumnInfo(name="weight")
+    private float weight;//weight in lbs
+    @ColumnInfo(name="date_created")
+    private Date dateCreated;
+
+    @ColumnInfo(name="health_concerns")
+    private String healthConcerns;
 
     @ColumnInfo(name="member_id")
-    private int memberId; //TODO: add foreignKEY or embeded
+    private int memberId;
 
     public int getFitnessPortfolioId() {
         return fitnessPortfolioId;
@@ -40,13 +53,7 @@ public class FitnessPortfolio {
         this.sessDuration = sessDuration;
     }
 
-    public String getMemberGoals() {
-        return memberGoals;
-    }
 
-    public void setMemberGoals(String memberGoals) {
-        this.memberGoals = memberGoals;
-    }
 
     public int getMemberId() {
         return memberId;
@@ -54,5 +61,37 @@ public class FitnessPortfolio {
 
     public void setMemberId(int memberId) {
         this.memberId = memberId;
+    }
+
+    public String getHealthConcerns() {
+        return healthConcerns;
+    }
+
+    public void setHealthConcerns(String healthConcerns) {
+        this.healthConcerns = healthConcerns;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 }

@@ -17,7 +17,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.example.senfit.dataContext.dao.CovidLogDAO;
-import com.example.senfit.dataContext.dao.FitnessClassDao;
+import com.example.senfit.dataContext.dao.FitnessClassDAO;
+import com.example.senfit.dataContext.dao.FitnessPortfolioDAO;
 import com.example.senfit.dataContext.dao.GymClassDAO;
 import com.example.senfit.dataContext.dao.MemberDAO;
 import com.example.senfit.dataContext.dao.TrainerDAO;
@@ -25,6 +26,7 @@ import com.example.senfit.dataContext.entities.CovidLog;
 import com.example.senfit.dataContext.entities.Exercise;
 import com.example.senfit.dataContext.entities.FitnessClass;
 import com.example.senfit.dataContext.entities.FitnessPortfolio;
+import com.example.senfit.dataContext.entities.FitnessResult;
 import com.example.senfit.dataContext.entities.GymClass;
 import com.example.senfit.dataContext.entities.GymLocation;
 import com.example.senfit.dataContext.entities.Member;
@@ -36,8 +38,8 @@ import com.example.senfit.dataContext.entities.TrainingSession;
 
 @Database(entities={Member.class, Trainer.class, CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class, GymClass.class, GymLocation.class,
-        OnlineClass.class, TrainingExercise.class, TrainingPlan.class, TrainingSession.class},version=3,
-exportSchema=false)//See what export schema is used for
+        OnlineClass.class, TrainingExercise.class, TrainingPlan.class, TrainingSession.class, FitnessResult.class},
+        version=4, exportSchema=false)//See what export schema is used for
 @TypeConverters({Converter.class})
 //TODO: Add Entity classes to database annotation
 public abstract class AppDatabase extends RoomDatabase {
@@ -47,10 +49,11 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract GymClassDAO getGymClassDao();
 
-    public abstract FitnessClassDao getFitnessClassDao();
+    public abstract FitnessClassDAO getFitnessClassDao();
 
     public abstract CovidLogDAO getCovidLogDAO();
 
+    public abstract FitnessPortfolioDAO getFitnessPortfolioDAO();
 
     //TODO: Add any new DAO's to appdatabase
 }

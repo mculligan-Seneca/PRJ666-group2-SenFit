@@ -12,12 +12,28 @@ package com.example.senfit.dataContext;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DatabaseClient {
+   /* private static final Migration MIGRATION_3_4 = new Migration(3,4) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("Alter table fitnessPortfolio"
+            +" add column height FLOAT;");
+            database.execSQL("Alter table fitnessPortfolio"
+                    +" add column weight FLOAT;");
+            database.execSQL("Alter table fitnessPortfolio"
+                    +" add column date_created DATE;");
+        }
+    };
+
+    */
     private AppDatabase appDatabase;
     private static DatabaseClient dbClient=null;
 
@@ -25,6 +41,7 @@ public class DatabaseClient {
     //NOTE: Optionally use livedata and observables to run concurrent actions
     private DatabaseClient(Context context){
             this.appDatabase= Room.databaseBuilder(context, AppDatabase.class,"Sen-FitDB")
+                    //.addMigrations(MIGRATION_3_4)
                     //.fallbackToDestructiveMigration()
                     .build();
 

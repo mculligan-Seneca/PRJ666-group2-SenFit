@@ -44,6 +44,10 @@ dependencies {
     def room_version = "2.2.6"
     def nav_version = "2.3.3"
 
+    //auto value annotation
+  //  annotationProcessor 'com.google.auto.value:auto-value:1.4'
+    //compileOnly 'com.jakewharton.auto.value:auto-value-annotations:1.4'
+
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 

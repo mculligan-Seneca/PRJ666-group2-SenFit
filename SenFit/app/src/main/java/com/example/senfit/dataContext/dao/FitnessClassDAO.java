@@ -12,7 +12,7 @@ import com.example.senfit.dataContext.entities.FitnessClass;
 import java.util.List;
 
 @Dao
-public interface FitnessClassDao {
+public interface FitnessClassDAO {
 
     @Insert
     long insertFitnessClass(FitnessClass member);

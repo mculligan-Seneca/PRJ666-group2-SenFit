@@ -4,7 +4,7 @@ init date: Febuary 2nd 2021
 Author Mitchell Culligan
 Version 1.0
 com.example.senfit.CovidLog ViewModel
-This viewmodel class stores data for the current covid Log
+This viewmodel class stores data for the current covid Log use case and interacts with the dataclient
  */
 package com.example.senfit.covidLog;
 
