@@ -14,6 +14,7 @@ import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -61,15 +62,19 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         this.drawer.addDrawerListener(toggle);
         toggle.syncState();//manages rotating the hamburger icon
         */
-
+        ActionBarDrawerToggle toggle =
+                new ActionBarDrawerToggle(this,this.drawerLayout,
+                        R.string.nav_drawer_open,R.string.nav_drawer_close);
+        this.drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
         NavController navController = Navigation.findNavController(this,R.id.fragment_container_view_tag);;
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
+    /*    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .setOpenableLayout(drawerLayout)
-                .build();
+                .build();*/
 
        //Toolbar toolbar = findViewById(R.id.title_toolBar);
         NavigationView navView = findViewById(R.id.navigation_viewId);
-//        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
+      //  NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
         NavigationUI.setupWithNavController(navView,navController);
 
         this.memberId= LoginHelper.MEMBER_ID;
