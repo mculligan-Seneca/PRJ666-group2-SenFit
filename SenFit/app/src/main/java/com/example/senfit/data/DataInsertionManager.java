@@ -136,7 +136,7 @@ public class DataInsertionManager {
 
 
             setDummyDataInserted(context);
-       }
+      }
     }
 
     static void insertTrainer(Context context, int pass) {

@@ -39,44 +39,41 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senfit);
         this.fm = getSupportFragmentManager();
-        this.drawerLayout = findViewById(R.id.drawer_view_senfit);
-/*
+
         if(savedInstanceState==null){
             fm.beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.frame_layout_senfit,HomeFragment.newInstance(),DEFAULT_FRAG)//sets fragment to home fragment by default
                     .commit();
         }
-        this.drawer = findViewById(R.id.drawer_view_senfit);
+        this.drawerLayout = findViewById(R.id.drawer_view_senfit);
         NavigationView navView = findViewById(R.id.navigation_viewId);
         navView.setNavigationItemSelectedListener((item)->{
 
             return true;
         });
 
-        Toolbar toolbar = findViewById(R.id.title_toolBar);
-        toolbar.setTitle(R.string.app_name);
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawer,toolbar,
+
+
+        //setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawerLayout,
                 R.string.nav_drawer_open,R.string.nav_drawer_close);//to manage functionality of drawer
-        this.drawer.addDrawerListener(toggle);
-        toggle.syncState();//manages rotating the hamburger icon
-        */
-        ActionBarDrawerToggle toggle =
-                new ActionBarDrawerToggle(this,this.drawerLayout,
-                        R.string.nav_drawer_open,R.string.nav_drawer_close);
         this.drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        NavController navController = Navigation.findNavController(this,R.id.fragment_container_view_tag);;
-    /*    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
+        toggle.syncState();//manages rotating the hamburger icon
+
+        /*     NavController navController = Navigation.findNavController(this,R.id.fragment_container_view_tag);
+        Toolbar toolbar = findViewById(R.id.title_toolBar);
+      AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .setOpenableLayout(drawerLayout)
-                .build();*/
+                .build();
 
-       //Toolbar toolbar = findViewById(R.id.title_toolBar);
+
+    // setSupportActionBar(toolbar);
         NavigationView navView = findViewById(R.id.navigation_viewId);
-      //  NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
-        NavigationUI.setupWithNavController(navView,navController);
+       NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
 
+        NavigationUI.setupWithNavController(navView,navController);
+*/
         this.memberId= LoginHelper.MEMBER_ID;
         this.inPersonClassId=0;
     }

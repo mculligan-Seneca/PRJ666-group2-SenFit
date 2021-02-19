@@ -9,26 +9,20 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     >
-    <!--
-    <Toolbar
-        android:id="@+id/title_toolBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:minHeight="?actionBarSize"
-        android:padding="@dimen/appbar_padding"
-        android:title="@string/app_name"
-        android:elevation="5dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />-->
 
-    <fragment
-        android:id="@+id/fragment_container_view_tag"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+
+
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/frame_layout_senfit"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"/>
+        />
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"

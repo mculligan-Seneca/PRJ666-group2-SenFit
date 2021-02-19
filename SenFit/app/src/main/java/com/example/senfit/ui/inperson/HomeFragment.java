@@ -9,10 +9,12 @@ This fragment class repersents the default fragment to be displayed from the hom
  */
 package com.example.senfit.ui.inperson;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -76,6 +78,9 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = v.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+      //  Toolbar toolbar = v.findViewById(R.id.title_toolBar);
+      //  toolbar.setTitle(R.string.app_name);
 
 
         return v;
