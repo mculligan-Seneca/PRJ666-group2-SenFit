@@ -9,6 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.login.LoginActivity;
@@ -16,20 +24,7 @@ import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class SenFitActivity extends AppCompatActivity implements InpersonFragment.SelectClassListener {
+public class SenFitActivity extends AppCompatActivity {
 
     private static final int SURVEY_ACTIVITY=2;
     private static final String DEFAULT_FRAG="HOME_FRAGMENT";
@@ -61,7 +56,7 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
                         break;
 
                     case R.id.log_out:
-                        LoginHelper.MEMBER_ID=0;
+                        LoginHelper.setMemberId(this, 0);
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -85,7 +80,7 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         toggle.syncState();//manages rotating the hamburger icon
 
 
-        this.memberId= LoginHelper.MEMBER_ID;
+        this.memberId = LoginHelper.getMemberId(this);
         this.inPersonClassId=0;
     }
 
@@ -104,13 +99,6 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         }else{
             super.onBackPressed();
         }
-    }
-    @Override
-    public void selectClassItem(int inPersonClassId) {
-            Intent intent = new Intent(this, CovidSurveyActivity.class);
-            intent.putExtra(CovidSurveyActivity.MEMBER_ID_TAG,this.memberId);//TODO: Find way to store member id
-            startActivityForResult(intent, SURVEY_ACTIVITY);
-
     }
 
     @Override

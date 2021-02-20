@@ -13,6 +13,15 @@ public class InpersonClassData {
     private String time;
     private String instructorName;
     private Bitmap image;
+    private Boolean enrolled;
+
+    public Boolean getEnrolled() {
+        return enrolled;
+    }
+
+    public void setEnrolled(Boolean enrolled) {
+        this.enrolled = enrolled;
+    }
 
     public String getClasName() {
         return clasName;

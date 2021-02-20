@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.inperson.SenFitActivity"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    >
+    tools:openDrawer="start">
 
 <LinearLayout
     android:orientation="vertical"
