@@ -85,24 +85,6 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         toggle.syncState();//manages rotating the hamburger icon
 
 
-     /*
-          NavController navController = Navigation.findNavController(this,R.id.fragment_container_view_tag);
-  //        Toolbar toolbar = findViewById(R.id.title_toolBar);
-           toolbar.setTitle(R.string.app_name);
-           setSupportActionBar(toolbar);
-      AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
-                .setOpenableLayout(drawerLayout)
-                .build();
-
-
-    // setSupportActionBar(toolbar);
-        NavigationView navView = findViewById(R.id.navigation_viewId);
-
-
-        NavigationUI.setupWithNavController(navView,navController);
-       NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
-*/
-
         this.memberId= LoginHelper.MEMBER_ID;
         this.inPersonClassId=0;
     }
