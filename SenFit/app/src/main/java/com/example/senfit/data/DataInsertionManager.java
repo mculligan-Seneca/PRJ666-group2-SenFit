@@ -125,7 +125,7 @@ public class DataInsertionManager {
 
 
     public static void insertDummyData(Context context) {
-        if (!getDummyDataInserted(context)) {
+       if (!getDummyDataInserted(context)) {
             populateDummyData();
             for (int i = 0 ; i < 4; i++) {
                 insertTrainer(context, i);
@@ -136,7 +136,7 @@ public class DataInsertionManager {
 
 
             setDummyDataInserted(context);
-      }
+     }
     }
 
     static void insertTrainer(Context context, int pass) {
