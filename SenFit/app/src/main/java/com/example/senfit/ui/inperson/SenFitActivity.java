@@ -7,9 +7,11 @@ package com.example.senfit.ui.inperson;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
+import com.example.senfit.login.LoginActivity;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -31,6 +34,7 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
     private static final int SURVEY_ACTIVITY=2;
     private static final String DEFAULT_FRAG="HOME_FRAGMENT";
     private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
     private FragmentManager fm;
     private int memberId;
     private int inPersonClassId;
@@ -39,30 +43,53 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senfit);
         this.fm = getSupportFragmentManager();
-
-        if(savedInstanceState==null){
+        toolbar = findViewById(R.id.title_toolBar);
+       if(savedInstanceState==null){
             fm.beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.frame_layout_senfit,HomeFragment.newInstance(),DEFAULT_FRAG)//sets fragment to home fragment by default
                     .commit();
+            toolbar.setTitle(R.string.app_name);
         }
         this.drawerLayout = findViewById(R.id.drawer_view_senfit);
         NavigationView navView = findViewById(R.id.navigation_viewId);
         navView.setNavigationItemSelectedListener((item)->{
+            
+                switch(item.getItemId()){
+                    case R.id.home_fragment:
+                        this.replaceFragment(HomeFragment.newInstance(),R.string.app_name);
+                        break;
+
+                    case R.id.log_out:
+                        LoginHelper.MEMBER_ID=0;
+                        Intent intent = new Intent(this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                    default:
+                        Toast.makeText(SenFitActivity.this,"Button pressed",Toast.LENGTH_LONG).show();
+                }
 
             return true;
         });
 
 
+        //TODO:get Toolbar from frag,emt
 
-        //setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawerLayout,
+
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,this.drawerLayout,toolbar,
                 R.string.nav_drawer_open,R.string.nav_drawer_close);//to manage functionality of drawer
         this.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();//manages rotating the hamburger icon
 
-        /*     NavController navController = Navigation.findNavController(this,R.id.fragment_container_view_tag);
-        Toolbar toolbar = findViewById(R.id.title_toolBar);
+
+     /*
+          NavController navController = Navigation.findNavController(this,R.id.fragment_container_view_tag);
+  //        Toolbar toolbar = findViewById(R.id.title_toolBar);
+           toolbar.setTitle(R.string.app_name);
+           setSupportActionBar(toolbar);
       AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .setOpenableLayout(drawerLayout)
                 .build();
@@ -70,12 +97,22 @@ public class SenFitActivity extends AppCompatActivity implements InpersonFragmen
 
     // setSupportActionBar(toolbar);
         NavigationView navView = findViewById(R.id.navigation_viewId);
-       NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
+
 
         NavigationUI.setupWithNavController(navView,navController);
+       NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
 */
+
         this.memberId= LoginHelper.MEMBER_ID;
         this.inPersonClassId=0;
+    }
+
+
+    public void replaceFragment( Fragment fragment,int fragmentTitle){
+        fm.beginTransaction().replace(R.id.frame_layout_senfit,HomeFragment.newInstance())
+                .commit();
+        toolbar.setTitle(R.string.app_name);
+        this.drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override

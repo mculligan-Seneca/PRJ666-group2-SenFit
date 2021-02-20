@@ -121,4 +121,5 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
     public int getItemCount() {
         return mDataSet.size();
     }
+
 }

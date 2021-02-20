@@ -8,6 +8,7 @@
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +92,7 @@ public class InpersonFragment extends Fragment {
         // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
         InpersonViewModel model = new ViewModelProvider(this).get(InpersonViewModel.class);
-
+        //owner should be activity if viewmodel shares data across multiple fragments
         // Observing live data and updating adapter data
         //tieing the lifcycle to the view instead of actual fragment
         model.getInpersonClasses().observe(getViewLifecycleOwner(), inpersonClassData -> {
@@ -107,5 +108,9 @@ public class InpersonFragment extends Fragment {
         return root;
     }
 
-
+      @Override
+      public void onDestroy() {
+          super.onDestroy();
+          Log.d("INPERSON_FRAGMENT","Fragment Destroyed");
+      }
   }

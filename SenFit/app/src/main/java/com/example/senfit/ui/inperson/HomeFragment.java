@@ -9,7 +9,7 @@ This fragment class repersents the default fragment to be displayed from the hom
  */
 package com.example.senfit.ui.inperson;
 
-import android.app.Activity;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,12 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +69,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_home, container, false);
+       View v= inflater.inflate(R.layout.fragment_home, container, false);
 
        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getContext(), getChildFragmentManager());
         ViewPager viewPager = v.findViewById(R.id.view_pager);
@@ -79,10 +77,12 @@ public class HomeFragment extends Fragment {
         TabLayout tabs = v.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-      //  Toolbar toolbar = v.findViewById(R.id.title_toolBar);
-      //  toolbar.setTitle(R.string.app_name);
+  /*      Toolbar toolbar = v.findViewById(R.id.title_toolBar);
+        toolbar.setTitle(R.string.app_name);
 
-
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
         return v;
     }
 
@@ -92,4 +92,10 @@ public class HomeFragment extends Fragment {
 
         NavController navController = Navigation.findNavController(view);
     } */
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("HOME_FRAGMENT","Fragment Destroyed");
+    }
 }
