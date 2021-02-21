@@ -14,3 +14,5 @@ Complete password and email validation to sign up page on 2021/2/8.(Mitchell)
 
 Complete Covid survey functionality on 2021/2/12.(Mitchell)
 
+Completed menu and navigation functionality 2021/2/20.(Mitchell)
+
