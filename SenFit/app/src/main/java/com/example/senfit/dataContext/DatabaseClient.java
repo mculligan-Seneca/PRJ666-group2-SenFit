@@ -21,19 +21,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DatabaseClient {
-   /* private static final Migration MIGRATION_3_4 = new Migration(3,4) {
+    private static final Migration MIGRATION_7_8 = new Migration(7,8) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            database.execSQL("Alter table fitnessPortfolio"
-            +" add column height FLOAT;");
-            database.execSQL("Alter table fitnessPortfolio"
-                    +" add column weight FLOAT;");
-            database.execSQL("Alter table fitnessPortfolio"
-                    +" add column date_created DATE;");
+           database.execSQL("Alter table fitnessportfolio"+
+           "modify  height INTEGER;");
+            database.execSQL("Alter table fitnessportfolio"+
+                    "modify  weight INTEGER;");
         }
     };
 
-    */
+
     private AppDatabase appDatabase;
     private static DatabaseClient dbClient=null;
 

@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
+import com.example.senfit.fitnessPortfolio.FitnessPortfolioFragment;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
@@ -55,12 +56,17 @@ public class SenFitActivity extends AppCompatActivity {
                         this.replaceFragment(HomeFragment.newInstance(),R.string.app_name);
                         break;
 
+                    case R.id.fitness_port_id:
+                        this.replaceFragment(FitnessPortfolioFragment.newInstance(this.memberId),
+                                R.string.fitness_portfolio);
+                        break;
                     case R.id.log_out:
                         LoginHelper.setMemberId(this, 0);
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                         break;
+
 
                     default:
                         Toast.makeText(SenFitActivity.this,"Button pressed",Toast.LENGTH_LONG).show();

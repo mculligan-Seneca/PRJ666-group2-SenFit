@@ -46,11 +46,24 @@
     <string name="fitness_classes">Fitness Classes</string>
     <string name="logout">Logout</string>
     <string name="member_name">Member Name</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="health_concerns">Health concerns</string>
+    <string name="see_results">See Results</string>
+    <string name="enter_weight_lbs">Enter Weight(lbs)</string>
+    <string name="enter_height_cm">Enter Height(cm)</string>
+    <string name="enter_health_concerns">Enter health concerns</string>
+    <string name="optional">optional...</string>
+    <string name="start_exercises">Start Exercises</string>
+    <string name="height_errMssg">Height attribute cannot be empty and must be a number greater than 0</string>
+    <string name="weight_errMssg">Weight attribute cannot be empty and must be a number greater than 0</string>
+
     <string-array name="covid_questions">
         <item>I do not have a cough</item>
         <item>I have not been experencing headaches</item>
         <item>I have not been exposed</item>
 
     </string-array>
+
 
 </resources>

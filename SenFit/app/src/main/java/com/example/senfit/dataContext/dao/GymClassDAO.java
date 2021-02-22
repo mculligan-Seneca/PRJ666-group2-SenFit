@@ -24,5 +24,5 @@ public interface GymClassDAO {
     public List<GymClass> getGymClasses();
 
     @Query("UPDATE gymClass SET enrolled=:enrolled where gymClassId=:id")
-    void updateEnrollStatus(int id, boolean enrolled);
+    public void updateEnrollStatus(int id, boolean enrolled);
 }

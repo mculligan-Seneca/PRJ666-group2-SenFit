@@ -20,14 +20,13 @@ public class FitnessPortfolio {
     @PrimaryKey(autoGenerate=true)
     private int fitnessPortfolioId;
 
-    @ColumnInfo(name="session_duration")
-    private int sessDuration;//the duration of a session in minutes
+
 
     @ColumnInfo(name="height")
-    private float height;//height in ft
+    private int height;//height in cm
 
     @ColumnInfo(name="weight")
-    private float weight;//weight in lbs
+    private int weight;//weight in lbs
     @ColumnInfo(name="date_created")
     private Date dateCreated;
 
@@ -37,6 +36,15 @@ public class FitnessPortfolio {
     @ColumnInfo(name="member_id")
     private int memberId;
 
+    public FitnessPortfolio(){
+        this.dateCreated= new Date(System.currentTimeMillis());
+        this.height=0;
+        this.weight=0;
+        this.healthConcerns="";
+        this.memberId=0;
+        this.fitnessPortfolioId=0;
+    }
+
     public int getFitnessPortfolioId() {
         return fitnessPortfolioId;
     }
@@ -45,13 +53,7 @@ public class FitnessPortfolio {
         this.fitnessPortfolioId = fitnessPortfolioId;
     }
 
-    public int getSessDuration() {
-        return sessDuration;
-    }
 
-    public void setSessDuration(int sessDuration) {
-        this.sessDuration = sessDuration;
-    }
 
 
 
@@ -79,19 +81,19 @@ public class FitnessPortfolio {
         this.dateCreated = dateCreated;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public float getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 }

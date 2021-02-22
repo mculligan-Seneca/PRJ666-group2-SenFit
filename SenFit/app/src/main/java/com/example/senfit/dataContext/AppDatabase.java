@@ -19,6 +19,7 @@ import androidx.room.TypeConverters;
 import com.example.senfit.dataContext.dao.CovidLogDAO;
 import com.example.senfit.dataContext.dao.FitnessClassDAO;
 import com.example.senfit.dataContext.dao.FitnessPortfolioDAO;
+import com.example.senfit.dataContext.dao.FitnessResultDAO;
 import com.example.senfit.dataContext.dao.GymClassDAO;
 import com.example.senfit.dataContext.dao.MemberDAO;
 import com.example.senfit.dataContext.dao.OnlineClassDAO;
@@ -63,6 +64,9 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CovidLogDAO getCovidLogDAO();
 
     public abstract FitnessPortfolioDAO getFitnessPortfolioDAO();
+
+
+    public abstract FitnessResultDAO getFitnessResultDao();
 
     //TODO: Add any new DAO's to appdatabase
 }

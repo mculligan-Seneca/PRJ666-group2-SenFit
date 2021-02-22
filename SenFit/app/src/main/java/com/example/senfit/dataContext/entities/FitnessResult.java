@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey;
 
 
 
-@Entity(tableName = "fitness_exercise",primaryKeys = {"exerciseId","fitnessPortfolioId"},
+@Entity(tableName = "fitnessResults",primaryKeys = {"exerciseId","fitnessPortfolioId"},
         foreignKeys = {@ForeignKey(entity = FitnessPortfolio.class,
         parentColumns = "fitnessPortfolioId",
         childColumns = "fitnessPortfolioId"),

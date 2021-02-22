@@ -113,7 +113,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Observing live data and updating adapter data
-        model.getInpersonClasses().observe(this, inpersonClassData -> {
+        model.getInpersonClasses().observe(getViewLifecycleOwner(), inpersonClassData -> {
             mAdapter.updateDataSet(inpersonClassData);
         });
 

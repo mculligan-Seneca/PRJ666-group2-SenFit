@@ -1,0 +1,23 @@
+/*
+PRJ666 Sen-Fit
+init date: January 24th 2021
+Author Mitchell Culligan
+Version 1.0
+FitnessResultDAO interface
+This interface is the data acess object for the fitness result entity.
+ */
+package com.example.senfit.dataContext.dao;
+
+import androidx.room.Dao;
+import androidx.room.Query;
+
+import com.example.senfit.dataContext.entities.FitnessResult;
+
+import java.util.List;
+
+@Dao
+public interface FitnessResultDAO {
+
+    @Query("select * from fitnessResults where fitnessPortfolioId=:portfolioId")
+    public List<FitnessResult> getResultsFromPortfolio(int portfolioId);
+}

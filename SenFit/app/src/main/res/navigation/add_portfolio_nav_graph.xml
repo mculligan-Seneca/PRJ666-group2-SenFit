@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_portfolio_nav_graph"
+    app:startDestination="">
+
+    <fragment
+        android:id="@+id/measurement_fragment"
+        android:name="com.example.senfit.fitnessPortfolio.FitnessMeasureFragment"
+        android:label="Measurement">
+        <action
+            android:id="@+id/action_start_exercises"
+            app:destination="@+id/exercise_fragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/exercise_fragment"
+        android:label="exercise"/>
+</navigation>
