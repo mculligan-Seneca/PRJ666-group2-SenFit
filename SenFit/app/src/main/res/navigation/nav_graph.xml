@@ -7,6 +7,7 @@
         android:id="@+id/home_fragment"
         android:name="com.example.senfit.ui.inperson.HomeFragment"
         android:label="Home"
+
         android:layout="@layout/fragment_home">
 
     </fragment>
@@ -15,5 +16,13 @@
         android:name="com.example.senfit.fitnessPortfolio.FitnessPortfolioFragment"
         android:label="FitnessPortfolio"
         android:layout="@layout/fragment_fitness_portfolio"/>
+
+        android:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/inPerson_fragment"
+        android:name = "com.example.senfit.ui.inperson.InpersonFragment"
+        android:label="InPersonClass"
+        android:layout="@layout/fragment_inperson"/>
+
 
 </navigation>

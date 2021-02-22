@@ -1,10 +1,8 @@
-/*
-* author: Portia siddiqua(107741175)
-*
-* */
+
+/*Author : Portia Siddiqua 107741175*/
 
 
-package com.example.senfit.ui.inperson;
+package com.example.senfit.ui.online;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,22 +12,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.senfit.R;
+import com.example.senfit.ui.inperson.InpersonAdapter;
+import com.example.senfit.ui.inperson.InpersonClassData;
 
 import java.util.List;
 
-public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHolder> {
-    private static final String TAG = "CustomAdapter";
+public class OnlineClassAdapter extends RecyclerView.Adapter<OnlineClassAdapter.ViewHolder>{
 
     private List<InpersonClassData> mDataSet;
 
-    private SelectClassListener listener;
+    private InpersonAdapter.SelectClassListener listener;
 
-    public interface SelectClassListener {
-        public void selectClassItem(int position, int inPersonClassId);
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView mClassImageView;
@@ -44,6 +41,8 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(new View.OnClickListener() {
+                private String TAG = "OnlineClass";
+
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
@@ -94,10 +93,11 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
     }
 
 
-    public InpersonAdapter(List<InpersonClassData> dataSet, SelectClassListener listener) {
+    public OnlineClassAdapter(List<InpersonClassData> dataSet, InpersonAdapter.SelectClassListener listener) {
         this.listener=listener;
         mDataSet = dataSet;
     }
+
 
     public void updateDataSet(List<InpersonClassData> dataSet) {
         mDataSet.clear();
@@ -105,20 +105,18 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view.
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.inperson_row_item, viewGroup, false);
+    public OnlineClassAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.online_row_item, parent, false);
 
         return new ViewHolder(v);
+
     }
-//setting data on textview for each row and showing
+
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "Element " + position + " set.");
-        // Get element from your dataset at this position and replace the contents of the view
-        // with that element
+    public void onBindViewHolder(@NonNull OnlineClassAdapter.ViewHolder viewHolder, int position) {
         viewHolder.getClassNameTextView().setText(mDataSet.get(position).getClasName());
         viewHolder.getClassDateTextView().setText(mDataSet.get(position).getDate());
         viewHolder.getClassTimeTextView().setText(mDataSet.get(position).getTime());
@@ -138,11 +136,11 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
             if (listener!=null)//checks listener is not null
                 listener.selectClassItem(position, gymClass.getGymClassId());//notifies the main ui of selected class
         });
+
     }
 
     @Override
     public int getItemCount() {
         return mDataSet.size();
     }
-
 }

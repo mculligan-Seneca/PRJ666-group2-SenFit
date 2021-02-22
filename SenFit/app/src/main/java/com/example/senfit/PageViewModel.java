@@ -4,7 +4,7 @@
  * */
 
 
-package com.example.senfit.ui.inperson;
+package com.example.senfit;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

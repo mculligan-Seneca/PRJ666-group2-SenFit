@@ -26,10 +26,12 @@ import android.widget.Toast;
 
 import com.example.senfit.dataContext.entities.CovidLog;
 import com.example.senfit.R;
+import com.example.senfit.login.LoginActivity;
+import com.example.senfit.login.LoginHelper;
 
 
 public class CovidSurveyActivity extends AppCompatActivity {
-    public static final String MEMBER_ID_TAG="member_id_tag"; //tag to retrieve member id from intent
+    //public static final String MEMBER_ID_TAG="member_id_tag"; //tag to retrieve member id from intent
     public static final String CANCELED_RESULT ="error_result";//intent tag in the case the result is cancelled
 
     private static final String DIALOG_TITLE="Covid Positive message";
@@ -49,7 +51,8 @@ public class CovidSurveyActivity extends AppCompatActivity {
         this.logViewModel=null;
         Intent intent = getIntent();
 
-        int memberId = intent.getIntExtra(MEMBER_ID_TAG,-1);//retrieves member id
+        //int memberId = intent.getIntExtra(MEMBER_ID_TAG,-1);//retrieves member id
+        int memberId = LoginHelper.getMemberId(this); // Retrieve member id from saved location
 
         if(memberId!=-1){
             this.recyclerView = findViewById(R.id.covid_questions);

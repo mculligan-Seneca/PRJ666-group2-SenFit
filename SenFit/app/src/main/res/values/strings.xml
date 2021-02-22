@@ -43,6 +43,9 @@
     <string name="classes">Classes</string>
     <string name="nav_drawer_open">Open Navigation Drawer</string>
     <string name="nav_drawer_close">Close Navigation Drawer</string>
+    <string name="fitness_classes">Fitness Classes</string>
+    <string name="logout">Logout</string>
+    <string name="member_name">Member Name</string>
     <string-array name="covid_questions">
         <item>I do not have a cough</item>
         <item>I have not been experencing headaches</item>

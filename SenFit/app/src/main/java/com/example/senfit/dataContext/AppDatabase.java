@@ -21,6 +21,7 @@ import com.example.senfit.dataContext.dao.FitnessClassDAO;
 import com.example.senfit.dataContext.dao.FitnessPortfolioDAO;
 import com.example.senfit.dataContext.dao.GymClassDAO;
 import com.example.senfit.dataContext.dao.MemberDAO;
+import com.example.senfit.dataContext.dao.OnlineClassDAO;
 import com.example.senfit.dataContext.dao.TrainerDAO;
 import com.example.senfit.dataContext.entities.CovidLog;
 import com.example.senfit.dataContext.entities.Exercise;
@@ -38,8 +39,10 @@ import com.example.senfit.dataContext.entities.TrainingSession;
 
 @Database(entities={Member.class, Trainer.class, CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class, GymClass.class, GymLocation.class,
-        OnlineClass.class, TrainingExercise.class, TrainingPlan.class, TrainingSession.class, FitnessResult.class},
-        version=4, exportSchema=false)//See what export schema is used for
+        OnlineClass.class, TrainingExercise.class, TrainingPlan.class, TrainingSession.class,FitnessResult.class}
+        ,version=7,
+exportSchema=false)//See what export schema is used for
+
 @TypeConverters({Converter.class})
 //TODO: Add Entity classes to database annotation
 public abstract class AppDatabase extends RoomDatabase {
@@ -49,7 +52,13 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract GymClassDAO getGymClassDao();
 
+
     public abstract FitnessClassDAO getFitnessClassDao();
+
+    public abstract OnlineClassDAO getOnlineClassDao();
+
+
+
 
     public abstract CovidLogDAO getCovidLogDAO();
 

@@ -3,7 +3,7 @@
  *
  * */
 
-package com.example.senfit.ui.inperson;
+package com.example.senfit;
 
 import android.content.Context;
 
@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.senfit.R;
+import com.example.senfit.ui.inperson.InpersonFragment;
+import com.example.senfit.ui.online.OnlineClassFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -22,7 +24,7 @@ import com.example.senfit.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_inperson, R.string.tab_online, R.string.tab_home};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_home, R.string.tab_inperson, R.string.tab_online};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -32,9 +34,19 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return InpersonFragment.newInstance(position + 1);
+        switch (position) {
+            case 0:
+            return OnlineClassFragment.newInstance();
+
+            case 1:
+                return InpersonFragment.newInstance(position + 1);
+
+            case 2:
+                return OnlineClassFragment.newInstance();
+
+            default:
+                return InpersonFragment.newInstance(position + 1);
+        }
     }
 
     @Nullable

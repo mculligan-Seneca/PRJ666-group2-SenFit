@@ -1,5 +1,3 @@
-/*author: Portia siddiqua(107741175)*/
-
 package com.example.senfit.dataContext.dao;
 
 import androidx.lifecycle.LiveData;
@@ -10,19 +8,20 @@ import androidx.room.Transaction;
 
 import com.example.senfit.dataContext.entities.InPersonClass;
 import com.example.senfit.dataContext.entities.GymClass;
+import com.example.senfit.dataContext.entities.OnlineClass;
 
 import java.util.List;
 
 @Dao
-public interface GymClassDAO {
+public interface OnlineClassDAO {
 
     @Insert
-    void insertGymClass(GymClass gymClass);
+    void insertOnlineClass(OnlineClass onlineClass);
 
     @Transaction
-    @Query("Select * from gymClass")
-    public List<GymClass> getGymClasses();
+    @Query("Select * from onlineClasses")
+    public List<OnlineClass> getOnlineClasses();
 
-    @Query("UPDATE gymClass SET enrolled=:enrolled where gymClassId=:id")
+    @Query("UPDATE onlineClasses SET enrolled=:enrolled where onlineClassId=:id")
     void updateEnrollStatus(int id, boolean enrolled);
 }

@@ -57,7 +57,7 @@ public class FitnessPortfolioFragment extends Fragment {
 
         }
         else{
-            this.memberId= LoginHelper.MEMBER_ID;//fix this
+            this.memberId= 0;//always set arguements
         }
     }
 

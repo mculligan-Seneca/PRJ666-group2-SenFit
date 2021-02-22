@@ -7,12 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.inperson.SenFitActivity"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    >
-    <!--
-    <Toolbar
+    tools:openDrawer="start">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.SenFit.AppBarOverlay">
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/title_toolBar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:minHeight="?actionBarSize"
@@ -20,15 +28,20 @@
         android:title="@string/app_name"
         android:elevation="5dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />-->
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
-    <fragment
-        android:id="@+id/fragment_container_view_tag"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+</com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/frame_layout_senfit"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"/>
+
+        />
+</LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
