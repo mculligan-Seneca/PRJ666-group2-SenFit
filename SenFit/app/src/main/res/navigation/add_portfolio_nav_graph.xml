@@ -6,12 +6,15 @@
 
     <fragment
         android:id="@+id/measurement_fragment"
-        android:name="com.example.senfit.fitnessPortfolio.FitnessMeasureFragment"
+        android:name="com.example.senfit.fitnessPortfolio.AddPortfolioFragment"
         android:label="Measurement">
         <action
             android:id="@+id/action_start_exercises"
-            app:destination="@+id/exercise_fragment"/>
+            app:destination="@+id/start_exercises_fragment"/>
     </fragment>
+    <fragment
+        android:id="@+id/start_exercises_fragment"
+        android:label="Start Exercises"/>
     <fragment
         android:id="@+id/exercise_fragment"
         android:label="exercise"/>

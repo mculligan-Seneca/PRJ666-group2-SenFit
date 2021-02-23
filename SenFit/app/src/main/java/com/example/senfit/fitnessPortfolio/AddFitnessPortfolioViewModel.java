@@ -26,6 +26,7 @@ public class AddFitnessPortfolioViewModel extends ViewModel {
 
     private LiveData<List<Exercise>> exerciseList;
     private FitnessPortfolio portfolio;
+    private MutableLiveData<Long>rowNum;
     public final ObservableArrayList<Integer> resultList;
     public AddFitnessPortfolioViewModel(){
 
