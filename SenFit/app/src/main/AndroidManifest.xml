@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SenFit">
-        <activity android:name=".fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity"></activity>
+        <activity android:name=".fitnessResult.AddFitnessResultsActivity"></activity>
+        <activity android:name=".fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity" />
         <activity
             android:name=".covidLog.CovidSurveyActivity"
             android:label="@string/title_activity_covid_survey" />

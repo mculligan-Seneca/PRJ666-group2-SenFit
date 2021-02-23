@@ -12,10 +12,10 @@ import com.example.senfit.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddExerciseResultFragment#newInstance} factory method to
+ * Use the {@link AddFitnessResultFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddExerciseResultFragment extends Fragment {
+public class AddFitnessResultFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class AddExerciseResultFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AddExerciseResultFragment() {
+    public AddFitnessResultFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class AddExerciseResultFragment extends Fragment {
      * @return A new instance of fragment ExerciseResultFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddExerciseResultFragment newInstance(String param1, String param2) {
-        AddExerciseResultFragment fragment = new AddExerciseResultFragment();
+    public static AddFitnessResultFragment newInstance(String param1, String param2) {
+        AddFitnessResultFragment fragment = new AddFitnessResultFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class AddExerciseResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercise_result, container, false);
+        return inflater.inflate(R.layout.fragment_add_fitness_result, container, false);
     }
 }

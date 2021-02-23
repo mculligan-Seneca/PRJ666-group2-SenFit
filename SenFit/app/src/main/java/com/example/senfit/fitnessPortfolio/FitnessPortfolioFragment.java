@@ -93,6 +93,7 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
         });
         this.actionButton.setOnClickListener(view->{
             Intent intent = new Intent(getContext(), AddFitnessPortfolioActivity.class);
+            intent.putExtra(AddFitnessPortfolioActivity.MEMBER_TAG,this.memberId);
             startActivity(intent);
         });
         return v;

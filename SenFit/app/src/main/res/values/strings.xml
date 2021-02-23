@@ -60,6 +60,7 @@
     <string name="start_exercise_message">We ask you complete the following exercises.
         Press the start Button when ready</string>
     <string name="start">Start</string>
+    <string name="enter_heart_rate_mssg">Perform the exercise then enter your heart rate in BPM</string>
 
     <string-array name="covid_questions">
         <item>I do not have a cough</item>

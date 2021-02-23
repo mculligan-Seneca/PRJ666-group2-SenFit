@@ -46,6 +46,7 @@ public class ExerciseStartFragment extends Fragment {
 
     public void startExercise(View v){
         NavController navController= Navigation.findNavController(v);
+        navController.navigate(R.id.action_exercise_start_to_fitness_result);
        // navController.navigate
         //TODO:Navigate to next fragment LOOK AT SAFE ARGS
     }

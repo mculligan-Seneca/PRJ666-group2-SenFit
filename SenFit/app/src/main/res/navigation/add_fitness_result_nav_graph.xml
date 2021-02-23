@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_exercise_result_nav_graph"
+    app:startDestination="@id/start_exercises_fragment">
+
+    <fragment
+        android:id="@+id/start_exercises_fragment"
+        android:name="com.example.senfit.fitnessResult.ExerciseStartFragment"
+        android:label="Start Exercises">
+       <action
+           android:id="@+id/action_exercise_start_to_fitness_result"
+           android:destination="@id/add_fitness_result"/>
+    </fragment>
+    <fragment
+        android:id="@+id/add_fitness_result"
+        android:name="com.example.senfit.fitnessResult.AddFitnessResultFragment"
+        android:label="Fitness Test"/>
+
+</navigation>
