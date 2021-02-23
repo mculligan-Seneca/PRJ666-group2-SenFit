@@ -24,6 +24,12 @@ public class Exercise {
     @ColumnInfo(name="exercise_description")
     private String exerciseDescription;
 
+    public Exercise(){
+        this.exerciseName="";
+        this.exerciseName="";
+        this.exerciseId=-1;
+    }
+
     public int getExerciseId() {
         return exerciseId;
     }

@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 public class PortfolioViewModelFactory implements ViewModelProvider.Factory {
-   private static final String FACTORY_TAG="PORTFOLIO_FACTORY";
+   private static final String PORTFOLIO_FACTORY_TAG="PORTFOLIO_FACTORY";
 
     private int memberId;
 
@@ -30,7 +30,7 @@ public class PortfolioViewModelFactory implements ViewModelProvider.Factory {
        try {
            return modelClass.getConstructor(int.class).newInstance(memberId);
        }catch(ReflectiveOperationException rfe){
-           Log.e(FACTORY_TAG, rfe.getMessage());
+           Log.e(PORTFOLIO_FACTORY_TAG, rfe.getMessage());
            throw new RuntimeException("Unable to create view model of "+modelClass);
        }
     }

@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.senfit.R;
+import com.example.senfit.fitnessResult.AddFitnessResultsActivity;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
@@ -53,7 +54,9 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
         this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted 
             if(row!=null){
                 portfolioId=row;
-
+                Intent args = new Intent(this, AddFitnessResultsActivity.class);
+                args.putExtra(AddFitnessResultsActivity.ADD_RESULT_TAG,portfolioId);
+                startActivity(args);
                 finish();
                 //TODO:Start exercise result activity
             }

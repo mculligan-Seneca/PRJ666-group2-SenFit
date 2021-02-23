@@ -1,59 +1,56 @@
+/*
+PRJ666 Sen-Fit
+init date: Feb 23rd 2021
+Author Mitchell Culligan
+Version 1.0
+AddFitnessResultFragment
+This fragment class provides user with exercise to perform and then saves their heart beats in a viewmodel
+ */
 package com.example.senfit.fitnessResult;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.senfit.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddFitnessResultFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AddFitnessResultFragment extends Fragment {
 
+    private static final String HEART_BEAT_TAG="heart_beats";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    private EditText heartBeatText;
+    private TextView exerciseText;
+    private ImageButton nextButton;
+    private AddFitnessResultViewModel fitnessResultViewModel;
+    private int heartBeatPM;//for storing text as integer
 
     public AddFitnessResultFragment() {
         // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ExerciseResultFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddFitnessResultFragment newInstance(String param1, String param2) {
-        AddFitnessResultFragment fragment = new AddFitnessResultFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        if (savedInstanceState== null) {
+           this.heartBeatPM=savedInstanceState.getInt(HEART_BEAT_TAG,-1);
+        }else{
+            this.heartBeatPM=0;
         }
     }
 
@@ -61,6 +58,28 @@ public class AddFitnessResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_fitness_result, container, false);
+        View v = inflater.inflate(R.layout.fragment_add_fitness_result, container, false);
+        this.exerciseText = v.findViewById(R.id.fitness_exerciseId);
+        this.heartBeatText = v.findViewById(R.id.heart_beatspm);
+        this.nextButton = v.findViewById(R.id.next_button);
+
+        return v;
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.fitnessResultViewModel = new ViewModelProvider(getActivity()).get(AddFitnessResultViewModel.class);
+        this.fitnessResultViewModel.getExerciseLiveData().observe(getViewLifecycleOwner(),exercise->{
+           exerciseText.setText(String.format("Perform %d %s",0,exercise.getExerciseName()));
+        });
+        
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(HEART_BEAT_TAG,this.heartBeatPM);
     }
 }
