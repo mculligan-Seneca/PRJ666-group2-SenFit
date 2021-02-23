@@ -28,7 +28,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
 
 
     public interface OnResultClickListener{
-        public void resultsSelected(FitnessPortfolio portfolio);
+         void resultsSelected(FitnessPortfolio portfolio);
     }
 
     private OnResultClickListener listener;//callback interface
@@ -56,7 +56,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.portfolioList.size();
     }
 
    static  class PortfolioHolder extends RecyclerView.ViewHolder {
@@ -66,7 +66,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
        public PortfolioHolder(@NonNull PortfolioItemBinding itemBinding) {
 
            super(itemBinding.getRoot());
-           this.binding=binding;
+           this.binding=itemBinding;
        }
        public void bind(FitnessPortfolio portfolio,OnResultClickListener listener){
            this.binding.setPortfolio(portfolio);

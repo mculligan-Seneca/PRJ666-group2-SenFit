@@ -6,7 +6,7 @@ Version 1.0
 ExerciseStartFragment
 This fragment repersents the start page before the user starts performing exercises
  */
-package com.example.senfit.fitnessPortfolio;
+package com.example.senfit.fitnessResult;
 
 import android.os.Bundle;
 

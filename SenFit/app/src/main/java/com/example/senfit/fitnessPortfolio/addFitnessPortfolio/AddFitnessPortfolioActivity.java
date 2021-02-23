@@ -6,7 +6,7 @@ Version 1.0
 Add fitness portfolio activity
 This activity allows the user to add a fitness portfolio to their account
  */
-package com.example.senfit.fitnessPortfolio;
+package com.example.senfit.fitnessPortfolio.addFitnessPortfolio;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.senfit.R;
+import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
 public class AddFitnessPortfolioActivity extends AppCompatActivity implements View.OnClickListener{
@@ -25,7 +26,8 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
     private AddFitnessPortfolioViewModel portfolioViewModel;
     private EditText heightIn,weigthIn, healthConcerns;
     private Button startBtn;
-
+    private int memberId;
+    private long portfolioId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,16 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
         this.startBtn=findViewById(R.id.start_buttonId);
         this.healthConcerns=findViewById(R.id.health_concerns_input);
         this.startBtn.setOnClickListener(this);
+        this.memberId= LoginHelper.getMemberId(this);
+        this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted 
+            if(row!=null){
+                portfolioId=row;
 
+                finish();
+                //TODO:Start exercise result activity
+            }
+
+        });
 
     }
 
@@ -51,6 +62,8 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
                 this.portfolioViewModel.getPortfolio().setHeight(Integer.parseInt(heightStr));
                 this.portfolioViewModel.getPortfolio().setWeight(Integer.parseInt(weightStr));
                 this.portfolioViewModel.getPortfolio().setHealthConcerns(this.healthConcerns.getText().toString());
+                this.portfolioViewModel.getPortfolio().setMemberId(this.memberId);
+                this.portfolioViewModel.insertPortfolio();//insert portfolio into database
 
 
             }

@@ -6,7 +6,7 @@ Version 1.0
 AddFitnessPortfolioViewModel
 This viewModel class holds the data for the add fitness portfolio use case.
  */
-package com.example.senfit.fitnessPortfolio;
+package com.example.senfit.fitnessPortfolio.addFitnessPortfolio;
 
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
@@ -15,6 +15,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.Exercise;
 import com.example.senfit.dataContext.entities.FitnessPortfolio;
 
@@ -24,14 +25,14 @@ public class AddFitnessPortfolioViewModel extends ViewModel {
 
     private static final int EXERCISE_NUM=5;
 
-    private LiveData<List<Exercise>> exerciseList;
+
     private FitnessPortfolio portfolio;
-    private MutableLiveData<Long>rowNum;
-    public final ObservableArrayList<Integer> resultList;
+    private MutableLiveData<Long> rowNumData;
+
     public AddFitnessPortfolioViewModel(){
 
         this.portfolio= new FitnessPortfolio();
-        this.resultList= new ObservableArrayList<>();
+        this.rowNumData= new MutableLiveData<>(null);
     }
 
   public FitnessPortfolio getPortfolio(){
@@ -39,4 +40,17 @@ public class AddFitnessPortfolioViewModel extends ViewModel {
   }
 
 
+  public void insertPortfolio(){
+      DatabaseClient.dbExecutors.execute(()->{
+        Long rowNum = DatabaseClient.getInstance()
+                .getAppDatabase()
+                .getFitnessPortfolioDAO()
+                .insertPortfolio(portfolio);
+        rowNumData.postValue(rowNum);
+      });
+  }
+
+  public LiveData<Long> getRowNumData(){
+        return this.rowNumData;
+  }
 }

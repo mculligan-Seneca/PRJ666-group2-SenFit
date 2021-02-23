@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/add_portfolio_nav_graph"
-    app:startDestination="">
+    app:startDestination="@id/measurement_fragment">
 
     <fragment
         android:id="@+id/measurement_fragment"
-        android:name="com.example.senfit.fitnessPortfolio.AddPortfolioFragment"
+
         android:label="Measurement">
         <action
             android:id="@+id/action_start_exercises"

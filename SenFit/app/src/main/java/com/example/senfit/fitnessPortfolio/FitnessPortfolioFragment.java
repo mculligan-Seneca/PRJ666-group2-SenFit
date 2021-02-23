@@ -8,6 +8,7 @@ This fragment class repersents the view of the fitness portfolio.
  */
 package com.example.senfit.fitnessPortfolio;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,8 @@ import android.view.ViewGroup;
 
 import com.example.senfit.R;
 import com.example.senfit.dataContext.entities.FitnessPortfolio;
+import com.example.senfit.fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
     private RecyclerView recyclerView;
     private List<FitnessPortfolio> portfolioList;
     private PortfolioAdapter adapter;
+    private FloatingActionButton actionButton;
     public FitnessPortfolioFragment() {
         // Required empty public constructor
     }
@@ -78,6 +82,7 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
         this.portfolioViewModel = new ViewModelProvider(getActivity(),new PortfolioViewModelFactory(memberId))
                 .get(FitnessPortfolioViewModel.class);
         this.portfolioList = new ArrayList<>(0);
+        this.actionButton = v.findViewById(R.id.floating_add_button);
         this.recyclerView = v.findViewById(R.id.portfolio_listId);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         this.adapter= new PortfolioAdapter(getContext(),this.portfolioList,this);
@@ -85,6 +90,10 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
         //update list when data set has changed
         this.portfolioViewModel.getPortfolioData().observe(getViewLifecycleOwner(),(data)->{
                 updatePortfolioList(data);
+        });
+        this.actionButton.setOnClickListener(view->{
+            Intent intent = new Intent(getContext(), AddFitnessPortfolioActivity.class);
+            startActivity(intent);
         });
         return v;
     }

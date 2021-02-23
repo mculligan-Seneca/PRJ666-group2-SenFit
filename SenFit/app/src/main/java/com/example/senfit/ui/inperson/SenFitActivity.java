@@ -92,9 +92,9 @@ public class SenFitActivity extends AppCompatActivity {
 
 
     public void replaceFragment( Fragment fragment,int fragmentTitle){
-        fm.beginTransaction().replace(R.id.frame_layout_senfit,HomeFragment.newInstance())
+        fm.beginTransaction().replace(R.id.frame_layout_senfit,fragment)
                 .commit();
-        toolbar.setTitle(R.string.app_name);
+        toolbar.setTitle(fragmentTitle);
         this.drawerLayout.closeDrawer(GravityCompat.START);
     }
 
