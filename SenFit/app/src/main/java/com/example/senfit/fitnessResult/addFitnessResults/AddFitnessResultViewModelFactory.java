@@ -1,4 +1,13 @@
-package com.example.senfit.fitnessResult;
+/*
+PRJ666 Sen-Fit
+init date: Feb 23rd 2021
+Author Mitchell Culligan
+Version 1.0
+AddFitnessResultViewModelFactory
+This viewmodel factory class is tasked with the job of passing the portfolio id to the constructor of
+AddFitnessResultViewModel
+ */
+package com.example.senfit.fitnessResult.addFitnessResults;
 
 import android.util.Log;
 

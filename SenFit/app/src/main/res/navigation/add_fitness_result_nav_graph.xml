@@ -14,7 +14,18 @@
     </fragment>
     <fragment
         android:id="@+id/add_fitness_result"
-        android:name="com.example.senfit.fitnessResult.AddFitnessResultFragment"
-        android:label="Fitness Test"/>
-
+        android:name="com.example.senfit.fitnessResult.addFitnessResults.AddFitnessResultFragment"
+        android:label="Fitness Test">
+        <action
+            android:id="@+id/action_result_to_next_result"
+            android:destination="@id/add_fitness_result"/>
+        <action
+            android:id="@+id/action_result_to_display"
+            android:destination="@id/display_results_fragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/display_results_fragment"
+        android:label="Display Fitness Results"
+    />
 </navigation>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fitnessResult.AddFitnessResultsActivity">
+    tools:context=".fitnessResult.addFitnessResults.AddFitnessResultsActivity">
 
     <fragment
         android:id="@+id/exercise_nav_host"
@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:defaultNavHost="true"
+        app:navGraph="@navigation/add_fitness_result_nav_graph"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

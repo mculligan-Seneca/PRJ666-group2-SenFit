@@ -6,7 +6,7 @@ Version 1.0
 AddFitnessResultsActivity
 This activity is the base controller for the add fitness result use case
  */
-package com.example.senfit.fitnessResult;
+package com.example.senfit.fitnessResult.addFitnessResults;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 
 import com.example.senfit.R;
+
 import android.content.Intent;
 public class AddFitnessResultsActivity extends AppCompatActivity {
 

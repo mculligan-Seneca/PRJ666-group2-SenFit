@@ -6,7 +6,7 @@ Version 1.0
 AddFitnessResultViewModel
 This viewmodel class holds the fitness result data when a user is performing the exercises
  */
-package com.example.senfit.fitnessResult;
+package com.example.senfit.fitnessResult.addFitnessResults;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
@@ -19,6 +19,7 @@ import androidx.paging.PagedList;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.Exercise;
 import com.example.senfit.dataContext.entities.FitnessResult;
+import com.example.senfit.fitnessResult.ExerciseWithReps;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,11 +27,12 @@ import java.util.List;
 public class AddFitnessResultViewModel extends ViewModel {
 
     private static final int EXERCISE_NUM=5;//number of exercises to be performed
+    private static final int REP_NUM=5;
     private int portfolioId;
     private DatabaseClient dbClient;
 
     private MediatorLiveData<List<Exercise>> exerciseList;
-    private MutableLiveData<Exercise> exerciseLiveData;
+    private MutableLiveData<ExerciseWithReps> exerciseLiveData;
     private List<FitnessResult> completedList;
     private MutableLiveData<Integer> index;
     private MutableLiveData<Integer> size;
@@ -60,7 +62,7 @@ public class AddFitnessResultViewModel extends ViewModel {
         this.exerciseLiveData=new MutableLiveData<>();
         this.exerciseList.addSource(this.index,position->{
             if(position<exerciseList.getValue().size()){
-                exerciseLiveData.setValue(exerciseList.getValue().get(position));
+                exerciseLiveData.setValue(new ExerciseWithReps(exerciseList.getValue().get(position),REP_NUM));
             }
         });
 
@@ -69,7 +71,7 @@ public class AddFitnessResultViewModel extends ViewModel {
     }
 
 
-    public LiveData<Exercise> getExerciseLiveData(){
+    public LiveData<ExerciseWithReps> getExerciseLiveData(){
         return this.exerciseLiveData;
     }
 
@@ -77,10 +79,10 @@ public class AddFitnessResultViewModel extends ViewModel {
         return this.index.getValue()<this.size.getValue();
     }
 
-    public void addNext(int heartBeats, int reps){
-        Exercise e = this.exerciseLiveData.getValue();
+    public void addResult(int heartBeats){
+        ExerciseWithReps e = this.exerciseLiveData.getValue();
         if(e!=null){
-            FitnessResult result = new FitnessResult(portfolioId,e.getExerciseId(),reps,heartBeats);
+            FitnessResult result = new FitnessResult(portfolioId,e.exercise.getExerciseId(),e.reps,heartBeats);
             this.completedList.add(result);
             this.index.setValue(this.index.getValue()+1);
         }
@@ -93,5 +95,8 @@ public class AddFitnessResultViewModel extends ViewModel {
                     .getFitnessResultDao()
                     .insertResults(completedList.toArray(results));
         });
+    }
+    public int getPortfolioId(){
+        return this.portfolioId;
     }
 }

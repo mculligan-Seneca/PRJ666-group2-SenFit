@@ -20,8 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.senfit.R;
-import com.example.senfit.fitnessResult.AddFitnessResultsActivity;
-import com.example.senfit.login.LoginHelper;
+import com.example.senfit.fitnessResult.addFitnessResults.AddFitnessResultsActivity;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
 public class AddFitnessPortfolioActivity extends AppCompatActivity implements View.OnClickListener{
@@ -77,7 +76,6 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
                 this.portfolioViewModel.getPortfolio().setHealthConcerns(this.healthConcerns.getText().toString());
                 this.portfolioViewModel.getPortfolio().setMemberId(this.memberId);
                 this.portfolioViewModel.insertPortfolio();//insert portfolio into database
-
 
             }
             else
