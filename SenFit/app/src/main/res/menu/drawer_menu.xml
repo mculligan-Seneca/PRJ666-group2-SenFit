@@ -8,12 +8,9 @@
 
        <item android:id="@+id/home_fragment"
 
-           android:icon="@drawable/ic_fitness_classes_icon"
-           android:title="@string/classes"/>
-        <item android:id="@+id/portfolio_fragment"
-
            android:icon="@drawable/ic_home"
            android:title="@string/tab_home"/>
+        
         <item android:id="@+id/fitness_port_id"
               android:icon="@drawable/ic_fitness_portfolio_icon"
               android:title="@string/fitness_portfolio"/>

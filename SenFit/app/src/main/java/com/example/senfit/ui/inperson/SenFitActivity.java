@@ -23,6 +23,7 @@ import com.example.senfit.fitnessPortfolio.FitnessPortfolioFragment;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.navigator.Navigator;
+import com.example.senfit.ui.online.OnlineClassFragment;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
 
@@ -60,6 +61,12 @@ public class SenFitActivity extends AppCompatActivity implements Navigator {
                     case R.id.fitness_port_id:
                         this.replaceFragment(FitnessPortfolioFragment.newInstance(this.memberId),
                                 R.string.fitness_portfolio);
+                        break;
+                    case R.id.inPerson_fragment:
+                        this.replaceFragment(InpersonFragment.newInstance(0),R.string.tab_inperson);
+                        break;
+                    case R.id.online_fragment:
+                        this.replaceFragment(OnlineClassFragment.newInstance(),R.string.tab_online);
                         break;
                     case R.id.log_out:
                         LoginHelper.setMemberId(this, 0);

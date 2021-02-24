@@ -16,3 +16,7 @@ Complete Covid survey functionality on 2021/2/12.(Mitchell)
 
 Completed menu and navigation functionality 2021/2/20.(Mitchell)
 
+Completed view for fitness portfolios 2021/2/24.(Mitchell)
+
+Completed functionality to add new fitness portfolio 2021/2/24.(Mitchell)
+
