@@ -8,9 +8,11 @@ This fragment class repersents the view of the fitness portfolio.
  */
 package com.example.senfit.fitnessPortfolio;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +25,7 @@ import android.view.ViewGroup;
 import com.example.senfit.R;
 import com.example.senfit.dataContext.entities.FitnessPortfolio;
 import com.example.senfit.fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity;
+import com.example.senfit.navigator.Navigator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -47,10 +50,24 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
     private List<FitnessPortfolio> portfolioList;
     private PortfolioAdapter adapter;
     private FloatingActionButton actionButton;
+    private Navigator activityNavigator;
     public FitnessPortfolioFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof Navigator){
+            this.activityNavigator=(Navigator)context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.activityNavigator=null;
+    }
 
     // TODO: Rename and change types and number of parameters
     public static FitnessPortfolioFragment newInstance(int memberId) {
@@ -94,7 +111,7 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
         this.actionButton.setOnClickListener(view->{
             Intent intent = new Intent(getContext(), AddFitnessPortfolioActivity.class);
             intent.putExtra(AddFitnessPortfolioActivity.MEMBER_TAG,this.memberId);
-            startActivity(intent);
+            activityNavigator.navigateTo(intent);
         });
         return v;
     }

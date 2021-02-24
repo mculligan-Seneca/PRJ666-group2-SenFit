@@ -1,6 +1,6 @@
 /*
 PRJ666 Sen-Fit
-init date:  2021
+init date: Feb 21st 2021
 Author Mitchell Culligan
 Version 1.0
 Fitness Portfolio ViewModel factory

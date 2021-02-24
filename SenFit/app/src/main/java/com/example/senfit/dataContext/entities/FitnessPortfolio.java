@@ -40,7 +40,7 @@ public class FitnessPortfolio {
         this.dateCreated= new Date(System.currentTimeMillis());
         this.height=0;
         this.weight=0;
-        this.healthConcerns="";
+        this.healthConcerns="N/A";
         this.memberId=0;
         this.fitnessPortfolioId=0;
     }

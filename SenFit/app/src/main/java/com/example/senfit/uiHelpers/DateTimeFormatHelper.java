@@ -10,11 +10,12 @@ package com.example.senfit.uiHelpers;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class DateTimeFormatHelper {
-
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM dd, YYYY");
     public static String formatDate(Date date){
-        return date.toString();//TODO:implement this function
+        return DATE_FORMAT.format(date);//TODO:implement this function
     }
 
     public static String formatTime(Timestamp timestamp){

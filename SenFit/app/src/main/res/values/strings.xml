@@ -40,6 +40,7 @@
     <string name="confirm_statement">I Confirm these results</string>
     <string name="covid_survey">Covid Survey</string>
     <string name="fitness_portfolio">Fitness Portfolio</string>
+    <string name="add_fitness_portfolio">Add Fitness Portfolio</string>
     <string name="classes">Classes</string>
     <string name="nav_drawer_open">Open Navigation Drawer</string>
     <string name="nav_drawer_close">Close Navigation Drawer</string>
@@ -62,6 +63,7 @@
         Press the start Button when ready</string>
     <string name="start">Start</string>
     <string name="enter_heart_rate_mssg">Perform the exercise then enter your heart rate in BPM</string>
+    <string name="portfolio_added">Portfolio Added!</string>
 
     <string-array name="covid_questions">
         <item>I do not have a cough</item>

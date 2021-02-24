@@ -22,10 +22,11 @@ import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.fitnessPortfolio.FitnessPortfolioFragment;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.login.LoginHelper;
+import com.example.senfit.navigator.Navigator;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
 
-public class SenFitActivity extends AppCompatActivity {
+public class SenFitActivity extends AppCompatActivity implements Navigator {
 
     private static final int SURVEY_ACTIVITY=2;
     private static final String DEFAULT_FRAG="HOME_FRAGMENT";
@@ -122,6 +123,13 @@ public class SenFitActivity extends AppCompatActivity {
                         .show();
             }
         }
+
+    }
+
+    @Override
+    public void navigateTo(Intent intent) {//starts new activity and finishes previous one
+        startActivity(intent);
+        finish();
 
     }
 }

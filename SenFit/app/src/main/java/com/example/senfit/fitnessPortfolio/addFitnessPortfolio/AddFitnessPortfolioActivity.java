@@ -18,9 +18,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.senfit.R;
 import com.example.senfit.fitnessResult.addFitnessResults.AddFitnessResultsActivity;
+import com.example.senfit.ui.inperson.SenFitActivity;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
 public class AddFitnessPortfolioActivity extends AppCompatActivity implements View.OnClickListener{
@@ -48,9 +50,10 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
         this.weigthIn=findViewById(R.id.weight_input);
         this.startBtn=findViewById(R.id.start_buttonId);
         this.healthConcerns=findViewById(R.id.health_concerns_input);
+        getActionBar().setTitle(R.string.add_fitness_portfolio);
         this.startBtn.setOnClickListener(this);
 
-        this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted 
+       /* this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted
             if(row!=null){
                 portfolioId=row;
                 Intent args = new Intent(this, AddFitnessResultsActivity.class);
@@ -61,21 +64,27 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
             }
 
         });
-
+        */
     }
 
     @Override
     public void onClick(View v) {
-        String heightStr=null, weightStr=null;
+        String heightStr=null, weightStr=null,healthStr;
         heightStr=this.heightIn.getText().toString();
         weightStr=this.weigthIn.getText().toString();
+        healthStr=this.healthConcerns.getText().toString();
         if(heightStr!=null &&!heightStr.isEmpty() && TextUtils.isDigitsOnly(heightStr)){
             if(weightStr!=null &&!weightStr.isEmpty() && TextUtils.isDigitsOnly(weightStr)){
                 this.portfolioViewModel.getPortfolio().setHeight(Integer.parseInt(heightStr));
                 this.portfolioViewModel.getPortfolio().setWeight(Integer.parseInt(weightStr));
-                this.portfolioViewModel.getPortfolio().setHealthConcerns(this.healthConcerns.getText().toString());
+                this.portfolioViewModel.getPortfolio().setHealthConcerns(healthStr.isEmpty()?"N/A":healthStr);
                 this.portfolioViewModel.getPortfolio().setMemberId(this.memberId);
                 this.portfolioViewModel.insertPortfolio();//insert portfolio into database
+                Intent intent = new Intent(this, SenFitActivity.class);//go back to main class for now
+              //  args.putExtra(AddFitnessResultsActivity.ADD_RESULT_TAG,portfolioId);
+                Toast.makeText(this,R.string.portfolio_added,Toast.LENGTH_LONG).show();
+                startActivity(intent);
+                finish();
 
             }
             else

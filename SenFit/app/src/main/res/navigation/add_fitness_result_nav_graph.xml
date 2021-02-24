@@ -10,7 +10,7 @@
         android:label="Start Exercises">
        <action
            android:id="@+id/action_exercise_start_to_fitness_result"
-           android:destination="@id/add_fitness_result"/>
+           app:destination="@id/add_fitness_result"/>
     </fragment>
     <fragment
         android:id="@+id/add_fitness_result"
@@ -18,10 +18,10 @@
         android:label="Fitness Test">
         <action
             android:id="@+id/action_result_to_next_result"
-            android:destination="@id/add_fitness_result"/>
+            app:destination="@id/add_fitness_result"/>
         <action
             android:id="@+id/action_result_to_display"
-            android:destination="@id/display_results_fragment"
+            app:destination="@id/display_results_fragment"
             />
     </fragment>
     <fragment

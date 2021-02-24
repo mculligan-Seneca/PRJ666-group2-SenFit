@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="com.example.senfit.uiHelpers.DateTimeFormatHelper"/>
         <variable
@@ -12,11 +14,17 @@
     <androidx.cardview.widget.CardView
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        cardView:cardElevation="10dp"
+        cardView:cardPreventCornerOverlap="true"
+        cardView:cardCornerRadius="20dp"
+        cardView:cardUseCompatPadding="true"
+
+        >
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingStart="10dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/date_createdID"
@@ -24,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:paddingBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:text="@{DateTimeFormatHelper.formatDate(portfolio.dateCreated)}"
@@ -36,6 +45,7 @@
                 android:layout_below="@id/date_createdID"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
+
                 android:paddingTop="10dp">
             <TextView
                 android:id="@+id/height_title"
@@ -49,6 +59,7 @@
                 android:id="@+id/height"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:text='@{portfolio.height+" cm"}'/>
 
             </LinearLayout>
@@ -73,7 +84,8 @@
                     android:id="@+id/weight"
                     android:text='@{portfolio.weight+" lbs"}'
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
             </LinearLayout>
 
             <TextView
@@ -81,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/weight_layout"
+
                 android:text="@string/health_concerns"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:paddingBottom='10dp'
@@ -90,9 +103,11 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_below="@id/health_concerns_viewId"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:layout_marginBottom="10dp"
                 android:text="@{portfolio.healthConcerns}"
                 />
-
+<!--
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +119,7 @@
                 android:onClick="@{()->listener.resultsSelected(portfolio)}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 />
-
+-->
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
