@@ -10,6 +10,7 @@ package com.example.senfit.fitnessPortfolio.addFitnessPortfolio;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -50,7 +51,7 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
         this.weigthIn=findViewById(R.id.weight_input);
         this.startBtn=findViewById(R.id.start_buttonId);
         this.healthConcerns=findViewById(R.id.health_concerns_input);
-        getActionBar().setTitle(R.string.add_fitness_portfolio);
+
         this.startBtn.setOnClickListener(this);
 
        /* this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted
