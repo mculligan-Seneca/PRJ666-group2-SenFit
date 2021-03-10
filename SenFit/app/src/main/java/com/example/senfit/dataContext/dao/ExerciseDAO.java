@@ -13,4 +13,7 @@ public interface ExerciseDAO {
 
     @Query("select * from exercises")
     public LiveData<List<Exercise>> getExercises();
+
+    @Query("select * from exercises LIMIT :lim")
+    public LiveData<List<Exercise>> getExercisesWithLim(int lim);
 }

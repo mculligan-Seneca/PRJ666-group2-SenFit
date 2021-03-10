@@ -6,15 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".fitnessResult.addFitnessResults.AddFitnessResultsActivity">
 
-    <fragment
-        android:id="@+id/exercise_nav_host"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/exercise_with_RepLayout"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/add_fitness_result_nav_graph"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@id/heart_beatLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />.
+
+    <LinearLayout
+        android:id="@+id/heart_beatLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/next_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_with_RepLayout"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/heart_beats_per_minute"
+            android:padding="15dp"/>
+        <EditText
+            android:id="@+id/heart_beatspm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginStart="5dp"
+            />
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/next_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:src="@drawable/ic_baseline_arrow_forward_24"
+        app:layout_constraintTop_toBottomOf="@id/heart_beatLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

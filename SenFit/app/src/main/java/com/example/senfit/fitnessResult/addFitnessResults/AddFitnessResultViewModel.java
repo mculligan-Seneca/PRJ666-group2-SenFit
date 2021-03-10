@@ -8,6 +8,7 @@ This viewmodel class holds the fitness result data when a user is performing the
  */
 package com.example.senfit.fitnessResult.addFitnessResults;
 
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -27,15 +28,15 @@ import java.util.List;
 public class AddFitnessResultViewModel extends ViewModel {
 
     private static final int EXERCISE_NUM=5;//number of exercises to be performed
-    private static final int REP_NUM=5;
+
     private int portfolioId;
     private DatabaseClient dbClient;
 
-    private MediatorLiveData<List<Exercise>> exerciseList;
-    private MutableLiveData<ExerciseWithReps> exerciseLiveData;
+    private LiveData<List<Exercise>> exerciseList;
+
     private List<FitnessResult> completedList;
-    private MutableLiveData<Integer> index;
-    private MutableLiveData<Integer> size;
+
+    private LiveData<Integer> size;
 
     public AddFitnessResultViewModel(int portfolioId){
 
@@ -44,50 +45,37 @@ public class AddFitnessResultViewModel extends ViewModel {
         this.exerciseList = new MediatorLiveData<>();
         this.completedList= new LinkedList<FitnessResult>();
         this.size= new MutableLiveData<>(0);
-        this.exerciseList.addSource(this.dbClient
+        this.exerciseList= this.dbClient
                 .getAppDatabase()
                 .getExerciseDao()
-                .getExercises(),list->{
-            if(list.size()>EXERCISE_NUM){
-                exerciseList.setValue(list.subList(0,EXERCISE_NUM));
-                size.setValue(EXERCISE_NUM);
-            }
-            else{
-                exerciseList.setValue(list);
-                size.setValue(list.size());
-            }
-            //TODO:remove source
-        });
-        this.index=new MutableLiveData<>(0);
-        this.exerciseLiveData=new MutableLiveData<>();
-        this.exerciseList.addSource(this.index,position->{
-            if(position<exerciseList.getValue().size()){
-                exerciseLiveData.setValue(new ExerciseWithReps(exerciseList.getValue().get(position),REP_NUM));
-            }
-        });
+                .getExercisesWithLim(EXERCISE_NUM);
+        this.size=Transformations.map(this.exerciseList, List::size);//always set size to accurate list size
+
+
+
 
 
 
     }
 
 
-    public LiveData<ExerciseWithReps> getExerciseLiveData(){
-        return this.exerciseLiveData;
-    }
 
+    public LiveData<List<Exercise>> getExerciseList(){
+        return this.exerciseList;
+    }
     public boolean hasNext(){//returns true if the user has more exercises to complete
-        return this.index.getValue()<this.size.getValue();
+        List<Exercise> loaded= this.exerciseList.getValue();
+        return  loaded!=null && this.completedList.size()+1<loaded.size();
     }
 
-    public void addResult(int heartBeats){
-        ExerciseWithReps e = this.exerciseLiveData.getValue();
-        if(e!=null){
-            FitnessResult result = new FitnessResult(portfolioId,e.exercise.getExerciseId(),e.reps,heartBeats);
+    public void addResult(FitnessResult result){
+
             this.completedList.add(result);
-            this.index.setValue(this.index.getValue()+1);
-        }
     }
 
+    public int getIndex(){
+        return this.completedList.size();
+    }
     public void insert(){
         DatabaseClient.dbExecutors.execute(()->{
             FitnessResult[] results = new FitnessResult[1];
