@@ -40,7 +40,7 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
     private ImageButton nextButton;
     private EditText heartBeatText;
     private List<ExerciseWithReps> exerciseList;
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +63,18 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
         this.nextButton.setEnabled(false);//in case the user attempts to submit before data loads
         this.fitnessResultViewModel.getExerciseList().observe(this,list->{
 
-            exerciseList = list.stream()
-                        .map(e->{
-                            ExerciseWithReps er = new ExerciseWithReps(e,REP_NUM);
-                            return er;
-                        })
-                        .collect(Collectors.toList());//maps exercise to exercise with reps
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                exerciseList = list.stream()
+                            .map(e->{
+                                ExerciseWithReps er = new ExerciseWithReps(e,REP_NUM);
+                                return er;
+                            })
+                            .collect(Collectors.toList());//maps exercise to exercise with reps
+            }else{
+                for(Exercise e:list){
+                    exerciseList.add(new ExerciseWithReps(e,REP_NUM));
+                }
+            }
             setExerciseFragment();
 
         });
@@ -79,9 +85,11 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
         Fragment fragment = this.fm.findFragmentById(R.id.exercise_with_RepLayout);
         FragmentTransaction transaction=this.fm.beginTransaction();
         if(fragment==null){
+            //TODO:set fragment to first exercise
            transaction.add(R.id.exercise_with_RepLayout,fragment);//adds exercise with rep fragment
         }
         else {
+            //set fragment to next exercise and replace fragment
             transaction.replace(R.id.exercise_with_RepLayout,fragment);
             }
     }
