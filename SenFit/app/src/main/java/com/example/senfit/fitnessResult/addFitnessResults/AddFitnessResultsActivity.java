@@ -71,6 +71,7 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
                             })
                             .collect(Collectors.toList());//maps exercise to exercise with reps
             }else{
+                exerciseList.clear();
                 for(Exercise e:list){
                     exerciseList.add(new ExerciseWithReps(e,REP_NUM));
                 }
