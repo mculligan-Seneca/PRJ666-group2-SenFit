@@ -46,6 +46,7 @@ public class AddFitnessPortfolioViewModel extends ViewModel {
                 .getAppDatabase()
                 .getFitnessPortfolioDAO()
                 .insertPortfolio(portfolio);
+
         rowNumData.postValue(rowNum);
       });
   }

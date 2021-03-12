@@ -8,6 +8,7 @@ This activity is the base controller for the add fitness result use case
  */
 package com.example.senfit.fitnessResult.addFitnessResults;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -38,6 +40,7 @@ import android.widget.Toast;
 public class AddFitnessResultsActivity extends AppCompatActivity {
 
     public static final String ADD_RESULT_TAG="add_result_tag";
+    private static final String HEART_BEAT_TAG="heart_beatTag";
     private static final int REP_NUM=5;
 
     private AddFitnessResultViewModel fitnessResultViewModel;
@@ -50,7 +53,10 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_fitness_results);
-
+        this.fm = getSupportFragmentManager();
+        this.exerciseList = new ArrayList<>(0);
+        this.heartBeatText = findViewById(R.id.heart_beatspm);
+        this.nextButton = findViewById(R.id.next_button);
         if(savedInstanceState==null) {//if viewmodel already instantiated then retrieve viewmodel else create new
             Intent args = getIntent();
             int portId = args.getIntExtra(ADD_RESULT_TAG, -1);
@@ -59,12 +65,10 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
                     .get(AddFitnessResultViewModel.class);
         }else{
             this.fitnessResultViewModel = new ViewModelProvider(this).get(AddFitnessResultViewModel.class);
+            this.heartBeatText.setText(savedInstanceState.getString(HEART_BEAT_TAG));
         }
 
-        this.fm = getSupportFragmentManager();
-        this.exerciseList = new ArrayList<>(0);
-        this.heartBeatText = findViewById(R.id.heart_beatspm);
-        this.nextButton = findViewById(R.id.next_button);
+
         this.nextButton.setEnabled(false);//in case the user attempts to submit before data loads
         this.nextButton.setOnClickListener(v->{
             String heartstr = heartBeatText.getText().toString();
@@ -127,5 +131,12 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
             fragment = new ExerciseWithRepsFragment(this.exerciseList.get(this.fitnessResultViewModel.getIndex()));
             transaction.replace(R.id.exercise_with_RepLayout,fragment);
             }
+    }
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        outState.putString(HEART_BEAT_TAG,this.heartBeatText.getText().toString());
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 }

@@ -54,7 +54,7 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
 
         this.startBtn.setOnClickListener(this);
 
-       /* this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted
+        this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted
             if(row!=null){
                 portfolioId=row;
                 Intent args = new Intent(this, AddFitnessResultsActivity.class);
@@ -65,7 +65,7 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
             }
 
         });
-        */
+
     }
 
     @Override
@@ -74,19 +74,19 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
         heightStr=this.heightIn.getText().toString();
         weightStr=this.weigthIn.getText().toString();
         healthStr=this.healthConcerns.getText().toString();
-        if(heightStr!=null &&!heightStr.isEmpty() && TextUtils.isDigitsOnly(heightStr)){
-            if(weightStr!=null &&!weightStr.isEmpty() && TextUtils.isDigitsOnly(weightStr)){
+        if(heightStr.trim().length()>0 && TextUtils.isDigitsOnly(heightStr)){
+            if(weightStr.trim().length()>0 && TextUtils.isDigitsOnly(weightStr)){
                 this.portfolioViewModel.getPortfolio().setHeight(Integer.parseInt(heightStr));
                 this.portfolioViewModel.getPortfolio().setWeight(Integer.parseInt(weightStr));
                 this.portfolioViewModel.getPortfolio().setHealthConcerns(healthStr.isEmpty()?"N/A":healthStr);
                 this.portfolioViewModel.getPortfolio().setMemberId(this.memberId);
                 this.portfolioViewModel.insertPortfolio();//insert portfolio into database
-                Intent intent = new Intent(this, SenFitActivity.class);//go back to main class for now
+        /*        Intent intent = new Intent(this, SenFitActivity.class);//go back to main class for now
               //  args.putExtra(AddFitnessResultsActivity.ADD_RESULT_TAG,portfolioId);
                 Toast.makeText(this,R.string.portfolio_added,Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 finish();
-
+         */
             }
             else
             {
