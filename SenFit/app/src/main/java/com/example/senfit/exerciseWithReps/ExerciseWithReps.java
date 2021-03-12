@@ -6,7 +6,7 @@ Version 1.0
 ExerciseWithReps
 This class holds an exercise and the number of reps to be perform with said exercise
  */
-package com.example.senfit.fitnessResult;
+package com.example.senfit.exerciseWithReps;
 
 import com.example.senfit.dataContext.entities.Exercise;
 

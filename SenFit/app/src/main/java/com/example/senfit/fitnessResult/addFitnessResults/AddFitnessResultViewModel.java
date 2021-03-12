@@ -8,19 +8,15 @@ This viewmodel class holds the fitness result data when a user is performing the
  */
 package com.example.senfit.fitnessResult.addFitnessResults;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
-import androidx.paging.LivePagedListBuilder;
-import androidx.paging.PagedList;
 
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.Exercise;
 import com.example.senfit.dataContext.entities.FitnessResult;
-import com.example.senfit.fitnessResult.ExerciseWithReps;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -65,7 +61,7 @@ public class AddFitnessResultViewModel extends ViewModel {
     }
     public boolean hasNext(){//returns true if the user has more exercises to complete
         List<Exercise> loaded= this.exerciseList.getValue();
-        return  loaded!=null && this.completedList.size()+1<loaded.size();
+        return  loaded!=null && this.completedList.size()<loaded.size();
     }
 
     public void addResult(FitnessResult result){

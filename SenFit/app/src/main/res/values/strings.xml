@@ -65,7 +65,7 @@
     <string name="enter_heart_rate_mssg">Perform the exercise then enter your heart rate in BPM</string>
     <string name="portfolio_added">Portfolio Added!</string>
     <string name="heart_beats_per_minute">Heart Beats Per Minute</string>
-
+    <string name="results_insert_msg"> Fitness results added!</string>
     <string-array name="covid_questions">
         <item>I do not have a cough</item>
         <item>I have not been experencing headaches</item>
