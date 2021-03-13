@@ -77,7 +77,7 @@ public class OnlineClassFragment extends Fragment implements InpersonAdapter.Sel
         mViewModel = new ViewModelProvider(this).get(OnlineClassViewModel.class);
 
         mViewModel.getOnlineClasses()
-                .observe(this, new Observer<List<InpersonClassData>>() {
+                .observe(getViewLifecycleOwner(), new Observer<List<InpersonClassData>>() {
             @Override
             public void onChanged(List<InpersonClassData> inpersonClassData) {
                 mAdapter.updateDataSet(inpersonClassData);
