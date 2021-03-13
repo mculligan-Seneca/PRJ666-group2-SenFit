@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DatabaseClient {
-    private static final Migration MIGRATION_7_8 = new Migration(7,8) {
+   /* private static final Migration MIGRATION_7_8 = new Migration(7,8) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
            database.execSQL("Alter table fitnessportfolio"+
@@ -30,7 +30,7 @@ public class DatabaseClient {
                     "modify  weight INTEGER;");
         }
     };
-
+*/
 
     private AppDatabase appDatabase;
     private static DatabaseClient dbClient=null;
@@ -39,9 +39,10 @@ public class DatabaseClient {
     //NOTE: Optionally use livedata and observables to run concurrent actions
     private DatabaseClient(Context context){
             this.appDatabase= Room.databaseBuilder(context, AppDatabase.class,"Sen-FitDB")
-                    //.addMigrations(MIGRATION_3_4)
                     //.fallbackToDestructiveMigration()
                     .build();
+     //      this.appDatabase.clearAllTables();
+
 
     }
 

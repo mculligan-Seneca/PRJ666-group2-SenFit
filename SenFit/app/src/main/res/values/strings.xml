@@ -66,6 +66,7 @@
     <string name="portfolio_added">Portfolio Added!</string>
     <string name="heart_beats_per_minute">Heart Beats Per Minute</string>
     <string name="results_insert_msg"> Fitness results added!</string>
+    <string name="add_fitness_results">Add Fitness Results</string>
     <string-array name="covid_questions">
         <item>I do not have a cough</item>
         <item>I have not been experencing headaches</item>

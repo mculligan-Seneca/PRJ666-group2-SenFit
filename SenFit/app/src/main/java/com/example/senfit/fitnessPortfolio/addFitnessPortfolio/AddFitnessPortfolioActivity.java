@@ -58,7 +58,9 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
             if(row!=null){
                 portfolioId=row;
                 Intent args = new Intent(this, AddFitnessResultsActivity.class);
-                args.putExtra(AddFitnessResultsActivity.ADD_RESULT_TAG,portfolioId);
+                Bundle extras =new Bundle();
+                extras.putLong(AddFitnessResultsActivity.ADD_RESULT_TAG,portfolioId);
+                args.putExtras(extras);
                 startActivity(args);
                 finish();
                 //TODO:Start exercise result activity

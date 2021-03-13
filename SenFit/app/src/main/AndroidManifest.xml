@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SenFit">
-        <activity android:name=".fitnessResult.addFitnessResults.AddFitnessResultsActivity" />
+        <activity android:name=".fitnessResult.addFitnessResults.AddFitnessResultsActivity"
+            android:label="@string/add_fitness_results"/>
         <activity
             android:name=".fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity"
             android:label="@string/add_fitness_portfolio" />

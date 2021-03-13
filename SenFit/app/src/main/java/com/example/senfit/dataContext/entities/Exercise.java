@@ -26,10 +26,15 @@ public class Exercise {
 
     public Exercise(){
         this.exerciseName="";
-        this.exerciseName="";
-        this.exerciseId=-1;
+        this.exerciseDescription="";
+        //this.exerciseId=-1; NEVER ASSIGN AUTO GENERATED KEY
     }
 
+    public Exercise(String name, String desc){
+        this.exerciseName=name;
+        this.exerciseDescription=desc;
+
+    }
     public int getExerciseId() {
         return exerciseId;
     }

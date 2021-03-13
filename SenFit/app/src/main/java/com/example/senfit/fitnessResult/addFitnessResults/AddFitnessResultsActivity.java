@@ -58,8 +58,9 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
         this.heartBeatText = findViewById(R.id.heart_beatspm);
         this.nextButton = findViewById(R.id.next_button);
         if(savedInstanceState==null) {//if viewmodel already instantiated then retrieve viewmodel else create new
-            Intent args = getIntent();
-            int portId = args.getIntExtra(ADD_RESULT_TAG, -1);
+            Bundle args = getIntent().getExtras();
+
+            int portId = (int)args.getLong(ADD_RESULT_TAG);
             this.fitnessResultViewModel = new ViewModelProvider(this,
                     new AddFitnessResultViewModelFactory(portId))
                     .get(AddFitnessResultViewModel.class);
@@ -124,12 +125,12 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
 
             //TODO:set fragment to first exercise
             fragment = new ExerciseWithRepsFragment(this.exerciseList.get(this.fitnessResultViewModel.getIndex()));
-           transaction.add(R.id.exercise_with_RepLayout,fragment);//adds exercise with rep fragment
+           transaction.add(R.id.exercise_with_RepLayout,fragment).commit();//adds exercise with rep fragment
         }
         else {
             //set fragment to next exercise and replace fragment
             fragment = new ExerciseWithRepsFragment(this.exerciseList.get(this.fitnessResultViewModel.getIndex()));
-            transaction.replace(R.id.exercise_with_RepLayout,fragment);
+            transaction.replace(R.id.exercise_with_RepLayout,fragment).commit();
             }
     }
 

@@ -107,6 +107,7 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
         //update list when data set has changed
         this.portfolioViewModel.getPortfolioData().observe(getViewLifecycleOwner(),(data)->{
                 updatePortfolioList(data);
+
         });
         this.actionButton.setOnClickListener(view->{
             Intent intent = new Intent(getContext(), AddFitnessPortfolioActivity.class);

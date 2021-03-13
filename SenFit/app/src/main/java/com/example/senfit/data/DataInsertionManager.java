@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.Exercise;
 import com.example.senfit.dataContext.entities.FitnessClass;
 import com.example.senfit.dataContext.entities.GymClass;
 import com.example.senfit.dataContext.entities.OnlineClass;
@@ -188,6 +189,10 @@ public class DataInsertionManager {
         data.onlineClassList.add(onlineClass3);
         data.onlineClassList.add(onlineClass4);
 
+        //insert exercise data
+
+
+
     }
 
     private static Long getTime(String dateStr) {
@@ -204,7 +209,27 @@ public class DataInsertionManager {
 
 
     public static void insertDummyData(Context context) {
-       if (!getDummyDataInserted(context)) {
+     if (!getDummyDataInserted(context)) {
+           Exercise[] exercises = {new Exercise("Push up","" +
+                   "a conditioning exercise performed in a prone position by raising and lowering the body with the straightening and bending of the arms while keeping the back straight " +
+                   "and supporting the body on the hands and toes."),
+                   new Exercise("Sit Up","Situps are classic abdominal exercises done " +
+                           "by lying on your back and lifting your torso. " +
+                           "They use your body weight to strengthen " +
+                           "and tone the core-stabilizing abdominal muscles."),
+                   new Exercise("forward lunge","Stand with feet hip-width apart," +
+                           " engage your core, " +
+                           "and take a big step backward. Activate your glutes as " +
+                           "you bend front knee to lower your body so back knee lightly " +
+                           "taps the floor while keeping upper body upright. " +
+                           "Drive front heel into the floor to return to starting position. Repeat on the other side")
+           };
+           DatabaseClient.dbExecutors.execute(()->{
+                DatabaseClient.initDB(context)
+                        .getAppDatabase()
+                        .getExerciseDao()
+                        .insertExercises(exercises);
+           });
             populateDummyData();
             for (int i = 0 ; i < 4; i++) {
                 insertInpersonTrainer(context, i);

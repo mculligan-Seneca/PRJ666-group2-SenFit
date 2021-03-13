@@ -8,6 +8,8 @@ This viewmodel class holds the fitness result data when a user is performing the
  */
 package com.example.senfit.fitnessResult.addFitnessResults;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -75,9 +77,14 @@ public class AddFitnessResultViewModel extends ViewModel {
     public void insert(){
         DatabaseClient.dbExecutors.execute(()->{
             FitnessResult[] results = new FitnessResult[1];
-            dbClient.getAppDatabase()
-                    .getFitnessResultDao()
-                    .insertResults(completedList.toArray(results));
+            try {
+                results=completedList.toArray(results);
+                dbClient.getAppDatabase()
+                        .getFitnessResultDao()
+                        .insertResults(results);
+            }catch(Exception e){
+                Log.e("insert_result_err",e.getMessage());
+            }
         });
     }
     public int getPortfolioId(){
