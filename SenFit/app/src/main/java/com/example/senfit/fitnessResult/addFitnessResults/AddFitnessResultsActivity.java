@@ -89,7 +89,7 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
 
                 }else{// else if finished insert results into database and return to home activity
                     fitnessResultViewModel.insert();//
-                    Toast.makeText(this,R.string.results_insert_msg,Toast.LENGTH_LONG);
+                    Toast.makeText(this,R.string.results_insert_msg,Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(this, SenFitActivity.class);
                     startActivity(intent);
                     finish();//start main fiish result
