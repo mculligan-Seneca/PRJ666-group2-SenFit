@@ -14,9 +14,27 @@ Complete password and email validation to sign up page on 2021/2/8.(Mitchell)
 
 Complete Covid survey functionality on 2021/2/12.(Mitchell)
 
+Completed inperson confirmation  Dialog box 2021/02/13.(Portia)
+
+completed inperson confirmation dialogue box functinality 2021/02/14.(Portia)
+
+Completed login page modification (Portia) 
+
 Completed menu and navigation functionality 2021/2/20.(Mitchell)
+
+completed implement online class list page 2021/02/21(Portia)
+
+completed online class confirmation  Dialog box 2021/02/21.(Portia)
+
+completed onlinec class confirmation dialogue box functinality 2021/02/21 (Portia)
 
 Completed view for fitness portfolios 2021/2/24.(Mitchell)
 
 Completed functionality to add new fitness portfolio 2021/2/24.(Mitchell)
+
+
+
+
+
+
 
