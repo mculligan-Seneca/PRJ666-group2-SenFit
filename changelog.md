@@ -32,6 +32,8 @@ Completed view for fitness portfolios 2021/2/24.(Mitchell)
 
 Completed functionality to add new fitness portfolio 2021/2/24.(Mitchell)
 
+Completed fitness results 2021/3/15.(Mitchell)
+
 
 
 
