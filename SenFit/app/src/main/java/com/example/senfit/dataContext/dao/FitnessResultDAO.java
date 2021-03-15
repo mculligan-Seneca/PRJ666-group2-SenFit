@@ -8,11 +8,13 @@ This interface is the data acess object for the fitness result entity.
  */
 package com.example.senfit.dataContext.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.senfit.dataContext.entities.FitnessResult;
+import com.example.senfit.dataContext.views.FitnessResultView;
 
 import java.util.List;
 
@@ -24,4 +26,8 @@ public interface FitnessResultDAO {
 
     @Insert
     public void insertResults(FitnessResult...results);
+
+
+    @Query("Select * from fitnessresultview where fitnessPortfolioId=:portId")
+    public LiveData<List<FitnessResultView>> getFitnessResultView(int portId);
 }

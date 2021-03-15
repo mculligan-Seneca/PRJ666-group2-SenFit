@@ -9,12 +9,19 @@ this view class repersents a database view for displaying a fitness result.
 package com.example.senfit.dataContext.views;
 
 
+import androidx.room.ColumnInfo;
 import androidx.room.DatabaseView;
 
-@DatabaseView(viewName = "fitnessresultview",value = "")
+@DatabaseView(viewName = "fitnessresultview",
+        value = "select fitnessPortfolioId, e.exercise_name, reps_num, beatsPM "+
+         "from fitnessresults join exercises e; "           )
 public class FitnessResultView {
 
+
+    public  int fitnessPortfolioId;
+    @ColumnInfo(name="exercise_name")
     private String exerciseName;
+    @ColumnInfo(name="reps_num")
     private int repsNum;
     private int beatsPM;
 
