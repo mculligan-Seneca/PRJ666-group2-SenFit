@@ -22,12 +22,13 @@ import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.fitnessPortfolio.FitnessPortfolioFragment;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.login.LoginHelper;
+import com.example.senfit.navigator.NavigateFragment;
 import com.example.senfit.navigator.Navigator;
 import com.example.senfit.ui.online.OnlineClassFragment;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
 
-public class SenFitActivity extends AppCompatActivity implements Navigator {
+public class SenFitActivity extends AppCompatActivity implements Navigator, NavigateFragment {
 
     private static final int SURVEY_ACTIVITY=2;
     private static final String DEFAULT_FRAG="HOME_FRAGMENT";
@@ -137,6 +138,15 @@ public class SenFitActivity extends AppCompatActivity implements Navigator {
     public void navigateTo(Intent intent) {//starts new activity and finishes previous one
         startActivity(intent);
         finish();
+
+    }
+
+    @Override
+    public void swapFragment(Fragment fragment, int titleId) {
+        fm.beginTransaction()
+                .replace(R.id.frame_layout_senfit,fragment)
+                .addToBackStack(null).commit();
+        toolbar.setTitle(titleId);
 
     }
 }

@@ -25,6 +25,9 @@ import android.view.ViewGroup;
 import com.example.senfit.R;
 import com.example.senfit.dataContext.entities.FitnessPortfolio;
 import com.example.senfit.fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity;
+import com.example.senfit.fitnessResult.displayFitnessResults.DisplayFitnessResultsFragment;
+import com.example.senfit.fitnessResult.displayFitnessResults.DisplayFitnessResultsViewModel;
+import com.example.senfit.navigator.NavigateFragment;
 import com.example.senfit.navigator.Navigator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -51,6 +54,7 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
     private PortfolioAdapter adapter;
     private FloatingActionButton actionButton;
     private Navigator activityNavigator;
+    private NavigateFragment fragmentNav;
     public FitnessPortfolioFragment() {
         // Required empty public constructor
     }
@@ -58,8 +62,12 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof Navigator){
-            this.activityNavigator=(Navigator)context;
+        if(context instanceof Navigator) {
+            this.activityNavigator = (Navigator) context;
+
+        }
+        if(context instanceof  NavigateFragment){
+            this.fragmentNav = (NavigateFragment)context;
         }
     }
 
@@ -67,6 +75,7 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
     public void onDetach() {
         super.onDetach();
         this.activityNavigator=null;
+        this.fragmentNav=null;
     }
 
     // TODO: Rename and change types and number of parameters
@@ -124,6 +133,9 @@ public class FitnessPortfolioFragment extends Fragment implements PortfolioAdapt
     }
     @Override
     public void resultsSelected(FitnessPortfolio portfolio) {
-
+        DisplayFitnessResultsFragment fragment =
+                DisplayFitnessResultsFragment.newInstance(portfolio.getFitnessPortfolioId());
+        if(this.fragmentNav!=null)
+            this.fragmentNav.swapFragment(fragment,R.string.fittness_result_title);
     }
 }

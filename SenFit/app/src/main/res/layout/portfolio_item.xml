@@ -107,7 +107,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="@{portfolio.healthConcerns}"
                 />
-<!--
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                 android:onClick="@{()->listener.resultsSelected(portfolio)}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 />
--->
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
