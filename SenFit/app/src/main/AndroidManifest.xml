@@ -38,10 +38,14 @@
                app to run.
         -->
         <activity android:name=".signup.SignUpActivity" />
+        <activity android:name=".ui.home.MyClassesActivity" />
+
+
         <activity
             android:name=".ui.inperson.SenFitActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.SenFit.NoActionBar" />
+
     </application>
 
 </manifest>
