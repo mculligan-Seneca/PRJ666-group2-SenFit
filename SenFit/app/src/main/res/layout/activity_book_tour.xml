@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="267dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:gravity="center"
+        android:text="FREE WORKOUT"
+        android:textSize="21dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/first_name"
+        android:layout_width="329dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Fill out the form below to get a free workout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/text_view_background"
+        android:hint="@string/hint_first_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_name" />
+
+    <EditText
+        android:id="@+id/customer_email"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/text_view_background"
+        android:ems="10"
+        android:hint="@string/hint_last_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/last_name" />
+
+    <EditText
+        android:id="@+id/customer_phone_number"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/text_view_background"
+        android:ems="10"
+        android:hint="@string/hint_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_email" />
+
+    <EditText
+        android:id="@+id/login_submit"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/text_view_background"
+        android:ems="10"
+        android:hint="@string/hint_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_phone_number" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="292dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="52dp"
+        android:text="Submit"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_submit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

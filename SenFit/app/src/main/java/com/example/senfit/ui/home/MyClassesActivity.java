@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.senfit.R;
 import com.example.senfit.dataContext.DatabaseClient;
@@ -12,6 +14,7 @@ import com.example.senfit.dataContext.entities.GymClass;
 import com.example.senfit.dataContext.entities.OnlineClass;
 import com.example.senfit.dataContext.entities.Trainer;
 import com.example.senfit.ui.inperson.InpersonClassData;
+import com.example.senfit.ui.online.OnlineClassAdapter;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -21,10 +24,24 @@ import java.util.List;
 
 public class MyClassesActivity extends AppCompatActivity {
 
+
+    protected RecyclerView mRecyclerView;
+
+    protected MyClassesAdapter mAdapter;
+
+    protected RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myclasses);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewMyClasses);
+
+        mLayoutManager = new LinearLayoutManager(this);
+
+        loadOnlineClass();
+
 
     }
 
@@ -114,6 +131,23 @@ public class MyClassesActivity extends AppCompatActivity {
                             .getTrainer(gymClass.getTrainerId());
                     data.setInstructorName(trainer.getFirstName() + " " + trainer.getLastName());
                     dataSet.add(data);
+
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAdapter = new MyClassesAdapter(dataSet);
+
+                            mRecyclerView.setAdapter(mAdapter);
+
+                            mRecyclerView.setAdapter(mAdapter);
+
+                            mRecyclerView.setLayoutManager(mLayoutManager);
+                        }
+                    });
+
+
+
                 }
 
                 return null;

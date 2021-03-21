@@ -46,6 +46,11 @@
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.SenFit.NoActionBar" />
 
+        <activity
+            android:name=".bookTour.BookTourActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.SenFit.NoActionBar" />
+
     </application>
 
 </manifest>
