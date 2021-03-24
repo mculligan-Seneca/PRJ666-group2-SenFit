@@ -31,9 +31,7 @@ public class MyClassesAdapter extends RecyclerView.Adapter<MyClassesAdapter.View
         private final TextView mClassDateTextView;
         private final TextView mClassTimeTextView;
         private final TextView mClassInstrctorTextView;
-        private final Button mClassEnrollButton;
         private final View mInpersonRowView;
-        private final TextView mEnrolledTextView;
 
         public ViewHolder(View v) {
             super(v);
@@ -52,8 +50,6 @@ public class MyClassesAdapter extends RecyclerView.Adapter<MyClassesAdapter.View
             mClassDateTextView = (TextView) v.findViewById(R.id.inperson_row_class_date);
             mClassTimeTextView = (TextView) v.findViewById(R.id.inperson_row_class_time);
             mClassInstrctorTextView = (TextView) v.findViewById(R.id.inperson_row_class_instructor_name);
-            mClassEnrollButton = (Button) v.findViewById(R.id.inperson_row_class_enroll);
-            mEnrolledTextView = (TextView) v.findViewById(R.id.inperson_row_class_enrolled_txt);
         }
 
         public ImageView getClassImageView() {
@@ -74,14 +70,6 @@ public class MyClassesAdapter extends RecyclerView.Adapter<MyClassesAdapter.View
 
         public TextView getClassInstrctorTextView() {
             return mClassInstrctorTextView;
-        }
-
-        public Button getClassEnrollButton() {
-            return mClassEnrollButton;
-        }
-
-        public TextView getClassEnroledTextView() {
-            return mEnrolledTextView;
         }
 
         public View getInpersonRowView() {
@@ -105,7 +93,7 @@ public class MyClassesAdapter extends RecyclerView.Adapter<MyClassesAdapter.View
     @Override
     public MyClassesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.online_row_item, parent, false);
+                .inflate(R.layout.myclasses_row_item, parent, false);
 
         return new ViewHolder(v);
 
@@ -117,14 +105,6 @@ public class MyClassesAdapter extends RecyclerView.Adapter<MyClassesAdapter.View
         viewHolder.getClassDateTextView().setText(mDataSet.get(position).getDate());
         viewHolder.getClassTimeTextView().setText(mDataSet.get(position).getTime());
         viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).getInstructorName());
-
-        if (mDataSet.get(position).getEnrolled()) {
-            viewHolder.getClassEnroledTextView().setVisibility(View.VISIBLE);
-            viewHolder.getClassEnrollButton().setVisibility(View.INVISIBLE);
-        } else {
-            viewHolder.getClassEnrollButton().setVisibility(View.VISIBLE);
-            viewHolder.getClassEnroledTextView().setVisibility(View.INVISIBLE);
-        }
     }
 
     @Override

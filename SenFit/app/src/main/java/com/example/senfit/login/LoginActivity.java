@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     Compare email and password with the database counterpart
      */
     public void onLoginClick(View view) {
-        EditText userNameEditText = findViewById(R.id.last_name);
-        EditText passwordEditText = findViewById(R.id.customer_email);
+        EditText userNameEditText = findViewById(R.id.first_name);
+        EditText passwordEditText = findViewById(R.id.last_name);
         String userName = userNameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 

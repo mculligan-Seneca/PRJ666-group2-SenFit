@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/sen_fit" />
 
     <EditText
-        android:id="@+id/last_name"
+        android:id="@+id/first_name"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="48dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/customer_email"
+        android:id="@+id/last_name"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:background="@drawable/text_view_background"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/last_name"
+        app:layout_constraintTop_toBottomOf="@+id/first_name"
         app:layout_constraintVertical_bias="0.099" />
 
     <Button
@@ -55,7 +55,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_email" />
+        app:layout_constraintTop_toBottomOf="@+id/last_name" />
 
     <Button
         android:id="@+id/login_signup"

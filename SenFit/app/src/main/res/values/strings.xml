@@ -78,7 +78,7 @@
 
     </string-array>
     <string name="title_activity_my_classes">MyClassesActivity</string>
-    <string name="hint_last_name">First name</string>
+    <string name="hint_last_name">Last name</string>
     <string name="hint_first_name">First Name</string>
     <string name="hint_last_email">Email</string>
     <string name="hint_phone">Phone number</string>
