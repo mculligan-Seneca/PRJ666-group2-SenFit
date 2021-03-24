@@ -34,6 +34,11 @@ Completed functionality to add new fitness portfolio 2021/2/24.(Mitchell)
 
 Completed fitness results 2021/3/15.(Mitchell)
 
+Completed My Class list page 2021/3/19(Portia)
+
+Completed Book a tour page 2021/3/23 (Portia)
+
+
 
 
 
