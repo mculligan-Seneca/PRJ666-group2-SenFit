@@ -38,6 +38,7 @@ Completed My Class list page 2021/3/19(Portia)
 
 Completed Book a tour page 2021/3/23 (Portia)
 
+Completed SEN-FIT REST API 2021/3/24. (Mitchell)
 
 
 
