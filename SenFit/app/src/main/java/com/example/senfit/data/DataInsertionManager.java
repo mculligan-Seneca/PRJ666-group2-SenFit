@@ -209,7 +209,7 @@ public class DataInsertionManager {
 
 
     public static void insertDummyData(Context context) {
-     if (!getDummyDataInserted(context)) {
+        if (!getDummyDataInserted(context)) {
            Exercise[] exercises = {new Exercise("Push up","" +
                    "a conditioning exercise performed in a prone position by raising and lowering the body with the straightening and bending of the arms while keeping the back straight " +
                    "and supporting the body on the hands and toes."),
@@ -243,7 +243,7 @@ public class DataInsertionManager {
 
 
            setDummyDataInserted(context);
-     }
+        }
     }
 
     static void insertInpersonTrainer(Context context, int pass) {

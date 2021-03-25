@@ -135,22 +135,23 @@ public class MyClassesActivity extends AppCompatActivity {
                     dataSet.add(data);
 
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mAdapter = new MyClassesAdapter(dataSet);
 
-                            mRecyclerView.setAdapter(mAdapter);
-
-                            mRecyclerView.setAdapter(mAdapter);
-
-                            mRecyclerView.setLayoutManager(mLayoutManager);
-                        }
-                    });
 
 
 
                 }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter = new MyClassesAdapter(dataSet);
+
+                        mRecyclerView.setAdapter(mAdapter);
+
+                        mRecyclerView.setAdapter(mAdapter);
+
+                        mRecyclerView.setLayoutManager(mLayoutManager);
+                    }
+                });
 
                 return null;
             }
