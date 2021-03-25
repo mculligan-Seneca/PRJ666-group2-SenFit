@@ -10,25 +10,27 @@
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="165dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/login_username"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sen_fit" />
 
     <EditText
-        android:id="@+id/login_username"
+        android:id="@+id/first_name"
         android:layout_width="300dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="36dp"
-        android:hint="@string/hint_email"
+        android:layout_marginTop="48dp"
         android:background="@drawable/text_view_background"
-        app:layout_constraintBottom_toTopOf="@+id/login_password"
+        android:hint="@string/hint_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/login_password"
+        android:id="@+id/last_name"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:background="@drawable/text_view_background"
@@ -37,8 +39,10 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/first_name"
+        app:layout_constraintVertical_bias="0.099" />
 
     <Button
         android:id="@+id/login_signin"
@@ -51,7 +55,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/last_name" />
 
     <Button
         android:id="@+id/login_signup"
@@ -63,6 +67,20 @@
         android:text="SignUp"
         android:onClick="onSignupClick"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_signin" />
+
+    <Button
+        android:id="@+id/login_book_tour"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/text_view_background"
+        android:onClick="onBookTourClick"
+        android:text="Book a tour"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_signin" />
 

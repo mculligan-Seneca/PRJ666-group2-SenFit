@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.senfit.R;
+import com.example.senfit.ui.home.SenfitHomeFragment;
+import com.example.senfit.ui.inperson.HomeFragment;
 import com.example.senfit.ui.inperson.InpersonFragment;
 import com.example.senfit.ui.online.OnlineClassFragment;
 
@@ -36,7 +38,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-            return OnlineClassFragment.newInstance();
+            return SenfitHomeFragment.newInstance();
 
             case 1:
                 return InpersonFragment.newInstance(position + 1);
@@ -45,7 +47,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return OnlineClassFragment.newInstance();
 
             default:
-                return InpersonFragment.newInstance(position + 1);
+                return null;
         }
     }
 

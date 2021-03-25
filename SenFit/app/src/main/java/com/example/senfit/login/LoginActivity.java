@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senfit.R;
+import com.example.senfit.bookTour.BookTourActivity;
 import com.example.senfit.signup.SignUpActivity;
 import com.example.senfit.data.DataInsertionManager;
 import com.example.senfit.ui.inperson.SenFitActivity;
@@ -45,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     Compare email and password with the database counterpart
      */
     public void onLoginClick(View view) {
-        EditText userNameEditText = findViewById(R.id.login_username);
-        EditText passwordEditText = findViewById(R.id.login_password);
+        EditText userNameEditText = findViewById(R.id.first_name);
+        EditText passwordEditText = findViewById(R.id.last_name);
         String userName = userNameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
@@ -95,4 +96,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void onBookTourClick(View view) {
+        Intent intent = new Intent(this, BookTourActivity.class);
+        startActivity(intent);
+    }
+
 }
