@@ -21,7 +21,7 @@ import java.sql.Date;
         ))
 //@Entity TODO: Find way to potentially remove full table scans
 public class CovidLog {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private  int covidLogID;
 
     @ColumnInfo(name="covid_status")
