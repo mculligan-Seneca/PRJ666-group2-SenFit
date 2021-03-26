@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName="trainingExercises")
 public class TrainingExercise {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int trainingExerciseID;//TODO: ADD constructors and getters and setter methods
 
     @ColumnInfo(name = "repNumber")
