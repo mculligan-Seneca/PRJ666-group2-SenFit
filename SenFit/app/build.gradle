@@ -48,6 +48,9 @@ dependencies {
   //  annotationProcessor 'com.google.auto.value:auto-value:1.4'
     //compileOnly 'com.jakewharton.auto.value:auto-value-annotations:1.4'
 
+    // Retrofit & OkHttp
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     implementation "androidx.paging:paging-runtime:$paging_version" // For Kotlin use paging-runtime-ktx
     
