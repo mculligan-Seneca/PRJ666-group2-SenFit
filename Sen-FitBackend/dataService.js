@@ -4,6 +4,7 @@ const {sequelize,
     Trainer,
     Exercise,
     FitnessClass,
+    CovidLog,
     FitnessPortfolio,
     Sequelize,
     GymLocation} 
@@ -39,7 +40,7 @@ module.exports.getUpcomingGymClasses=()=>{
         },
          order:[['class_date','ASC']]
     }).then(function(data){
-        console.log(data);
+        
         data=data.map(value=>value.dataValues);//ensures that data contains only valid data
         resolve(data);
     })
@@ -49,19 +50,27 @@ module.exports.getUpcomingGymClasses=()=>{
 
     });
 }
-module.exports.getGymClassesForDate=async(dateStr)=>{
-        let data = await  GymClass.findAll({
+module.exports.getGymClassesForDate=(dateStr)=>{
+    return new Promise((resolve,reject)=>{
+        GymClass.findAll({
             include: ['trainer','gymLocation','fitnessClass'],
             where:{
                 
                 class_date: {
-                    [Op.eq]: new Date(dateStr) 
+                    [Op.eq]: new Date(dateStr)
                 }
             },
              order:[['start_time','ASC']]
+        }).then(function(data){
+        
+            data=data.map(value=>value.dataValues);//ensures that data contains only valid data
+            resolve(data);
+        })
+        .catch(function(err){
+            reject('Error retrieving classes: '+err);
         });
-        data=data.map(value=>value.dataValues);
-        return data;
+    
+        });
 }
 module.exports.getMemberFromEmail=(memberEmail)=>{
     return new Promise((resolve,reject)=>{
@@ -129,3 +138,25 @@ module.exports.getAllExercises= async()=>{
     return exercises;
 }
 
+module.exports.getAllTrainers=async()=>{
+    const trainers = await Trainer.findAll();
+    return trainers;
+}
+
+module.exports.getCovidLogForMember= async(memberId)=>{
+            await CovidLog.max('date_logged',{where: 
+                {
+                    member_id: memberId
+                }
+                });
+}
+
+
+module.exports.getTrainersForGymLocation=async(gymId)=>{
+        const trainers = await Trainer.findAll({
+            where:{
+                gymLocationId: gymId
+            }
+        });
+        return trainers;
+}

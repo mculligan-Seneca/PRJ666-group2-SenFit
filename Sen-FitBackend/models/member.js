@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({FitnessPortfolio, GymClass}) {
+    static associate({FitnessPortfolio, GymClass,CovidLog,TrainingPlan}) {
       // define association here
+      this.hasMany(CovidLog,{foreignKey: 'member_id'});
       this.hasMany(FitnessPortfolio,{foreignKey: 'member_id'});
+      this.hasMany(TrainingPlan,{foreignKey:'member_id'});
       this.belongsToMany(GymClass, {through: 'Member_GymClass'});//many to many 
       
     }
@@ -37,6 +39,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Member',
   });
-  Member.beforeCreate(user=>user.uuid=uuid());
+  //Member.beforeCreate(user=>user.uuid=uuid());
   return Member;
 };

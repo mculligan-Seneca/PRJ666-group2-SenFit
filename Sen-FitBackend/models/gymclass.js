@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({FitnessClass,Trainer,GymLocation,Member}) {
+    static associate({FitnessClass,Trainer,GymLocation,Member,GymClass}) {
       // define association here
         this.belongsTo(FitnessClass,{foreignKey: 'fitnessClassId',as: 'fitnessClass'});
         this.belongsTo(Trainer,{foreignKey: 'trainerId', as:'trainer'});
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   GymClass.init({
-    class_date: DataTypes.DATE,
+    class_date: DataTypes.DATEONLY,
     start_time: DataTypes.TIME,
     end_time: DataTypes.TIME,
     trainerId: DataTypes.INTEGER,

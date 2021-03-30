@@ -2,13 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
- /*     await queryInterface.addColumn('Members',
-      'uuid',
-      {
-        type: Sequelize.UUID,
-        allowNull: false,
-        unique: true
-      });
+   // return queryInterface.removeColumn('GymClass','gymLocationId');
     /**
      * Add altering commands here.
      *
@@ -18,7 +12,12 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    //await queryInterface.removeColumn('Members','uuid');
+   /*   return queryInterface.addColumn('GymClass','gymLocationId',{
+            type: Sequelize.INTEGER,
+            references: 'GymLocations',
+            referencesKey: 'id'
+        });
+      
     /**
      * Add reverting commands here.
      *

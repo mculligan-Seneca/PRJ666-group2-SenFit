@@ -50,7 +50,7 @@ app.post('/member',(req,res)=>{
             const member = req.body;
             ds.createMember(member)
             .then((msg)=>{
-                    res.json('Member created');
+                    res.json({msg: 'Member created'});
             })
             .catch(err=>res.status(500).json(err));
 
@@ -70,7 +70,7 @@ app.get('/fitnessPortfolio',(req,res)=>{
         :   ${err}`}));
 });
 app.get('/gymClasses',async(req,res)=>{
-    const dateStr=req.query.date;
+    let dateStr=req.query.date;
     try{
         let data =null;
     if(dateStr)
@@ -91,7 +91,7 @@ app.get('/gymLocations',(req,res)=>{
     ds.getAllGymLocations()
     .then((data)=>{
         if(data && data.length>0)
-            res.json({locations: data});
+            res.json(data);
         else
             throw new Error('No locations found');
 
@@ -99,6 +99,20 @@ app.get('/gymLocations',(req,res)=>{
     .catch((err)=>{
         res.status(500).json({errMsg: ''+ err});
     });
+});
+app.get('/gymLocations/:id/trainers',async(req,res)=>{
+        const id=req.params.id;
+        try{
+            const data = await ds.getTrainersForGymLocation(id);  
+            if(data && data.length>0)
+            res.json({locations: data});
+        else
+            throw new Error('No trainers found'); 
+
+        }catch(error){
+            res.status(500).json({errMsg: ''+ error});
+        }
+
 });
 app.get('/exercises',(req,res)=>{
     ds.getAllExercises()
@@ -109,6 +123,39 @@ app.get('/exercises',(req,res)=>{
             throw new Error("No exercise data found");    
     })
     .catch(err=>res.status(500).json({errMsg: ''+err}));
+});
+app.get('/trainers',async(req,res)=>{
+    const data = await ds.getAllTrainers();
+   try{
+    if(data && data.length>0){
+        res.json({trainers: data});
+    }
+    else{
+        throw new Error('No trainers found');
+    }
+    }catch(error){
+        res.status(500).json({errMsg: ""+error});
+    }
+});
+
+app.get('/covidLog',async(req,res)=>{
+        const id = req.query.member_id;
+        try{
+            if(id){
+                data = await ds.getCovidLogForMember(id);
+                if(data)
+                    res.json(data);
+                else
+                    throw new Error('No covid logs found');    
+            }
+            else
+            {
+                throw new Error('no member id given');
+            }
+
+        }catch(error){
+            res.status(500).json({errMsg: ""+error});
+        }
 });
 app.use((req, res) => {
     res.status(404).send("Page Not Found");

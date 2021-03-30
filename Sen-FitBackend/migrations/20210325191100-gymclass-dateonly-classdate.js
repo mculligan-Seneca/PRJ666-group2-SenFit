@@ -2,12 +2,8 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
- /*     await queryInterface.addColumn('Members',
-      'uuid',
-      {
-        type: Sequelize.UUID,
-        allowNull: false,
-        unique: true
+      return queryInterface.changeColumn('GymClass','class_date',{
+        type: Sequelize.DATEONLY
       });
     /**
      * Add altering commands here.
@@ -18,7 +14,9 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    //await queryInterface.removeColumn('Members','uuid');
+    return queryInterface.changeColumn('GymClass','class_date',{
+      type: Sequelize.DATE
+    });
     /**
      * Add reverting commands here.
      *

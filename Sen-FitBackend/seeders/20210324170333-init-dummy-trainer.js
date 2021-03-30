@@ -2,17 +2,20 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    let i=0;
+    const locations = await queryInterface.sequelize.query(`select id from public."GymLocations"`);
     return  queryInterface.bulkInsert('Trainer',[{
       first_name: 'Doug',
       last_name:  'Trains',
-      post_code: 'B4U3G3',
+      gymLocationId: locations[0][i++%locations[0].length].id,
       email: 'DougTrains@gmail.com',
+
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       first_name: 'Mike',
       last_name:  'Johns',
-      post_code: 'W4D3Y7',
+      gymLocationId: locations[0][i++%locations[0].length].id,
       email: 'Mike_johns@yahoo.com',
       createdAt: new Date(),
       updatedAt: new Date()
@@ -20,7 +23,7 @@ module.exports = {
     {
       first_name: 'Avery',
       last_name:  'Kerkamp',
-      post_code: 'L4G3A7',
+      gymLocationId: locations[0][i++%locations[0].length].id,
       email: 'Avery_rocks@bell.net',
       createdAt: new Date(),
       updatedAt: new Date()
@@ -28,7 +31,7 @@ module.exports = {
     {
       first_name: 'Lindsey',
       last_name:  'Camp',
-      post_code: 'R3D7S5',
+      gymLocationId: locations[0][i++%locations[0].length].id,
       email: 'Lcamp@icloud.com',
       createdAt: new Date(),
       updatedAt: new Date()
@@ -36,7 +39,7 @@ module.exports = {
     {
       first_name: 'Eren',
       last_name:  'Yeager',
-      post_code: 'A8A9L0',
+      gymLocationId: locations[0][i++%locations[0].length].id,
       email: 'freedom@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date()
