@@ -8,17 +8,27 @@ package com.example.senfit.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.senfit.NetworkManager.NetworkManager;
+import com.example.senfit.NetworkManager.NetwrokServices.LoginService;
 import com.example.senfit.R;
 import com.example.senfit.bookTour.BookTourActivity;
+import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.Member;
 import com.example.senfit.signup.SignUpActivity;
 import com.example.senfit.data.DataInsertionManager;
 import com.example.senfit.ui.inperson.SenFitActivity;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 
 /**
@@ -31,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     Interface to get email password comparison result
      */
     public interface ComparisonCallback {
-        void isValid(boolean vaildUser, boolean isValidPass);
+        void isValid(boolean validUser, String msg);
     }
 
     @Override
@@ -39,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         DataInsertionManager.insertDummyData(this);
+        onAutomaticLogin();//attempts to login previous owner
     }
 
     /*
@@ -59,21 +70,16 @@ public class LoginActivity extends AppCompatActivity {
 
         LoginHelper.compareEmailPass(this, userName, password, new ComparisonCallback() {
             @Override
-            public void isValid(boolean vaildUser, boolean validPass) {
+            public void isValid(boolean vaildUser, String msg) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (vaildUser && validPass) {
-                            Toast.makeText(LoginActivity.this, "Loging success", Toast.LENGTH_LONG).show();
+                        if (vaildUser) {
+                            Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
                             showSenfitActivity();
                         } else {
-                            if (!vaildUser && validPass) {
-                                Toast.makeText(LoginActivity.this, "Invalid username.", Toast.LENGTH_LONG).show();
-                            } else if(vaildUser && !validPass) {
-                                Toast.makeText(LoginActivity.this, "Invalid password.", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Invalid credentials.", Toast.LENGTH_LONG).show();
-                            }
+
+                                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -97,6 +103,39 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    public void onAutomaticLogin(){
+        DatabaseClient.dbExecutors.execute(()->{
+            Member member=DatabaseClient.initDB(getApplicationContext())
+                    .getAppDatabase()
+                    .getMemberDao()
+                    .getMember();
+            if(member!=null){
+                LoginService loginService = NetworkManager.getNetworkManager()
+                        .createNetworkService(LoginService.class);
+                Call<Member> memberCall = loginService.login(new LoginBody(member.getEmail(),member.getPassword()));
+                try {
+                    Response response = memberCall.execute();
+                    if(response.isSuccessful()){// if member in db valid
+                        member=(Member)response.body();//then update member in db with token
+                        DatabaseClient.getInstance()
+                                .getAppDatabase()
+                                .getMemberDao()
+                                .updateMember(member);
+                        runOnUiThread(()->{//start next activity with logged member
+                            showSenfitActivity();
+                        });
+                    }
+                }catch (IOException ioe){
+                    Log.e("login_activity_err",ioe.getMessage());
+                }
+                catch (Exception e){//mainly for bad cast
+                    Log.e("login_activity_err",e.getMessage());
+                }
+            }
+        });//for automatic login
+        //if member was previously logged in or found in database
+        //system automatically attempts to authenticate user
+    }
     public void onBookTourClick(View view) {
         Intent intent = new Intent(this, BookTourActivity.class);
         startActivity(intent);

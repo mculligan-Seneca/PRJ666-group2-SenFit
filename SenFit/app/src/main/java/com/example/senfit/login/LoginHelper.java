@@ -16,7 +16,11 @@ import com.example.senfit.NetworkManager.NetworkManager;
 import com.example.senfit.NetworkManager.NetwrokServices.LoginService;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.Member;
+import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,23 +54,34 @@ public class LoginHelper {
             @Override
             public void onResponse(Call<Member> call, Response<Member> response) {
                     if(!response.isSuccessful()){
-                        comparisonCallback.isValid(false, true);
+                        String errMsg=null;
+                        try {
+                            JSONObject jsonErr = new JSONObject(response.errorBody().string());
+                            errMsg=jsonErr.getString("errMsg");
+                        }catch(Exception e){
+                            Log.e("login_req_err",e.getMessage());
+                            errMsg="Error retrieving member";
+
+                        }
+                        comparisonCallback.isValid(false, errMsg);
                         return;
                     }
                     Member member = response.body();
                     NetworkManager.getNetworkManager().addInterceptorToClient(new AuthInterceptor(member.getToken()));
                     //retrieve token for member
+                    member.setPassword(password);
                     DatabaseClient.dbExecutors.execute(()->{
                         DatabaseClient.initDB(context).getAppDatabase()
                                 .getMemberDao()
                                 .insertMember(member);
-                    });
-                comparisonCallback.isValid(true, true);
+                    });//doesnt save member id but saves member in database
+                comparisonCallback.isValid(true, "Login Success");
             }
 
             @Override
             public void onFailure(Call<Member> call, Throwable t) {
                 Log.e("login_api_err",t.getMessage());
+                comparisonCallback.isValid(false,t.getMessage());
             }
         });
         /*new AsyncTask<Object, Object, Object>() {
