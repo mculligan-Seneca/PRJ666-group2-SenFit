@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.senfit.NetworkManager.Interceptor.AuthInterceptor;
 import com.example.senfit.NetworkManager.NetworkManager;
 import com.example.senfit.NetworkManager.NetwrokServices.LoginService;
 import com.example.senfit.R;
@@ -117,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
                     Response response = memberCall.execute();
                     if(response.isSuccessful()){// if member in db valid
                         member=(Member)response.body();//then update member in db with token
+                        NetworkManager.getNetworkManager()
+                                .addInterceptorToClient(new AuthInterceptor(member.getToken()));
                         DatabaseClient.getInstance()
                                 .getAppDatabase()
                                 .getMemberDao()
