@@ -8,8 +8,16 @@ This interface is used to interact with the api when the user performs the sign 
  */
 package com.example.senfit.NetworkManager.NetwrokServices;
 
+import com.example.senfit.dataContext.entities.Member;
+import com.example.senfit.signup.SignUpResponse;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
 public interface SignUpService {
 
-
+    @POST("/signUp")
+    public Call<SignUpResponse> signUp(@Body Member member);
 
 }
