@@ -40,12 +40,15 @@ public class Member {
     private String password;//will be hashed
     //must contain at least 1 number, 1 upper case letter and be 8 chars long
 
-    @ColumnInfo(name="salt",typeAffinity = ColumnInfo.BLOB)
-    private byte[] salt;// used as a salt for hashing password
+    @ColumnInfo(name="salt")
+    private String salt;// used as a salt for hashing password
     //TODO: add constructor
 
+    @ColumnInfo(name="token")
+    private String token;
 
     public Member(){
+        this.member_id=-1;
         this.firstName=null;
         this.lastName=null;
         this.dateOfBirth=null;
@@ -54,6 +57,21 @@ public class Member {
         this.email=null;
         this.password=null;
         this.salt=null;
+        this.token=null;
+
+    }
+    public Member(int member_id,String firstName, String lastName, Date dateOfBirth, String postalCode,
+                  String gender,String email,String password,String salt, String token){
+        this.member_id=member_id;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.dateOfBirth=dateOfBirth;
+        this.postalCode=postalCode;
+        this.gender=gender.charAt(0);
+        this.email=email;
+        this.password=password;
+        this.salt=salt;
+        this.token=token;
 
     }
     public int getMember_id() {
@@ -101,11 +119,11 @@ public class Member {
     }
 
 
-    public byte[] getSalt() {
+    public String getSalt() {
         return salt;
     }
 
-    public void setSalt(byte[] salt) {
+    public void setSalt(String salt) {
         this.salt = salt;
     }
 
@@ -123,5 +141,13 @@ public class Member {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
