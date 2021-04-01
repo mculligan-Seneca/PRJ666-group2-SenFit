@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     Interface to get email password comparison result
      */
     public interface ComparisonCallback {
-        void isValid(boolean validUser, String msg);
+        void isValid(int memberId, String msg);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         DataInsertionManager.insertDummyData(this);
-        onAutomaticLogin();//attempts to login previous owner
+       // onAutomaticLogin();//attempts to login previous owner
     }
 
     /*
@@ -71,11 +71,11 @@ public class LoginActivity extends AppCompatActivity {
 
         LoginHelper.compareEmailPass(this, userName, password, new ComparisonCallback() {
             @Override
-            public void isValid(boolean vaildUser, String msg) {
+            public void isValid(int memberId, String msg) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (vaildUser) {
+                        if (memberId!=-1) {
                             Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
                             showSenfitActivity();
                         } else {

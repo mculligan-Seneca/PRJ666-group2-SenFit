@@ -151,6 +151,12 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
                                 .show();
                         submit.setEnabled(true);
                     }else{
+                        DatabaseClient dbClient = DatabaseClient.initDB(getApplicationContext());
+                        DatabaseClient.dbExecutors.execute(()->{
+                            dbClient.getAppDatabase()
+                                    .getMemberDao()
+                                    .insertMember(member);
+                        });//inserts member into db
                         startLoginActivity();
                     }
                 }

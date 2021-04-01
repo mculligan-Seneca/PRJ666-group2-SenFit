@@ -23,6 +23,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
+import io.reactivex.Scheduler;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,25 +66,33 @@ public class LoginHelper {
                             errMsg="Error retrieving member";
 
                         }
-                        comparisonCallback.isValid(false, errMsg);
+                        comparisonCallback.isValid(-1, errMsg);
                         return;
                     }
                     Member member = response.body();
                     NetworkManager.getNetworkManager().addInterceptorToClient(new AuthInterceptor(member.getToken()));
                     //retrieve token for member
                     member.setPassword(password);
+                    DatabaseClient.initDB(context)
+                            .getAppDatabase()
+                            .getMemberDao()
+                            .updateMember(member)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread());
+
                     DatabaseClient.dbExecutors.execute(()->{
-                        DatabaseClient.initDB(context).getAppDatabase()
+
+                        DatabaseClient.getInstance().getAppDatabase()
                                 .getMemberDao()
                                 .insertMember(member);
                     });//doesnt save member id but saves member in database
-                comparisonCallback.isValid(true, "Login Success");
+                comparisonCallback.isValid(member.getMember_id(), "Login Success");
             }
 
             @Override
             public void onFailure(Call<Member> call, Throwable t) {
                 Log.e("login_api_err",t.getMessage());
-                comparisonCallback.isValid(false,t.getMessage());
+                comparisonCallback.isValid(-1,t.getMessage());
             }
         });
         /*new AsyncTask<Object, Object, Object>() {
