@@ -12,7 +12,8 @@ import com.example.senfit.dataContext.entities.FitnessClass;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public interface FitnessClassDAO {

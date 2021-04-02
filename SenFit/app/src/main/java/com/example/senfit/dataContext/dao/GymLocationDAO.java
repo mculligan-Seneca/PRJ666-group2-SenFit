@@ -6,7 +6,8 @@ import androidx.room.OnConflictStrategy;
 
 import com.example.senfit.dataContext.entities.GymLocation;
 
-import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public interface GymLocationDAO {

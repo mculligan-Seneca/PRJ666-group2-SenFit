@@ -38,6 +38,7 @@ import retrofit2.Response;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String MEMBER_ID="login_member_id";
     /*
     Interface to get email password comparison result
      */
@@ -77,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         if (memberId!=-1) {
                             Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
-                            showSenfitActivity();
+                            showSenfitActivity(memberId);
                         } else {
 
                                 Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
@@ -98,8 +99,11 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void showSenfitActivity() {
+    private void showSenfitActivity(int memberId) {
         Intent intent = new Intent(this, SenFitActivity.class);
+        Bundle args = new Bundle();
+        args.putInt(MEMBER_ID,memberId);
+        intent.putExtras(args);
         startActivity(intent);
         finish();
     }
@@ -126,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                                 .updateMember(member)
                                 .blockingGet();//fine cause its on background thread
                         runOnUiThread(()->{//start next activity with logged member
-                            showSenfitActivity();
+                            showSenfitActivity(0);
                         });
                     }
                 }catch (IOException ioe){

@@ -9,6 +9,9 @@ import com.example.senfit.dataContext.entities.Exercise;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.rxjava3.core.Single;
+
 @Dao
 public interface ExerciseDAO {
 
@@ -19,5 +22,5 @@ public interface ExerciseDAO {
     public LiveData<List<Exercise>> getExercisesWithLim(int lim);
 
     @Insert
-    public void insertExercises(Exercise...exercises);
+    public Completable insertExercises(Exercise...exercises);
 }

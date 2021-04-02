@@ -16,11 +16,13 @@ import com.example.senfit.dataContext.entities.Trainer;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+
 @Dao
 public interface TrainerDAO {
 
     @Insert
-    long insertTrainer(Trainer member);
+    public Completable insertTrainers(Trainer...trainers);
 
     @Query("Select * from trainers where trainerId=:id")
     public Trainer getTrainer(long id);//IMPORTANT: Methods that retrieve data from database should

@@ -14,6 +14,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -32,12 +34,15 @@ public class GymClass {
     private int gymClassId;//TODO:add constructor and getter/setter
 
     @ColumnInfo(name="class_date")
+    @SerializedName("class_date")
     private Date classDate;
 
     @ColumnInfo(name="start_time")
+    @SerializedName("start_time")
     private Timestamp startTime;
 
     @ColumnInfo(name="end_time")
+    @SerializedName("end_time")
     private Timestamp endTime;
 
     @ColumnInfo(name="trainerId")

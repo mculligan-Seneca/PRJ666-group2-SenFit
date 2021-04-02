@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senfit.NetworkManager.NetworkManager;
+import com.example.senfit.NetworkManager.NetworkServices.ExerciseService;
 import com.example.senfit.NetworkManager.NetworkServices.FitnessClassService;
 import com.example.senfit.NetworkManager.NetworkServices.GymLocationService;
 import com.example.senfit.NetworkManager.NetworkServices.TrainerService;
@@ -30,12 +31,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import io.reactivex.CompletableObserver;
+import io.reactivex.Scheduler;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.CompletableObserver;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,6 +59,7 @@ public class DataInsertionManager {
     private NetworkManager networkManager;
     private GymLocationService gymLocationService;
     private FitnessClassService fitnessClassService;
+    private ExerciseService exerciseService;
     private TrainerService trainerService;
     private CompositeDisposable disposables;
 
@@ -65,6 +70,7 @@ public class DataInsertionManager {
        this.gymLocationService = networkManager.createNetworkService(GymLocationService.class);
        this.fitnessClassService = networkManager.createNetworkService(FitnessClassService.class);
        this.trainerService =networkManager.createNetworkService(TrainerService.class);
+       this.exerciseService= networkManager.createNetworkService(ExerciseService.class);
     }
 
 
@@ -125,10 +131,10 @@ public class DataInsertionManager {
     }
 
     public void insertFitnessClasses(){
-        Call<List<FitnessClass>> locationCall = this.fitnessClassService.getFitnessClasses();
-        locationCall.enqueue(new Callback<List<FitnessClass>>() {
+        Call<List<FitnessClass>> fitnessClassCall = this.fitnessClassService.getFitnessClasses();
+        fitnessClassCall.enqueue(new Callback<List<FitnessClass>>() {
             @Override
-            public void onResponse(Call<List<FitnessClass> call, Response<List<FitnessClass>> response) {
+            public void onResponse(Call<List<FitnessClass>> call, Response<List<FitnessClass>> response) {
                 if(!response.isSuccessful()){
                     String errMsg=null;
                     try {
@@ -157,7 +163,7 @@ public class DataInsertionManager {
                                 @Override
                                 public void onComplete() {
 
-                                    insertFitnessClasses();
+                                    insertTrainers();
                                 }
 
                                 @Override
@@ -171,11 +177,66 @@ public class DataInsertionManager {
                 }
             }
 
+
             @Override
-            public void onFailure(Call<List<GymLocation>> call, Throwable t) {
+            public void onFailure(Call<List<FitnessClass>> call, Throwable t) {
                 handleError(t);
             }
         });
+    }
+
+    public void insertTrainers(){
+        Call<List<Trainer>> trainerCall = trainerService.getTrainers();
+        trainerCall.enqueue(new Callback<List<Trainer>>() {
+            @Override
+            public void onResponse(Call<List<Trainer>> call, Response<List<Trainer>> response) {
+                if(!response.isSuccessful()){
+                    String errMsg=null;
+                    try {
+                        JSONObject jsonErr = new JSONObject(response.errorBody().string());
+                        errMsg=jsonErr.getString("errMsg");
+                        Log.e("load_data_err",errMsg);
+                        if(!disposables.isDisposed())
+                            disposables.clear();
+                    }catch(Exception e){
+                        handleError(e);
+
+                    }
+                }else{
+                    List<Trainer> trainers = response.body();
+                    Trainer[] trainerList = new Trainer[1];
+                    trainerList=trainers.toArray(trainerList);
+                    dbClient.getAppDatabase()
+                            .getTrainerDao()
+                            .insertTrainers(trainerList).subscribe(new CompletableObserver() {
+                        @Override
+                        public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                            disposables.add(d);
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            if(!disposables.isDisposed())
+                                disposables.clear();//inserts trainers the trainer then completes resources
+                        }
+
+                        @Override
+                        public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                            handleError(e);
+                        }
+                    });
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Trainer>> call, Throwable t) {
+
+            }
+        });
+
     }
     public void handleError(Throwable t){
         Log.e("load_data_err",t.getMessage());
@@ -246,7 +307,7 @@ public class DataInsertionManager {
         }
     }
 
-    public
+
 /*
     static void insertInpersonTrainer(Context context, int pass) {
         final long[] trainerId = new long[1];

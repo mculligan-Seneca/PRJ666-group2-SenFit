@@ -11,11 +11,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName="Exercises")
 public class Exercise {
 
     //TODO: Create Constructor
     @PrimaryKey(autoGenerate = true)
+    @SerializedName("id")
     private int exerciseId;
 
     @ColumnInfo(name="exercise_name")

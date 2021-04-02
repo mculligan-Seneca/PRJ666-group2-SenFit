@@ -13,12 +13,16 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName="fitnessClass")
 public class FitnessClass {
     @PrimaryKey(autoGenerate = true)
+    @SerializedName("id")
     private int fitnessClassId;
 
     @ColumnInfo(name="fitness_class_name")
+    @SerializedName("className")
     private String fitnessClassName;
 
     @ColumnInfo(name = "class_description")

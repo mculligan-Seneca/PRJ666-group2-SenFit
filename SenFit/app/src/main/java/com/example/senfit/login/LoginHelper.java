@@ -84,6 +84,7 @@ public class LoginHelper {
 
                                 @Override
                                 public void onSuccess(@NonNull Integer id) {
+                                    setMemberId(context,id);
                                     comparisonCallback.isValid(id, "Login Success");
                                     if(!disposable.isDisposed())
                                         disposable.dispose();
