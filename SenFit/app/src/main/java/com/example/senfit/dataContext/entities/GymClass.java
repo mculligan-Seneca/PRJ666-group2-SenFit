@@ -52,6 +52,9 @@ public class GymClass {
     @ColumnInfo(name="enrolled")
     private boolean enrolled;
 
+    @ColumnInfo(name = "isFull")
+    private boolean isFull;
+
     public boolean getEnrolled() {
         return enrolled;
     }

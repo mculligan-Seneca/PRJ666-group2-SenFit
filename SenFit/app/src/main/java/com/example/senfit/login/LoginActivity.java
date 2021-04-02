@@ -104,12 +104,12 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onAutomaticLogin(){
+    public void onAutomaticLogin(int memberId){
         DatabaseClient.dbExecutors.execute(()->{
             Member member=DatabaseClient.initDB(getApplicationContext())
                     .getAppDatabase()
                     .getMemberDao()
-                    .getMember();
+                    .getMember(memberId);
             if(member!=null){
                 LoginService loginService = NetworkManager.getNetworkManager()
                         .createNetworkService(LoginService.class);

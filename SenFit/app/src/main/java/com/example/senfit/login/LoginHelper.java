@@ -23,7 +23,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Scheduler;
+import io.reactivex.SingleObserver;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -73,20 +77,44 @@ public class LoginHelper {
                     NetworkManager.getNetworkManager().addInterceptorToClient(new AuthInterceptor(member.getToken()));
                     //retrieve token for member
                     member.setPassword(password);
+
                     DatabaseClient.initDB(context)
                             .getAppDatabase()
                             .getMemberDao()
                             .updateMember(member)
                             .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread());
+                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))//BE CAREFUL ABOUT interacting with ui
+                            .subscribe(new SingleObserver<Member>() {
+                                private Disposable disposable;
+                                @Override
+                                public void onSubscribe(@NonNull Disposable d) {
+                                            disposable=d;
+                                }
 
-                    DatabaseClient.dbExecutors.execute(()->{
+                                @Override
+                                public void onSuccess(@NonNull Member m) {
+                                    comparisonCallback.isValid(m.getMember_id(), "Login Success");
+                                    if(!disposable.isDisposed())
+                                        disposable.dispose();
+                                }
 
-                        DatabaseClient.getInstance().getAppDatabase()
-                                .getMemberDao()
-                                .insertMember(member);
+                                @Override
+                                public void onError(@NonNull Throwable e) {
+                                    DatabaseClient.getInstance().getAppDatabase()
+                                            .getMemberDao()
+                                            .insertMember(member);
+                                    comparisonCallback.isValid(member.getMember_id(), "Login Success");
+                                    if(!disposable.isDisposed())
+                                        disposable.dispose();
+                                }
+                            });
+
+
+                 /*   DatabaseClient.dbExecutors.execute(()->{
+
+
                     });//doesnt save member id but saves member in database
-                comparisonCallback.isValid(member.getMember_id(), "Login Success");
+                    */
             }
 
             @Override
