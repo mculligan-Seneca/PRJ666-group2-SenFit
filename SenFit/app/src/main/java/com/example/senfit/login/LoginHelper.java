@@ -83,8 +83,8 @@ public class LoginHelper {
                             .getMemberDao()
                             .updateMember(member)
                             .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))//BE CAREFUL ABOUT interacting with ui
-                            .subscribe(new SingleObserver<Member>() {
+                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))//Maybe use Schedulers.computation();
+                            .subscribe(new SingleObserver<Long>() {
                                 private Disposable disposable;
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
@@ -92,8 +92,8 @@ public class LoginHelper {
                                 }
 
                                 @Override
-                                public void onSuccess(@NonNull Member m) {
-                                    comparisonCallback.isValid(m.getMember_id(), "Login Success");
+                                public void onSuccess(@NonNull Long id) {
+                                    comparisonCallback.isValid(id.intValue(), "Login Success");
                                     if(!disposable.isDisposed())
                                         disposable.dispose();
                                 }

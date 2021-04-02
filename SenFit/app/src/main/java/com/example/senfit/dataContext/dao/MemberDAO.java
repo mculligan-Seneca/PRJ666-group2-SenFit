@@ -23,7 +23,7 @@ import io.reactivex.Single;
 @Dao
 public interface MemberDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     public Long insertMember(Member member);//returns new rownumber
 
     //use maybe
@@ -37,7 +37,7 @@ public interface MemberDAO {
     //used for user validation
 
 
-    @Update
-    public Single<Member> updateMember(Member member);
+    @Update(onConflict = OnConflictStrategy.ABORT)
+    public Single<Long> updateMember(Member member);
    //TODO: ADD methods for retrieving associated data
 }
