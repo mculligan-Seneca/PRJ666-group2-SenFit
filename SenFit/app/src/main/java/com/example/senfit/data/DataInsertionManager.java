@@ -126,9 +126,9 @@ public class DataInsertionManager {
 
     public void insertFitnessClasses(){
         Call<List<FitnessClass>> locationCall = this.fitnessClassService.getFitnessClasses();
-        locationCall.enqueue(new Callback<List<GymLocation>>() {
+        locationCall.enqueue(new Callback<List<FitnessClass>>() {
             @Override
-            public void onResponse(Call<List<GymLocation>> call, Response<List<GymLocation>> response) {
+            public void onResponse(Call<List<FitnessClass> call, Response<List<FitnessClass>> response) {
                 if(!response.isSuccessful()){
                     String errMsg=null;
                     try {
@@ -142,14 +142,12 @@ public class DataInsertionManager {
 
                     }
                 }else{
-                    List<GymLocation> locations = response.body();
-                    GymLocation[] gymLocations = new GymLocation[1];
-                    gymLocations=locations.toArray(gymLocations);
+                    List<FitnessClass> classes = response.body();
+                    FitnessClass[] fitnessClassList = new FitnessClass[1];
+                    fitnessClassList=classes.toArray(fitnessClassList);
                     dbClient.getAppDatabase()
-                            .getGymLocationDAO()
-                            .insertGymLocations(gymLocations)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
+                            .getFitnessClassDao()
+                            .insertFitnessClass(fitnessClassList)
                             .subscribe(new CompletableObserver() {
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
