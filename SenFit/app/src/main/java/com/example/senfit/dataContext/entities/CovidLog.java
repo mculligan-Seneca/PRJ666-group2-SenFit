@@ -12,6 +12,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 @Entity(tableName="CovidLogs",
@@ -22,6 +24,7 @@ import java.sql.Date;
 //@Entity TODO: Find way to potentially remove full table scans
 public class CovidLog {
     @PrimaryKey
+    @SerializedName("id")
     private  int covidLogID;
 
     @ColumnInfo(name="covid_status")

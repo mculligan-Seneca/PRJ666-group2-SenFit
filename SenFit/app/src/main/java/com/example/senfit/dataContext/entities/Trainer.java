@@ -12,10 +12,13 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "trainers",foreignKeys = {@ForeignKey(entity = GymLocation.class,
         parentColumns = "gymLocationId", childColumns = "gymLocationId")})
 public class Trainer {
     @PrimaryKey
+    @SerializedName("id")
     private int trainerId;
     //TODO: add constructor and getter and setters
     @ColumnInfo(name = "first_name")

@@ -6,7 +6,7 @@ Version 1.0
 LoginService
 This interface interats with the api to log the user in
  */
-package com.example.senfit.NetworkManager.NetwrokServices;
+package com.example.senfit.NetworkManager.NetworkServices;
 
 import com.example.senfit.dataContext.entities.Member;
 import com.example.senfit.login.LoginBody;

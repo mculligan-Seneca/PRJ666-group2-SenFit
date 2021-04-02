@@ -118,4 +118,12 @@ public class GymClass {
     public void setGymLocationId(int gymLocationId) {
         this.gymLocationId = gymLocationId;
     }
+
+    public boolean isFull() {
+        return isFull;
+    }
+
+    public void setFull(boolean full) {
+        isFull = full;
+    }
 }

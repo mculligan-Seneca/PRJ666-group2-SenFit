@@ -77,4 +77,12 @@ public class TrainingPlan {
     public void setTrainerId(int trainerId) {
         this.trainerId = trainerId;
     }
+
+    public int getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
+    }
 }

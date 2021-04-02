@@ -7,28 +7,19 @@ package com.example.senfit.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Icon;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.senfit.NetworkManager.Interceptor.AuthInterceptor;
 import com.example.senfit.NetworkManager.NetworkManager;
-import com.example.senfit.NetworkManager.NetwrokServices.LoginService;
+import com.example.senfit.NetworkManager.NetworkServices.LoginService;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.Member;
-import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,7 +75,7 @@ public class LoginHelper {
                             .updateMember(member)
                             .subscribeOn(Schedulers.io())
                             .observeOn(Schedulers.from(DatabaseClient.dbExecutors))//Maybe use Schedulers.computation();
-                            .subscribe(new SingleObserver<Long>() {
+                            .subscribe(new SingleObserver<Integer>() {
                                 private Disposable disposable;
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
@@ -92,8 +83,8 @@ public class LoginHelper {
                                 }
 
                                 @Override
-                                public void onSuccess(@NonNull Long id) {
-                                    comparisonCallback.isValid(id.intValue(), "Login Success");
+                                public void onSuccess(@NonNull Integer id) {
+                                    comparisonCallback.isValid(id, "Login Success");
                                     if(!disposable.isDisposed())
                                         disposable.dispose();
                                 }
@@ -119,7 +110,7 @@ public class LoginHelper {
 
             @Override
             public void onFailure(Call<Member> call, Throwable t) {
-                Log.e("login_api_err",t.getMessage());
+                Log.e("login_api_err",t.getLocalizedMessage());
                 comparisonCallback.isValid(-1,t.getMessage());
             }
         });

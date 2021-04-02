@@ -38,6 +38,6 @@ public interface MemberDAO {
 
 
     @Update(onConflict = OnConflictStrategy.ABORT)
-    public Single<Long> updateMember(Member member);
+    public Single<Integer> updateMember(Member member);
    //TODO: ADD methods for retrieving associated data
 }

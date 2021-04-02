@@ -22,19 +22,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.senfit.NetworkManager.NetworkManager;
-import com.example.senfit.NetworkManager.NetwrokServices.SignUpService;
+import com.example.senfit.NetworkManager.NetworkServices.SignUpService;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.Member;
 import com.example.senfit.R;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
-import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

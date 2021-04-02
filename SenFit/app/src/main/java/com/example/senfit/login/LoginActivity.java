@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.senfit.NetworkManager.Interceptor.AuthInterceptor;
 import com.example.senfit.NetworkManager.NetworkManager;
-import com.example.senfit.NetworkManager.NetwrokServices.LoginService;
+import com.example.senfit.NetworkManager.NetworkServices.LoginService;
 import com.example.senfit.R;
 import com.example.senfit.bookTour.BookTourActivity;
 import com.example.senfit.dataContext.DatabaseClient;
@@ -123,7 +123,8 @@ public class LoginActivity extends AppCompatActivity {
                         DatabaseClient.getInstance()
                                 .getAppDatabase()
                                 .getMemberDao()
-                                .updateMember(member);
+                                .updateMember(member)
+                                .blockingGet();//fine cause its on background thread
                         runOnUiThread(()->{//start next activity with logged member
                             showSenfitActivity();
                         });
