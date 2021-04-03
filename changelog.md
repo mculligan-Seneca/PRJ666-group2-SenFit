@@ -40,7 +40,7 @@ Completed Book a tour page 2021/3/23 (Portia)
 
 Completed SEN-FIT REST API 2021/3/24.(Mitchell)
 
-
+Networking manager implemented 2021/4/2(Mitchell)
 
 
 
