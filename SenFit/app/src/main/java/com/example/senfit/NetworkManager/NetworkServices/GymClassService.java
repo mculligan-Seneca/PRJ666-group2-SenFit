@@ -8,5 +8,14 @@ This interface repersents a service that interacts with the Sen-FIt API that spe
  */
 package com.example.senfit.NetworkManager.NetworkServices;
 
+import com.example.senfit.dataContext.entities.GymClass;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+
 public interface GymClassService {
+    @GET("/gymClasses")
+    public Call<List<GymClass>> getGymClasses();
 }

@@ -18,13 +18,14 @@ import com.example.senfit.dataContext.entities.Member;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 @Dao
 public interface MemberDAO {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    public Long insertMember(Member member);//returns new rownumber
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public Completable insertMember(Member member);//returns new rownumber
 
     //use maybe
     @Query("Select * from members where member_id=:id")

@@ -22,9 +22,11 @@ public class Trainer {
     private int trainerId;
     //TODO: add constructor and getter and setters
     @ColumnInfo(name = "first_name")
+    @SerializedName("first_name")
     private String firstName;
 
     @ColumnInfo(name="last_name")
+    @SerializedName("last_name")
     private String lastName;
 
 

@@ -18,7 +18,7 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface FitnessClassDAO {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable insertFitnessClass(FitnessClass... classes);
 
     @Query("Select * from FitnessClass where fitnessClassId=:id")

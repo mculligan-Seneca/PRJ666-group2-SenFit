@@ -154,6 +154,8 @@ public class DataInsertionManager {
                     dbClient.getAppDatabase()
                             .getFitnessClassDao()
                             .insertFitnessClass(fitnessClassList)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
                             .subscribe(new CompletableObserver() {
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
@@ -208,7 +210,10 @@ public class DataInsertionManager {
                     trainerList=trainers.toArray(trainerList);
                     dbClient.getAppDatabase()
                             .getTrainerDao()
-                            .insertTrainers(trainerList).subscribe(new CompletableObserver() {
+                            .insertTrainers(trainerList)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
+                            .subscribe(new CompletableObserver() {
                         @Override
                         public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
                             disposables.add(d);
@@ -258,7 +263,7 @@ public class DataInsertionManager {
 
     public static void insertDummyData(Context context) {
         DataInsertionManager dim = new DataInsertionManager(context);
-        if (!getDummyDataInserted(context)) {
+        //if (!getDummyDataInserted(context)) {
 
 
 
@@ -302,7 +307,7 @@ public class DataInsertionManager {
 
 
            setDummyDataInserted(context);*/
-        }
+       // }
     }
 
 

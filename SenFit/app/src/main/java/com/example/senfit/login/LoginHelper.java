@@ -17,6 +17,7 @@ import com.example.senfit.dataContext.entities.Member;
 
 import org.json.JSONObject;
 
+import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -72,10 +73,10 @@ public class LoginHelper {
                     DatabaseClient.initDB(context)
                             .getAppDatabase()
                             .getMemberDao()
-                            .updateMember(member)
+                            .insertMember(member)
                             .subscribeOn(Schedulers.io())
                             .observeOn(Schedulers.from(DatabaseClient.dbExecutors))//Maybe use Schedulers.computation();
-                            .subscribe(new SingleObserver<Integer>() {
+                            .subscribe(new CompletableObserver() {
                                 private Disposable disposable;
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
@@ -83,19 +84,22 @@ public class LoginHelper {
                                 }
 
                                 @Override
-                                public void onSuccess(@NonNull Integer id) {
-                                    setMemberId(context,id);
-                                    comparisonCallback.isValid(id, "Login Success");
+                                public void onComplete() {
+                                    setMemberId(context,member.getMember_id());
+                                    comparisonCallback.isValid(member.getMember_id(), "Login Success");
                                     if(!disposable.isDisposed())
                                         disposable.dispose();
                                 }
 
+
+
                                 @Override
                                 public void onError(@NonNull Throwable e) {
-                                    DatabaseClient.getInstance().getAppDatabase()
+                                   /* DatabaseClient.getInstance().getAppDatabase()
                                             .getMemberDao()
                                             .insertMember(member);
-                                    comparisonCallback.isValid(member.getMember_id(), "Login Success");
+                                    comparisonCallback.isValid(member.getMember_id(), "Login Success");*/
+                                    Log.e("load_to_db_err",e.getMessage());
                                     if(!disposable.isDisposed())
                                         disposable.dispose();
                                 }
