@@ -24,7 +24,8 @@ public class AuthInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        Request.Builder reqBuilder = request.newBuilder().addHeader("Authorization",this.token);
+        Request.Builder reqBuilder = request.newBuilder().addHeader("Authorization","JWT "+this.token);
+        //add JWT with header
         return chain.proceed(reqBuilder.build());
     }
 }

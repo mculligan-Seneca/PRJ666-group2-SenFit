@@ -31,6 +31,7 @@ public class Member {
     @ColumnInfo(name="postal_code")
     private String postalCode;
     @ColumnInfo(name="birth_date")
+    @SerializedName("birth_date")
     private Date dateOfBirth;// date uses java.sql.Date format
 
     @ColumnInfo(name="gender")

@@ -46,7 +46,7 @@ import com.example.senfit.dataContext.views.FitnessResultView;
 @Database(entities={Member.class, Trainer.class, CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class, GymClass.class, GymLocation.class,
         OnlineClass.class, TrainingExercise.class, TrainingPlan.class, TrainingSession.class,FitnessResult.class, UnregisteredClient.class}
-        ,views={FitnessResultView.class},version=11,
+        ,views={FitnessResultView.class},version=12,
 exportSchema=false)//See what export schema is used for
 
 @TypeConverters({Converter.class})

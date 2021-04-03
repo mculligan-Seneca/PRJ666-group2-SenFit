@@ -11,6 +11,8 @@ package com.example.senfit.NetworkManager;
 
 import android.app.Application;
 
+import com.google.gson.GsonBuilder;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -26,7 +28,8 @@ public class NetworkManager {
     private NetworkManager(String url){
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(url)//URL for senfit API
-                .addConverterFactory(GsonConverterFactory.create())//convert JSON to java objects
+                .addConverterFactory(GsonConverterFactory.create(new
+                        GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()))//convert JSON to java objects
                 .client(new OkHttpClient.Builder().build())
                 .build();
             
