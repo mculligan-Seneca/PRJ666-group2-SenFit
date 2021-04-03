@@ -12,6 +12,9 @@ package com.example.senfit.dataContext.entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName="GymLocations")
 public class GymLocation {
 
@@ -19,6 +22,7 @@ public class GymLocation {
     private int gymLocationId;
 
     @ColumnInfo(name="postal_code")
+    @SerializedName("postal_code")
     private String postalCode;
 
     public int getGymLocationId() {

@@ -12,16 +12,20 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.senfit.dataContext.entities.Member;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Single;
+
 @Dao
 public interface MemberDAO {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    public Long insertMember(Member member);//returns new rownumber
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public Completable insertMember(Member member);//returns new rownumber
 
     //use maybe
     @Query("Select * from members where member_id=:id")
@@ -34,5 +38,7 @@ public interface MemberDAO {
     //used for user validation
 
 
+    @Update(onConflict = OnConflictStrategy.ABORT)
+    public Single<Integer> updateMember(Member member);
    //TODO: ADD methods for retrieving associated data
 }

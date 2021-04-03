@@ -9,14 +9,18 @@ package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.sql.Date;
 
-@Entity(tableName="TrainingPlans")
+@Entity(tableName="TrainingPlans",foreignKeys = {@ForeignKey(entity = FitnessPortfolio.class,
+        parentColumns = "fitnessPortfolioId",childColumns = "fitnessPortfolioId"),
+            @ForeignKey(entity = Trainer.class,parentColumns = "trainerId",childColumns = "trainerId"),
+            @ForeignKey(entity=Member.class,parentColumns = "member_id",childColumns = "member_id")})
 public class TrainingPlan {
 //TODO: add constructor and getter and setters
-    @PrimaryKey(autoGenerate=true)
+    @PrimaryKey
     private int trainingPlanId;
 
     @ColumnInfo(name="plan_name")
@@ -30,6 +34,9 @@ public class TrainingPlan {
 
     @ColumnInfo(name="trainerId")
     private int trainerId; //TODO: add foreignKey
+
+    @ColumnInfo(name="member_id")
+    private int member_id;
 
     public int getTrainingPlanId() {
         return trainingPlanId;
@@ -69,5 +76,13 @@ public class TrainingPlan {
 
     public void setTrainerId(int trainerId) {
         this.trainerId = trainerId;
+    }
+
+    public int getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
     }
 }

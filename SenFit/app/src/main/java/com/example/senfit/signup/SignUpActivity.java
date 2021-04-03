@@ -11,6 +11,7 @@ package com.example.senfit.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,16 +21,22 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.senfit.NetworkManager.NetworkManager;
+import com.example.senfit.NetworkManager.NetworkServices.SignUpService;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.Member;
 import com.example.senfit.R;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
+import org.json.JSONObject;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 //TODO: Add client side validation
@@ -50,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
     private TextView birthDate;
              private Button submit;
     private Member member;
-
+    private NetworkManager networkManager;
 
 
 
@@ -63,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         this.member = new Member();
+        this.networkManager=NetworkManager.getNetworkManager();
         this.firstName = findViewById(R.id.first_name_id);
         this.lastName = findViewById(R.id.last_name_id);
         this.postalCode = findViewById(R.id.postal_code);
@@ -122,6 +130,45 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             this.member.setPassword(pWord);
 
             submit.setEnabled(false);
+            SignUpService signUpService = this.networkManager.createNetworkService(SignUpService.class);
+            Call<SignUpResponse> signUpCall = signUpService.signUp(this.member);
+            signUpCall.enqueue(new Callback<SignUpResponse>() {
+                @Override
+                public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                    if(!response.isSuccessful()){
+                        String errMsg=null;
+                        try{
+                            JSONObject jsonErr= new JSONObject(response.errorBody().string());
+                            errMsg=jsonErr.getString("errMsg");
+                        }catch(Exception e){
+                            Log.e("sign_up_res_err",e.getLocalizedMessage());
+                            errMsg="ERRORInternal problem";
+                        }
+                        DialogBoxHelper.createPositiveDialog(SignUpActivity.this,ERR_TITLE,
+                                errMsg,null)
+                                .show();
+                        submit.setEnabled(true);
+                    }else{
+                        DatabaseClient dbClient = DatabaseClient.initDB(getApplicationContext());
+                        DatabaseClient.dbExecutors.execute(()->{
+                            dbClient.getAppDatabase()
+                                    .getMemberDao()
+                                    .insertMember(member);
+                        });//inserts member into db
+                        startLoginActivity();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                            Log.e("sign_up_res_err",t.getLocalizedMessage());
+                    DialogBoxHelper.createPositiveDialog(SignUpActivity.this,ERR_TITLE,
+                            "Server error occured",null)
+                            .show();
+                    submit.setEnabled(true);
+                }
+            });
+            /*
             DatabaseClient dbClient = DatabaseClient.initDB(getApplicationContext());
             DatabaseClient.dbExecutors.execute(()-> {
                 List<Member> memberList = dbClient//maybe replace with worker class
@@ -134,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
                     //   PasswordHasher ph = new PasswordHasher();
                     // String hash = new String(ph.hashPassword(member.getPassword()), "UTF-8");
                     member.setPassword(member.getPassword());
-                    member.setSalt(member.getPassword().getBytes());//store salt in database
+                  //  member.setSalt(member.getPassword().);//store salt in database
                     dbClient.getAppDatabase()
                             .getMemberDao()
                             .insertMember(member);
@@ -157,7 +204,7 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
                         submit.setEnabled(true);
                     });
                 }
-            });
+            });*/
         }
 
     }
@@ -218,6 +265,14 @@ public class SignUpActivity extends AppCompatActivity implements AddBirthDateFra
             return errors;
         }
 
+
+        public void startLoginActivity(){
+            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+
+            Toast.makeText(SignUpActivity.this,"Member successfully created",Toast.LENGTH_LONG).show();
+            startActivity(intent);
+            finish();
+        }
 
 
 }

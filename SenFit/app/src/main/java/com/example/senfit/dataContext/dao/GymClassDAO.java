@@ -13,11 +13,13 @@ import com.example.senfit.dataContext.entities.GymClass;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+
 @Dao
 public interface GymClassDAO {
 
     @Insert
-    void insertGymClass(GymClass gymClass);
+    public Completable insertGymClasses(GymClass...gymClasses);
 
     @Transaction
     @Query("Select * from gymClass")

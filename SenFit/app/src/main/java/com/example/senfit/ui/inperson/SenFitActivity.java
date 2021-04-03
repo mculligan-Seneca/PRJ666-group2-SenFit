@@ -94,7 +94,7 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
         this.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();//manages rotating the hamburger icon
 
-
+        //Bundle extras = getIntent()
         this.memberId = LoginHelper.getMemberId(this);
         this.inPersonClassId=0;
     }

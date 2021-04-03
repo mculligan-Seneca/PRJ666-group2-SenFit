@@ -14,10 +14,12 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
-@Entity(tableName = "gymClass"/*,foreignKeys = {@ForeignKey(entity=FitnessClass.class,
+@Entity(tableName = "gymClass",foreignKeys = {@ForeignKey(entity=FitnessClass.class,
                                                                 parentColumns = "fitnessClassId",
                                                                     childColumns ="fitnessClassId" ),
                                                 @ForeignKey(entity=Trainer.class,
@@ -25,19 +27,22 @@ import java.sql.Timestamp;
                                                         childColumns = "trainerId"),
                                                 @ForeignKey(entity = GymLocation.class,
                                                         parentColumns = "gymLocationId",
-                                                        childColumns = "gymLocationId")}*/)
+                                                        childColumns = "gymLocationId")})
 public class GymClass {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name="gymClassId")
     private int gymClassId;//TODO:add constructor and getter/setter
 
     @ColumnInfo(name="class_date")
+    @SerializedName("class_date")
     private Date classDate;
 
     @ColumnInfo(name="start_time")
+    @SerializedName("start_time")
     private Timestamp startTime;
 
     @ColumnInfo(name="end_time")
+    @SerializedName("end_time")
     private Timestamp endTime;
 
     @ColumnInfo(name="trainerId")
@@ -51,6 +56,9 @@ public class GymClass {
 
     @ColumnInfo(name="enrolled")
     private boolean enrolled;
+
+    @ColumnInfo(name = "isFull")
+    private boolean isFull;
 
     public boolean getEnrolled() {
         return enrolled;
@@ -114,5 +122,13 @@ public class GymClass {
 
     public void setGymLocationId(int gymLocationId) {
         this.gymLocationId = gymLocationId;
+    }
+
+    public boolean isFull() {
+        return isFull;
+    }
+
+    public void setFull(boolean full) {
+        isFull = full;
     }
 }

@@ -9,27 +9,50 @@ package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "trainers")
+import com.google.gson.annotations.SerializedName;
+
+@Entity(tableName = "trainers",foreignKeys = {@ForeignKey(entity = GymLocation.class,
+        parentColumns = "gymLocationId", childColumns = "gymLocationId")})
 public class Trainer {
-    @PrimaryKey(autoGenerate=true)
+    @PrimaryKey
+    @SerializedName("id")
     private int trainerId;
     //TODO: add constructor and getter and setters
     @ColumnInfo(name = "first_name")
+    @SerializedName("first_name")
     private String firstName;
 
     @ColumnInfo(name="last_name")
+    @SerializedName("last_name")
     private String lastName;
 
 
-    @ColumnInfo(name="post_code")
-    private String postalCode;
+    @ColumnInfo(name="gymLocationId")
+    private int gymLocationId;
 
     @ColumnInfo(name="email")
     private String email;
 
 
+
+    public Trainer(){
+        this.trainerId=-1;
+        this.gymLocationId=-1;
+        this.firstName=null;
+        this.lastName=null;
+        this.email=null;
+    }
+
+    public Trainer(int trainerId,String firstName, String lastName,int gymLocationId, String email){
+        this.trainerId=trainerId;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.gymLocationId=gymLocationId;
+        this.email=email;
+    }
     public int getTrainerId() {
         return trainerId;
     }
@@ -54,13 +77,7 @@ public class Trainer {
         this.lastName = lastName;
     }
 
-    public String getPostalCode() {
-        return postalCode;
-    }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
 
     public String getEmail() {
         return email;
@@ -68,5 +85,13 @@ public class Trainer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getGymLocationId() {
+        return gymLocationId;
+    }
+
+    public void setGymLocationId(int gymLocationId) {
+        this.gymLocationId = gymLocationId;
     }
 }

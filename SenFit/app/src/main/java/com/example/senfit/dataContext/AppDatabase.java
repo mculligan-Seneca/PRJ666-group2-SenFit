@@ -22,6 +22,7 @@ import com.example.senfit.dataContext.dao.FitnessClassDAO;
 import com.example.senfit.dataContext.dao.FitnessPortfolioDAO;
 import com.example.senfit.dataContext.dao.FitnessResultDAO;
 import com.example.senfit.dataContext.dao.GymClassDAO;
+import com.example.senfit.dataContext.dao.GymLocationDAO;
 import com.example.senfit.dataContext.dao.MemberDAO;
 import com.example.senfit.dataContext.dao.OnlineClassDAO;
 import com.example.senfit.dataContext.dao.TrainerDAO;
@@ -45,7 +46,7 @@ import com.example.senfit.dataContext.views.FitnessResultView;
 @Database(entities={Member.class, Trainer.class, CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class, GymClass.class, GymLocation.class,
         OnlineClass.class, TrainingExercise.class, TrainingPlan.class, TrainingSession.class,FitnessResult.class, UnregisteredClient.class}
-        ,views={FitnessResultView.class},version=11,
+        ,views={FitnessResultView.class},version=12,
 exportSchema=false)//See what export schema is used for
 
 @TypeConverters({Converter.class})
@@ -75,6 +76,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UnregisteredClientDAO getUnregisteredClientDAO();
 
+    public abstract GymLocationDAO getGymLocationDAO();
 
 
     //TODO: Add any new DAO's to appdatabase
