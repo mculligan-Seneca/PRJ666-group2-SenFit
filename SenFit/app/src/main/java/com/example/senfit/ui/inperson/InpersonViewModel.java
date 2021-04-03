@@ -86,7 +86,7 @@ public class InpersonViewModel extends ViewModel {
 
                                     @Override
                                     public void onError(@NonNull Throwable e) {
-
+                                        Log.e("in_person_class",e.getMessage());
                                     }
                                 });
 
