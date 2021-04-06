@@ -6,7 +6,7 @@ Version 1.0
 SelectTrainingPortfolioFragment
 This fragment class repersents a list of fitness portfolios for the member to select for a trainingplan.
  */
-package com.example.senfit.trainingPlan;
+package com.example.senfit.trainingPlan.selectTrainingPortfolio;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +30,8 @@ import com.example.senfit.fitnessPortfolio.PortfolioAdapter;
 import com.example.senfit.fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity;
 import com.example.senfit.navigator.NavigateFragment;
 import com.example.senfit.navigator.Navigator;
+import com.example.senfit.trainingPlan.EnrollTrainingPlanViewModel;
+import com.example.senfit.trainingPlan.selectGymTraining.SelectTrainingGymFragment;
 
 import java.util.ArrayList;
 import java.util.List;

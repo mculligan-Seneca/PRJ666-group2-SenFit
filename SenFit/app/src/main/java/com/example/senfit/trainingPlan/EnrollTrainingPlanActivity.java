@@ -15,11 +15,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toolbar;
 
 import com.example.senfit.R;
 import com.example.senfit.navigator.NavigateFragment;
 import com.example.senfit.navigator.Navigator;
+import com.example.senfit.trainingPlan.selectTrainingPortfolio.SelectTrainingPortfolioFragment;
 
 public class EnrollTrainingPlanActivity extends AppCompatActivity implements Navigator, NavigateFragment {
     public static final String MEMBER_TAG="member_tag";

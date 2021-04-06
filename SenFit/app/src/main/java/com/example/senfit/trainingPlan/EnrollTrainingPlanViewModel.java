@@ -13,25 +13,25 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.FitnessPortfolio;
+import com.example.senfit.dataContext.entities.TrainingPlan;
 
 import java.util.List;
 
 public class EnrollTrainingPlanViewModel extends ViewModel {
 
-    private int memberId;
-    private int fitnessPortfolioId;
-    private int gymLocationId;
-    private int trainerId;
+
+    private TrainingPlan trainingPlan;
     private DatabaseClient dbClient;
     private LiveData<List<FitnessPortfolio>> livePortfolioData;
 
 
     public EnrollTrainingPlanViewModel(int memberId){
-        this.memberId=memberId;
+        this.trainingPlan=new TrainingPlan();
+        this.trainingPlan.setMember_id(memberId);
         this.dbClient = DatabaseClient.getInstance();
         this.livePortfolioData= dbClient.getAppDatabase()
                 .getFitnessPortfolioDAO()
-                .getFitnessPortfolioFromMember(this.memberId);
+                .getFitnessPortfolioFromMember(this.trainingPlan.getMember_id());
 
 
     }
@@ -41,9 +41,9 @@ public class EnrollTrainingPlanViewModel extends ViewModel {
     }
 
     public int getMemberId(){
-        return this.memberId;
+        return this.trainingPlan.getMember_id();
     }
     public void setFitnessPortfolioId(int fitnessPortfolioId){
-        this.fitnessPortfolioId=fitnessPortfolioId;
+        this.trainingPlan.setFitnessPortfolioId(fitnessPortfolioId);
     }
 }
