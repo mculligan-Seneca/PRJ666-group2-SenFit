@@ -9,15 +9,55 @@ This activity is the base activity for the member to enroll into a training plan
 package com.example.senfit.trainingPlan;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
-import com.example.senfit.R;
+import android.widget.Toolbar;
 
-public class EnrollTrainingPlanActivity extends AppCompatActivity {
+import com.example.senfit.R;
+import com.example.senfit.navigator.NavigateFragment;
+import com.example.senfit.navigator.Navigator;
+
+public class EnrollTrainingPlanActivity extends AppCompatActivity implements Navigator, NavigateFragment {
+    public static final String MEMBER_TAG="member_tag";
+    private FragmentManager fm;
+    private EnrollTrainingPlanViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enroll_training_plan);
+
+        if(savedInstanceState==null) {
+            int memberId=getIntent().getIntExtra(MEMBER_TAG,-1);
+            this.viewModel = new ViewModelProvider(this,).create(EnrollTrainingPlanViewModel.class);
+        }
+        this.fm=getSupportFragmentManager();
+        this.fm.beginTransaction()
+                .add(R.id.training_plan_enroll_fragment,new SelectTrainingPortfolioFragment())
+                .addToBackStack(null)
+                .commit();
+        getActionBar().setTitle(R.string.select_training_portfolio);
     }
+
+
+    @Override
+    public void navigateTo(Intent intent) {//starts new activity and finishes previous one
+        startActivity(intent);
+        finish();
+
+    }
+
+    @Override
+    public void swapFragment(Fragment fragment, int titleId) {
+        fm.beginTransaction()
+                .replace(R.id.training_plan_enroll_fragment,fragment)
+                .addToBackStack(null).commit();
+        getActionBar().setTitle(titleId);
+
+    }
+
 }
