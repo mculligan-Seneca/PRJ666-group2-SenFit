@@ -8,6 +8,7 @@ This interface repersents the data access object of the trainer class
  */
 package com.example.senfit.dataContext.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -33,4 +34,6 @@ public interface TrainerDAO {
 
     //TODO: ADD methods for retrieving associated data
 
+    @Query("Select * from trainers where gymLocationId=:gymId")
+    public LiveData<List<Trainer>> getTrainersFromGym(int gymId);
 }

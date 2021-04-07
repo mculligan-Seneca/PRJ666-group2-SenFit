@@ -14,12 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class EnrollTrainingPlanViewModelFactory implements ViewModelProvider.Factory{
+public class TrainingPlanViewModelFactory implements ViewModelProvider.Factory{
     private static final String TRAINING_PLAN_FACTORYTAG="plan_tag";
     private int memberId;
 
 
-    public EnrollTrainingPlanViewModelFactory(int memberId){
+    public TrainingPlanViewModelFactory(int memberId){
         this.memberId=memberId;
     }
     @NonNull

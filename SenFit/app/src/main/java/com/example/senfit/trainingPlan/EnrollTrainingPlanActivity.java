@@ -33,7 +33,7 @@ public class EnrollTrainingPlanActivity extends AppCompatActivity implements Nav
 
         if(savedInstanceState==null) {
             int memberId=getIntent().getIntExtra(MEMBER_TAG,-1);
-            this.viewModel = new ViewModelProvider(this,new EnrollTrainingPlanViewModelFactory(memberId)).get(EnrollTrainingPlanViewModel.class);
+            this.viewModel = new ViewModelProvider(this,new TrainingPlanViewModelFactory(memberId)).get(EnrollTrainingPlanViewModel.class);
         }else{
             this.viewModel = new ViewModelProvider(this).get(EnrollTrainingPlanViewModel.class);
         }

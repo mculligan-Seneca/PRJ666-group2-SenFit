@@ -73,6 +73,8 @@
     <string name="reps">Reps:</string>
     <string name="hearts_beats_pm">Hearts Beats PM:</string>
     <string name="fittness_result_title">Fitness Results</string>
+    <string name="select_trainer_plan">Select Trainer for Plan</string>
+    <string name="training_plan_submitted">Training Plan Submitted!</string>
     <string-array name="covid_questions">
         <item>I do not have a cough</item>
         <item>I have not been experencing headaches</item>
