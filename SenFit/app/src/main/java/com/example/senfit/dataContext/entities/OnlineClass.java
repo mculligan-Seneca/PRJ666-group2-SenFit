@@ -13,6 +13,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -20,6 +22,7 @@ import java.sql.Timestamp;
 public class OnlineClass {
 
     @PrimaryKey(autoGenerate=true)
+    @SerializedName("Id")
     private int onlineClassId;
 
     @ColumnInfo(name="class_date")
@@ -32,6 +35,7 @@ public class OnlineClass {
     private Timestamp endTime;
 
     @ColumnInfo(name="fitnessClassId")
+    @SerializedName("FitnessClasssId")
     private long fitnessClassId;//TODO:ADD foreign key or embedded
 
     @ColumnInfo(name="trainerId")
