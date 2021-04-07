@@ -79,6 +79,7 @@ public class InpersonViewModel extends ViewModel {
 
                                     @Override
                                     public void onComplete() {
+
                                         loadInpersonClass();
                                         if(!disposable.isDisposed())
                                             disposable.dispose();

@@ -31,6 +31,7 @@ import java.sql.Timestamp;
 public class GymClass {
     @PrimaryKey
     @ColumnInfo(name="gymClassId")
+    @SerializedName("id")
     private int gymClassId;//TODO:add constructor and getter/setter
 
     @ColumnInfo(name="class_date")
