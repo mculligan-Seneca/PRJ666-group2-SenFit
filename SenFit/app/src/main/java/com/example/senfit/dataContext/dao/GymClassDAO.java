@@ -5,6 +5,7 @@ package com.example.senfit.dataContext.dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
@@ -18,7 +19,7 @@ import io.reactivex.Completable;
 @Dao
 public interface GymClassDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     public Completable insertGymClasses(GymClass...gymClasses);
 
     @Transaction
