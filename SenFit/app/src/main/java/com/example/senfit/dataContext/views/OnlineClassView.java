@@ -23,6 +23,7 @@ public class OnlineClassView {
     public int onlineClassId;
     public int trainerId;
     public int fitnessClassId;
+    @ColumnInfo(name="instructorName")
     public String instructorName;
     @ColumnInfo(name="fitness_class_name")
     public String className;
