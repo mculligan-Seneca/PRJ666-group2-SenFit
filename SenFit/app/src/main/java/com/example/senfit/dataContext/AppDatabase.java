@@ -42,11 +42,12 @@ import com.example.senfit.dataContext.entities.TrainingPlan;
 import com.example.senfit.dataContext.entities.TrainingSession;
 import com.example.senfit.dataContext.entities.UnregisteredClient;
 import com.example.senfit.dataContext.views.FitnessResultView;
+import com.example.senfit.dataContext.views.OnlineClassView;
 
 @Database(entities={Member.class, Trainer.class, CovidLog.class,
     Exercise.class, FitnessClass.class, FitnessPortfolio.class, GymClass.class, GymLocation.class,
         OnlineClass.class, TrainingExercise.class, TrainingPlan.class, TrainingSession.class,FitnessResult.class, UnregisteredClient.class}
-        ,views={FitnessResultView.class},version=12,
+        ,views={FitnessResultView.class, OnlineClassView.class},version=13,
 exportSchema=false)//See what export schema is used for
 
 @TypeConverters({Converter.class})

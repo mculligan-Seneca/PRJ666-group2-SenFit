@@ -14,6 +14,7 @@ import com.example.senfit.dataContext.entities.GymClass;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 
 @Dao
 public interface GymClassDAO {
@@ -21,10 +22,13 @@ public interface GymClassDAO {
     @Insert
     public Completable insertGymClasses(GymClass...gymClasses);
 
-    @Transaction
+
     @Query("Select * from gymClass")
     public List<GymClass> getGymClasses();
 
     @Query("UPDATE gymClass SET enrolled=:enrolled where gymClassId=:id")
     public void updateEnrollStatus(int id, boolean enrolled);
+
+    @Query("Select * from gymClass")
+    public Flowable<GymClass> getGymClassesFlow();
 }

@@ -16,14 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.senfit.R;
+import com.example.senfit.covidLog.DateHelper;
+import com.example.senfit.dataContext.views.OnlineClassView;
 import com.example.senfit.ui.inperson.InpersonAdapter;
 import com.example.senfit.ui.inperson.InpersonClassData;
+import com.example.senfit.uiHelpers.DateTimeFormatHelper;
 
 import java.util.List;
 
 public class OnlineClassAdapter extends RecyclerView.Adapter<OnlineClassAdapter.ViewHolder>{
 
-    private List<InpersonClassData> mDataSet;
+    private List<OnlineClassView> mDataSet;
 
     private InpersonAdapter.SelectClassListener listener;
 
@@ -93,13 +96,13 @@ public class OnlineClassAdapter extends RecyclerView.Adapter<OnlineClassAdapter.
     }
 
 
-    public OnlineClassAdapter(List<InpersonClassData> dataSet, InpersonAdapter.SelectClassListener listener) {
+    public OnlineClassAdapter(List<OnlineClassView> dataSet, InpersonAdapter.SelectClassListener listener) {
         this.listener=listener;
         mDataSet = dataSet;
     }
 
 
-    public void updateDataSet(List<InpersonClassData> dataSet) {
+    public void updateDataSet(List<OnlineClassView> dataSet) {
         mDataSet.clear();
         mDataSet.addAll(dataSet);
         notifyDataSetChanged();
@@ -117,12 +120,12 @@ public class OnlineClassAdapter extends RecyclerView.Adapter<OnlineClassAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull OnlineClassAdapter.ViewHolder viewHolder, int position) {
-        viewHolder.getClassNameTextView().setText(mDataSet.get(position).getClasName());
-        viewHolder.getClassDateTextView().setText(mDataSet.get(position).getDate());
-        viewHolder.getClassTimeTextView().setText(mDataSet.get(position).getTime());
-        viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).getInstructorName());
+        viewHolder.getClassNameTextView().setText(mDataSet.get(position).className);
+        viewHolder.getClassDateTextView().setText(DateTimeFormatHelper.formatDate(mDataSet.get(position).classDate));
+        viewHolder.getClassTimeTextView().setText(DateTimeFormatHelper.formatTime(mDataSet.get(position).startTime));
+        viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).instructorName);
 
-        if (mDataSet.get(position).getEnrolled()) {
+        if (mDataSet.get(position).enrolled) {
             viewHolder.getClassEnroledTextView().setVisibility(View.VISIBLE);
             viewHolder.getClassEnrollButton().setVisibility(View.INVISIBLE);
         } else {
@@ -131,10 +134,10 @@ public class OnlineClassAdapter extends RecyclerView.Adapter<OnlineClassAdapter.
         }
 
         viewHolder.getClassEnrollButton().setOnClickListener((v)->{
-            InpersonClassData gymClass = mDataSet.get(position);
+            OnlineClassView onlineClassView = mDataSet.get(position);
             //gets the current gym class being selected
             if (listener!=null)//checks listener is not null
-                listener.selectClassItem(position, gymClass.getGymClassId());//notifies the main ui of selected class
+                listener.selectClassItem(position, onlineClassView.onlineClassId);//notifies the main ui of selected class
         });
 
     }
