@@ -39,9 +39,9 @@ public class DatabaseClient {
     //NOTE: Optionally use livedata and observables to run concurrent actions
     private DatabaseClient(Context context){
             this.appDatabase= Room.databaseBuilder(context, AppDatabase.class,"Sen-FitDB")
-                    .fallbackToDestructiveMigration()
+                    //.fallbackToDestructiveMigration()
                     .build();
-     //     this.appDatabase.clearAllTables();
+           // dbExecutors.execute(()->this.appDatabase.clearAllTables());
 
 
     }

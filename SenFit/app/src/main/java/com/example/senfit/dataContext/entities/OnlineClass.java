@@ -35,12 +35,15 @@ public class OnlineClass {
     private Date classDate;
 
     @ColumnInfo(name="start_time")
+    @SerializedName("start_time")
     private Timestamp startTime;
 
     @ColumnInfo(name="end_time")
+    @SerializedName("end_time")
     private Timestamp endTime;
 
     @ColumnInfo(name="fitnessClassId")
+    @SerializedName("FitnessClassId")
     private long fitnessClassId;//TODO:ADD foreign key or embedded
 
     @ColumnInfo(name="trainerId")

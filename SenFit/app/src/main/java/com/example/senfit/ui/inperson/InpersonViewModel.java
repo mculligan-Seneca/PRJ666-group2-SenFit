@@ -5,6 +5,7 @@
 
 package com.example.senfit.ui.inperson;
 
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ import com.example.senfit.dataContext.entities.FitnessClass;
 import com.example.senfit.dataContext.entities.GymClass;
 import com.example.senfit.dataContext.entities.InPersonClass;
 import com.example.senfit.dataContext.entities.Trainer;
+import com.example.senfit.dataContext.views.InPersonView;
 
 import org.json.JSONObject;
 
@@ -30,6 +32,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import io.reactivex.CompletableObserver;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -40,74 +44,77 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InpersonViewModel extends ViewModel {
-    private MutableLiveData<List<InpersonClassData>> inpersonClasses;
+    private LiveData<List<InPersonView>> inpersonClasses;
     private GymClassService gymClassService;
-    private DatabaseClient dbClient;
+    private GymClassDAO gymClassDAO;
     public InpersonViewModel(){
-        this.inpersonClasses = null;
+
         this.gymClassService = NetworkManager.getNetworkManager().createNetworkService(GymClassService.class);
-        this.dbClient= DatabaseClient.getInstance();
-    }
-    public LiveData<List<InpersonClassData>> getInpersonClasses() {
-        if (inpersonClasses == null) {
-            this.inpersonClasses= new MutableLiveData<List<InpersonClassData>>();
-            Call<List<GymClass>> gymClassCall = this.gymClassService.getGymClasses();
-            gymClassCall.enqueue(new Callback<List<GymClass>>() {
-                @Override
-                public void onResponse(Call<List<GymClass>> call, Response<List<GymClass>> response) {
-                    if(!response.isSuccessful()){
+        this.gymClassDAO= DatabaseClient.getInstance().getAppDatabase().getGymClassDao();
+        this.inpersonClasses= this.gymClassDAO.getLiveInPersonClasses();
+        Call<List<GymClass>> gymClassCall = this.gymClassService.getGymClasses();
+        gymClassCall.enqueue(new Callback<List<GymClass>>() {
+            @Override
+            public void onResponse(Call<List<GymClass>> call, Response<List<GymClass>> response) {
+                if(!response.isSuccessful()){
 
-                        try{
-                            Log.e("in_person_class",response.errorBody().string());
-                        }catch(Exception e){
-                            Log.e("in_person_class",e.getMessage());
-                        }
-                    }else{
-                        List<GymClass> gymClasses = response.body();
-                        GymClass[] classes = new GymClass[1];
-                        classes= gymClasses.toArray(classes);
-                        dbClient.getAppDatabase()
-                                .getGymClassDao()
-                                .insertGymClasses(classes)
-                                .subscribeOn(Schedulers.io())
-                                .subscribe(new CompletableObserver() {
-                                    private Disposable disposable;
-                                    @Override
-                                    public void onSubscribe(@NonNull Disposable d) {
-                                        disposable=d;
-                                    }
-
-                                    @Override
-                                    public void onComplete() {
-                                        loadInpersonClass();
-                                        if(!disposable.isDisposed())
-                                            disposable.dispose();
-                                    }
-
-                                    @Override
-                                    public void onError(@NonNull Throwable e) {
-                                        Log.e("in_person_class",e.getMessage());
-                                    }
-                                });
-
-
+                    try{
+                        Log.e("in_person_class",response.errorBody().string());
+                    }catch(Exception e){
+                        Log.e("in_person_class",e.getMessage());
                     }
-                }
+                }else{
+                    List<GymClass> gymClasses = response.body();
+                    Observable.fromIterable(gymClasses)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
+                            .subscribe(new Observer<GymClass>() {
+                               private Disposable disposable;
+                                @Override
+                                public void onSubscribe(@NonNull Disposable d) {
+                                    disposable=d;
+                                }
 
-                @Override
-                public void onFailure(Call<List<GymClass>> call, Throwable t) {
-                    Log.e("in_person_class",t.getMessage());
-                }
-            });
+                                @Override
+                                public void onNext(@NonNull GymClass gymClass) {
+                                       try {
+                                           gymClassDAO.insertGymClass(gymClass);
+                                       }catch(SQLiteConstraintException sqle){
+                                           Log.e("load_gym_data",sqle.getMessage());
+                                       }
+                                }
 
-        }
+                                @Override
+                                public void onError(@NonNull Throwable e) {
+                                    Log.e("load_online_data",e.getMessage());
+                                }
+
+                                @Override
+                                public void onComplete() {
+                                    if(!disposable.isDisposed())
+                                        disposable.dispose();
+                                }
+                            });
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GymClass>> call, Throwable t) {
+                Log.e("in_person_class",t.getMessage());
+            }
+        });
+    }
+    public LiveData<List<InPersonView>> getInpersonClasses() {
+
         return inpersonClasses;
     }
 
 
     /*
     Fetching inperson class related data from the DB
-     */
+
    private void loadInpersonClass() {
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -157,4 +164,6 @@ public class InpersonViewModel extends ViewModel {
             }
         }.execute();
     }
+
+     */
 }

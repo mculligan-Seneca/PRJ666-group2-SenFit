@@ -16,13 +16,21 @@ import com.google.gson.annotations.SerializedName;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-@DatabaseView(viewName = "InPersonView",value = "select gymClassId, trainerId, fitnessClassId, gymLocationId, "+
+@DatabaseView(viewName = "InPersonView",value = "select gymClassId, trainerId, fitnessClassId,  "+
             "class_date, start_time, end_time, first_name || ' ' || last_name as instructorName, fitness_class_name, "+
-            "postal_code, enrolled from gymClass join trainers using(trainerId) join fitnessClass using(fitnessClassId) "+
-                "join gymlocations using(gymLocationId);")
+            " enrolled from gymClass join trainers using(trainerId) join fitnessClass using(fitnessClassId);")
 public class InPersonView {
     @ColumnInfo(name="gymClassId")
     public int gymClassId;
+    @ColumnInfo(name="trainerId")
+    public int trainerId;//TODO: ADD foreign key or embeeded
+
+    @ColumnInfo(name="fitnessClassId")
+    public int fitnessClassId;//TODO:ADD foreign key or
+
+
+
+
     @ColumnInfo(name="class_date")
 
     public Date classDate;
@@ -35,14 +43,7 @@ public class InPersonView {
 
     public Timestamp endTime;
 
-    @ColumnInfo(name="trainerId")
-    public int trainerId;//TODO: ADD foreign key or embeeded
 
-    @ColumnInfo(name="fitnessClassId")
-    public int fitnessClassId;//TODO:ADD foreign key or
-
-    @ColumnInfo(name="gymLocationId")
-    public int gymLocationId;//TODO: ADD foreign key or embedded
 
     @ColumnInfo(name="instructorName")
     public String instructorName;
@@ -50,8 +51,8 @@ public class InPersonView {
     @ColumnInfo(name="fitness_class_name")
     public String className;
 
-    @ColumnInfo(name="postal_code")
-    public String postalCode;
+
+
     @ColumnInfo(name="enrolled")
     public boolean enrolled;
 

@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface GymLocationDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     public Completable insertGymLocations(GymLocation...gymLocations);
 
     @Query("Select * from GymLocations")

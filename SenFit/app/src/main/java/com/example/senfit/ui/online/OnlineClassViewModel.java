@@ -2,6 +2,7 @@
 
 package com.example.senfit.ui.online;
 
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -70,8 +71,11 @@ public class OnlineClassViewModel extends ViewModel {
 
                                 @Override
                                 public void onNext(@NonNull OnlineClass onlineClass) {
-
-                                    onlineDAO.insertOnlineClass(onlineClass);
+                                    try {
+                                        onlineDAO.insertOnlineClass(onlineClass);
+                                    }catch(SQLiteConstraintException sqle){
+                                        Log.e("load_online_data",sqle.getMessage());
+                                    }
                                 }
 
                                 @Override
