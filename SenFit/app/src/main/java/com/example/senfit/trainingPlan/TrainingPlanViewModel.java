@@ -2,6 +2,7 @@ package com.example.senfit.trainingPlan;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.senfit.NetworkManager.NetworkManager;
@@ -25,7 +26,7 @@ public class TrainingPlanViewModel extends ViewModel {
 
         private TrainingPlanService planService;
         private TrainingPlanDAO planDAO;
-
+        private LiveData<List<TrainingPlan>> trainingPlanLiveData;
 
         public TrainingPlanViewModel(int memberId){
                 this.planDAO= DatabaseClient.getInstance().getAppDatabase().getTrainingPlanDAO();
@@ -68,11 +69,17 @@ public class TrainingPlanViewModel extends ViewModel {
 
                         @Override
                         public void onFailure(Call<List<TrainingPlan>> call, Throwable t) {
-
+                            Log.e("load_training_plans",t.getMessage());
                         }
                 });
+            this.trainingPlanLiveData= this.planDAO.getTrainingPlansForMember(memberId);
         }
 
+
+
+        public LiveData<List<TrainingPlan>> getTrainingPlanLiveData(){
+            return this.trainingPlanLiveData;
+        }
 
 
 
