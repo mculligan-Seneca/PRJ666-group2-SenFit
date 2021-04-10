@@ -8,16 +8,22 @@ This interface repersents a service that interacts with the Sen-FIt API that spe
  */
 package com.example.senfit.NetworkManager.NetworkServices;
 
+import com.example.senfit.dataContext.entities.MemberOnlineClass;
 import com.example.senfit.dataContext.entities.OnlineClass;
 import com.example.senfit.generated.callback.OnClickListener;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface OnlineClassService {
 
     @GET("/onlineClasses")
     public Call<List<OnlineClass>> getOnlineClasses();
+
+    @POST("/onlimeClaases/enroll")
+    public Call<OnlineClass> enrollOnlineClass(@Body MemberOnlineClass memberOnlineClass);
 }

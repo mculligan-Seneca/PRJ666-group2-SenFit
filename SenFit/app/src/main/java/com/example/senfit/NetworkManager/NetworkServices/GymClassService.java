@@ -9,13 +9,19 @@ This interface repersents a service that interacts with the Sen-FIt API that spe
 package com.example.senfit.NetworkManager.NetworkServices;
 
 import com.example.senfit.dataContext.entities.GymClass;
+import com.example.senfit.dataContext.entities.MemberGymClass;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface GymClassService {
     @GET("/gymClasses")
     public Call<List<GymClass>> getGymClasses();
+
+    @POST("/gymClass/enroll")
+    public Call<GymClass> enrollGymClass(@Body MemberGymClass memberGymClass);
 }
