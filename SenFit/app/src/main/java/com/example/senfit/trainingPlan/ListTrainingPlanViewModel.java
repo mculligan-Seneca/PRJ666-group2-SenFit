@@ -1,3 +1,11 @@
+/*
+PRJ666 Sen-Fit
+init date: April 10th 2021
+Author Mitchell Culligan
+Version 1.0
+ListTrainingPlanViewModel
+This viewmodel class holds data to list the training plans a member has been enrolled for
+ */
 package com.example.senfit.trainingPlan;
 
 import android.util.Log;
@@ -22,13 +30,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TrainingPlanViewModel extends ViewModel {
+public class ListTrainingPlanViewModel extends ViewModel {
 
         private TrainingPlanService planService;
         private TrainingPlanDAO planDAO;
         private LiveData<List<TrainingPlan>> trainingPlanLiveData;
 
-        public TrainingPlanViewModel(int memberId){
+        public ListTrainingPlanViewModel(int memberId){
                 this.planDAO= DatabaseClient.getInstance().getAppDatabase().getTrainingPlanDAO();
                 this.planService = NetworkManager
                         .getNetworkManager()
