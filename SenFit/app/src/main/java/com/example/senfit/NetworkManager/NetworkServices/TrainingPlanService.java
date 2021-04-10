@@ -10,14 +10,21 @@ package com.example.senfit.NetworkManager.NetworkServices;
 
 import com.example.senfit.dataContext.entities.TrainingPlan;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface TrainingPlanService {
 
     @POST("/trainingPlan")
     public Call<TrainingPlan> createTrainingPlan(@Body TrainingPlan plan);
+
+    @GET("/member/{id}/trainingPlans")
+    public Call<List<TrainingPlan>> getTrainingPlans(@Path("id") int memberId);
 
 }
 

@@ -26,6 +26,7 @@ import com.example.senfit.dataContext.dao.GymLocationDAO;
 import com.example.senfit.dataContext.dao.MemberDAO;
 import com.example.senfit.dataContext.dao.OnlineClassDAO;
 import com.example.senfit.dataContext.dao.TrainerDAO;
+import com.example.senfit.dataContext.dao.TrainingPlanDAO;
 import com.example.senfit.dataContext.dao.UnregisteredClientDAO;
 import com.example.senfit.dataContext.entities.CovidLog;
 import com.example.senfit.dataContext.entities.Exercise;
@@ -80,6 +81,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract GymLocationDAO getGymLocationDAO();
 
-
+    public abstract TrainingPlanDAO getTrainingPlanDAO();
     //TODO: Add any new DAO's to appdatabase
 }

@@ -94,4 +94,12 @@ public class TrainingPlan {
     public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
+
+    public FitnessPortfolio getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(FitnessPortfolio portfolio) {
+        this.portfolio = portfolio;
+    }
 }
