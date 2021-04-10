@@ -17,7 +17,10 @@ import io.reactivex.rxjava3.core.Single;
 public interface GymLocationDAO {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    public Completable insertGymLocations(GymLocation...gymLocations);
+    public void insertGymLocations(GymLocation...gymLocations);
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    public void insertGymLocations(List<GymLocation> gymLocations);
 
     @Query("Select * from GymLocations")
     public LiveData<List<GymLocation>> getGymLocations();

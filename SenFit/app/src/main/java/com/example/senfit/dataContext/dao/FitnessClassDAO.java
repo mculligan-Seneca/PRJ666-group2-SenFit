@@ -21,6 +21,9 @@ public interface FitnessClassDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable insertFitnessClass(FitnessClass... classes);
 
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    public void insertFitnessClasses(List<FitnessClass> classes);
+
     @Query("Select * from FitnessClass where fitnessClassId=:id")
     public FitnessClass getFitnessClass(long id);
 

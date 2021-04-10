@@ -17,10 +17,15 @@ import com.example.senfit.dataContext.entities.Member;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+
 import io.reactivex.CompletableObserver;
+import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,8 +79,7 @@ public class LoginHelper {
                             .getAppDatabase()
                             .getMemberDao()
                             .insertMember(member)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))//Maybe use Schedulers.computation();
+                            .subscribeOn(Schedulers.io())//Maybe use Schedulers.computation();
                             .subscribe(new CompletableObserver() {
                                 private Disposable disposable;
                                 @Override

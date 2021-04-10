@@ -22,6 +22,7 @@ import com.example.senfit.dataContext.entities.Trainer;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -74,175 +75,45 @@ public class DataInsertionManager {
     }
 
 
+
     public void loadData(){
-        Call<List<GymLocation>> locationCall = gymLocationService.getGymLocations();
-        locationCall.enqueue(new Callback<List<GymLocation>>() {
-            @Override
-            public void onResponse(Call<List<GymLocation>> call, Response<List<GymLocation>> response) {
-                if(!response.isSuccessful()){
-                    String errMsg=null;
-                    try {
-                        JSONObject jsonErr = new JSONObject(response.errorBody().string());
-                        errMsg=jsonErr.getString("errMsg");
-                        Log.e("load_data_err",errMsg);
-                        if(!disposables.isDisposed())
-                            disposables.clear();
-                    }catch(Exception e){
-                        handleError(e);
 
-                    }
-                }else{
-                    List<GymLocation> locations = response.body();
-                    GymLocation[] gymLocations = new GymLocation[1];
-                    gymLocations=locations.toArray(gymLocations);
-                    dbClient.getAppDatabase()
+        DatabaseClient.dbExecutors.execute(()->{
+
+            try {
+                Response<List<GymLocation>> locationResponse = gymLocationService.getGymLocations().execute();
+                if(locationResponse.isSuccessful()) {
+                    dbClient
+                            .getAppDatabase()
                             .getGymLocationDAO()
-                            .insertGymLocations(gymLocations)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
-                            .subscribe(new CompletableObserver() {
-                                @Override
-                                public void onSubscribe(@NonNull Disposable d) {
-                                    disposables.add(d);
-                                }
-
-                                @Override
-                                public void onComplete() {
-
-                                    insertFitnessClasses();
-                                }
-
-                                @Override
-                                public void onError(@NonNull Throwable e) {
-                                    handleError(e);
-
-                                }
-                            });
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<GymLocation>> call, Throwable t) {
-                        handleError(t);
-            }
-        });
-    }
-
-    public void insertFitnessClasses(){
-        Call<List<FitnessClass>> fitnessClassCall = this.fitnessClassService.getFitnessClasses();
-        fitnessClassCall.enqueue(new Callback<List<FitnessClass>>() {
-            @Override
-            public void onResponse(Call<List<FitnessClass>> call, Response<List<FitnessClass>> response) {
-                if(!response.isSuccessful()){
-                    String errMsg=null;
-                    try {
-                        JSONObject jsonErr = new JSONObject(response.errorBody().string());
-                        errMsg=jsonErr.getString("errMsg");
-                        Log.e("load_data_err",errMsg);
-                        if(!disposables.isDisposed())
-                            disposables.clear();
-                    }catch(Exception e){
-                        handleError(e);
-
+                            .insertGymLocations(locationResponse.body());
+                    Response<List<FitnessClass>> classResponse = fitnessClassService.getFitnessClasses().execute();
+                    if(classResponse.isSuccessful()) {
+                            dbClient
+                                    .getAppDatabase()
+                                    .getFitnessClassDao()
+                                    .insertFitnessClasses(classResponse.body());
+                            Response<List<Trainer>> trainerResponse = trainerService.getTrainers().execute();
+                            if (trainerResponse.isSuccessful()) {
+                                dbClient
+                                        .getAppDatabase()
+                                        .getTrainerDao()
+                                        .insertTrainers(trainerResponse.body());
+                            }
                     }
-                }else{
-                    List<FitnessClass> classes = response.body();
-                    FitnessClass[] fitnessClassList = new FitnessClass[1];
-                    fitnessClassList=classes.toArray(fitnessClassList);
-                    dbClient.getAppDatabase()
-                            .getFitnessClassDao()
-                            .insertFitnessClass(fitnessClassList)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
-                            .subscribe(new CompletableObserver() {
-                                @Override
-                                public void onSubscribe(@NonNull Disposable d) {
-                                    disposables.add(d);
-                                }
-
-                                @Override
-                                public void onComplete() {
-
-                                    insertTrainers();
-                                }
-
-                                @Override
-                                public void onError(@NonNull Throwable e) {
-                                    handleError(e);
-
-                                }
-                            });
-
 
                 }
-            }
 
-
-            @Override
-            public void onFailure(Call<List<FitnessClass>> call, Throwable t) {
-                handleError(t);
-            }
-        });
-    }
-
-    public void insertTrainers(){
-        Call<List<Trainer>> trainerCall = trainerService.getTrainers();
-        trainerCall.enqueue(new Callback<List<Trainer>>() {
-            @Override
-            public void onResponse(Call<List<Trainer>> call, Response<List<Trainer>> response) {
-                if(!response.isSuccessful()){
-                    String errMsg=null;
-                    try {
-                        JSONObject jsonErr = new JSONObject(response.errorBody().string());
-                        errMsg=jsonErr.getString("errMsg");
-                        Log.e("load_data_err",errMsg);
-                        if(!disposables.isDisposed())
-                            disposables.clear();
-                    }catch(Exception e){
-                        handleError(e);
-
-                    }
-                }else{
-                    List<Trainer> trainers = response.body();
-                    Trainer[] trainerList = new Trainer[1];
-                    trainerList=trainers.toArray(trainerList);
-                    dbClient.getAppDatabase()
-                            .getTrainerDao()
-                            .insertTrainers(trainerList)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
-                            .subscribe(new CompletableObserver() {
-                        @Override
-                        public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-                            disposables.add(d);
-                        }
-
-                        @Override
-                        public void onComplete() {
-                            if(!disposables.isDisposed())
-                                disposables.clear();//inserts trainers the trainer then completes resources
-                        }
-
-                        @Override
-                        public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                            handleError(e);
-                        }
-                    });
-
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Trainer>> call, Throwable t) {
-
+            }catch(Exception e){
+                handleError(e);
             }
         });
 
     }
+
+
+
+
     public void handleError(Throwable t){
         Log.e("load_data_err",t.getMessage());
         if(!disposables.isDisposed())
