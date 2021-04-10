@@ -18,6 +18,7 @@ import com.example.senfit.NetworkManager.NetworkServices.TrainingPlanService;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.dao.TrainingPlanDAO;
 import com.example.senfit.dataContext.entities.TrainingPlan;
+import com.example.senfit.dataContext.views.TrainingPlanView;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ListTrainingPlanViewModel extends ViewModel {
 
         private TrainingPlanService planService;
         private TrainingPlanDAO planDAO;
-        private LiveData<List<TrainingPlan>> trainingPlanLiveData;
+        private LiveData<List<TrainingPlanView>> trainingPlanLiveData;
 
         public ListTrainingPlanViewModel(int memberId){
                 this.planDAO= DatabaseClient.getInstance().getAppDatabase().getTrainingPlanDAO();
@@ -85,7 +86,7 @@ public class ListTrainingPlanViewModel extends ViewModel {
 
 
 
-        public LiveData<List<TrainingPlan>> getTrainingPlanLiveData(){
+        public LiveData<List<TrainingPlanView>> getTrainingPlanLiveData(){
             return this.trainingPlanLiveData;
         }
 
