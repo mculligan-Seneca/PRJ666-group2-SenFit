@@ -11,6 +11,7 @@ package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
@@ -18,24 +19,34 @@ import com.google.gson.annotations.SerializedName;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-@Entity(tableName="onlineClasses")
+@Entity(tableName="onlineClasses",foreignKeys = {@ForeignKey(entity = FitnessClass.class,
+        parentColumns = "fitnessClassId",
+        childColumns = "fitnessClassId"),
+                @ForeignKey(entity=Trainer.class,
+                        parentColumns = "trainerId",
+                        childColumns="trainerId")})
 public class OnlineClass {
 
-    @PrimaryKey(autoGenerate=true)
-    @SerializedName("Id")
+
+    @PrimaryKey
+    @SerializedName("id")
     private int onlineClassId;
 
     @ColumnInfo(name="class_date")
     private Date classDate;
 
     @ColumnInfo(name="start_time")
+    @SerializedName("start_time")
     private Timestamp startTime;
 
     @ColumnInfo(name="end_time")
+    @SerializedName("end_time")
     private Timestamp endTime;
 
     @ColumnInfo(name="fitnessClassId")
-    @SerializedName("FitnessClasssId")
+
+    @SerializedName("FitnessClassId")
+
     private long fitnessClassId;//TODO:ADD foreign key or embedded
 
     @ColumnInfo(name="trainerId")

@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.senfit.R;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.OnlineClass;
+import com.example.senfit.dataContext.views.OnlineClassView;
 import com.example.senfit.ui.inperson.InpersonAdapter;
 import com.example.senfit.ui.inperson.InpersonClassData;
 import com.example.senfit.ui.inperson.InpersonFragment;
@@ -58,7 +59,7 @@ public class OnlineClassFragment extends Fragment implements InpersonAdapter.Sel
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        List<InpersonClassData> data = new ArrayList<>();
+        List<OnlineClassView> data = new ArrayList<>();
 
         mAdapter = new OnlineClassAdapter(data , this);
 
@@ -77,10 +78,10 @@ public class OnlineClassFragment extends Fragment implements InpersonAdapter.Sel
         mViewModel = new ViewModelProvider(this).get(OnlineClassViewModel.class);
 
         mViewModel.getOnlineClasses()
-                .observe(getViewLifecycleOwner(), new Observer<List<InpersonClassData>>() {
+                .observe(getViewLifecycleOwner(), new Observer<List<OnlineClassView>>() {
             @Override
-            public void onChanged(List<InpersonClassData> inpersonClassData) {
-                mAdapter.updateDataSet(inpersonClassData);
+            public void onChanged(List<OnlineClassView> onlineClassViews) {
+                mAdapter.updateDataSet(onlineClassViews);
             }
         });
 
@@ -124,7 +125,7 @@ public class OnlineClassFragment extends Fragment implements InpersonAdapter.Sel
                 super.onPostExecute(aVoid);
                 synchronized (mAdapter) {
                     mViewModel.getOnlineClasses().observe(OnlineClassFragment.this, inpersonClassData -> {
-                        inpersonClassData.get(mCurrentPosition).setEnrolled(true);
+                        inpersonClassData.get(mCurrentPosition).enrolled=true;
                         mAdapter.updateDataSet(inpersonClassData);
                         showEnrollSuccessAlertDialog();
                     });

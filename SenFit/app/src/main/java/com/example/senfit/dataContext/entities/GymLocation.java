@@ -18,7 +18,8 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName="GymLocations")
 public class GymLocation {
 
-    @PrimaryKey(autoGenerate=true)
+    @PrimaryKey
+    @SerializedName("id")
     private int gymLocationId;
 
     @ColumnInfo(name="postal_code")

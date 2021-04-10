@@ -17,13 +17,15 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.senfit.R;
+import com.example.senfit.dataContext.views.InPersonView;
+import com.example.senfit.uiHelpers.DateTimeFormatHelper;
 
 import java.util.List;
 
 public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
 
-    private List<InpersonClassData> mDataSet;
+    private List<InPersonView> mDataSet;
 
     private SelectClassListener listener;
 
@@ -94,12 +96,12 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
     }
 
 
-    public InpersonAdapter(List<InpersonClassData> dataSet, SelectClassListener listener) {
+    public InpersonAdapter(List<InPersonView> dataSet, SelectClassListener listener) {
         this.listener=listener;
         mDataSet = dataSet;
     }
 
-    public void updateDataSet(List<InpersonClassData> dataSet) {
+    public void updateDataSet(List<InPersonView> dataSet) {
         mDataSet.clear();
         mDataSet.addAll(dataSet);
         notifyDataSetChanged();
@@ -119,12 +121,12 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         Log.d(TAG, "Element " + position + " set.");
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getClassNameTextView().setText(mDataSet.get(position).getClasName());
-        viewHolder.getClassDateTextView().setText(mDataSet.get(position).getDate());
-        viewHolder.getClassTimeTextView().setText(mDataSet.get(position).getTime());
-        viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).getInstructorName());
+        viewHolder.getClassNameTextView().setText(mDataSet.get(position).className);
+        viewHolder.getClassDateTextView().setText(DateTimeFormatHelper.formatDate(mDataSet.get(position).classDate));
+        viewHolder.getClassTimeTextView().setText(DateTimeFormatHelper.formatTime(mDataSet.get(position).startTime));
+        viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).instructorName);
 
-        if (mDataSet.get(position).getEnrolled()) {
+        if (mDataSet.get(position).enrolled) {
             viewHolder.getClassEnroledTextView().setVisibility(View.VISIBLE);
             viewHolder.getClassEnrollButton().setVisibility(View.INVISIBLE);
         } else {
@@ -133,10 +135,10 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         }
 
         viewHolder.getClassEnrollButton().setOnClickListener((v)->{
-            InpersonClassData gymClass = mDataSet.get(position);
+            InPersonView gymClass = mDataSet.get(position);
             //gets the current gym class being selected
             if (listener!=null)//checks listener is not null
-                listener.selectClassItem(position, gymClass.getGymClassId());//notifies the main ui of selected class
+                listener.selectClassItem(position, gymClass.gymClassId);//notifies the main ui of selected class
         });
     }
 

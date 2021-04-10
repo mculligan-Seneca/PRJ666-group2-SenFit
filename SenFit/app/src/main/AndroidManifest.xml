@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SenFit">
-        <activity android:name=".fitnessResult.addFitnessResults.AddFitnessResultsActivity"
-            android:label="@string/add_fitness_results"/>
+        <activity android:name=".trainingPlan.EnrollTrainingPlanActivity"></activity>
+        <activity
+            android:name=".fitnessResult.addFitnessResults.AddFitnessResultsActivity"
+            android:label="@string/add_fitness_results" />
         <activity
             android:name=".fitnessPortfolio.addFitnessPortfolio.AddFitnessPortfolioActivity"
             android:label="@string/add_fitness_portfolio" />
@@ -39,18 +42,14 @@
         -->
         <activity android:name=".signup.SignUpActivity" />
         <activity android:name=".ui.home.MyClassesActivity" />
-
-
         <activity
             android:name=".ui.inperson.SenFitActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.SenFit.NoActionBar" />
-
         <activity
             android:name=".bookTour.BookTourActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.SenFit.NoActionBar" />
-
     </application>
 
 </manifest>

@@ -41,7 +41,7 @@ public class DatabaseClient {
             this.appDatabase= Room.databaseBuilder(context, AppDatabase.class,"Sen-FitDB")
                     //.fallbackToDestructiveMigration()
                     .build();
-     //     this.appDatabase.clearAllTables();
+           // dbExecutors.execute(()->this.appDatabase.clearAllTables());
 
 
     }

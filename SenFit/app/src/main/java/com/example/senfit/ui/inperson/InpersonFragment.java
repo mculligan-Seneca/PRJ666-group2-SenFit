@@ -28,6 +28,7 @@ import com.example.senfit.PageViewModel;
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.views.InPersonView;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
@@ -102,7 +103,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
         mLayoutManager = new LinearLayoutManager(getActivity());
         model = new ViewModelProvider(this).get(InpersonViewModel.class);
 
-        List<InpersonClassData> data = new ArrayList<>();
+        List<InPersonView> data = new ArrayList<>();
 
         mAdapter = new InpersonAdapter(data , this);//passes data and listener to adapter
 
@@ -178,7 +179,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
 
                   synchronized (mAdapter) {
                       model.getInpersonClasses().observe(InpersonFragment.this, inpersonClassData -> {
-                          inpersonClassData.get(mCurrentPosition).setEnrolled(true);
+                          inpersonClassData.get(mCurrentPosition).enrolled=true;
                           mAdapter.updateDataSet(inpersonClassData);
                           Toast.makeText(getContext(),"You have enrolled successfylly.", Toast.LENGTH_LONG).show();
                       });
