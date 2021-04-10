@@ -6,7 +6,7 @@ Version 1.0
 Select Trainer
 This fragment provides a list of trainers for the user to select
  */
-package com.example.senfit.trainingPlan.selectTrainer;
+package com.example.senfit.trainingPlan.enrollTrainingPlan.selectTrainer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +27,7 @@ import android.widget.Toast;
 import com.example.senfit.R;
 import com.example.senfit.dataContext.entities.Trainer;
 import com.example.senfit.navigator.Navigator;
-import com.example.senfit.trainingPlan.EnrollTrainingPlanViewModel;
+import com.example.senfit.trainingPlan.enrollTrainingPlan.EnrollTrainingPlanViewModel;
 import com.example.senfit.ui.inperson.SenFitActivity;
 
 import java.util.List;

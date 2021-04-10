@@ -11,13 +11,16 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 @Entity(tableName="fitnessPortfolio",foreignKeys = @ForeignKey(entity = Member.class,
         parentColumns = "member_id",
         childColumns = "member_id"))
 public class FitnessPortfolio {
-    @PrimaryKey(autoGenerate=true)
+    @PrimaryKey
+    @SerializedName("id")
     private int fitnessPortfolioId;
 
 
@@ -28,12 +31,15 @@ public class FitnessPortfolio {
     @ColumnInfo(name="weight")
     private int weight;//weight in lbs
     @ColumnInfo(name="date_created")
+    @SerializedName("date_created")
     private Date dateCreated;
 
     @ColumnInfo(name="health_concerns")
+    @SerializedName("health_concerns")
     private String healthConcerns;
 
     @ColumnInfo(name="member_id")
+    @SerializedName("member_id")
     private int memberId;
 
     public FitnessPortfolio(){

@@ -17,7 +17,7 @@ import retrofit2.http.POST;
 public interface TrainingPlanService {
 
     @POST("/trainingPlan")
-    public Call<Object> createTrainingPlan(@Body TrainingPlan plan);
+    public Call<TrainingPlan> createTrainingPlan(@Body TrainingPlan plan);
 
 }
 

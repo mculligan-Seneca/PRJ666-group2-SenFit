@@ -6,7 +6,7 @@ Version 1.0
 GymLocationAdapter
 This adapter class is designed with the purpose to display Sen-fit gym locations for a recyclerview
  */
-package com.example.senfit.trainingPlan.selectGymTraining;
+package com.example.senfit.trainingPlan.enrollTrainingPlan.selectGymTraining;
 
 import android.content.Context;
 import android.view.LayoutInflater;

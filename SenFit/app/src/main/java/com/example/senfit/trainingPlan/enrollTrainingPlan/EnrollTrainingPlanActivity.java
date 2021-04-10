@@ -6,7 +6,7 @@ Version 1.0
 EnrollTrainingPlanActivity
 This activity is the base activity for the member to enroll into a training plan use case
  */
-package com.example.senfit.trainingPlan;
+package com.example.senfit.trainingPlan.enrollTrainingPlan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -19,7 +19,9 @@ import android.os.Bundle;
 import com.example.senfit.R;
 import com.example.senfit.navigator.NavigateFragment;
 import com.example.senfit.navigator.Navigator;
-import com.example.senfit.trainingPlan.selectTrainingPortfolio.SelectTrainingPortfolioFragment;
+import com.example.senfit.trainingPlan.TrainingPlanViewModelFactory;
+import com.example.senfit.trainingPlan.enrollTrainingPlan.EnrollTrainingPlanViewModel;
+import com.example.senfit.trainingPlan.enrollTrainingPlan.selectTrainingPortfolio.SelectTrainingPortfolioFragment;
 
 public class EnrollTrainingPlanActivity extends AppCompatActivity implements Navigator, NavigateFragment {
     public static final String MEMBER_TAG="member_tag";

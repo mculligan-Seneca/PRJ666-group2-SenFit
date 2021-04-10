@@ -6,7 +6,7 @@ Version 1.0
 SelectTrainingGymFragment
 This fragment provides the member with a list of gym locations to select for their training plan
  */
-package com.example.senfit.trainingPlan.selectGymTraining;
+package com.example.senfit.trainingPlan.enrollTrainingPlan.selectGymTraining;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 import com.example.senfit.R;
 import com.example.senfit.dataContext.entities.GymLocation;
 import com.example.senfit.navigator.NavigateFragment;
-import com.example.senfit.trainingPlan.EnrollTrainingPlanViewModel;
+import com.example.senfit.trainingPlan.enrollTrainingPlan.EnrollTrainingPlanViewModel;
 
 import java.util.ArrayList;
 

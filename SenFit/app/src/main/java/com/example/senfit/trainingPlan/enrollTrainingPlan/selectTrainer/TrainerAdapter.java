@@ -6,7 +6,7 @@ Version 1.0
 TrainerAdapter
 This adapter class is responsible for displaying a list of trainer objects in a recycler view.
  */
-package com.example.senfit.trainingPlan.selectTrainer;
+package com.example.senfit.trainingPlan.enrollTrainingPlan.selectTrainer;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.senfit.dataContext.entities.Trainer;
-import com.example.senfit.trainingPlan.selectGymTraining.GymLocationAdapter;
 import com.example.senfit.R;
 
 import java.util.List;

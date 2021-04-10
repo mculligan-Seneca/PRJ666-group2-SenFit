@@ -10,7 +10,10 @@ package com.example.senfit.dataContext.entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.sql.Date;
 
@@ -21,10 +24,10 @@ import java.sql.Date;
 public class TrainingPlan {
 //TODO: add constructor and getter and setters
     @PrimaryKey
+    @SerializedName("id")
     private int trainingPlanId;
 
-    @ColumnInfo(name="plan_name")
-    private String planName;
+
 
     @ColumnInfo(name="start_date")
     private Date startDate;
@@ -38,6 +41,18 @@ public class TrainingPlan {
     @ColumnInfo(name="member_id")
     private int member_id;
 
+    @Ignore
+    @SerializedName("fitnessPortfolio")
+    private FitnessPortfolio portfolio;
+
+    public TrainingPlan(){
+        this.trainingPlanId=0;
+        this.trainerId=0;
+        this.member_id=0;
+        this.startDate=null;
+        this.fitnessPortfolioId=0;
+        this.portfolio=null;
+    }
     public int getTrainingPlanId() {
         return trainingPlanId;
     }
@@ -46,13 +61,7 @@ public class TrainingPlan {
         this.trainingPlanId = trainingPlanId;
     }
 
-    public String getPlanName() {
-        return planName;
-    }
-
-    public void setPlanName(String planName) {
-        this.planName = planName;
-    }
+    //TODO Add number of weeks
 
     public Date getStartDate() {
         return startDate;
