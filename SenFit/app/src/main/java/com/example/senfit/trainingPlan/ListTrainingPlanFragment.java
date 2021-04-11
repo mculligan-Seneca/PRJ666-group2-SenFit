@@ -72,6 +72,6 @@ public class ListTrainingPlanFragment extends Fragment implements TrainingPlanAd
 
     @Override
     public void selectPlan(int trainingPlanId) {
-
+            //TODO Set up view for single training plan
     }
 }
