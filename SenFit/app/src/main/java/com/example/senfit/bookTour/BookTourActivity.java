@@ -73,7 +73,7 @@ public class BookTourActivity extends AppCompatActivity {
                         protected Object doInBackground(Object[] objects) {
 
                             try {
-                                UnregisteredClient client = new UnregisteredClient(firstName, lastName, email, phone, token);
+                                UnregisteredClient client = new UnregisteredClient(firstName, lastName, email, phone);
                                 dbClient.getAppDatabase().getUnregisteredClientDAO().insertUnregisteredClient(client);
                                 saved = true;
                             } catch (SQLiteConstraintException ex) {
