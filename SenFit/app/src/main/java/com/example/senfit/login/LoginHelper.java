@@ -71,7 +71,7 @@ public class LoginHelper {
                         return;
                     }
                     Member member = response.body();
-                    NetworkManager.getNetworkManager().addInterceptorToClient(new AuthInterceptor(member.getToken()));
+                    NetworkManager.getNetworkManager().addAuthToken(member.getToken());
                     //retrieve token for member
                     member.setPassword(password);
 
