@@ -14,7 +14,7 @@ import androidx.room.DatabaseView;
 
 import java.sql.Date;
 @DatabaseView(viewName = "trainingPlanView",value = "select tp.trainingPlanId, tp.start_date, f.fitnessPortfolioId, t.trainerId,"+
-        " m.member_id, m.first_name || 's plan with '|| t.first_name || ' '||t.last_name as plan_name,"+
+        " m.member_id, m.first_name || 's plan with '|| t.first_name as plan_name,"+
         " t.first_name || ' '||t.last_name as instructor_name from trainingplans tp join fitnessPortfolio f "+
         "on tp.fitnessPortfolioId=f.fitnessPortfolioId join trainers t"+
         " on tp.trainerId=t.trainerId join members m on tp.member_id=m.member_id")
