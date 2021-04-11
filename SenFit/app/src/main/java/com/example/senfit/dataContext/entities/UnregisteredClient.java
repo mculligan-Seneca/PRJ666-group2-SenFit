@@ -9,6 +9,7 @@ package com.example.senfit.dataContext.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -30,13 +31,23 @@ public class UnregisteredClient {
     @ColumnInfo(name="phone")
     private String phone;
 
+    @Ignore
+    private String token;
+
+    public UnregisteredClient(String firstName, String lastName, String email, String phone, String token) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.token = token;
+    }
     public UnregisteredClient(String firstName, String lastName, String email, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+        this.token = null;
     }
-
     public int getClient_id() {
         return client_id;
     }
@@ -75,5 +86,13 @@ public class UnregisteredClient {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

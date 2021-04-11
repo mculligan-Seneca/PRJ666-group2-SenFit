@@ -11,6 +11,7 @@ package com.example.senfit.NetworkManager;
 
 import android.app.Application;
 
+import com.example.senfit.NetworkManager.Interceptor.AuthInterceptor;
 import com.google.gson.GsonBuilder;
 
 import okhttp3.Interceptor;
@@ -22,15 +23,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkManager {
     public static final String BASE_URL="https://limitless-woodland-96285.herokuapp.com/";
     private  Retrofit retrofit=null;
+    private AuthInterceptor authInterceptor;
 
     private static NetworkManager networkManager=null;
 
     private NetworkManager(String url){
+        this.authInterceptor=new AuthInterceptor(null);
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(url)//URL for senfit API
                 .addConverterFactory(GsonConverterFactory.create(new
                         GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()))//convert JSON to java objects
-                .client(new OkHttpClient.Builder().build())
+                .client(new OkHttpClient.Builder().addInterceptor(this.authInterceptor).build())
                 .build();
             
     }
@@ -48,9 +51,10 @@ public class NetworkManager {
     }
 
 
-    public void addInterceptorToClient(Interceptor interceptor){
-        this.retrofit.newBuilder()
-                .client(new OkHttpClient.Builder().addInterceptor(interceptor).build())
-                .build();//TODO Lookup add authenticator
+    public void addAuthToken(String token){
+        this.authInterceptor.setToken(token);
+    }
+    public void invalidateAuthToken(){
+        this.authInterceptor.invlaidateToken();
     }
 }
