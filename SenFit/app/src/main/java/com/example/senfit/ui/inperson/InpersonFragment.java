@@ -28,12 +28,17 @@ import com.example.senfit.PageViewModel;
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.MemberGymClass;
 import com.example.senfit.dataContext.views.InPersonView;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.CompletableObserver;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -44,6 +49,7 @@ import static android.app.Activity.RESULT_OK;
 public class InpersonFragment extends Fragment implements InpersonAdapter.SelectClassListener {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final String MEMBER_TAG="member_tag";
 
     private PageViewModel pageViewModel;
 
@@ -51,6 +57,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
     protected InpersonAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     private int mInPersonClassId;
+
     InpersonViewModel model;
 
       private static final int SURVEY_ACTIVITY=2;
@@ -72,6 +79,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
         InpersonFragment fragment = new InpersonFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_SECTION_NUMBER, index);
+
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -152,7 +160,31 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
                   .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                       @Override
                       public void onClick(DialogInterface dialogInterface, int i) {
-                          updateEnrollStatusinDB();
+                          model.enroll(new MemberGymClass(memberId,mInPersonClassId))
+                                  .subscribeOn(Schedulers.io())
+                                  .subscribe(new CompletableObserver() {
+                                      private Disposable disposable;
+                                      @Override
+                                      public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                                          disposable=d;
+                                      }
+
+                                      @Override
+                                      public void onComplete() {
+
+                                          updateEnrollStatusinDB();
+                                          if(!disposable.isDisposed())
+                                              disposable.dispose();
+                                      }
+
+                                      @Override
+                                      public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                                          Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_LONG).show();
+                                          if(!disposable.isDisposed())
+                                              disposable.dispose();
+                                      }
+                                  });
+
                       }
                   })
                   .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

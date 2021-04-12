@@ -104,6 +104,7 @@ public class LoginHelper {
                                             .insertMember(member);
                                     comparisonCallback.isValid(member.getMember_id(), "Login Success");*/
                                     Log.e("load_to_db_err",e.getMessage());
+                                    comparisonCallback.isValid(-1, e.getMessage());
                                     if(!disposable.isDisposed())
                                         disposable.dispose();
                                 }

@@ -134,7 +134,7 @@ public class DataInsertionManager {
 
     public static void insertDummyData(Context context) {
         DataInsertionManager dim = new DataInsertionManager(context);
-       // if (!getDummyDataInserted(context)) {
+        if (!getDummyDataInserted(context)) {
 
 
 
@@ -178,7 +178,7 @@ public class DataInsertionManager {
 
 
            setDummyDataInserted(context);*/
-       // }
+        }
     }
 
 
