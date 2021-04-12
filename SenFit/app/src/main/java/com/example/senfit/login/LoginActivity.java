@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-
+        Toast.makeText(LoginActivity.this,"Logging in Please wait",Toast.LENGTH_LONG).show();
         LoginHelper.compareEmailPass(this, userName, password, new ComparisonCallback() {
             @Override
             public void isValid(int memberId, String msg) {
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.isSuccessful()){// if member in db valid
                         member=(Member)response.body();//then update member in db with token
                         NetworkManager.getNetworkManager()
-                                .addInterceptorToClient(new AuthInterceptor(member.getToken()));
+                                .addAuthToken(member.getToken());
                         DatabaseClient.getInstance()
                                 .getAppDatabase()
                                 .getMemberDao()

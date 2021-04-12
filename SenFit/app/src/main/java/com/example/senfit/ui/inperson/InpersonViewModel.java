@@ -20,6 +20,7 @@ import com.example.senfit.dataContext.dao.GymClassDAO;
 import com.example.senfit.dataContext.entities.FitnessClass;
 import com.example.senfit.dataContext.entities.GymClass;
 import com.example.senfit.dataContext.entities.InPersonClass;
+import com.example.senfit.dataContext.entities.MemberGymClass;
 import com.example.senfit.dataContext.entities.Trainer;
 import com.example.senfit.dataContext.views.InPersonView;
 
@@ -31,6 +32,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -116,6 +118,16 @@ public class InpersonViewModel extends ViewModel {
         return inpersonClasses;
     }
 
+    public Completable enroll(MemberGymClass memberGymClass){
+       return Completable.defer(()->{
+            Response<GymClass> response = gymClassService.enrollGymClass(memberGymClass).execute();
+            if(response.isSuccessful()){
+                return Completable.complete();
+            }else{
+                return Completable.error(new Exception(response.errorBody().string()));
+            }
+       });
+    }
 
     /*
     Fetching inperson class related data from the DB

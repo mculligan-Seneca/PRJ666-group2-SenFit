@@ -13,9 +13,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.senfit.NetworkManager.NetworkManager;
+import com.example.senfit.NetworkManager.NetworkServices.UnregisteredClientService;
 import com.example.senfit.R;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.entities.UnregisteredClient;
+
+import java.io.IOException;
+
+import retrofit2.Response;
 
 public class BookTourActivity extends AppCompatActivity {
 
@@ -73,10 +79,19 @@ public class BookTourActivity extends AppCompatActivity {
                         protected Object doInBackground(Object[] objects) {
 
                             try {
-                                UnregisteredClient client = new UnregisteredClient(firstName, lastName, email, phone, token);
-                                dbClient.getAppDatabase().getUnregisteredClientDAO().insertUnregisteredClient(client);
-                                saved = true;
-                            } catch (SQLiteConstraintException ex) {
+                                UnregisteredClientService service = NetworkManager
+                                        .getNetworkManager()
+                                        .createNetworkService(UnregisteredClientService.class);
+                                Response<UnregisteredClient> response = service.
+                                        registerClient(new UnregisteredClient(firstName, lastName, email, phone))
+                                        .execute();
+                                if(response.isSuccessful()) {
+                                    UnregisteredClient client = response.body();
+                                    dbClient.getAppDatabase().getUnregisteredClientDAO().insertUnregisteredClient(client);
+                                    saved = true;
+                                }else
+                                    saved=false;
+                            } catch (SQLiteConstraintException | IOException ex) {
                                 saved = false;
                             }
 

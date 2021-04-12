@@ -13,16 +13,21 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName="UnregisteredClient",indices = {@Index(value = "email",unique = true)})
 
 public class UnregisteredClient {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    @SerializedName("id")
     private int client_id;
 
     @ColumnInfo(name = "first_name")
+    @SerializedName("first_name")
     private String firstName;
 
     @ColumnInfo(name="last_name")
+    @SerializedName("last_name")
     private String lastName;
 
     @ColumnInfo(name="email")
@@ -31,22 +36,15 @@ public class UnregisteredClient {
     @ColumnInfo(name="phone")
     private String phone;
 
-    @Ignore
-    private String token;
 
-    public UnregisteredClient(String firstName, String lastName, String email, String phone, String token) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.token = token;
-    }
+
+
     public UnregisteredClient(String firstName, String lastName, String email, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-        this.token = null;
+
     }
     public int getClient_id() {
         return client_id;
@@ -88,11 +86,5 @@ public class UnregisteredClient {
         this.phone = phone;
     }
 
-    public String getToken() {
-        return token;
-    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
 }
