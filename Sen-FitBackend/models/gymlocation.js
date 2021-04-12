@@ -15,9 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(Trainer,{foreignKey: 'gymLocationId'});
       this.hasMany(GymClass,{foreignKey: 'gymLocationId'});
     }
-    toJSON(){
-      return {...this.get(),id: undefined};
-    }
+ 
   };
   GymLocation.init({
     postal_code: DataTypes.STRING

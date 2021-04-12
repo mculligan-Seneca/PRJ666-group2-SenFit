@@ -9,16 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({GymClass,GymLocation,TrainingPlan}) {
+    static associate({GymClass,GymLocation,TrainingPlan,OnlineClass}) {
       // define association here
       this.hasMany(GymClass,{foreignKey:'trainerId',as: 'gymClasses'});
+      this.hasMany(OnlineClass,{foreignKey:'trainerId',as:'onlineClasses'});
       this.hasMany(TrainingPlan,{foreignKey:'trainerId',as: 'trainingPlans'});
       this.belongsTo(GymLocation,{foreignKey:'gymLocationId'});
 
     }
-    toJSON(){
-      return {...this.get(),id:undefined};
-    }
+    
   };
   Trainer.init({
     first_name: DataTypes.STRING,
