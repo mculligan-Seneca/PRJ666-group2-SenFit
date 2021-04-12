@@ -6,10 +6,9 @@ Version 1.0
 TrainingPlanAdapter
 This adapter class displays a training plan item in a recycler view
  */
-package com.example.senfit.trainingPlan;
+package com.example.senfit.trainingPlan.listTrainingPlan;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import com.example.senfit.R;
-import com.example.senfit.dataContext.entities.TrainingPlan;
 import com.example.senfit.dataContext.views.TrainingPlanView;
 import com.example.senfit.uiHelpers.DateTimeFormatHelper;
 

@@ -6,10 +6,12 @@ Version 1.0
 ListTrainingPlanFragment
 This fragment is the view for a list of training plans for a member
  */
-package com.example.senfit.trainingPlan;
+package com.example.senfit.trainingPlan.listTrainingPlan;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,6 +25,7 @@ import android.view.ViewGroup;
 import com.example.senfit.R;
 import com.example.senfit.dataContext.views.TrainingPlanView;
 import com.example.senfit.navigator.NavigateFragment;
+import com.example.senfit.trainingPlan.TrainingPlanViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -40,8 +43,22 @@ public class ListTrainingPlanFragment extends Fragment implements TrainingPlanAd
 
     public ListTrainingPlanFragment(int memberId) {
         // Required empty public constructor
+        this.memberId=memberId;
     }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof NavigateFragment)
+            this.navigateFragment=(NavigateFragment)context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.navigateFragment=null;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

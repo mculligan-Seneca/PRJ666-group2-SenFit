@@ -6,7 +6,7 @@ Version 1.0
 ListTrainingPlanViewModel
 This viewmodel class holds data to list the training plans a member has been enrolled for
  */
-package com.example.senfit.trainingPlan;
+package com.example.senfit.trainingPlan.listTrainingPlan;
 
 import android.util.Log;
 
