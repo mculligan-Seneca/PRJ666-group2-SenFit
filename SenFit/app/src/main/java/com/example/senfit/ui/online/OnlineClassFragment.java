@@ -23,14 +23,21 @@ import android.widget.Toast;
 
 import com.example.senfit.R;
 import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.entities.MemberGymClass;
+import com.example.senfit.dataContext.entities.MemberOnlineClass;
 import com.example.senfit.dataContext.entities.OnlineClass;
 import com.example.senfit.dataContext.views.OnlineClassView;
+import com.example.senfit.login.LoginHelper;
 import com.example.senfit.ui.inperson.InpersonAdapter;
 import com.example.senfit.ui.inperson.InpersonClassData;
 import com.example.senfit.ui.inperson.InpersonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.CompletableObserver;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class OnlineClassFragment extends Fragment implements InpersonAdapter.SelectClassListener {
 
@@ -100,7 +107,7 @@ public class OnlineClassFragment extends Fragment implements InpersonAdapter.Sel
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        updateEnrollStatusinDB();
+                        showEnrollSuccessAlertDialog();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -127,7 +134,6 @@ public class OnlineClassFragment extends Fragment implements InpersonAdapter.Sel
                     mViewModel.getOnlineClasses().observe(OnlineClassFragment.this, inpersonClassData -> {
                         inpersonClassData.get(mCurrentPosition).enrolled=true;
                         mAdapter.updateDataSet(inpersonClassData);
-                        showEnrollSuccessAlertDialog();
                     });
                 }
 
@@ -143,6 +149,37 @@ public class OnlineClassFragment extends Fragment implements InpersonAdapter.Sel
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        mViewModel.enroll(new MemberOnlineClass(LoginHelper.getMemberId(getContext()), mOnlineClassId))
+                                .subscribeOn(Schedulers.io())
+                                .subscribe(new CompletableObserver() {
+                                    private Disposable disposable;
+                                    @Override
+                                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                                        disposable=d;
+                                    }
+
+                                    @Override
+                                    public void onComplete() {
+
+                                        updateEnrollStatusinDB();
+                                        if(!disposable.isDisposed())
+                                            disposable.dispose();
+                                    }
+
+                                    @Override
+                                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                                        getActivity().runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+
+                                        if(!disposable.isDisposed())
+                                            disposable.dispose();
+                                    }
+                                });
+
                     }
                 })
                 .show();

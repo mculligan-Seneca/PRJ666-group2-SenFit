@@ -11,6 +11,12 @@ package com.example.senfit.dataContext.entities;
 import com.google.gson.annotations.SerializedName;
 
 public class MemberOnlineClass {
+
+    public MemberOnlineClass(int memberId, int gymClassId) {
+        this.memberId = memberId;
+        this.onlineClassId = gymClassId;
+    }
+
     @SerializedName("member_id")
     private int memberId;
 
