@@ -149,4 +149,12 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
         toolbar.setTitle(titleId);
 
     }
+
+    @Override
+    public void swapFragment(Fragment fragment, String title) {
+        fm.beginTransaction()
+                .replace(R.id.frame_layout_senfit,fragment)
+                .addToBackStack(null).commit();
+        toolbar.setTitle(title);
+    }
 }
