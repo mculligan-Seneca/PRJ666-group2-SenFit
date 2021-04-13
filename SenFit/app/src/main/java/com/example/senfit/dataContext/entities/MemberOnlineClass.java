@@ -18,8 +18,8 @@ public class MemberOnlineClass {
     }
 
     @SerializedName("member_id")
-    private int memberId;
+    public int memberId;
 
     @SerializedName("onlineClassId")
-    private int onlineClassId;
+    public int onlineClassId;
 }
