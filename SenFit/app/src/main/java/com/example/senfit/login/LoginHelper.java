@@ -161,4 +161,17 @@ public class LoginHelper {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getInt(KEY, -1);
     }
+
+    public static void setLoginStatus(Context context, boolean status) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("login_status", status);
+        editor.apply();
+    }
+
+    public static boolean getLoginStatus(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getBoolean("login_status", false);
+    }
+
 }

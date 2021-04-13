@@ -15,6 +15,9 @@ import com.example.senfit.NetworkManager.NetworkServices.OnlineClassService;
 import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.dataContext.dao.OnlineClassDAO;
 import com.example.senfit.dataContext.entities.FitnessClass;
+import com.example.senfit.dataContext.entities.GymClass;
+import com.example.senfit.dataContext.entities.MemberGymClass;
+import com.example.senfit.dataContext.entities.MemberOnlineClass;
 import com.example.senfit.dataContext.entities.OnlineClass;
 import com.example.senfit.dataContext.entities.Trainer;
 import com.example.senfit.dataContext.views.OnlineClassView;
@@ -26,6 +29,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
@@ -100,6 +104,19 @@ public class OnlineClassViewModel extends ViewModel {
             }
         });
     }
+
+
+    public Completable enroll(MemberOnlineClass memberOnlineClass){
+        return Completable.defer(()->{
+            Response<OnlineClass> response = onlineClassService.enrollOnlineClass(memberOnlineClass).execute();
+            if(response.isSuccessful()){
+                return Completable.complete();
+            }else{
+                return Completable.error(new Exception(response.errorBody().string()));
+            }
+        });
+    }
+
 
     public LiveData<List<OnlineClassView>> getOnlineClasses() {
 

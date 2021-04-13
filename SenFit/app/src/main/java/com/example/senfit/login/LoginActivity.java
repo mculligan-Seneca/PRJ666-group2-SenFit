@@ -52,6 +52,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         DataInsertionManager.insertDummyData(this);
        // onAutomaticLogin();//attempts to login previous owner
+
+        if (LoginHelper.getLoginStatus(this)) {
+            showSenfitActivity(LoginHelper.getMemberId(this));
+        }
     }
 
     /*
@@ -78,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         if (memberId!=-1) {
                             Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
+                            LoginHelper.setLoginStatus(LoginActivity.this, true);
                             showSenfitActivity(memberId);
                         } else {
 
