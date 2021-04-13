@@ -70,6 +70,7 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
                         this.replaceFragment(OnlineClassFragment.newInstance(),R.string.tab_online);
                         break;
                     case R.id.log_out:
+                        LoginHelper.setLoginStatus(this, false);
                         LoginHelper.setMemberId(this, 0);
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);

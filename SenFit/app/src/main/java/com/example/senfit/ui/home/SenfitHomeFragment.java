@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.senfit.R;
+import com.example.senfit.bookTour.BookTourActivity;
 
 
 public class SenfitHomeFragment extends Fragment {
@@ -49,6 +50,17 @@ public class SenfitHomeFragment extends Fragment {
               startActivity(intent);
           }
       });
+
+      Button bookTour = view.findViewById(R.id.bookATour);
+
+      bookTour.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              Intent intent = new Intent(getActivity(), BookTourActivity.class);
+              startActivity(intent);
+          }
+      });
+
 
         return view;
     }
