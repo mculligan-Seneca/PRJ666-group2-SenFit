@@ -24,6 +24,6 @@ public interface OnlineClassService {
     @GET("/onlineClasses")
     public Call<List<OnlineClass>> getOnlineClasses();
 
-    @POST("/onlimeClaases/enroll")
+    @POST("/onlineClaases/enroll")
     public Call<OnlineClass> enrollOnlineClass(@Body MemberOnlineClass memberOnlineClass);
 }
