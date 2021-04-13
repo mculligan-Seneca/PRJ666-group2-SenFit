@@ -81,6 +81,13 @@ public class DataInsertionManager {
         DatabaseClient.dbExecutors.execute(()->{
 
             try {
+                Response<List<Exercise>> exerciseResponse = exerciseService.getExercises().execute();
+                if(exerciseResponse.isSuccessful()){
+                    dbClient
+                            .getAppDatabase()
+                            .getExerciseDao()
+                            .insertExercises(exerciseResponse.body());
+                }
                 Response<List<GymLocation>> locationResponse = gymLocationService.getGymLocations().execute();
                 if(locationResponse.isSuccessful()) {
                     dbClient

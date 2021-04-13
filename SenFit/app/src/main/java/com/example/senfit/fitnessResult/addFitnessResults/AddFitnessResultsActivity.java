@@ -83,17 +83,8 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
                         ,e.exercise.getExerciseId(),
                         e.reps,Integer.parseInt(heartstr));
                 fitnessResultViewModel.addResult(result);
-                if(fitnessResultViewModel.hasNext()){
-                    heartBeatText.getText().clear();
-                    setExerciseFragment();//prepare next exercise
-
-                }else{// else if finished insert results into database and return to home activity
-                    fitnessResultViewModel.insert();//
-                    Toast.makeText(this,R.string.results_insert_msg,Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(this, SenFitActivity.class);
-                    startActivity(intent);
-                    finish();//start main fiish result
-                }
+                heartBeatText.getText().clear();
+                setExerciseFragment();//prepare next exercise
             }
         });
         this.fitnessResultViewModel.getExerciseList().observe(this,list->{
@@ -112,7 +103,8 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
                     exerciseList.add(new ExerciseWithReps(e,REP_NUM));
                 }
             }
-            setExerciseFragment();
+            if(!list.isEmpty())
+                 setExerciseFragment();
 
         });
 
@@ -121,17 +113,31 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
 
         Fragment fragment = this.fm.findFragmentById(R.id.exercise_with_RepLayout);
         FragmentTransaction transaction=this.fm.beginTransaction();
-        if(fragment==null){
+        if(this.fitnessResultViewModel.hasNext())
+            if(fragment==null ){
 
-            //TODO:set fragment to first exercise
-            fragment = new ExerciseWithRepsFragment(this.exerciseList.get(this.fitnessResultViewModel.getIndex()));
-           transaction.add(R.id.exercise_with_RepLayout,fragment).commit();//adds exercise with rep fragment
-        }
-        else {
-            //set fragment to next exercise and replace fragment
-            fragment = new ExerciseWithRepsFragment(this.exerciseList.get(this.fitnessResultViewModel.getIndex()));
-            transaction.replace(R.id.exercise_with_RepLayout,fragment).commit();
+                //TODO:set fragment to first exercise
+
+                fragment = new ExerciseWithRepsFragment(this.exerciseList.get(this.fitnessResultViewModel.getIndex()));
+                transaction.add(R.id.exercise_with_RepLayout,fragment).commit();//adds exercise with rep fragment
+
+
             }
+            else {
+                //set fragment to next exercise and replace fragment
+
+                fragment = new ExerciseWithRepsFragment(this.exerciseList.get(this.fitnessResultViewModel.getIndex()));
+                transaction.replace(R.id.exercise_with_RepLayout,fragment).commit();//adds exercise with rep fragment
+
+
+                }
+        else{// else if finished insert results into database and return to home activity
+            fitnessResultViewModel.insert();//
+            Toast.makeText(this,R.string.results_insert_msg,Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, SenFitActivity.class);
+            startActivity(intent);
+            finish();//start main fiish result
+        }
     }
 
 

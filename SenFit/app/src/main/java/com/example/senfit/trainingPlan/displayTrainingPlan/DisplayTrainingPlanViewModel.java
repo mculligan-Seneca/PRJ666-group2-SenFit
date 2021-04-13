@@ -6,7 +6,7 @@ Version 1.0
 DisplayTrainingPlanViewmodel
 This viewmodel class is used for displaying a selected training plan
  */
-package com.example.senfit.trainingPlan;
+package com.example.senfit.trainingPlan.displayTrainingPlan;
 
 import androidx.lifecycle.ViewModel;
 

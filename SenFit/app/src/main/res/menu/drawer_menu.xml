@@ -15,6 +15,10 @@
               android:icon="@drawable/ic_fitness_portfolio_icon"
               android:title="@string/fitness_portfolio"/>
 
+        <item android:id="@+id/list_training_plan_fragment"
+            android:icon="@drawable/ic_baseline_calendar_today_24"
+            android:title="Training Plan"/>
+
     </group>
 
     <item android:title="@string/fitness_classes"
@@ -30,6 +34,7 @@
                 android:title="@string/tab_online"/>
         </menu>
     </item>
+
 
     <item
         android:id="@+id/log_out"

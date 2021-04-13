@@ -29,7 +29,7 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
     private SelectPlanListener listener;
 
     public interface SelectPlanListener{
-        public void selectPlan(int trainingPlanId);
+        public void selectPlan(int trainingPlanId,String planName);
     }
 
 
@@ -53,7 +53,7 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
         holder.instructorName.setText(plan.instrucotrName);
         holder.startDate.setText(DateTimeFormatHelper.formatDate(plan.startDate));
         holder.selectPlan.setOnClickListener(v->{
-            listener.selectPlan(plan.trainingPlanId);
+            listener.selectPlan(plan.trainingPlanId,plan.planName);
         });
 
 

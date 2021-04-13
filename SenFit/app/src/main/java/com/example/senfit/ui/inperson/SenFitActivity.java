@@ -24,6 +24,7 @@ import com.example.senfit.login.LoginActivity;
 import com.example.senfit.login.LoginHelper;
 import com.example.senfit.navigator.NavigateFragment;
 import com.example.senfit.navigator.Navigator;
+import com.example.senfit.trainingPlan.listTrainingPlan.ListTrainingPlanFragment;
 import com.example.senfit.ui.online.OnlineClassFragment;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
@@ -68,6 +69,9 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
                         break;
                     case R.id.online_fragment:
                         this.replaceFragment(OnlineClassFragment.newInstance(),R.string.tab_online);
+                        break;
+                    case R.id.list_training_plan_fragment:
+                        this.replaceFragment(ListTrainingPlanFragment.newInstance(this.memberId),R.string.select_trainer_plan);
                         break;
                     case R.id.log_out:
                         LoginHelper.setMemberId(this, 0);

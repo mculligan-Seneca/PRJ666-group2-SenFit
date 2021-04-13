@@ -24,7 +24,10 @@ import com.example.senfit.dataContext.entities.Exercise;
 import com.example.senfit.dataContext.entities.FitnessPortfolio;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
+import io.reactivex.rxjava3.core.Maybe;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,30 +52,24 @@ public class AddFitnessPortfolioViewModel extends ViewModel {
   }
 
 
-  public void insertPortfolio(){
-       Call<FitnessPortfolio> portfolioCall = this.portfolioService.createPortfolio(this.portfolio);
-       portfolioCall.enqueue(new Callback<FitnessPortfolio>() {
-           @Override
-           public void onResponse(Call<FitnessPortfolio> call, Response<FitnessPortfolio> response) {
-               if(response.isSuccessful()){
-                   DatabaseClient.dbExecutors.execute(()->{
+  public Maybe<Integer> insertPortfolio(){
+      return Maybe.fromCallable(new Callable<Integer>() {
+          @Override
+          public Integer call() throws Exception {
+              Response<FitnessPortfolio> response = portfolioService.createPortfolio(portfolio).execute();
+              if(response.isSuccessful()) {
+                  FitnessPortfolio p=response.body();
+                  DatabaseClient.getInstance()
+                          .getAppDatabase()
+                          .getFitnessPortfolioDAO()
+                          .insertPortfolio(p);
+                  return p.getFitnessPortfolioId();
 
-                       Long rowNum = DatabaseClient.getInstance()
-                               .getAppDatabase()
-                               .getFitnessPortfolioDAO()
-                               .insertPortfolio(portfolio);
-
-                       rowNumData.postValue(rowNum);
-                   });
-               }
-           }
-
-           @Override
-           public void onFailure(Call<FitnessPortfolio> call, Throwable t) {
-                    Log.e("load_portfolio",t.getMessage());
-           }
-       });
-
+              }
+              else
+                  throw new Exception(response.errorBody().string());
+          }
+      });
   }
 
   public LiveData<Long> getRowNumData(){
