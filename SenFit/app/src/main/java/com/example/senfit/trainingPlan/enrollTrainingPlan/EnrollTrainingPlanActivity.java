@@ -60,7 +60,7 @@ public class EnrollTrainingPlanActivity extends AppCompatActivity implements Nav
         fm.beginTransaction()
                 .replace(R.id.training_plan_enroll_fragment,fragment)
                 .addToBackStack(null).commit();
-        getActionBar().setTitle(titleId);
+        getSupportActionBar().setTitle(titleId);
 
     }
 
@@ -69,7 +69,7 @@ public class EnrollTrainingPlanActivity extends AppCompatActivity implements Nav
         fm.beginTransaction()
                 .replace(R.id.training_plan_enroll_fragment,fragment)
                 .addToBackStack(null).commit();
-        getActionBar().setTitle(title);
+        getSupportActionBar().setTitle(title);
     }
 
 }

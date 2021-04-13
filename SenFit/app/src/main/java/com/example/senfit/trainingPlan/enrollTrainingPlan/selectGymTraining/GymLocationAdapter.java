@@ -12,6 +12,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,7 +47,7 @@ public class GymLocationAdapter extends RecyclerView.Adapter<GymLocationAdapter.
     public void onBindViewHolder(@NonNull GymLocationViewHolder holder, int position) {
             GymLocation location = this.gymList.get(position);
             holder.postal_code.setText(location.getPostalCode());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.selectGym.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.selectGym(location);
@@ -63,9 +64,11 @@ public class GymLocationAdapter extends RecyclerView.Adapter<GymLocationAdapter.
 
     public class GymLocationViewHolder extends RecyclerView.ViewHolder {
         public final TextView postal_code;
+        public final ImageButton selectGym;
         public GymLocationViewHolder(@NonNull View itemView) {
             super(itemView);
             this.postal_code=itemView.findViewById(R.id.training_gym_postal_code);
+            this.selectGym=itemView.findViewById(R.id.select_gym_button);
         }
     }
 }

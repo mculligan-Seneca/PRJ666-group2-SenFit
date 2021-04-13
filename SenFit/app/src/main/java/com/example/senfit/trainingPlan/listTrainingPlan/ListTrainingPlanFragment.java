@@ -98,6 +98,7 @@ public class ListTrainingPlanFragment extends Fragment implements TrainingPlanAd
         this.recyclerView=v.findViewById(R.id.training_plan_list);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         this.adapter= new TrainingPlanAdapter(getContext(),this.planList,this);
+        this.recyclerView.setAdapter(this.adapter);
 
         return v;
     }

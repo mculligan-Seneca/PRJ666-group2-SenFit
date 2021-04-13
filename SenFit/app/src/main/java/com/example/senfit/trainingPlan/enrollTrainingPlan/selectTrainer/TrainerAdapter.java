@@ -12,6 +12,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,7 @@ public class TrainerAdapter extends RecyclerView.Adapter<TrainerAdapter.TrainerV
         Trainer trainer= this.trainerList.get(position);
         holder.full_name.setText(trainer.getFirstName()+trainer.getLastName());
         holder.email.setText(trainer.getEmail());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.selectTrainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.selectTrainer(trainer);
@@ -69,10 +70,12 @@ public class TrainerAdapter extends RecyclerView.Adapter<TrainerAdapter.TrainerV
     public class TrainerViewHolder extends RecyclerView.ViewHolder {
         public final TextView full_name;
         public final TextView email;
+        public final ImageButton selectTrainer;
         public TrainerViewHolder(@NonNull View itemView) {
             super(itemView);
             this.full_name=itemView.findViewById(R.id.trainer_full_name);
             this.email=itemView.findViewById(R.id.trainer_email);
+            this.selectTrainer=itemView.findViewById(R.id.select_trainer_button);
 
         }
     }

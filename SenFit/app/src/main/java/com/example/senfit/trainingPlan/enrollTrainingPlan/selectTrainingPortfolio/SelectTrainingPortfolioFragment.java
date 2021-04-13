@@ -100,12 +100,15 @@ public class SelectTrainingPortfolioFragment extends Fragment implements Portfol
         });
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         this.adapter = new PortfolioAdapter(getContext(),this.portfolioList,this);
+        this.recyclerView.setAdapter(this.adapter);
         return v;
     }
 
+
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         this.viewModel = new ViewModelProvider(getActivity()).get(EnrollTrainingPlanViewModel.class);
         this.viewModel.getLivePortfolioData().observe(getViewLifecycleOwner(), this::updateList);
     }

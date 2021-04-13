@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,14 @@ import com.example.senfit.navigator.Navigator;
 import com.example.senfit.trainingPlan.enrollTrainingPlan.EnrollTrainingPlanViewModel;
 import com.example.senfit.ui.inperson.SenFitActivity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class SelectTrainerFragment extends Fragment implements TrainerAdapter.OnSelectTrainer {
@@ -76,9 +84,11 @@ public class SelectTrainerFragment extends Fragment implements TrainerAdapter.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_select_trainer, container, false);
+        this.trainerList= new ArrayList<>(0);
         this.recyclerView=v.findViewById(R.id.select_training_list);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         this.adapter= new TrainerAdapter(getContext(),this.trainerList,this);
+        this.recyclerView.setAdapter(this.adapter);
         return v;
     }
 
@@ -96,9 +106,34 @@ public class SelectTrainerFragment extends Fragment implements TrainerAdapter.On
     @Override
     public void selectTrainer(Trainer trainer) {
         this.viewModel.setTrainer(trainer.getTrainerId());
-        this.viewModel.submitPlan();
-        Toast.makeText(getContext(),R.string.training_plan_submitted,Toast.LENGTH_LONG);
-        Intent intent = new Intent(getContext(), SenFitActivity.class);//finsih activity and go back to main activity
-        this.navigator.navigateTo(intent);
+        this.viewModel.submitPlan()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    private Disposable disposable;
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                            disposable=d;
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                        Toast.makeText(getContext(),R.string.training_plan_submitted,Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getContext(), SenFitActivity.class);//finsih activity and go back to main activity
+                        navigator.navigateTo(intent);
+                        if(!disposable.isDisposed())
+                            disposable.dispose();
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.e("submit_training_plan",e.getMessage());
+                        Toast.makeText(getContext(),R.string.training_plan_submit_err,Toast.LENGTH_LONG).show();
+                        if(!disposable.isDisposed())
+                            disposable.dispose();
+                    }
+                });
+
     }
 }

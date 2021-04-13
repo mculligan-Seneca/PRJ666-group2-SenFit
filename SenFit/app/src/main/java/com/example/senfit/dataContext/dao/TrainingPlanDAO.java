@@ -18,6 +18,9 @@ public interface TrainingPlanDAO {
     @Insert
     public void insertWithPortfolio(TrainingPlan plan, FitnessPortfolio portfolio);
 
+    @Insert
+    public void insertTrainingPlan(TrainingPlan plan);
+
     @Query("Select * from trainingPlanView where member_id=:id")
     public LiveData<List<TrainingPlanView>> getTrainingPlansForMember(int id);
 }

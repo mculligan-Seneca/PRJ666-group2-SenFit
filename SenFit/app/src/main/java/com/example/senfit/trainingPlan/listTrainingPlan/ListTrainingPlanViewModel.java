@@ -8,6 +8,7 @@ This viewmodel class holds data to list the training plans a member has been enr
  */
 package com.example.senfit.trainingPlan.listTrainingPlan;
 
+import android.database.sqlite.SQLiteConstraintException;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -58,8 +59,12 @@ public class ListTrainingPlanViewModel extends ViewModel {
 
                                                         @Override
                                                         public void onNext(@NonNull TrainingPlan trainingPlan) {
-                                                                planDAO.insertWithPortfolio(trainingPlan,
-                                                                        trainingPlan.getPortfolio());
+                                                              try {
+                                                                  planDAO.insertWithPortfolio(trainingPlan,
+                                                                          trainingPlan.getPortfolio());
+                                                              }catch(SQLiteConstraintException sqle){
+                                                                  Log.e("list_training_plans",sqle.getMessage());
+                                                              }
                                                         }
 
                                                         @Override
