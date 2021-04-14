@@ -42,7 +42,16 @@ Completed SEN-FIT REST API 2021/3/24.(Mitchell)
 
 Networking manager implemented 2021/4/2(Mitchell).
 
+Logout feature implemented 2021/04/6.(Portia).
+
+Book a tour feature for existing customers implemented 2021/04/9. (Portia).
+
+Finished intregating backend API with APP 2021/04/13(Mitchell , Portia).
+
 Enrol Training Plan functionality added 2021/04/14(Mitchell).
+
+
+
 
 
 
