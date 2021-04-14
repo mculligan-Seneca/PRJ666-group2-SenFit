@@ -22,8 +22,10 @@ import com.example.senfit.dataContext.entities.Trainer;
 import com.example.senfit.dataContext.entities.TrainingPlan;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,26 +84,25 @@ public class EnrollTrainingPlanViewModel extends ViewModel {
         this.trainingPlan.setTrainerId(trainerId);
     }
 
-    public void submitPlan(){
-        Call<TrainingPlan> plansubmit = this.planService.createTrainingPlan(this.trainingPlan);
-        plansubmit.enqueue(new Callback<TrainingPlan>() {
-            @Override
-            public void onResponse(Call<TrainingPlan> call, Response<TrainingPlan> response) {
-                    if(!response.isSuccessful()){
-                        try {
-                            Log.e("submit_training_plan", response.errorBody().string());
-                        }catch(IOException ioe){
-                            Log.e("submit_training_plan",ioe.getMessage());
-                        }
-                    }else{
-                        Log.d("submit_training_plan","training submission successful");
-                    }
-            }
+    public Completable submitPlan(){
+        this.trainingPlan.setStartDate(new Date(System.currentTimeMillis()));
+       return Completable.defer(()->{
+                    Response<TrainingPlan> response =this.planService.createTrainingPlan(this.trainingPlan)
+                            .execute();
+                    if(response.isSuccessful()) {
 
-            @Override
-            public void onFailure(Call<TrainingPlan> call, Throwable t) {
-                Log.e("submit_training_plan",t.getMessage());
-            }
-        });
+                        dbClient.getAppDatabase()
+                                .getTrainingPlanDAO()
+                                .insertTrainingPlan(response.body());
+                        return Completable.complete();
+                    }
+                    else {
+
+                        return Completable.error(new Exception(response.errorBody().string()));
+                    }
+
+
+               });
+
     }
 }

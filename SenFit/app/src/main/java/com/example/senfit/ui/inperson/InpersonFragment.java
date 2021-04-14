@@ -109,7 +109,7 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
         // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
-        model = new ViewModelProvider(this).get(InpersonViewModel.class);
+        model = new ViewModelProvider(getActivity()).get(InpersonViewModel.class);
 
         List<InPersonView> data = new ArrayList<>();
 
@@ -128,6 +128,12 @@ public class InpersonFragment extends Fragment implements InpersonAdapter.Select
 
         return root;
     }
+
+      @Override
+      public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+          super.onActivityCreated(savedInstanceState);
+
+      }
 
       @Override
       public void onDestroy() {

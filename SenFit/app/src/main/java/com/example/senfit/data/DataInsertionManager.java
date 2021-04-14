@@ -81,6 +81,13 @@ public class DataInsertionManager {
         DatabaseClient.dbExecutors.execute(()->{
 
             try {
+                Response<List<Exercise>> exerciseResponse = exerciseService.getExercises().execute();
+                if(exerciseResponse.isSuccessful()){
+                    dbClient
+                            .getAppDatabase()
+                            .getExerciseDao()
+                            .insertExercises(exerciseResponse.body());
+                }
                 Response<List<GymLocation>> locationResponse = gymLocationService.getGymLocations().execute();
                 if(locationResponse.isSuccessful()) {
                     dbClient
@@ -134,7 +141,7 @@ public class DataInsertionManager {
 
     public static void insertDummyData(Context context) {
         DataInsertionManager dim = new DataInsertionManager(context);
-        if (!getDummyDataInserted(context)) {
+        //if (!getDummyDataInserted(context)) {
 
 
 
@@ -178,7 +185,7 @@ public class DataInsertionManager {
 
 
            setDummyDataInserted(context);*/
-        }
+       // }
     }
 
 

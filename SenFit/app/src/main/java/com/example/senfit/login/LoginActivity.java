@@ -73,7 +73,9 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+
         Toast.makeText(LoginActivity.this,"Logging in Please wait",Toast.LENGTH_LONG).show();
+
         LoginHelper.compareEmailPass(this, userName, password, new ComparisonCallback() {
             @Override
             public void isValid(int memberId, String msg) {

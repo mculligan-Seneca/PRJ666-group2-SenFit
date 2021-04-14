@@ -26,6 +26,11 @@ import com.example.senfit.fitnessResult.addFitnessResults.AddFitnessResultsActiv
 import com.example.senfit.ui.inperson.SenFitActivity;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 
+import io.reactivex.rxjava3.core.MaybeObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class AddFitnessPortfolioActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String MEMBER_TAG="member__tag";
     private AddFitnessPortfolioViewModel portfolioViewModel;
@@ -54,7 +59,7 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
 
         this.startBtn.setOnClickListener(this);
 
-        this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted
+       /* this.portfolioViewModel.getRowNumData().observe(this,(row)->{// observe weather portfolio has been inserted
             if(row!=null){
                 portfolioId=row;
                 Intent args = new Intent(this, AddFitnessResultsActivity.class);
@@ -66,12 +71,13 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
                 //TODO:Start exercise result activity
             }
 
-        });
+        });*/
 
     }
 
     @Override
     public void onClick(View v) {
+        startBtn.setEnabled(false);
         String heightStr=null, weightStr=null,healthStr;
         heightStr=this.heightIn.getText().toString();
         weightStr=this.weigthIn.getText().toString();
@@ -82,7 +88,48 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
                 this.portfolioViewModel.getPortfolio().setWeight(Integer.parseInt(weightStr));
                 this.portfolioViewModel.getPortfolio().setHealthConcerns(healthStr.isEmpty()?"N/A":healthStr);
                 this.portfolioViewModel.getPortfolio().setMemberId(this.memberId);
-                this.portfolioViewModel.insertPortfolio();//insert portfolio into database
+                this.portfolioViewModel.insertPortfolio()
+                .subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<Integer>() {
+                    private Disposable disposable;
+
+
+                    @Override
+                    public void onSubscribe(io.reactivex.rxjava3.disposables.@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        disposable=d;
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.annotations.NonNull Integer row) {
+                        portfolioId=row;
+                        Intent args = new Intent(AddFitnessPortfolioActivity.this, AddFitnessResultsActivity.class);
+                        Bundle extras =new Bundle();
+                        extras.putLong(AddFitnessResultsActivity.ADD_RESULT_TAG,portfolioId);
+                        args.putExtras(extras);
+                        startActivity(args);
+                        finish();
+                        if(!disposable.isDisposed())
+                            disposable.dispose();
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+
+                        Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                        if(!disposable.isDisposed())
+                            disposable.dispose();
+                        startBtn.setEnabled(true);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Toast.makeText(getApplicationContext(),"Completed",Toast.LENGTH_LONG).show();
+                        if(!disposable.isDisposed())
+                            disposable.dispose();
+
+                    }
+                });//insert portfolio into database
         /*        Intent intent = new Intent(this, SenFitActivity.class);//go back to main class for now
               //  args.putExtra(AddFitnessResultsActivity.ADD_RESULT_TAG,portfolioId);
                 Toast.makeText(this,R.string.portfolio_added,Toast.LENGTH_LONG).show();

@@ -44,7 +44,7 @@ public class EnrollTrainingPlanActivity extends AppCompatActivity implements Nav
                 .add(R.id.training_plan_enroll_fragment,new SelectTrainingPortfolioFragment())
                 .addToBackStack(null)
                 .commit();
-        getActionBar().setTitle(R.string.select_training_portfolio);
+
     }
 
 
@@ -60,8 +60,16 @@ public class EnrollTrainingPlanActivity extends AppCompatActivity implements Nav
         fm.beginTransaction()
                 .replace(R.id.training_plan_enroll_fragment,fragment)
                 .addToBackStack(null).commit();
-        getActionBar().setTitle(titleId);
+        getSupportActionBar().setTitle(titleId);
 
+    }
+
+    @Override
+    public void swapFragment(Fragment fragment, String title) {
+        fm.beginTransaction()
+                .replace(R.id.training_plan_enroll_fragment,fragment)
+                .addToBackStack(null).commit();
+        getSupportActionBar().setTitle(title);
     }
 
 }

@@ -104,7 +104,9 @@ public class LoginHelper {
                                             .insertMember(member);
                                     comparisonCallback.isValid(member.getMember_id(), "Login Success");*/
                                     Log.e("load_to_db_err",e.getMessage());
+
                                     comparisonCallback.isValid(-1, e.getMessage());
+
                                     if(!disposable.isDisposed())
                                         disposable.dispose();
                                 }
@@ -171,7 +173,17 @@ public class LoginHelper {
 
     public static boolean getLoginStatus(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        return sharedPreferences.getBoolean("login_status", false);
+
+        boolean logged= sharedPreferences.getBoolean("login_status", false);
+        DatabaseClient.dbExecutors.execute(()->{
+            Member member= DatabaseClient.initDB(context)
+                            .getAppDatabase()
+                            .getMemberDao()
+                            .getMember(LoginHelper.getMemberId(context));
+            NetworkManager.getNetworkManager().addAuthToken(member.getToken());
+        });
+        return logged;
+
     }
 
 }

@@ -26,6 +26,7 @@ import com.example.senfit.R;
 import com.example.senfit.dataContext.entities.GymLocation;
 import com.example.senfit.navigator.NavigateFragment;
 import com.example.senfit.trainingPlan.enrollTrainingPlan.EnrollTrainingPlanViewModel;
+import com.example.senfit.trainingPlan.enrollTrainingPlan.selectTrainer.SelectTrainerFragment;
 
 import java.util.ArrayList;
 
@@ -75,6 +76,7 @@ public class SelectTrainingGymFragment extends Fragment implements GymLocationAd
         this.recyclerView=v.findViewById(R.id.training_gym_location_list);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         this.adapter = new GymLocationAdapter(getContext(),this.gymList,this);
+        this.recyclerView.setAdapter(this.adapter);
 
         return v;
 
@@ -96,6 +98,6 @@ public class SelectTrainingGymFragment extends Fragment implements GymLocationAd
     public void selectGym(GymLocation gym) {
         this.viewModel.setGymLocation(gym.getGymLocationId());
 
-        this.navigateFragment.swapFragment(new SelectTrainingGymFragment(),R.string.select_trainer_plan);
+        this.navigateFragment.swapFragment(new SelectTrainerFragment(),R.string.select_trainer_plan);
     }
 }

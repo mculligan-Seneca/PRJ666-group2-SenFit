@@ -51,10 +51,20 @@ public class NetworkManager {
     }
 
 
+
     public void addAuthToken(String token){
         this.authInterceptor.setToken(token);
     }
     public void invalidateAuthToken(){
         this.authInterceptor.invlaidateToken();
+
     }
+    /*
+    public void addInterceptorToClient(Interceptor interceptor){
+        synchronized (this) {
+            this.retrofit = this.retrofit.newBuilder()
+                    .client(new OkHttpClient.Builder().addInterceptor(interceptor).build())
+                    .build();//TODO Lookup add authenticator
+        }
+>>>>>>> TrainingPlan*/
 }

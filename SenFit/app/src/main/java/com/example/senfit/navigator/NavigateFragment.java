@@ -12,4 +12,6 @@ import androidx.fragment.app.Fragment;
 
 public interface NavigateFragment {
     public void swapFragment(Fragment fragment,int titleId);
+
+    public void swapFragment(Fragment fragment, String title);
 }

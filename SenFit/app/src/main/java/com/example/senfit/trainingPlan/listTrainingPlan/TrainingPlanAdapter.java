@@ -6,10 +6,9 @@ Version 1.0
 TrainingPlanAdapter
 This adapter class displays a training plan item in a recycler view
  */
-package com.example.senfit.trainingPlan;
+package com.example.senfit.trainingPlan.listTrainingPlan;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import com.example.senfit.R;
-import com.example.senfit.dataContext.entities.TrainingPlan;
 import com.example.senfit.dataContext.views.TrainingPlanView;
 import com.example.senfit.uiHelpers.DateTimeFormatHelper;
 
@@ -32,7 +29,7 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
     private SelectPlanListener listener;
 
     public interface SelectPlanListener{
-        public void selectPlan(int trainingPlanId);
+        public void selectPlan(int trainingPlanId,String planName);
     }
 
 
@@ -44,8 +41,8 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
     @NonNull
     @Override
     public TrainingPlanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflator= LayoutInflater.from(this.context);
-        View v= inflator.inflate(R.layout.training_plan_item,parent,false);
+        LayoutInflater inflater= LayoutInflater.from(this.context);
+        View v= inflater.inflate(R.layout.training_plan_item,parent,false);
         return new TrainingPlanViewHolder(v);
     }
 
@@ -55,9 +52,7 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
         holder.planName.setText(plan.planName);
         holder.instructorName.setText(plan.instrucotrName);
         holder.startDate.setText(DateTimeFormatHelper.formatDate(plan.startDate));
-        holder.selectPlan.setOnClickListener(v->{
-            listener.selectPlan(plan.trainingPlanId);
-        });
+        holder.trainerEmail.setText(plan.trainerEmail);
 
 
     }
@@ -75,14 +70,14 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
         public final TextView planName;
         public final TextView startDate;
         public final TextView instructorName;
-        public final ImageButton selectPlan;
+        public final TextView trainerEmail;
         public TrainingPlanViewHolder(@NonNull View itemView) {
 
             super(itemView);
             this.instructorName=itemView.findViewById(R.id.plan_instructor_name);
             this.planName=itemView.findViewById(R.id.plan_title);
             this.startDate=itemView.findViewById(R.id.plan_startDate);
-            this.selectPlan= itemView.findViewById(R.id.select_plan_button);
+            this.trainerEmail=itemView.findViewById(R.id.plan_trainer_email);
         }
 
     }
