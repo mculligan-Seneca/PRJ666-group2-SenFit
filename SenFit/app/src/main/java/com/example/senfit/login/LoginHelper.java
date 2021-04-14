@@ -71,6 +71,9 @@ public class LoginHelper {
                         return;
                     }
                     Member member = response.body();
+
+                    setToken(context, member.getToken());
+
                     NetworkManager.getNetworkManager().addAuthToken(member.getToken());
                     //retrieve token for member
                     member.setPassword(password);
@@ -172,6 +175,18 @@ public class LoginHelper {
     public static boolean getLoginStatus(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         return sharedPreferences.getBoolean("login_status", false);
+    }
+
+    public static void setToken(Context context, String token) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("member_token", token);
+        editor.apply();
+    }
+
+    public static String getToken(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        return sharedPreferences.getString("member_token", "");
     }
 
 }
