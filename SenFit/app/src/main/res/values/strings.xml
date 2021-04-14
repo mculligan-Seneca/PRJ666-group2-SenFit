@@ -88,6 +88,7 @@
     <string name="hint_last_email">Email</string>
     <string name="hint_phone">Phone number</string>
     <string name="add_portfolio">Add Portfolio</string>
+    <string name="start_date">Start Date:</string>
 
 
 </resources>

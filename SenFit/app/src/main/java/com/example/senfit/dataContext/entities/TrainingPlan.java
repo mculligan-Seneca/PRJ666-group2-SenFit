@@ -42,7 +42,7 @@ public class TrainingPlan {
     private int member_id;
 
     @Ignore
-    @SerializedName("fitnessPortfolio")
+    @SerializedName("fitnessPortfolios")
     private FitnessPortfolio portfolio;
 
     public TrainingPlan(){

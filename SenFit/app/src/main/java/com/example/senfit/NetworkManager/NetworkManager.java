@@ -49,8 +49,10 @@ public class NetworkManager {
 
 
     public void addInterceptorToClient(Interceptor interceptor){
-        this.retrofit=this.retrofit.newBuilder()
-                .client(new OkHttpClient.Builder().addInterceptor(interceptor).build())
-                .build();//TODO Lookup add authenticator
+        synchronized (this) {
+            this.retrofit = this.retrofit.newBuilder()
+                    .client(new OkHttpClient.Builder().addInterceptor(interceptor).build())
+                    .build();//TODO Lookup add authenticator
+        }
     }
 }

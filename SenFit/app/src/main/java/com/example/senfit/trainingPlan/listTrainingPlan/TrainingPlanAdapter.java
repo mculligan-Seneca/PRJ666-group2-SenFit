@@ -41,8 +41,8 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
     @NonNull
     @Override
     public TrainingPlanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflator= LayoutInflater.from(this.context);
-        View v= inflator.inflate(R.layout.training_plan_item,parent,false);
+        LayoutInflater inflater= LayoutInflater.from(this.context);
+        View v= inflater.inflate(R.layout.training_plan_item,parent,false);
         return new TrainingPlanViewHolder(v);
     }
 
@@ -52,9 +52,7 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
         holder.planName.setText(plan.planName);
         holder.instructorName.setText(plan.instrucotrName);
         holder.startDate.setText(DateTimeFormatHelper.formatDate(plan.startDate));
-        holder.selectPlan.setOnClickListener(v->{
-            listener.selectPlan(plan.trainingPlanId,plan.planName);
-        });
+        holder.trainerEmail.setText(plan.trainerEmail);
 
 
     }
@@ -72,14 +70,14 @@ public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapte
         public final TextView planName;
         public final TextView startDate;
         public final TextView instructorName;
-        public final ImageButton selectPlan;
+        public final TextView trainerEmail;
         public TrainingPlanViewHolder(@NonNull View itemView) {
 
             super(itemView);
             this.instructorName=itemView.findViewById(R.id.plan_instructor_name);
             this.planName=itemView.findViewById(R.id.plan_title);
             this.startDate=itemView.findViewById(R.id.plan_startDate);
-            this.selectPlan= itemView.findViewById(R.id.select_plan_button);
+            this.trainerEmail=itemView.findViewById(R.id.plan_trainer_email);
         }
 
     }

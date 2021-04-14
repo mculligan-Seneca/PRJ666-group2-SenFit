@@ -17,7 +17,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.senfit.NetworkManager.NetworkManager;
 import com.example.senfit.NetworkManager.NetworkServices.TrainingPlanService;
 import com.example.senfit.dataContext.DatabaseClient;
+import com.example.senfit.dataContext.dao.FitnessPortfolioDAO;
 import com.example.senfit.dataContext.dao.TrainingPlanDAO;
+import com.example.senfit.dataContext.entities.FitnessPortfolio;
 import com.example.senfit.dataContext.entities.TrainingPlan;
 import com.example.senfit.dataContext.views.TrainingPlanView;
 
@@ -36,10 +38,12 @@ public class ListTrainingPlanViewModel extends ViewModel {
 
         private TrainingPlanService planService;
         private TrainingPlanDAO planDAO;
+        private FitnessPortfolioDAO portfolioDAO;
         private LiveData<List<TrainingPlanView>> trainingPlanLiveData;
 
         public ListTrainingPlanViewModel(int memberId){
                 this.planDAO= DatabaseClient.getInstance().getAppDatabase().getTrainingPlanDAO();
+                this.portfolioDAO=DatabaseClient.getInstance().getAppDatabase().getFitnessPortfolioDAO();
                 this.planService = NetworkManager
                         .getNetworkManager()
                         .createNetworkService(TrainingPlanService.class);
@@ -60,8 +64,8 @@ public class ListTrainingPlanViewModel extends ViewModel {
                                                         @Override
                                                         public void onNext(@NonNull TrainingPlan trainingPlan) {
                                                               try {
-                                                                  planDAO.insertWithPortfolio(trainingPlan,
-                                                                          trainingPlan.getPortfolio());
+                                                                  portfolioDAO.insertPortfolio(trainingPlan.getPortfolio());
+                                                                  planDAO.insertTrainingPlan(trainingPlan);
                                                               }catch(SQLiteConstraintException sqle){
                                                                   Log.e("list_training_plans",sqle.getMessage());
                                                               }

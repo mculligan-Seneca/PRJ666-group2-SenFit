@@ -22,6 +22,7 @@ import com.example.senfit.dataContext.entities.Trainer;
 import com.example.senfit.dataContext.entities.TrainingPlan;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
@@ -84,6 +85,7 @@ public class EnrollTrainingPlanViewModel extends ViewModel {
     }
 
     public Completable submitPlan(){
+        this.trainingPlan.setStartDate(new Date(System.currentTimeMillis()));
        return Completable.defer(()->{
                     Response<TrainingPlan> response =this.planService.createTrainingPlan(this.trainingPlan)
                             .execute();
