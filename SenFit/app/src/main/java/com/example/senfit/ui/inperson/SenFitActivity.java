@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.senfit.NetworkManager.NetworkManager;
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
 import com.example.senfit.fitnessPortfolio.FitnessPortfolioFragment;
@@ -51,6 +52,12 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
                     .commit();
             toolbar.setTitle(R.string.app_name);
         }
+
+        String token = LoginHelper.getToken(this);
+
+        NetworkManager.getNetworkManager().addAuthToken(token);
+
+
         this.drawerLayout = findViewById(R.id.drawer_view_senfit);
         NavigationView navView = findViewById(R.id.navigation_viewId);
         navView.setNavigationItemSelectedListener((item)->{
@@ -75,7 +82,6 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
                         break;
                     case R.id.log_out:
                         LoginHelper.setLoginStatus(this, false);
-                        LoginHelper.setMemberId(this, 0);
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -85,6 +91,8 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
                     default:
                         Toast.makeText(SenFitActivity.this,"Button pressed",Toast.LENGTH_LONG).show();
                 }
+
+
 
             return true;
         });
