@@ -175,13 +175,18 @@ public class LoginHelper {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
 
         boolean logged= sharedPreferences.getBoolean("login_status", false);
-        DatabaseClient.dbExecutors.execute(()->{
-            Member member= DatabaseClient.initDB(context)
-                            .getAppDatabase()
-                            .getMemberDao()
-                            .getMember(LoginHelper.getMemberId(context));
-            NetworkManager.getNetworkManager().addAuthToken(member.getToken());
-        });
+       if(logged) {
+           DatabaseClient.dbExecutors.execute(() -> {
+               int id = LoginHelper.getMemberId(context);
+
+               Member member = DatabaseClient.initDB(context)
+                       .getAppDatabase()
+                       .getMemberDao()
+                       .getMember(id);
+               if (member != null)
+                   NetworkManager.getNetworkManager().addAuthToken(member.getToken());
+           });
+       }
         return logged;
 
     }

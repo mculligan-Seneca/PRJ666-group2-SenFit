@@ -25,14 +25,15 @@ import com.example.senfit.dataContext.views.TrainingPlanView;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class ListTrainingPlanViewModel extends ViewModel {
 
@@ -51,37 +52,42 @@ public class ListTrainingPlanViewModel extends ViewModel {
                         @Override
                         public void onResponse(Call<List<TrainingPlan>> call, Response<List<TrainingPlan>> response) {
                                 if(response.isSuccessful()){
-                                        Observable.fromIterable(response.body())
-                                                .subscribeOn(Schedulers.io())
-                                                .observeOn(Schedulers.from(DatabaseClient.dbExecutors))
-                                                .subscribe(new Observer<TrainingPlan>() {
-                                                       private Disposable disposable;
-                                                        @Override
-                                                        public void onSubscribe(@NonNull Disposable d) {
-                                                                disposable=d;
-                                                        }
+                                     Observable.fromIterable(response.body())
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(Schedulers.computation())
+                                        .subscribe(new Observer<TrainingPlan>() {
+                                        private Disposable disposable;
 
-                                                        @Override
-                                                        public void onNext(@NonNull TrainingPlan trainingPlan) {
-                                                              try {
-                                                                  portfolioDAO.insertPortfolio(trainingPlan.getPortfolio());
-                                                                  planDAO.insertTrainingPlan(trainingPlan);
-                                                              }catch(SQLiteConstraintException sqle){
-                                                                  Log.e("list_training_plans",sqle.getMessage());
-                                                              }
-                                                        }
 
-                                                        @Override
-                                                        public void onError(@NonNull Throwable e) {
-                                                                Log.e("load_training_plans",e.getMessage());
-                                                        }
 
-                                                        @Override
-                                                        public void onComplete() {
-                                                            if(!disposable.isDisposed())
-                                                                disposable.dispose();
-                                                        }
-                                                });
+                                            @Override
+                                            public void onSubscribe(@NonNull Disposable d) {
+                                                disposable=d;
+                                            }
+
+                                            @Override
+                                        public void onNext(@NonNull TrainingPlan trainingPlan) {
+                                            try {
+                                                portfolioDAO.insertPortfolio(trainingPlan.getPortfolio());
+                                                planDAO.insertTrainingPlan(trainingPlan);
+                                            } catch (SQLiteConstraintException sqle) {
+                                                Log.e("list_training_plans", sqle.getMessage());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(@NonNull Throwable e) {
+                                            Log.e("load_training_plans", e.getMessage());
+                                            if (!disposable.isDisposed())
+                                                disposable.dispose();
+                                        }
+
+                                        @Override
+                                        public void onComplete() {
+                                            if (!disposable.isDisposed())
+                                                disposable.dispose();
+                                        }
+                                    });
                                 }
                         }
 
