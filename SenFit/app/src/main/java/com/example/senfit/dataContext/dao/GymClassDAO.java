@@ -21,7 +21,7 @@ import io.reactivex.Flowable;
 @Dao
 public interface GymClassDAO {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertGymClass(GymClass gymClass);
     @Insert
 

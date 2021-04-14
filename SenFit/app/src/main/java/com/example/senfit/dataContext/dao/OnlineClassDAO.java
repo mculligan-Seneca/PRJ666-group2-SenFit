@@ -19,7 +19,7 @@ import io.reactivex.Completable;
 @Dao
 public interface OnlineClassDAO {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertOnlineClass(OnlineClass onlineClass);
 
 

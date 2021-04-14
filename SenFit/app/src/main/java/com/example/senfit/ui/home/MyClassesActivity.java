@@ -17,6 +17,7 @@ import com.example.senfit.dataContext.entities.OnlineClass;
 import com.example.senfit.dataContext.entities.Trainer;
 import com.example.senfit.ui.inperson.InpersonClassData;
 import com.example.senfit.ui.online.OnlineClassAdapter;
+import com.example.senfit.uiHelpers.DateTimeFormatHelper;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -71,19 +72,17 @@ public class MyClassesActivity extends AppCompatActivity {
                             .getFitnessClassDao()
                             .getFitnessClass(onlineClass.getFitnessClassId());
                     data.setClasName(fClass.getFitnessClassName());
-                    data.setDate(onlineClass.getClassDate().toString());
+                    data.setDate(DateTimeFormatHelper.formatDate(onlineClass.getClassDate()));
                     data.setEnrolled(false);
 
-                    Date startDate = new Date(onlineClass.getStartTime().getTime());
-                    Calendar startCalendar = GregorianCalendar.getInstance();
-                    startCalendar.setTime(startDate);
+                    String startDate = DateTimeFormatHelper.formatTime(onlineClass.getStartTime());
 
-                    Date endDate = new Date(onlineClass.getEndTime().getTime());
-                    Calendar endCalendar = GregorianCalendar.getInstance();
-                    endCalendar.setTime(endDate);
 
-                    data.setTime(startCalendar.get(Calendar.HOUR_OF_DAY) + ":" + startCalendar.get(Calendar.MINUTE) + "-"
-                            +endCalendar.get(Calendar.HOUR_OF_DAY) + ":" + endCalendar.get(Calendar.MINUTE));
+                    String endDate = DateTimeFormatHelper.formatTime(onlineClass.getEndTime());
+
+
+                    data.setTime(startDate+ "-"
+                            +endDate);
 
                     Trainer trainer = DatabaseClient
                             .getInstance()

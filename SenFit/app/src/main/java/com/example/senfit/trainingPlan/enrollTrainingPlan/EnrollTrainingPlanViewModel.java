@@ -63,7 +63,7 @@ public class EnrollTrainingPlanViewModel extends ViewModel {
     }
 
     public LiveData<List<Trainer>> getTrainerData(){
-        if(this.trainerData==null)
+
             this.trainerData=this.dbClient.getAppDatabase()
                     .getTrainerDao()
                     .getTrainersFromGym(this.gymLocationId);

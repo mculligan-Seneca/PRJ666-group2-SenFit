@@ -42,6 +42,7 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         private final Button mClassEnrollButton;
         private final View mInpersonRowView;
         private final TextView mEnrolledTextView;
+        private final TextView classDescription;
 
         public ViewHolder(View v) {
             super(v);
@@ -60,6 +61,7 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
             mClassInstrctorTextView = (TextView) v.findViewById(R.id.inperson_row_class_instructor_name);
             mClassEnrollButton = (Button) v.findViewById(R.id.inperson_row_class_enroll);
             mEnrolledTextView = (TextView) v.findViewById(R.id.inperson_row_class_enrolled_txt);
+            classDescription=v.findViewById(R.id.inperson_row_class_class_description);
         }
 
         public ImageView getClassImageView() {
@@ -93,6 +95,10 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         public View getInpersonRowView() {
             return mInpersonRowView;
         }
+
+        public TextView getClassDescription() {
+            return classDescription;
+        }
     }
 
 
@@ -125,6 +131,7 @@ public class InpersonAdapter extends RecyclerView.Adapter<InpersonAdapter.ViewHo
         viewHolder.getClassDateTextView().setText(DateTimeFormatHelper.formatDate(mDataSet.get(position).classDate));
         viewHolder.getClassTimeTextView().setText(DateTimeFormatHelper.formatTime(mDataSet.get(position).startTime));
         viewHolder.getClassInstrctorTextView().setText(mDataSet.get(position).instructorName);
+        viewHolder.getClassDescription().setText(mDataSet.get(position).classDescription);
 
         if (mDataSet.get(position).enrolled) {
             viewHolder.getClassEnroledTextView().setVisibility(View.VISIBLE);

@@ -15,9 +15,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.senfit.R;
+import com.example.senfit.uiHelpers.DialogBoxHelper;
 
 
 public class ExerciseWithRepsFragment extends Fragment {
@@ -31,6 +33,7 @@ public class ExerciseWithRepsFragment extends Fragment {
 
     private TextView exerciseMessage;
     private ExerciseWithReps exercise;
+    private Button getDescBtn;
     public ExerciseWithRepsFragment(ExerciseWithReps e) {
         // Required empty public constructor
         this.exercise=e;
@@ -56,6 +59,11 @@ public class ExerciseWithRepsFragment extends Fragment {
         this.exerciseMessage = v.findViewById(R.id.exercise_message);
         this.exerciseMessage.setText(String.format("Perform %d %s",
                 this.exercise.reps,this.exercise.exercise.getExerciseName()));
+        this.getDescBtn=v.findViewById(R.id.get_desc_btn);
+        this.getDescBtn.setOnClickListener(view-> {
+            DialogBoxHelper.createPositiveDialog(getContext(), getResources().getText(R.string.exercise_desc),
+                    this.exercise.exercise.getExerciseDescription(), null).show();
+        });
         return v;
     }
 }

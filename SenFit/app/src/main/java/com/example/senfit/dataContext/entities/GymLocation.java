@@ -26,6 +26,14 @@ public class GymLocation {
     @SerializedName("postal_code")
     private String postalCode;
 
+    @ColumnInfo(name="street_address")
+    @SerializedName("street_address")
+    private String streetAddress;
+
+    @ColumnInfo(name="province")
+    @SerializedName("province")
+    private String province;
+
     public int getGymLocationId() {
         return gymLocationId;
     }
@@ -40,5 +48,21 @@ public class GymLocation {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

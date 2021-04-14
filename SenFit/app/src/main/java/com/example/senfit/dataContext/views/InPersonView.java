@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 
 @DatabaseView(viewName = "InPersonView",value = "select gymClassId, trainerId, fitnessClassId,  "+
             "class_date, start_time, end_time, first_name || ' ' || last_name as instructorName, fitness_class_name, "+
-            " enrolled from gymClass join trainers using(trainerId) join fitnessClass using(fitnessClassId);")
+            " class_description, enrolled from gymClass join trainers using(trainerId) join fitnessClass using(fitnessClassId);")
 public class InPersonView {
     @ColumnInfo(name="gymClassId")
     public int gymClassId;
@@ -53,6 +53,9 @@ public class InPersonView {
 
 
 
+    @ColumnInfo(name="class_description")
+    public String classDescription;
+    
     @ColumnInfo(name="enrolled")
     public boolean enrolled;
 

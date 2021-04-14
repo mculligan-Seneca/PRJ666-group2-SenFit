@@ -47,6 +47,8 @@ public class GymLocationAdapter extends RecyclerView.Adapter<GymLocationAdapter.
     public void onBindViewHolder(@NonNull GymLocationViewHolder holder, int position) {
             GymLocation location = this.gymList.get(position);
             holder.postal_code.setText(location.getPostalCode());
+            holder.street.setText(location.getStreetAddress());
+            holder.province.setText(location.getProvince());
             holder.selectGym.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -64,10 +66,14 @@ public class GymLocationAdapter extends RecyclerView.Adapter<GymLocationAdapter.
 
     public class GymLocationViewHolder extends RecyclerView.ViewHolder {
         public final TextView postal_code;
+        public final TextView street;
+        public final TextView province;
         public final ImageButton selectGym;
         public GymLocationViewHolder(@NonNull View itemView) {
             super(itemView);
             this.postal_code=itemView.findViewById(R.id.training_gym_postal_code);
+            this.street=itemView.findViewById(R.id.gym_street);
+            this.province=itemView.findViewById(R.id.province);
             this.selectGym=itemView.findViewById(R.id.select_gym_button);
         }
     }

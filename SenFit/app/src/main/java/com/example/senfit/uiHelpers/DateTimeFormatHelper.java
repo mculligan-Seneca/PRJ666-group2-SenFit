@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 
 public class DateTimeFormatHelper {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMM dd, YYYY");
-    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh:mm a");
+    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh:mm aa");
     public static String formatDate(Date date){
         return DATE_FORMAT.format(date);//TODO:implement this function
     }

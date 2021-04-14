@@ -15,7 +15,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @DatabaseView(viewName = "onlineClassView",value="Select onlineClassId, trainerId, fitnessClassId,"+
-        " first_name || ' ' || last_name as instructorName, class_date, start_time, end_time, enrolled  "+
+        " first_name || ' ' || last_name as instructorName, class_date, start_time, end_time, class_description, enrolled  "+
         "from onlineClasses join trainers using(trainerId) "+
         "join fitnessClass using(fitnessClassId);")
 public class OnlineClassView {
@@ -34,6 +34,9 @@ public class OnlineClassView {
 
     @ColumnInfo(name="end_time")
     public Timestamp endTime;
+
+    @ColumnInfo(name="class_description")
+    public String classDescription;
 
     public boolean enrolled;
 

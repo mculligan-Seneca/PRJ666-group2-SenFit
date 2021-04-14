@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 public class DialogBoxHelper {
@@ -28,7 +29,7 @@ public class DialogBoxHelper {
     }
 
     public static AlertDialog createPositiveDialog(Context context, int titleId, int
-            messageId, DialogInterface.OnClickListener listener){
+            messageId,@Nullable DialogInterface.OnClickListener listener){
         AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(titleId);
         builder.setMessage(messageId)
                 .setCancelable(true)
