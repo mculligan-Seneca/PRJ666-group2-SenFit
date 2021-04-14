@@ -81,7 +81,7 @@ public class MyClassesActivity extends AppCompatActivity {
                     String endDate = DateTimeFormatHelper.formatTime(onlineClass.getEndTime());
 
 
-                    data.setTime(startDate+ "-"
+                    data.setTime(startDate+ " - "
                             +endDate);
 
                     Trainer trainer = DatabaseClient
@@ -111,19 +111,21 @@ public class MyClassesActivity extends AppCompatActivity {
                             .getFitnessClassDao()
                             .getFitnessClass(gymClass.getFitnessClassId());
                     data.setClasName(fClass.getFitnessClassName());
-                    data.setDate(gymClass.getClassDate().toString());
+                    data.setDate(DateTimeFormatHelper.formatDate(gymClass.getClassDate()));
                     data.setEnrolled(gymClass.getEnrolled());
 
-                    Date startDate = new Date(gymClass.getStartTime().getTime());
-                    Calendar startCalendar = GregorianCalendar.getInstance();
-                    startCalendar.setTime(startDate);
 
-                    Date endDate = new Date(gymClass.getEndTime().getTime());
-                    Calendar endCalendar = GregorianCalendar.getInstance();
-                    endCalendar.setTime(endDate);
 
-                    data.setTime(startCalendar.get(Calendar.HOUR_OF_DAY) + ":" + startCalendar.get(Calendar.MINUTE) + "-"
-                            +endCalendar.get(Calendar.HOUR_OF_DAY) + ":" + endCalendar.get(Calendar.MINUTE));
+                    String startDate = DateTimeFormatHelper.formatTime(gymClass.getStartTime());
+
+
+                    String endDate = DateTimeFormatHelper.formatTime(gymClass.getEndTime());
+
+
+                    data.setTime(startDate+ " - "
+                            +endDate);
+
+
 
                     Trainer trainer = DatabaseClient
                             .getInstance()
