@@ -154,7 +154,7 @@ app.get('/member/:id/fitnessPortfolios',passport.authenticate('jwt',{session: fa
 app.post('/fitnessPortfolio',passport.authenticate('jwt',{session: false}),(req,res)=>{
             const portfolio=req.body;
             ds.createFitnessPortfolio(portfolio)
-            .then((portfolio)=>res.json({portfolio}))
+            .then((portfolio)=>res.json(portfolio))
             .catch((err)=>res.status(500).json({"errMsg":err}));
 
 });
@@ -224,7 +224,7 @@ app.get('/exercises',(req,res)=>{
     ds.getAllExercises()
     .then((data)=>{
         if(data && data.length>0)
-            res.json({exercises: data});
+            res.json(data);
         else
             throw new Error("No exercise data found");    
     })
@@ -292,7 +292,7 @@ app.get('/member/:id/trainingPlans',passport.authenticate('jwt',{session: false}
 app.post('/trainingPlan',passport.authenticate('jwt',{session: false}),(req,res)=>{
     const plan = req.body;
     ds.enrollTrainingPlan(plan)
-    .then((msg)=>res.json())
+    .then((tPlan)=>res.json(tPlan))
     .catch((err)=>res.status(500).json({"errMsg":err}));
 });
 

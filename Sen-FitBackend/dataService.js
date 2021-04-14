@@ -7,6 +7,7 @@ const {sequelize,
     OnlineClass,
     Trainer,
     Exercise,
+    TrainingPlan,
     FitnessClass,
     CovidLog,
     FitnessPortfolio,
@@ -288,7 +289,7 @@ module.exports.enrollOnlineClass=async(memberId,classId)=>{
         const onlineClass = await OnlineClass.findOne({
             where:{
              
-                    id:classId    
+                    id: classId    
             }
         });
         if(!onlineClass) throw new Error('Member could not be enrolled');
@@ -336,14 +337,14 @@ module.exports.getOnlineClassesForMember=(memberId)=>{
 }
 module.exports.enrollTrainingPlan=(trainingPlan)=>{
     return new Promise((resolve,reject)=>{
-    trainingPlan.build(trainingPlan)
+    TrainingPlan.create(trainingPlan)
     .then((plan)=>resolve(plan))
     .catch(err=>reject(err));
     });
 }
 
 module.exports.getTrainingPlansForMember=async(id)=>{
-   let data = await trainingPlan.findAll({
+   let data = await TrainingPlan.findAll({
         include: ['fitnessPortfolios'],
         where:{
         member_id: id
@@ -360,8 +361,8 @@ module.exports.createFitnessPortfolio=async(portfolio)=>{
 module.exports.registerClient = (client)=>{
     return new Promise((resolve,reject)=>{
             UnregisteredClient
-            .build(client)
+            .create(client)
             .then(registerClient=>resolve(registerClient))
-            .catch((err)=>reject('Client already registered'));
+            .catch((err)=>reject(err));
     });
 }
