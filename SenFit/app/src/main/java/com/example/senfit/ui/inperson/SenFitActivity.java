@@ -82,6 +82,7 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
                         break;
                     case R.id.log_out:
                         LoginHelper.setLoginStatus(this, false);
+                        NetworkManager.getNetworkManager().invalidateAuthToken();
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);
                         finish();
