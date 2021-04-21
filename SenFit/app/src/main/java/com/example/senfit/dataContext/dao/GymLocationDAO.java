@@ -16,10 +16,10 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface GymLocationDAO {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertGymLocations(GymLocation...gymLocations);
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertGymLocations(List<GymLocation> gymLocations);
 
     @Query("Select * from GymLocations")

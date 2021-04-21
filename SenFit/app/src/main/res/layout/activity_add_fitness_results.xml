@@ -10,7 +10,7 @@
         android:id="@+id/exercise_with_RepLayout"
 
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
 
         app:layout_constraintBottom_toTopOf="@id/heart_beatLayout"
         app:layout_constraintEnd_toEndOf="parent"

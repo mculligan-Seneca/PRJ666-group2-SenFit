@@ -142,12 +142,15 @@ public class AddFitnessPortfolioActivity extends AppCompatActivity implements Vi
                 DialogBoxHelper.createPositiveDialog(this,R.string.fitness_portfolio,
                         R.string.weight_errMssg,null)
                         .show();
+                startBtn.setEnabled(true);
             }
         }
         else{
             DialogBoxHelper.createPositiveDialog(this,R.string.fitness_portfolio,R.string.height_errMssg,null)
                     .show();
+            startBtn.setEnabled(true);
         }
+
     }
 
     @Override

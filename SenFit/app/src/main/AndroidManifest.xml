@@ -22,7 +22,7 @@
             android:label="@string/add_fitness_portfolio" />
         <activity
             android:name=".covidLog.CovidSurveyActivity"
-            android:label="@string/title_activity_covid_survey" />
+            android:label="@string/covid_survey" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.

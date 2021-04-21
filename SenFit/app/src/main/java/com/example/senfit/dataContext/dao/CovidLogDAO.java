@@ -11,6 +11,7 @@ package com.example.senfit.dataContext.dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.senfit.dataContext.entities.CovidLog;
@@ -21,7 +22,7 @@ import java.util.List;
 @Dao
 public  interface CovidLogDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertCovidLog(CovidLog log);
 
     @Query("Select * from CovidLogs where member_id=:memberId and date_logged >:date order by date_logged desc")

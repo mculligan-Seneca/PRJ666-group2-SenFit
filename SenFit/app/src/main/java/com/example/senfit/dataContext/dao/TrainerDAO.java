@@ -26,7 +26,7 @@ public interface TrainerDAO {
     @Insert
     public Completable insertTrainers(Trainer...trainers);
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertTrainers(List<Trainer> trainers);
 
     @Query("Select * from trainers where trainerId=:id")

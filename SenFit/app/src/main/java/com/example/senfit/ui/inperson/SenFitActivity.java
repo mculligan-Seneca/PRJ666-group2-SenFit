@@ -7,6 +7,9 @@ package com.example.senfit.ui.inperson;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.senfit.NetworkManager.NetworkManager;
 import com.example.senfit.R;
 import com.example.senfit.covidLog.CovidSurveyActivity;
+import com.example.senfit.dataContext.DatabaseClient;
 import com.example.senfit.fitnessPortfolio.FitnessPortfolioFragment;
 import com.example.senfit.login.LoginActivity;
 import com.example.senfit.login.LoginHelper;
@@ -29,6 +33,16 @@ import com.example.senfit.trainingPlan.listTrainingPlan.ListTrainingPlanFragment
 import com.example.senfit.ui.online.OnlineClassFragment;
 import com.example.senfit.uiHelpers.DialogBoxHelper;
 import com.google.android.material.navigation.NavigationView;
+
+import org.reactivestreams.Subscription;
+
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.Scheduler;
+import io.reactivex.SingleObserver;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class SenFitActivity extends AppCompatActivity implements Navigator, NavigateFragment {
 
@@ -99,6 +113,7 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
         });
 
 
+
         //TODO:get Toolbar from frag,emt
 
 
@@ -111,6 +126,8 @@ public class SenFitActivity extends AppCompatActivity implements Navigator, Navi
         //Bundle extras = getIntent()
         this.memberId = LoginHelper.getMemberId(this);
         this.inPersonClassId=0;
+   
+
     }
 
 

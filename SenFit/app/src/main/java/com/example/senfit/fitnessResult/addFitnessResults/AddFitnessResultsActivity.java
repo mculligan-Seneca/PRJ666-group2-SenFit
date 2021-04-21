@@ -74,7 +74,8 @@ public class AddFitnessResultsActivity extends AppCompatActivity {
         this.nextButton.setOnClickListener(v->{
             String heartstr = heartBeatText.getText().toString();
             if(heartstr.trim().length()==0 || !TextUtils.isDigitsOnly(heartstr) || heartstr.trim().equals("0")){
-                Toast.makeText(this,R.string.heart_beat_errMssg,Toast.LENGTH_LONG);
+                Toast.makeText(this,R.string.heart_beat_errMssg,Toast.LENGTH_LONG).show();
+                this.nextButton.setEnabled(true);//in case the user attempts to submit before data loads
             }else{
                 //valid input
                 ExerciseWithReps e = exerciseList.get(fitnessResultViewModel.getIndex());
