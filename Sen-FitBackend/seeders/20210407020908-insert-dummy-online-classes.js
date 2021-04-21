@@ -10,9 +10,9 @@ module.exports = {
     
     return queryInterface.bulkInsert('OnlineClasses',[
       {
-        classDate: new Date('2021-04-22'),
-        start_time: new Date('2021-04-22 09:30:00'),
-        end_time: new Date('2021-04-22 10:00:00') ,
+        classDate: new Date('2021-04-25'),
+        start_time: new Date('2021-04-25 09:30:00'),
+        end_time: new Date('2021-04-25 10:00:00') ,
         FitnessClassId: fitnessClasses[2%fitnessClasses.length].id ,
         trainerId: trainers[0%trainers.length].id,
         enrolled: false,
@@ -20,9 +20,9 @@ module.exports = {
         createdAt: new Date()
 
       },{
-        classDate: new Date('2021-04-22'),
-        start_time: new Date('2021-04-22 10:05:00'),
-        end_time: new Date('2021-04-22 10:35:00') ,
+        classDate: new Date('2021-04-25'),
+        start_time: new Date('2021-04-25 10:05:00'),
+        end_time: new Date('2021-04-25 10:35:00') ,
         FitnessClassId: fitnessClasses[2%fitnessClasses.length].id ,
         trainerId: trainers[0%trainers.length].id,
         enrolled: false,
@@ -30,9 +30,9 @@ module.exports = {
         createdAt: new Date()
 
       },{
-        classDate: new Date('2021-04-20'),
-        start_time: new Date('2021-04-20 09:00:00'),
-        end_time: new Date('2021-04-20 09:45:00') ,
+        classDate: new Date('2021-04-27'),
+        start_time: new Date('2021-04-27 09:00:00'),
+        end_time: new Date('2021-04-27 09:45:00') ,
         FitnessClassId: fitnessClasses[4%fitnessClasses.length].id ,
         trainerId: trainers[1%trainers.length].id,
         enrolled: false,
@@ -89,9 +89,9 @@ module.exports = {
         updatedAt: new Date(),
         createdAt: new Date()
       }, {
-        classDate: new Date('2021-04-28'),
-        start_time: new Date('2021-04-28 11:00:00'),
-        end_time: new Date('2021-04-28 11:45:00') ,
+        classDate: new Date('2021-05-14'),
+        start_time: new Date('2021-05-14 11:00:00'),
+        end_time: new Date('2021-05-14 11:45:00') ,
         FitnessClassId: fitnessClasses[3%fitnessClasses.length].id ,
         trainerId: trainers[2%trainers.length].id,
         enrolled: false,
@@ -99,9 +99,9 @@ module.exports = {
         createdAt: new Date()
       },
       {
-        classDate: new Date('2021-04-28'),
-        start_time: new Date('2021-04-28 11:50:00'),
-        end_time: new Date('2021-04-28 12:30:00') ,
+        classDate: new Date('2021-05-28'),
+        start_time: new Date('2021-05-28 11:50:00'),
+        end_time: new Date('2021-05-28 12:30:00') ,
         FitnessClassId: fitnessClasses[3%fitnessClasses.length].id ,
         trainerId: trainers[2%trainers.length].id,
         enrolled: false,

@@ -2,7 +2,14 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-   // return queryInterface.renameColumn('OnlineClasses','fitnessPortfolioId','FitnessClassId');
+    return Promise.all([queryInterface.addColumn('GymLocations',
+    'street_address',
+    {
+      type:Sequelize.STRING
+    }),
+  queryInterface.addColumn('GymLocations','province',{
+    type:Sequelize.STRING
+    })]);
     /**
      * Add altering commands here.
      *
@@ -12,6 +19,8 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
+    return Promise.all([queryInterface.removeColumn('GymLocations','street_address'),
+      queryInterface.removeColumn('GymLocations','province')]);
     /**
      * Add reverting commands here.
      *

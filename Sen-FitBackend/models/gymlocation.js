@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
  
   };
   GymLocation.init({
-    postal_code: DataTypes.STRING
+    postal_code: DataTypes.STRING,
+    street_address: DataTypes.STRING,
+    province:DataTypes.STRING
   }, {
     sequelize,
     modelName: 'GymLocation',

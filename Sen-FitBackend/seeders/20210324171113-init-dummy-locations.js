@@ -5,16 +5,22 @@ module.exports = {
       return queryInterface.bulkInsert('GymLocations',[
       {
         postal_code: 'A8A91',
+        street_address: '123 Main Street',
+        province: 'Ontario',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         postal_code: 'R3D7S6',
+        street_address: '23 Queens Street',
+        province: 'Ontario',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         postal_code: 'L4G3A8',
+        street_address: '28th Younge Street',
+        province: 'Ontario',
         createdAt: new Date(),
         updatedAt: new Date()
       }

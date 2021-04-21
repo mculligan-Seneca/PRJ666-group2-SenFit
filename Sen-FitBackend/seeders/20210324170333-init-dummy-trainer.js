@@ -43,6 +43,36 @@ module.exports = {
       email: 'freedom@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      first_name: 'Andie',
+      last_name:  'Felterbusch',
+      gymLocationId: locations[0][i++%locations[0].length].id,
+      email: 'abusch@ymail.com',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      first_name: 'James',
+      last_name:  'Rhoades',
+      gymLocationId: locations[0][i++%locations[0].length].id,
+      email: 'RocknRhoades@hotmail.com',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      first_name: 'Micheal',
+      last_name:  'Bolton',
+      gymLocationId: locations[0][i++%locations[0].length].id,
+      email: 'micheal_bolton@gmail.com',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      first_name: 'John',
+      last_name:  'Samuelson',
+      gymLocationId: locations[0][i++%locations[0].length].id,
+      email: 'jSamuelson@sympatico.ca',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
     ]);
     /**
